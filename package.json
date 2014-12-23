@@ -1,0 +1,21 @@
+{
+  "name": "targaryen",
+  "version": "1.0.0",
+  "description": "Test Firebase security rules.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/**/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "extend": "^2.0.0",
+    "replaceall": "^0.1.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
