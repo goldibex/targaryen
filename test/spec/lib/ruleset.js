@@ -1,4 +1,6 @@
 
+'use strict';
+
 var Ruleset = require('../../../lib/ruleset');
 
 var invalidRulesets = [
@@ -13,6 +15,12 @@ var invalidRulesets = [
       '.indexOn': 'something'
     },
     otherStuff: true
+  },
+  {
+    rules: {
+      '.read': true,
+      '.indexOn': true
+    }
   },
   {
     rules: {
@@ -48,22 +56,64 @@ var validRulesets = [{
 
 describe('Ruleset', function() {
 
-  it('rejects invalid rulesets', function() {
+  describe('constructor', function() {
 
-    invalidRulesets.forEach(function(rules) {
-      expect(function() {
-        return new Ruleset(rules);
-      }).to.throw();
+    it('rejects invalid rulesets', function() {
+
+      invalidRulesets.forEach(function(rules) {
+        expect(function() {
+          return new Ruleset(rules);
+        }).to.throw();
+      });
+
+    });
+
+    it('accepts valid rulesets', function() {
+
+      validRulesets.forEach(function(rules) {
+        expect(function() {
+          return new Ruleset(rules);
+        }).not.to.throw();
+      });
+
     });
 
   });
 
-  it('accepts valid rulesets', function() {
+  describe('#get', function() {
 
-    validRulesets.forEach(function(rules) {
-      expect(function() {
-        return new Ruleset(rules);
-      }).not.to.throw();
+    it('gets all the rules along a given node path', function() {
+
+      var rules = new Ruleset({
+        rules: {
+          '.read': true,
+          foo: {
+            '.read': true,
+            '.write': false,
+            '$bar': {
+              '.read': 'auth !== null',
+              '.write': 'auth.id === 1',
+              baz: {
+                '.read': 'root.child("users").child($bar).exists()'
+              }
+            }
+          }
+        }
+      });
+
+
+      var readRules = rules.get('foo/bar/baz/quux', 'read');
+      expect(readRules.length).to.equal(4);
+      expect(readRules[0].path).to.equal('');
+      expect(readRules[1].path).to.equal('foo');
+      expect(readRules[2].path).to.equal('foo/bar');
+      expect(readRules[3].path).to.equal('foo/bar/baz');
+
+      var writeRules = rules.get('foo/bar/baz/quux', 'write');
+      expect(writeRules.length).to.equal(2);
+      expect(readRules[1].path).to.equal('foo');
+      expect(readRules[2].path).to.equal('foo/bar');
+
     });
 
   });

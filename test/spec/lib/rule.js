@@ -1,7 +1,7 @@
 
 'use strict';
 
-var parseRule = require('../../../lib/parser/parse-rule');
+var Rule = require('../../../lib/parser/rule');
 
 var testWildchildren = ['$here', '$there'];
 var validRules = [
@@ -48,7 +48,7 @@ describe('parseRule', function() {
     validRules.forEach(function(rule) {
 
       expect(function() {
-        parseRule(rule, testWildchildren);
+        new Rule(rule, testWildchildren);
       }, rule).not.to.throw();
 
     });
@@ -60,7 +60,7 @@ describe('parseRule', function() {
     invalidRules.forEach(function(rule) {
 
       expect(function() {
-        parseRule(rule, testWildchildren);
+        new Rule(rule, testWildchildren);
       }, rule).to.throw();
 
     });
