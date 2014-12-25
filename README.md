@@ -1,9 +1,11 @@
 targaryen
 =========
 
-Completely and thoroughly test your Firebase security rules without connecting to Firebase. All you need to do is supply the security rules and some mock data, then write tests describing the expected behavior of the rules. Targaryen will interpret the rules and run the tests.
+Completely and thoroughly test your Firebase security rules without connecting to Firebase.
 
 ## Usage
+
+ All you need to do is supply the security rules and some mock data, then write tests describing the expected behavior of the rules. Targaryen will interpret the rules and run the tests.
  
 Targaryen provides custom matchers for Jasmine and a plugin for Chai. When a test fails, you get detailed debug information that explains why the read/write operation succeeded/failed.
 
@@ -20,9 +22,10 @@ Docs are at [docs/chai](https://github.com/goldibex/targaryen/blob/master/docs/c
 ```js
 
 var chai = require('chai'),
-  expext = chai.expect,
+  expect = chai.expect,
   targaryen = require('targaryen');
-chai.use(targaryen.chaiPlugin);
+
+chai.use(targaryen.chai);
 
 describe('A set of rules and data', function() {
 
@@ -40,7 +43,7 @@ describe('A set of rules and data', function() {
             '.priority': 2
           }
         },
-        'simplelogin:2: {
+        'simplelogin:2': {
           name: 'Mad Aerys',
           king: true
         }
@@ -87,15 +90,15 @@ Docs are at [docs/jasmine](https://github.com/goldibex/targaryen/blob/master/doc
   
 var targaryen = require('targaryen');
 
+// see Chai example above for format
+targaryen.setFirebaseData(...);
+targaryen.setFirebaseRules(...);
+
+
 describe('A set of rules and data', function() {
 
   beforeEach(function() {
-  
-    jasmine.addMatchers(targaryen.jasmine.matchers);  
-    // see Chai example above for format
-    targaryen.setFirebaseData(...);
-    targaryen.setFirebaseRules(...);
-  
+    jasmine.addMatchers(targaryen.jasmine.matchers);    
   });
 
   it('can be tested', function() {

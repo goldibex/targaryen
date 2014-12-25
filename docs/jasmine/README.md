@@ -1,7 +1,7 @@
 
 ## Using Targaryen with Jasmine
 
-1. Run `npm install -g jasmine && npm install --save-dev targaryen`.
+1. Run `npm install -g jasmine` and `npm install --save-dev targaryen`.
 
 2. Create a new directory for your security tests. Jasmine likes your tests to live in the directory `spec`, so a good choice might be `spec/security`. Add this directory to `spec/support/jasmine.json`.
 
@@ -15,12 +15,13 @@
 var path = require('path'),
   targaryen = require('targaryen');
 
+targaryen.setFirebaseData(require(path.join(__dirname, path.basename(__filename, '.js') + '.json')));
+targaryen.setFirebaseRules(require(RULES_PATH));
+
 describe('my security rules', function() {
 
   beforeEach(function() {
     jasmine.addMatchers(targaryen.jasmine.matchers);
-    targaryen.setFirebaseData(require(__dirname + path.basename(__filename) + '.json'));
-    targaryen.setFirebaseRules(require(RULES_PATH));
   });
 
 });

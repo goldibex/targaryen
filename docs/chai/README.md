@@ -1,7 +1,7 @@
 
 ## Using Targaryen with Chai and Mocha
 
-1. Run `npm install --save-dev mocha chai targaryen`.
+1. Run `npm install -g mocha` and `npm install --save-dev mocha chai targaryen`.
 
 2. Create a new directory for your security tests, like, say, `test/security`.
 
@@ -20,7 +20,7 @@ chai.use(targaryen.chai);
 describe('my security rules', function() {
 
   before(function() {
-    targaryen.setFirebaseData(require(__dirname + path.basename(__filename) + '.json'));
+    targaryen.setFirebaseData(require(path.join(__dirname, path.basename(__filename, '.js') + '.json')));
     targaryen.setFirebaseRules(require(RULES_PATH));
   });
 
