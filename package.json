@@ -1,7 +1,7 @@
 {
   "name": "targaryen",
   "version": "1.0.0",
-  "description": "Test Firebase security rules.",
+  "description": "Test Firebase security rules without connecting to Firebase.",
   "main": "index.js",
   "directories": {
     "test": "test"
