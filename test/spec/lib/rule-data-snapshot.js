@@ -28,6 +28,53 @@ var root = new RuleDataSnapshot(rootObj);
 
 describe('RuleDataSnapshot', function() {
 
+  describe('convert', function() {
+
+    it('converts plain Javascript objects into Firebase data format', function() {
+
+      expect(RuleDataSnapshot.convert(true)).to.deep.equal({
+        '.value': true,
+        '.priority': null
+      });
+
+      expect(RuleDataSnapshot.convert({ foo: { bar: true, baz: true } }))
+      .to.deep.equal({
+        '.priority': null,
+        foo: {
+          '.priority': null,
+          bar: {
+            '.value': true,
+            '.priority': null
+          },
+          baz: {
+            '.value': true,
+            '.priority': null
+          }
+        }
+
+      });
+
+    });
+
+    it('transparently handles values for which value and priority are already set', function() {
+
+      expect(RuleDataSnapshot.convert({ foo: { '.value': true, '.priority': 5}, bar: 8 }))
+      .to.deep.equal({
+        '.priority': null,
+        foo: {
+          '.value': true,
+          '.priority': 5
+        },
+        bar: {
+          '.value': 8,
+          '.priority': null
+        }
+      });
+
+    });
+
+  });
+
   describe('#val', function() {
 
     it('gets the value at the specified path', function() {
