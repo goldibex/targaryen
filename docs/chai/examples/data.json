@@ -1,0 +1,11 @@
+{
+  "users": {
+    "simplelogin:1": {
+      "name": "Rickard Stark"
+    },
+    "simplelogin:2": {
+      "name": "Aerys the Mad",
+      "king": true
+    }
+  }
+}

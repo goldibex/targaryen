@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "users": {
+      "$user": {
+        ".read": "auth !== null",
+        ".write": "root.child('users').child(auth.uid).child('king').val() === true"
+      }
+    }
+  }
+}

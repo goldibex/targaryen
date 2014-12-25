@@ -1,0 +1,2310 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'mocha' ]
+2 info using npm@2.1.14
+3 info using node@v0.10.29
+4 verbose node symlink /usr/local/bin/node
+5 silly cache add args [ 'mocha', null ]
+6 verbose cache add spec mocha
+7 silly cache add parsed spec { raw: 'mocha',
+7 silly cache add   scope: null,
+7 silly cache add   name: 'mocha',
+7 silly cache add   rawSpec: '',
+7 silly cache add   spec: '*',
+7 silly cache add   type: 'range' }
+8 verbose addNamed mocha@*
+9 silly addNamed semver.valid null
+10 silly addNamed semver.validRange *
+11 silly addNameRange { name: 'mocha', range: '*', hasData: false }
+12 silly mapToRegistry name mocha
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+15 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha
+16 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha not in flight; fetching
+17 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 13:52:27
+20 verbose request id 2bcb311ebde4076d
+21 verbose etag "DECXNSAT2O8A3RO1NU60A7RWU"
+22 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha
+23 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha
+24 silly get cb [ 304,
+24 silly get   { 'content-length': '0',
+24 silly get     connection: 'keep-alive',
+24 silly get     age: '0',
+24 silly get     'cache-control': 'max-age=60',
+24 silly get     date: 'Thu, 25 Dec 2014 21:52:28 GMT',
+24 silly get     etag: '"DECXNSAT2O8A3RO1NU60A7RWU"',
+24 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:28 GMT',
+24 silly get     server: 'Apache',
+24 silly get     vary: 'Accept',
+24 silly get     via: '1.1 varnish, 1.1 vegur',
+24 silly get     'x-cache': 'MISS',
+24 silly get     'x-cache-hits': '0',
+24 silly get     'x-served-by': 'cache-iad2132-IAD',
+24 silly get     'x-timer': 'S1419544348.574659,VS0,VE331' } ]
+25 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mocha from cache
+26 silly addNameRange number 2 { name: 'mocha', range: '*', hasData: true }
+27 silly addNameRange versions [ 'mocha',
+27 silly addNameRange   [ '0.0.1-alpha1',
+27 silly addNameRange     '0.0.1-alpha2',
+27 silly addNameRange     '0.0.1-alpha3',
+27 silly addNameRange     '0.0.1-alpha4',
+27 silly addNameRange     '0.0.1-alpha5',
+27 silly addNameRange     '0.0.1-alpha6',
+27 silly addNameRange     '0.0.1',
+27 silly addNameRange     '0.0.2',
+27 silly addNameRange     '0.0.3',
+27 silly addNameRange     '0.0.4',
+27 silly addNameRange     '0.0.5',
+27 silly addNameRange     '0.0.6',
+27 silly addNameRange     '0.0.7',
+27 silly addNameRange     '0.0.8',
+27 silly addNameRange     '0.1.0',
+27 silly addNameRange     '0.2.0',
+27 silly addNameRange     '0.3.0',
+27 silly addNameRange     '0.3.1',
+27 silly addNameRange     '0.3.2',
+27 silly addNameRange     '0.3.3',
+27 silly addNameRange     '0.3.4',
+27 silly addNameRange     '0.3.6',
+27 silly addNameRange     '0.4.0',
+27 silly addNameRange     '0.5.0',
+27 silly addNameRange     '0.6.0',
+27 silly addNameRange     '0.7.0',
+27 silly addNameRange     '0.7.1',
+27 silly addNameRange     '0.8.0',
+27 silly addNameRange     '0.8.1',
+27 silly addNameRange     '0.9.0',
+27 silly addNameRange     '0.10.0',
+27 silly addNameRange     '0.10.1',
+27 silly addNameRange     '0.10.2',
+27 silly addNameRange     '0.11.0',
+27 silly addNameRange     '0.12.0',
+27 silly addNameRange     '0.12.1',
+27 silly addNameRange     '0.13.0',
+27 silly addNameRange     '0.14.0',
+27 silly addNameRange     '0.14.1',
+27 silly addNameRange     '1.0.0',
+27 silly addNameRange     '1.0.1',
+27 silly addNameRange     '1.0.2',
+27 silly addNameRange     '1.0.3',
+27 silly addNameRange     '1.1.0',
+27 silly addNameRange     '1.2.0',
+27 silly addNameRange     '1.2.1',
+27 silly addNameRange     '1.2.2',
+27 silly addNameRange     '1.3.0',
+27 silly addNameRange     '1.3.1',
+27 silly addNameRange     '1.3.2',
+27 silly addNameRange     '1.4.0',
+27 silly addNameRange     '1.4.1',
+27 silly addNameRange     '1.4.2',
+27 silly addNameRange     '1.4.3',
+27 silly addNameRange     '1.5.0',
+27 silly addNameRange     '1.6.0',
+27 silly addNameRange     '1.7.0',
+27 silly addNameRange     '1.7.1',
+27 silly addNameRange     '1.7.2',
+27 silly addNameRange     '1.7.3',
+27 silly addNameRange     '1.7.4',
+27 silly addNameRange     '1.8.0',
+27 silly addNameRange     '1.8.1',
+27 silly addNameRange     '1.8.2',
+27 silly addNameRange     '1.9.0',
+27 silly addNameRange     '1.10.0',
+27 silly addNameRange     '1.11.0',
+27 silly addNameRange     '1.12.0',
+27 silly addNameRange     '1.12.1',
+27 silly addNameRange     '1.13.0',
+27 silly addNameRange     '1.14.0',
+27 silly addNameRange     '1.15.0',
+27 silly addNameRange     '1.15.1',
+27 silly addNameRange     '1.16.0',
+27 silly addNameRange     '1.16.1',
+27 silly addNameRange     '1.16.2',
+27 silly addNameRange     '1.17.0',
+27 silly addNameRange     '1.17.1',
+27 silly addNameRange     '1.18.0',
+27 silly addNameRange     '1.18.1',
+27 silly addNameRange     '1.18.2',
+27 silly addNameRange     '1.19.0',
+27 silly addNameRange     '1.20.0',
+27 silly addNameRange     '1.20.1',
+27 silly addNameRange     '1.21.0',
+27 silly addNameRange     '1.21.1',
+27 silly addNameRange     '1.21.2',
+27 silly addNameRange     '1.21.3',
+27 silly addNameRange     '1.21.4',
+27 silly addNameRange     '1.21.5',
+27 silly addNameRange     '2.0.0',
+27 silly addNameRange     '2.0.1',
+27 silly addNameRange     '2.1.0' ] ]
+28 verbose addNamed mocha@2.1.0
+29 silly addNamed semver.valid 2.1.0
+30 silly addNamed semver.validRange 2.1.0
+31 silly cache afterAdd mocha@2.1.0
+32 verbose afterAdd /Users/goldibex/.npm/mocha/2.1.0/package/package.json not in flight; writing
+33 verbose afterAdd /Users/goldibex/.npm/mocha/2.1.0/package/package.json written
+34 silly install resolved [ { name: 'mocha',
+34 silly install resolved     version: '2.1.0',
+34 silly install resolved     description: 'simple, flexible, fun test framework',
+34 silly install resolved     keywords: [ 'mocha', 'test', 'bdd', 'tdd', 'tap' ],
+34 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+34 silly install resolved     contributors:
+34 silly install resolved      [ [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object],
+34 silly install resolved        [Object] ],
+34 silly install resolved     repository: { type: 'git', url: 'git://github.com/mochajs/mocha.git' },
+34 silly install resolved     maintainers: [ [Object], [Object], [Object] ],
+34 silly install resolved     main: './index',
+34 silly install resolved     browser: './mocha.js',
+34 silly install resolved     bin: { mocha: './bin/mocha', _mocha: './bin/_mocha' },
+34 silly install resolved     engines: { node: '>= 0.8.x' },
+34 silly install resolved     scripts: { test: 'make test-all' },
+34 silly install resolved     dependencies:
+34 silly install resolved      { commander: '2.3.0',
+34 silly install resolved        debug: '2.0.0',
+34 silly install resolved        diff: '1.0.8',
+34 silly install resolved        'escape-string-regexp': '1.0.2',
+34 silly install resolved        glob: '3.2.3',
+34 silly install resolved        growl: '1.8.1',
+34 silly install resolved        jade: '0.26.3',
+34 silly install resolved        mkdirp: '0.5.0' },
+34 silly install resolved     devDependencies: { 'coffee-script': '~1.8.0', should: '~4.0.0' },
+34 silly install resolved     files:
+34 silly install resolved      [ 'bin',
+34 silly install resolved        'images',
+34 silly install resolved        'lib',
+34 silly install resolved        'index.js',
+34 silly install resolved        'mocha.css',
+34 silly install resolved        'mocha.js',
+34 silly install resolved        'LICENSE' ],
+34 silly install resolved     licenses: [ [Object] ],
+34 silly install resolved     bugs: { url: 'https://github.com/mochajs/mocha/issues' },
+34 silly install resolved     homepage: 'https://github.com/mochajs/mocha',
+34 silly install resolved     _id: 'mocha@2.1.0',
+34 silly install resolved     _shasum: '77752fe592fb9092756827af46cd3eae1b83671c',
+34 silly install resolved     _from: 'mocha@*',
+34 silly install resolved     _npmVersion: '1.4.9',
+34 silly install resolved     _npmUser: { name: 'travisjeffery', email: 'tj@travisjeffery.com' },
+34 silly install resolved     dist:
+34 silly install resolved      { shasum: '77752fe592fb9092756827af46cd3eae1b83671c',
+34 silly install resolved        tarball: 'http://registry.npmjs.org/mocha/-/mocha-2.1.0.tgz' },
+34 silly install resolved     directories: {},
+34 silly install resolved     _resolved: 'http://registry.npmjs.org/mocha/-/mocha-2.1.0.tgz',
+34 silly install resolved     readme: 'ERROR: No README data found!' } ]
+35 info install mocha@2.1.0 into /usr/local/lib
+36 info installOne mocha@2.1.0
+37 verbose installOne of mocha to /usr/local/lib not in flight; installing
+38 verbose lock using /Users/goldibex/.npm/_locks/mocha-1cb4102bb5230051.lock for /usr/local/lib/node_modules/mocha
+39 silly install write writing mocha 2.1.0 to /usr/local/lib/node_modules/mocha
+40 silly cache addNamed cb mocha@2.1.0
+41 verbose unbuild lib/node_modules/mocha
+42 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha
+43 verbose tar unpack /Users/goldibex/.npm/mocha/2.1.0/package.tgz
+44 verbose tar unpacking to /usr/local/lib/node_modules/mocha
+45 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha
+46 silly gunzTarPerm modes [ '755', '644' ]
+47 silly gunzTarPerm extractEntry package.json
+48 silly gunzTarPerm modified mode [ 'package.json', 388, 420 ]
+49 silly gunzTarPerm extractEntry README.md
+50 silly gunzTarPerm modified mode [ 'README.md', 388, 420 ]
+51 silly gunzTarPerm extractEntry LICENSE
+52 silly gunzTarPerm modified mode [ 'LICENSE', 388, 420 ]
+53 silly gunzTarPerm extractEntry index.js
+54 silly gunzTarPerm modified mode [ 'index.js', 388, 420 ]
+55 silly gunzTarPerm extractEntry mocha.js
+56 silly gunzTarPerm modified mode [ 'mocha.js', 388, 420 ]
+57 silly gunzTarPerm extractEntry bin/_mocha
+58 silly gunzTarPerm modified mode [ 'bin/_mocha', 453, 485 ]
+59 silly gunzTarPerm extractEntry bin/mocha
+60 silly gunzTarPerm modified mode [ 'bin/mocha', 453, 485 ]
+61 silly gunzTarPerm extractEntry images/error.png
+62 silly gunzTarPerm modified mode [ 'images/error.png', 388, 420 ]
+63 silly gunzTarPerm extractEntry images/ok.png
+64 silly gunzTarPerm modified mode [ 'images/ok.png', 388, 420 ]
+65 silly gunzTarPerm extractEntry lib/utils.js
+66 silly gunzTarPerm modified mode [ 'lib/utils.js', 388, 420 ]
+67 silly gunzTarPerm extractEntry lib/hook.js
+68 silly gunzTarPerm modified mode [ 'lib/hook.js', 388, 420 ]
+69 silly gunzTarPerm extractEntry lib/mocha.js
+70 silly gunzTarPerm modified mode [ 'lib/mocha.js', 388, 420 ]
+71 silly gunzTarPerm extractEntry lib/ms.js
+72 silly gunzTarPerm modified mode [ 'lib/ms.js', 388, 420 ]
+73 silly gunzTarPerm extractEntry lib/context.js
+74 silly gunzTarPerm modified mode [ 'lib/context.js', 388, 420 ]
+75 silly gunzTarPerm extractEntry lib/runnable.js
+76 silly gunzTarPerm modified mode [ 'lib/runnable.js', 388, 420 ]
+77 silly gunzTarPerm extractEntry lib/runner.js
+78 silly gunzTarPerm modified mode [ 'lib/runner.js', 388, 420 ]
+79 silly gunzTarPerm extractEntry lib/suite.js
+80 silly gunzTarPerm modified mode [ 'lib/suite.js', 388, 420 ]
+81 silly gunzTarPerm extractEntry lib/test.js
+82 silly gunzTarPerm modified mode [ 'lib/test.js', 388, 420 ]
+83 silly gunzTarPerm extractEntry lib/interfaces/bdd.js
+84 silly gunzTarPerm modified mode [ 'lib/interfaces/bdd.js', 388, 420 ]
+85 silly gunzTarPerm extractEntry lib/interfaces/exports.js
+86 silly gunzTarPerm modified mode [ 'lib/interfaces/exports.js', 388, 420 ]
+87 silly gunzTarPerm extractEntry lib/interfaces/index.js
+88 silly gunzTarPerm modified mode [ 'lib/interfaces/index.js', 388, 420 ]
+89 silly gunzTarPerm extractEntry lib/interfaces/qunit.js
+90 silly gunzTarPerm modified mode [ 'lib/interfaces/qunit.js', 388, 420 ]
+91 silly gunzTarPerm extractEntry lib/interfaces/tdd.js
+92 silly gunzTarPerm modified mode [ 'lib/interfaces/tdd.js', 388, 420 ]
+93 silly gunzTarPerm extractEntry lib/template.html
+94 silly gunzTarPerm modified mode [ 'lib/template.html', 388, 420 ]
+95 silly gunzTarPerm extractEntry lib/browser/debug.js
+96 silly gunzTarPerm modified mode [ 'lib/browser/debug.js', 388, 420 ]
+97 silly gunzTarPerm extractEntry lib/browser/diff.js
+98 silly gunzTarPerm modified mode [ 'lib/browser/diff.js', 388, 420 ]
+99 silly gunzTarPerm extractEntry lib/browser/escape-string-regexp.js
+100 silly gunzTarPerm modified mode [ 'lib/browser/escape-string-regexp.js', 388, 420 ]
+101 silly gunzTarPerm extractEntry lib/browser/events.js
+102 silly gunzTarPerm modified mode [ 'lib/browser/events.js', 388, 420 ]
+103 silly gunzTarPerm extractEntry lib/browser/fs.js
+104 silly gunzTarPerm modified mode [ 'lib/browser/fs.js', 388, 420 ]
+105 silly gunzTarPerm extractEntry lib/browser/glob.js
+106 silly gunzTarPerm modified mode [ 'lib/browser/glob.js', 388, 420 ]
+107 silly gunzTarPerm extractEntry lib/browser/path.js
+108 silly gunzTarPerm modified mode [ 'lib/browser/path.js', 388, 420 ]
+109 silly gunzTarPerm extractEntry lib/browser/progress.js
+110 silly gunzTarPerm modified mode [ 'lib/browser/progress.js', 388, 420 ]
+111 silly gunzTarPerm extractEntry lib/browser/tty.js
+112 silly gunzTarPerm modified mode [ 'lib/browser/tty.js', 388, 420 ]
+113 silly gunzTarPerm extractEntry lib/reporters/base.js
+114 silly gunzTarPerm modified mode [ 'lib/reporters/base.js', 388, 420 ]
+115 silly gunzTarPerm extractEntry lib/reporters/index.js
+116 silly gunzTarPerm modified mode [ 'lib/reporters/index.js', 388, 420 ]
+117 silly gunzTarPerm extractEntry lib/reporters/json-cov.js
+118 silly gunzTarPerm modified mode [ 'lib/reporters/json-cov.js', 388, 420 ]
+119 silly gunzTarPerm extractEntry lib/reporters/json-stream.js
+120 silly gunzTarPerm modified mode [ 'lib/reporters/json-stream.js', 388, 420 ]
+121 silly gunzTarPerm extractEntry lib/reporters/json.js
+122 silly gunzTarPerm modified mode [ 'lib/reporters/json.js', 388, 420 ]
+123 silly gunzTarPerm extractEntry lib/reporters/html.js
+124 silly gunzTarPerm modified mode [ 'lib/reporters/html.js', 388, 420 ]
+125 silly gunzTarPerm extractEntry lib/reporters/list.js
+126 silly gunzTarPerm modified mode [ 'lib/reporters/list.js', 388, 420 ]
+127 silly gunzTarPerm extractEntry lib/reporters/markdown.js
+128 silly gunzTarPerm modified mode [ 'lib/reporters/markdown.js', 388, 420 ]
+129 silly gunzTarPerm extractEntry lib/reporters/min.js
+130 silly gunzTarPerm modified mode [ 'lib/reporters/min.js', 388, 420 ]
+131 silly gunzTarPerm extractEntry lib/reporters/nyan.js
+132 silly gunzTarPerm modified mode [ 'lib/reporters/nyan.js', 388, 420 ]
+133 silly gunzTarPerm extractEntry lib/reporters/progress.js
+134 silly gunzTarPerm modified mode [ 'lib/reporters/progress.js', 388, 420 ]
+135 silly gunzTarPerm extractEntry lib/reporters/html-cov.js
+136 silly gunzTarPerm modified mode [ 'lib/reporters/html-cov.js', 388, 420 ]
+137 silly gunzTarPerm extractEntry lib/reporters/spec.js
+138 silly gunzTarPerm modified mode [ 'lib/reporters/spec.js', 388, 420 ]
+139 silly gunzTarPerm extractEntry lib/reporters/dot.js
+140 silly gunzTarPerm modified mode [ 'lib/reporters/dot.js', 388, 420 ]
+141 silly gunzTarPerm extractEntry lib/reporters/tap.js
+142 silly gunzTarPerm modified mode [ 'lib/reporters/tap.js', 388, 420 ]
+143 silly gunzTarPerm extractEntry lib/reporters/doc.js
+144 silly gunzTarPerm modified mode [ 'lib/reporters/doc.js', 388, 420 ]
+145 silly gunzTarPerm extractEntry lib/reporters/xunit.js
+146 silly gunzTarPerm modified mode [ 'lib/reporters/xunit.js', 388, 420 ]
+147 silly gunzTarPerm extractEntry lib/reporters/landing.js
+148 silly gunzTarPerm modified mode [ 'lib/reporters/landing.js', 388, 420 ]
+149 silly gunzTarPerm extractEntry lib/reporters/templates/coverage.jade
+150 silly gunzTarPerm modified mode [ 'lib/reporters/templates/coverage.jade', 388, 420 ]
+151 silly gunzTarPerm extractEntry lib/reporters/templates/menu.jade
+152 silly gunzTarPerm modified mode [ 'lib/reporters/templates/menu.jade', 388, 420 ]
+153 silly gunzTarPerm extractEntry lib/reporters/templates/script.html
+154 silly gunzTarPerm modified mode [ 'lib/reporters/templates/script.html', 388, 420 ]
+155 silly gunzTarPerm extractEntry lib/reporters/templates/style.html
+156 silly gunzTarPerm modified mode [ 'lib/reporters/templates/style.html', 388, 420 ]
+157 silly gunzTarPerm extractEntry mocha.css
+158 silly gunzTarPerm modified mode [ 'mocha.css', 388, 420 ]
+159 info preinstall mocha@2.1.0
+160 silly prepareForInstallMany adding commander@2.3.0 from mocha dependencies
+161 silly prepareForInstallMany adding debug@2.0.0 from mocha dependencies
+162 silly prepareForInstallMany adding diff@1.0.8 from mocha dependencies
+163 silly prepareForInstallMany adding escape-string-regexp@1.0.2 from mocha dependencies
+164 silly prepareForInstallMany adding glob@3.2.3 from mocha dependencies
+165 silly prepareForInstallMany adding growl@1.8.1 from mocha dependencies
+166 silly prepareForInstallMany adding jade@0.26.3 from mocha dependencies
+167 silly prepareForInstallMany adding mkdirp@0.5.0 from mocha dependencies
+168 silly cache add args [ 'commander@2.3.0', null ]
+169 verbose cache add spec commander@2.3.0
+170 silly cache add args [ 'debug@2.0.0', null ]
+171 verbose cache add spec debug@2.0.0
+172 silly cache add parsed spec { raw: 'commander@2.3.0',
+172 silly cache add   scope: null,
+172 silly cache add   name: 'commander',
+172 silly cache add   rawSpec: '2.3.0',
+172 silly cache add   spec: '2.3.0',
+172 silly cache add   type: 'version' }
+173 verbose addNamed commander@2.3.0
+174 silly addNamed semver.valid 2.3.0
+175 silly addNamed semver.validRange 2.3.0
+176 silly mapToRegistry name commander
+177 silly mapToRegistry using default registry
+178 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+179 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+180 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander not in flight; fetching
+181 silly cache add parsed spec { raw: 'debug@2.0.0',
+181 silly cache add   scope: null,
+181 silly cache add   name: 'debug',
+181 silly cache add   rawSpec: '2.0.0',
+181 silly cache add   spec: '2.0.0',
+181 silly cache add   type: 'version' }
+182 verbose addNamed debug@2.0.0
+183 silly addNamed semver.valid 2.0.0
+184 silly addNamed semver.validRange 2.0.0
+185 silly mapToRegistry name debug
+186 silly mapToRegistry using default registry
+187 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+188 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug
+189 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug not in flight; fetching
+190 silly cache add args [ 'escape-string-regexp@1.0.2', null ]
+191 verbose cache add spec escape-string-regexp@1.0.2
+192 silly cache add parsed spec { raw: 'escape-string-regexp@1.0.2',
+192 silly cache add   scope: null,
+192 silly cache add   name: 'escape-string-regexp',
+192 silly cache add   rawSpec: '1.0.2',
+192 silly cache add   spec: '1.0.2',
+192 silly cache add   type: 'version' }
+193 verbose addNamed escape-string-regexp@1.0.2
+194 silly addNamed semver.valid 1.0.2
+195 silly addNamed semver.validRange 1.0.2
+196 silly mapToRegistry name escape-string-regexp
+197 silly mapToRegistry using default registry
+198 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+199 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp
+200 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp not in flight; fetching
+201 silly cache add args [ 'diff@1.0.8', null ]
+202 verbose cache add spec diff@1.0.8
+203 silly cache add parsed spec { raw: 'diff@1.0.8',
+203 silly cache add   scope: null,
+203 silly cache add   name: 'diff',
+203 silly cache add   rawSpec: '1.0.8',
+203 silly cache add   spec: '1.0.8',
+203 silly cache add   type: 'version' }
+204 verbose addNamed diff@1.0.8
+205 silly addNamed semver.valid 1.0.8
+206 silly addNamed semver.validRange 1.0.8
+207 silly mapToRegistry name diff
+208 silly mapToRegistry using default registry
+209 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+210 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff
+211 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff not in flight; fetching
+212 silly cache add args [ 'glob@3.2.3', null ]
+213 verbose cache add spec glob@3.2.3
+214 silly cache add parsed spec { raw: 'glob@3.2.3',
+214 silly cache add   scope: null,
+214 silly cache add   name: 'glob',
+214 silly cache add   rawSpec: '3.2.3',
+214 silly cache add   spec: '3.2.3',
+214 silly cache add   type: 'version' }
+215 verbose addNamed glob@3.2.3
+216 silly addNamed semver.valid 3.2.3
+217 silly addNamed semver.validRange 3.2.3
+218 silly mapToRegistry name glob
+219 silly mapToRegistry using default registry
+220 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+221 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob
+222 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob not in flight; fetching
+223 silly cache add args [ 'growl@1.8.1', null ]
+224 verbose cache add spec growl@1.8.1
+225 silly cache add parsed spec { raw: 'growl@1.8.1',
+225 silly cache add   scope: null,
+225 silly cache add   name: 'growl',
+225 silly cache add   rawSpec: '1.8.1',
+225 silly cache add   spec: '1.8.1',
+225 silly cache add   type: 'version' }
+226 verbose addNamed growl@1.8.1
+227 silly addNamed semver.valid 1.8.1
+228 silly addNamed semver.validRange 1.8.1
+229 silly mapToRegistry name growl
+230 silly mapToRegistry using default registry
+231 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+232 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl
+233 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl not in flight; fetching
+234 silly cache add args [ 'jade@0.26.3', null ]
+235 verbose cache add spec jade@0.26.3
+236 silly cache add parsed spec { raw: 'jade@0.26.3',
+236 silly cache add   scope: null,
+236 silly cache add   name: 'jade',
+236 silly cache add   rawSpec: '0.26.3',
+236 silly cache add   spec: '0.26.3',
+236 silly cache add   type: 'version' }
+237 verbose addNamed jade@0.26.3
+238 silly addNamed semver.valid 0.26.3
+239 silly addNamed semver.validRange 0.26.3
+240 silly mapToRegistry name jade
+241 silly mapToRegistry using default registry
+242 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+243 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade
+244 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade not in flight; fetching
+245 silly cache add args [ 'mkdirp@0.5.0', null ]
+246 verbose cache add spec mkdirp@0.5.0
+247 silly cache add parsed spec { raw: 'mkdirp@0.5.0',
+247 silly cache add   scope: null,
+247 silly cache add   name: 'mkdirp',
+247 silly cache add   rawSpec: '0.5.0',
+247 silly cache add   spec: '0.5.0',
+247 silly cache add   type: 'version' }
+248 verbose addNamed mkdirp@0.5.0
+249 silly addNamed semver.valid 0.5.0
+250 silly addNamed semver.validRange 0.5.0
+251 silly mapToRegistry name mkdirp
+252 silly mapToRegistry using default registry
+253 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+254 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp
+255 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp not in flight; fetching
+256 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp
+257 verbose request no auth needed
+258 info attempt registry request try #1 at 13:52:29
+259 verbose etag "EMIN7LOE22KESR5DOWJRB8ACW"
+260 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp
+261 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+262 verbose request no auth needed
+263 info attempt registry request try #1 at 13:52:29
+264 verbose etag "BWA1QTD1DTPPURZBNUAMO81GD"
+265 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+266 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff
+267 verbose request no auth needed
+268 info attempt registry request try #1 at 13:52:29
+269 verbose etag "Z4BHFZV94S7X2YNR36KF8XPK"
+270 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff
+271 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug
+272 verbose request no auth needed
+273 info attempt registry request try #1 at 13:52:29
+274 verbose etag "CSNN0ND70W1P0GC55NLGQT3UP"
+275 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug
+276 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl
+277 verbose request no auth needed
+278 info attempt registry request try #1 at 13:52:29
+279 verbose etag "DP9EALVBQMWHJ19465Y4YC2U"
+280 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl
+281 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob
+282 verbose request no auth needed
+283 info attempt registry request try #1 at 13:52:29
+284 verbose etag "QAFO3QJU0TY2Q7YPWT79LW1F"
+285 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob
+286 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp
+287 verbose request no auth needed
+288 info attempt registry request try #1 at 13:52:29
+289 verbose etag "EN5ZAENBT9LGFGCCQLHAJ8W4X"
+290 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp
+291 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade
+292 verbose request no auth needed
+293 info attempt registry request try #1 at 13:52:29
+294 verbose etag "DAZXUQ1JU7ENX2GSO0T10QKKI"
+295 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade
+296 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl
+297 silly get cb [ 304,
+297 silly get   { 'content-length': '0',
+297 silly get     connection: 'keep-alive',
+297 silly get     age: '0',
+297 silly get     'cache-control': 'max-age=60',
+297 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+297 silly get     etag: '"DP9EALVBQMWHJ19465Y4YC2U"',
+297 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:29 GMT',
+297 silly get     server: 'Apache',
+297 silly get     vary: 'Accept',
+297 silly get     via: '1.1 varnish, 1.1 vegur',
+297 silly get     'x-cache': 'MISS',
+297 silly get     'x-cache-hits': '0',
+297 silly get     'x-served-by': 'cache-iad2145-IAD',
+297 silly get     'x-timer': 'S1419544349.669187,VS0,VE15' } ]
+298 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/growl from cache
+299 silly cache afterAdd growl@1.8.1
+300 verbose afterAdd /Users/goldibex/.npm/growl/1.8.1/package/package.json not in flight; writing
+301 verbose afterAdd /Users/goldibex/.npm/growl/1.8.1/package/package.json written
+302 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff
+303 silly get cb [ 304,
+303 silly get   { 'content-length': '0',
+303 silly get     connection: 'keep-alive',
+303 silly get     age: '0',
+303 silly get     'cache-control': 'max-age=60',
+303 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+303 silly get     etag: '"Z4BHFZV94S7X2YNR36KF8XPK"',
+303 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:29 GMT',
+303 silly get     server: 'Apache',
+303 silly get     vary: 'Accept',
+303 silly get     via: '1.1 varnish, 1.1 vegur',
+303 silly get     'x-cache': 'MISS',
+303 silly get     'x-cache-hits': '0',
+303 silly get     'x-served-by': 'cache-iad2145-IAD',
+303 silly get     'x-timer': 'S1419544349.775705,VS0,VE60' } ]
+304 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/diff from cache
+305 silly cache afterAdd diff@1.0.8
+306 verbose afterAdd /Users/goldibex/.npm/diff/1.0.8/package/package.json not in flight; writing
+307 verbose afterAdd /Users/goldibex/.npm/diff/1.0.8/package/package.json written
+308 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp
+309 silly get cb [ 304,
+309 silly get   { 'content-length': '0',
+309 silly get     connection: 'keep-alive',
+309 silly get     age: '0',
+309 silly get     'cache-control': 'max-age=60',
+309 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+309 silly get     etag: '"EMIN7LOE22KESR5DOWJRB8ACW"',
+309 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:29 GMT',
+309 silly get     server: 'Apache',
+309 silly get     vary: 'Accept',
+309 silly get     via: '1.1 varnish, 1.1 vegur',
+309 silly get     'x-cache': 'MISS',
+309 silly get     'x-cache-hits': '0',
+309 silly get     'x-served-by': 'cache-iad2124-IAD',
+309 silly get     'x-timer': 'S1419544349.624712,VS0,VE351' } ]
+310 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/escape-string-regexp from cache
+311 silly cache afterAdd escape-string-regexp@1.0.2
+312 verbose afterAdd /Users/goldibex/.npm/escape-string-regexp/1.0.2/package/package.json not in flight; writing
+313 verbose afterAdd /Users/goldibex/.npm/escape-string-regexp/1.0.2/package/package.json written
+314 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp
+315 silly get cb [ 304,
+315 silly get   { 'content-length': '0',
+315 silly get     connection: 'keep-alive',
+315 silly get     age: '0',
+315 silly get     'cache-control': 'max-age=60',
+315 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+315 silly get     etag: '"EN5ZAENBT9LGFGCCQLHAJ8W4X"',
+315 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:30 GMT',
+315 silly get     server: 'Apache',
+315 silly get     vary: 'Accept',
+315 silly get     via: '1.1 varnish, 1.1 vegur',
+315 silly get     'x-cache': 'MISS',
+315 silly get     'x-cache-hits': '0',
+315 silly get     'x-served-by': 'cache-iad2124-IAD',
+315 silly get     'x-timer': 'S1419544349.999859,VS0,VE61' } ]
+316 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp from cache
+317 silly cache afterAdd mkdirp@0.5.0
+318 verbose afterAdd /Users/goldibex/.npm/mkdirp/0.5.0/package/package.json not in flight; writing
+319 verbose afterAdd /Users/goldibex/.npm/mkdirp/0.5.0/package/package.json written
+320 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug
+321 silly get cb [ 304,
+321 silly get   { 'content-length': '0',
+321 silly get     connection: 'keep-alive',
+321 silly get     age: '0',
+321 silly get     'cache-control': 'max-age=60',
+321 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+321 silly get     etag: '"CSNN0ND70W1P0GC55NLGQT3UP"',
+321 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:30 GMT',
+321 silly get     server: 'Apache',
+321 silly get     vary: 'Accept',
+321 silly get     via: '1.1 varnish, 1.1 vegur',
+321 silly get     'x-cache': 'MISS',
+321 silly get     'x-cache-hits': '0',
+321 silly get     'x-served-by': 'cache-iad2122-IAD',
+321 silly get     'x-timer': 'S1419544349.651194,VS0,VE427' } ]
+322 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/debug from cache
+323 silly cache afterAdd debug@2.0.0
+324 verbose afterAdd /Users/goldibex/.npm/debug/2.0.0/package/package.json not in flight; writing
+325 verbose afterAdd /Users/goldibex/.npm/debug/2.0.0/package/package.json written
+326 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob
+327 silly get cb [ 304,
+327 silly get   { 'content-length': '0',
+327 silly get     connection: 'keep-alive',
+327 silly get     age: '0',
+327 silly get     'cache-control': 'max-age=60',
+327 silly get     date: 'Thu, 25 Dec 2014 21:52:29 GMT',
+327 silly get     etag: '"QAFO3QJU0TY2Q7YPWT79LW1F"',
+327 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:30 GMT',
+327 silly get     server: 'Apache',
+327 silly get     vary: 'Accept',
+327 silly get     via: '1.1 varnish, 1.1 vegur',
+327 silly get     'x-cache': 'MISS',
+327 silly get     'x-cache-hits': '0',
+327 silly get     'x-served-by': 'cache-iad2145-IAD',
+327 silly get     'x-timer': 'S1419544349.847500,VS0,VE325' } ]
+328 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/glob from cache
+329 silly cache afterAdd glob@3.2.3
+330 verbose afterAdd /Users/goldibex/.npm/glob/3.2.3/package/package.json not in flight; writing
+331 verbose afterAdd /Users/goldibex/.npm/glob/3.2.3/package/package.json written
+332 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade
+333 silly get cb [ 304,
+333 silly get   { 'content-length': '0',
+333 silly get     connection: 'keep-alive',
+333 silly get     age: '0',
+333 silly get     'cache-control': 'max-age=60',
+333 silly get     date: 'Thu, 25 Dec 2014 21:52:30 GMT',
+333 silly get     etag: '"DAZXUQ1JU7ENX2GSO0T10QKKI"',
+333 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:30 GMT',
+333 silly get     server: 'Apache',
+333 silly get     vary: 'Accept',
+333 silly get     via: '1.1 varnish, 1.1 vegur',
+333 silly get     'x-cache': 'MISS',
+333 silly get     'x-cache-hits': '0',
+333 silly get     'x-served-by': 'cache-iad2122-IAD',
+333 silly get     'x-timer': 'S1419544350.131603,VS0,VE121' } ]
+334 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/jade from cache
+335 silly cache afterAdd jade@0.26.3
+336 verbose afterAdd /Users/goldibex/.npm/jade/0.26.3/package/package.json not in flight; writing
+337 verbose afterAdd /Users/goldibex/.npm/jade/0.26.3/package/package.json written
+338 http 200 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+339 silly get cb [ 200,
+339 silly get   { connection: 'keep-alive',
+339 silly get     'accept-ranges': 'bytes',
+339 silly get     age: '0',
+339 silly get     'cache-control': 'max-age=60',
+339 silly get     'content-length': '47659',
+339 silly get     'content-type': 'application/json',
+339 silly get     date: 'Thu, 25 Dec 2014 21:52:30 GMT',
+339 silly get     etag: '"BN1AJLGB4SIJT0HFQ4LEUE2C5"',
+339 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+339 silly get     vary: 'Accept',
+339 silly get     via: '1.1 varnish, 1.1 vegur',
+339 silly get     'x-cache': 'MISS',
+339 silly get     'x-cache-hits': '0',
+339 silly get     'x-served-by': 'cache-iad2132-IAD',
+339 silly get     'x-timer': 'S1419544349.584986,VS0,VE508' } ]
+340 silly mapToRegistry name commander
+341 silly mapToRegistry using default registry
+342 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+343 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+344 verbose addRemoteTarball http://registry.npmjs.org/commander/-/commander-2.3.0.tgz not in flight; adding
+345 verbose addRemoteTarball [ 'http://registry.npmjs.org/commander/-/commander-2.3.0.tgz',
+345 verbose addRemoteTarball   'fd430e889832ec353b9acd1de217c11cb3eef873' ]
+346 info retry fetch attempt 1 at 13:52:30
+347 info attempt registry request try #1 at 13:52:30
+348 http fetch GET http://registry.npmjs.org/commander/-/commander-2.3.0.tgz
+349 http fetch 200 http://registry.npmjs.org/commander/-/commander-2.3.0.tgz
+350 silly fetchAndShaCheck shasum fd430e889832ec353b9acd1de217c11cb3eef873
+351 verbose addTmpTarball /var/folders/m_/mh9l0ytj0k99l5zmnmxvy1fw0000gn/T/npm-75823-e9574f0c/registry.npmjs.org/commander/-/commander-2.3.0.tgz not in flight; adding
+352 verbose addTmpTarball already have metadata; skipping unpack for commander@2.3.0
+353 silly cache afterAdd commander@2.3.0
+354 verbose afterAdd /Users/goldibex/.npm/commander/2.3.0/package/package.json not in flight; writing
+355 verbose afterAdd /Users/goldibex/.npm/commander/2.3.0/package/package.json written
+356 silly install resolved [ { name: 'growl',
+356 silly install resolved     version: '1.8.1',
+356 silly install resolved     description: 'Growl unobtrusive notifications',
+356 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+356 silly install resolved     maintainers: [ [Object], [Object] ],
+356 silly install resolved     repository:
+356 silly install resolved      { type: 'git',
+356 silly install resolved        url: 'git://github.com/visionmedia/node-growl.git' },
+356 silly install resolved     main: './lib/growl.js',
+356 silly install resolved     gitHead: '882ced3155a57f566887c884d5c6dccb7df435c1',
+356 silly install resolved     bugs: { url: 'https://github.com/visionmedia/node-growl/issues' },
+356 silly install resolved     homepage: 'https://github.com/visionmedia/node-growl',
+356 silly install resolved     _id: 'growl@1.8.1',
+356 silly install resolved     scripts: {},
+356 silly install resolved     _shasum: '4b2dec8d907e93db336624dcec0183502f8c9428',
+356 silly install resolved     _from: 'growl@1.8.1',
+356 silly install resolved     _npmVersion: '1.4.20',
+356 silly install resolved     _npmUser: { name: 'jbnicolai', email: 'jappelman@xebia.com' },
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: '4b2dec8d907e93db336624dcec0183502f8c9428',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/growl/-/growl-1.8.1.tgz' },
+356 silly install resolved     directories: {},
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/growl/-/growl-1.8.1.tgz',
+356 silly install resolved     readme: '# Growl for nodejs\n\nGrowl support for Nodejs. This is essentially a port of my [Ruby Growl Library](http://github.com/visionmedia/growl). Ubuntu/Linux support added thanks to [@niftylettuce](http://github.com/niftylettuce). \n\n## Installation\n\n### Install \n\n### Mac OS X (Darwin):\n\n  Install [growlnotify(1)](http://growl.info/extras.php#growlnotify). On OS X 10.8, Notification Center is supported using [terminal-notifier](https://github.com/alloy/terminal-notifier). To install:\n  \n      $ sudo gem install terminal-notifier\n      \n  Install [npm](http://npmjs.org/) and run:\n  \n      $ npm install growl\n\n### Ubuntu (Linux):\n\n  Install `notify-send` through the [libnotify-bin](http://packages.ubuntu.com/libnotify-bin) package:\n\n      $ sudo apt-get install libnotify-bin\n\n  Install [npm](http://npmjs.org/) and run:\n  \n      $ npm install growl\n\n### Windows:\n\n  Download and install [Growl for Windows](http://www.growlforwindows.com/gfw/default.aspx)\n\n  Download [growlnotify](http://www.growlforwindows.com/gfw/help/growlnotify.aspx) - **IMPORTANT :** Unpack growlnotify to a folder that is present in your path!\n\n  Install [npm](http://npmjs.org/) and run:\n  \n      $ npm install growl\n\n## Examples\n\nCallback functions are optional\n\n    var growl = require(\'growl\')\n    growl(\'You have mail!\')\n    growl(\'5 new messages\', { sticky: true })\n    growl(\'5 new emails\', { title: \'Email Client\', image: \'Safari\', sticky: true })\n    growl(\'Message with title\', { title: \'Title\'})\n    growl(\'Set priority\', { priority: 2 })\n    growl(\'Show Safari icon\', { image: \'Safari\' })\n    growl(\'Show icon\', { image: \'path/to/icon.icns\' })\n    growl(\'Show image\', { image: \'path/to/my.image.png\' })\n    growl(\'Show png filesystem icon\', { image: \'png\' })\n    growl(\'Show pdf filesystem icon\', { image: \'article.pdf\' })\n    growl(\'Show pdf filesystem icon\', { image: \'article.pdf\' }, function(err){\n      // ... notified\n    })\n\n## Options\n\n  - title\n    - notification title\n  - name\n    - application name\n  - priority\n    - priority for the notification (default is 0)\n  - sticky\n    - weither or not the notification should remainin until closed\n  - image\n    - Auto-detects the context:\n      - path to an icon sets --iconpath\n      - path to an image sets --image\n      - capitalized word sets --appIcon\n      - filename uses extname as --icon\n      - otherwise treated as --icon\n      \n## License \n\n(The MIT License)\n\nCopyright (c) 2009 TJ Holowaychuk <tj@vision-media.ca>\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+356 silly install resolved     readmeFilename: 'Readme.md' },
+356 silly install resolved   { name: 'diff',
+356 silly install resolved     version: '1.0.8',
+356 silly install resolved     description: 'A javascript text diff implementation.',
+356 silly install resolved     keywords: [ 'diff', 'javascript' ],
+356 silly install resolved     maintainers: [ [Object] ],
+356 silly install resolved     bugs:
+356 silly install resolved      { url: 'http://github.com/kpdecker/jsdiff/issues',
+356 silly install resolved        email: 'kpdecker@gmail.com' },
+356 silly install resolved     licenses: [ [Object] ],
+356 silly install resolved     repository: { type: 'git', url: 'git://github.com/kpdecker/jsdiff.git' },
+356 silly install resolved     engines: { node: '>=0.3.1' },
+356 silly install resolved     main: './diff',
+356 silly install resolved     scripts: { test: 'mocha test/*.js' },
+356 silly install resolved     dependencies: {},
+356 silly install resolved     devDependencies: { mocha: '~1.6', should: '~1.2', colors: '~0.6.2' },
+356 silly install resolved     optionalDependencies: {},
+356 silly install resolved     files: [ 'diff.js' ],
+356 silly install resolved     _id: 'diff@1.0.8',
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: '343276308ec991b7bc82267ed55bc1411f971666',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/diff/-/diff-1.0.8.tgz' },
+356 silly install resolved     _from: 'diff@1.0.8',
+356 silly install resolved     _npmVersion: '1.3.11',
+356 silly install resolved     _npmUser: { name: 'kpdecker', email: 'kpdecker@gmail.com' },
+356 silly install resolved     directories: {},
+356 silly install resolved     _shasum: '343276308ec991b7bc82267ed55bc1411f971666',
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/diff/-/diff-1.0.8.tgz',
+356 silly install resolved     readme: '# jsdiff\n\n[![Build Status](https://secure.travis-ci.org/kpdecker/jsdiff.png)](http://travis-ci.org/kpdecker/jsdiff)\n\nA javascript text differencing implementation.\n\nBased on the algorithm proposed in\n["An O(ND) Difference Algorithm and its Variations" (Myers, 1986)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927).\n\n## Installation\n\n    npm install diff\n\nor\n\n    git clone git://github.com/kpdecker/jsdiff.git\n\n## API\n\n* `JsDiff.diffChars(oldStr, newStr)` - diffs two blocks of text, comparing character by character.\n\n    Returns a list of change objects (See below).\n\n* `JsDiff.diffWords(oldStr, newStr)` - diffs two blocks of text, comparing word by word.\n\n    Returns a list of change objects (See below).\n\n* `JsDiff.diffLines(oldStr, newStr)` - diffs two blocks of text, comparing line by line.\n\n    Returns a list of change objects (See below).\n\n* `JsDiff.diffCss(oldStr, newStr)` - diffs two blocks of text, comparing CSS tokens.\n\n    Returns a list of change objects (See below).\n\n* `JsDiff.createPatch(fileName, oldStr, newStr, oldHeader, newHeader)` - creates a unified diff patch.\n\n    Parameters:\n    * `fileName` : String to be output in the filename sections of the patch\n    * `oldStr` : Original string value\n    * `newStr` : New string value\n    * `oldHeader` : Additional information to include in the old file header\n    * `newHeader` : Additional information to include in thew new file header\n\n* `JsDiff.applyPatch(oldStr, diffStr)` - applies a unified diff patch.\n\n    Return a string containing new version of provided data.\n\n* `convertChangesToXML(changes)` - converts a list of changes to a serialized XML format\n\n### Change Objects\nMany of the methods above return change objects. These objects are consist of the following fields:\n\n* `value`: Text content\n* `added`: True if the value was inserted into the new string\n* `removed`: True of the value was removed from the old string\n\nNote that some cases may omit a particular flag field. Comparison on the flag fields should always be done in a truthy or falsy manner.\n\n## Examples\n\nBasic example in Node\n\n```js\nrequire(\'colors\')\nvar jsdiff = require(\'diff\');\n\nvar one = \'beep boop\';\nvar other = \'beep boob blah\';\n\nvar diff = jsdiff.diffChars(one, other);\n\ndiff.forEach(function(part){\n  // green for additions, red for deletions\n  // grey for common parts\n  var color = part.added ? \'green\' :\n    part.removed ? \'red\' : \'grey\';\n  process.stderr.write(part.value[color]);\n});\n\nconsole.log()\n```\nRunning the above program should yield\n\n<img src="images/node_example.png" alt="Node Example">\n\nBasic example in a web page\n\n```html\n<pre id="display"></pre>\n<script src="diff.js"></script>\n<script>\nvar one = \'beep boop\';\nvar other = \'beep boob blah\';\n\nvar diff = JsDiff.diffChars(one, other);\n\ndiff.forEach(function(part){\n  // green for additions, red for deletions\n  // grey for common parts\n  var color = part.added ? \'green\' :\n    part.removed ? \'red\' : \'grey\';\n  var span = document.createElement(\'span\');\n  span.style.color = color;\n  span.appendChild(document\n    .createTextNode(part.value));\n  display.appendChild(span);\n});\n</script>\n```\n\nOpen the above .html file in a browser and you should see\n\n<img src="images/web_example.png" alt="Node Example">\n\n**[Full online demo](http://kpdecker.github.com/jsdiff)**\n\n## License\n\nSoftware License Agreement (BSD License)\n\nCopyright (c) 2009-2011, Kevin Decker kpdecker@gmail.com\n\nAll rights reserved.\n\nRedistribution and use of this software in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above\n  copyright notice, this list of conditions and the\n  following disclaimer.\n\n* Redistributions in binary form must reproduce the above\n  copyright notice, this list of conditions and the\n  following disclaimer in the documentation and/or other\n  materials provided with the distribution.\n\n* Neither the name of Kevin Decker nor the names of its\n  contributors may be used to endorse or promote products\n  derived from this software without specific prior\n  written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR\nIMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR\nCONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\nDATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER\nIN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT\nOF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kpdecker/jsdiff/trend.png)](https://bitdeli.com/free "Bitdeli Badge")\n\n',
+356 silly install resolved     readmeFilename: 'README.md',
+356 silly install resolved     homepage: 'https://github.com/kpdecker/jsdiff' },
+356 silly install resolved   { name: 'escape-string-regexp',
+356 silly install resolved     version: '1.0.2',
+356 silly install resolved     description: 'Escape RegExp special characters',
+356 silly install resolved     license: 'MIT',
+356 silly install resolved     repository:
+356 silly install resolved      { type: 'git',
+356 silly install resolved        url: 'git://github.com/sindresorhus/escape-string-regexp' },
+356 silly install resolved     author:
+356 silly install resolved      { name: 'Sindre Sorhus',
+356 silly install resolved        email: 'sindresorhus@gmail.com',
+356 silly install resolved        url: 'http://sindresorhus.com' },
+356 silly install resolved     engines: { node: '>=0.8.0' },
+356 silly install resolved     scripts: { test: 'mocha' },
+356 silly install resolved     files: [ 'index.js' ],
+356 silly install resolved     keywords:
+356 silly install resolved      [ 'regex',
+356 silly install resolved        'regexp',
+356 silly install resolved        're',
+356 silly install resolved        'regular',
+356 silly install resolved        'expression',
+356 silly install resolved        'escape',
+356 silly install resolved        'string',
+356 silly install resolved        'str',
+356 silly install resolved        'special',
+356 silly install resolved        'characters' ],
+356 silly install resolved     devDependencies: { mocha: '*' },
+356 silly install resolved     readme: '# escape-string-regexp [![Build Status](https://travis-ci.org/sindresorhus/escape-string-regexp.svg?branch=master)](https://travis-ci.org/sindresorhus/escape-string-regexp)\n\n> Escape RegExp special characters\n\n\n## Install\n\n```sh\n$ npm install --save escape-string-regexp\n```\n\n\n## Usage\n\n```js\nvar escapeStringRegexp = require(\'escape-string-regexp\');\n\nvar escapedString = escapeStringRegexp(\'how much $ for a unicorn?\');\n//=> how much \\$ for a unicorn\\?\n\nnew RegExp(escapedString);\n```\n\n\n## License\n\nMIT © [Sindre Sorhus](http://sindresorhus.com)\n',
+356 silly install resolved     readmeFilename: 'readme.md',
+356 silly install resolved     bugs: { url: 'https://github.com/sindresorhus/escape-string-regexp/issues' },
+356 silly install resolved     homepage: 'https://github.com/sindresorhus/escape-string-regexp',
+356 silly install resolved     _id: 'escape-string-regexp@1.0.2',
+356 silly install resolved     _shasum: '4dbc2fe674e71949caf3fb2695ce7f2dc1d9a8d1',
+356 silly install resolved     _from: 'escape-string-regexp@1.0.2',
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.2.tgz' },
+356 silly install resolved   { name: 'mkdirp',
+356 silly install resolved     description: 'Recursively mkdir, like `mkdir -p`',
+356 silly install resolved     version: '0.5.0',
+356 silly install resolved     author:
+356 silly install resolved      { name: 'James Halliday',
+356 silly install resolved        email: 'mail@substack.net',
+356 silly install resolved        url: 'http://substack.net' },
+356 silly install resolved     main: './index',
+356 silly install resolved     keywords: [ 'mkdir', 'directory' ],
+356 silly install resolved     repository:
+356 silly install resolved      { type: 'git',
+356 silly install resolved        url: 'https://github.com/substack/node-mkdirp.git' },
+356 silly install resolved     scripts: { test: 'tap test/*.js' },
+356 silly install resolved     dependencies: { minimist: '0.0.8' },
+356 silly install resolved     devDependencies: { tap: '~0.4.0', 'mock-fs': '~2.2.0' },
+356 silly install resolved     bin: { mkdirp: 'bin/cmd.js' },
+356 silly install resolved     license: 'MIT',
+356 silly install resolved     bugs: { url: 'https://github.com/substack/node-mkdirp/issues' },
+356 silly install resolved     homepage: 'https://github.com/substack/node-mkdirp',
+356 silly install resolved     _id: 'mkdirp@0.5.0',
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: '1d73076a6df986cd9344e15e71fcc05a4c9abf12',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.0.tgz' },
+356 silly install resolved     _from: 'mkdirp@0.5.0',
+356 silly install resolved     _npmVersion: '1.4.3',
+356 silly install resolved     _npmUser: { name: 'substack', email: 'mail@substack.net' },
+356 silly install resolved     maintainers: [ [Object] ],
+356 silly install resolved     directories: {},
+356 silly install resolved     _shasum: '1d73076a6df986cd9344e15e71fcc05a4c9abf12',
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.0.tgz',
+356 silly install resolved     readme: '# mkdirp\n\nLike `mkdir -p`, but in node.js!\n\n[![build status](https://secure.travis-ci.org/substack/node-mkdirp.png)](http://travis-ci.org/substack/node-mkdirp)\n\n# example\n\n## pow.js\n\n```js\nvar mkdirp = require(\'mkdirp\');\n    \nmkdirp(\'/tmp/foo/bar/baz\', function (err) {\n    if (err) console.error(err)\n    else console.log(\'pow!\')\n});\n```\n\nOutput\n\n```\npow!\n```\n\nAnd now /tmp/foo/bar/baz exists, huzzah!\n\n# methods\n\n```js\nvar mkdirp = require(\'mkdirp\');\n```\n\n## mkdirp(dir, opts, cb)\n\nCreate a new directory and any necessary subdirectories at `dir` with octal\npermission string `opts.mode`. If `opts` is a non-object, it will be treated as\nthe `opts.mode`.\n\nIf `opts.mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\n`cb(err, made)` fires with the error or the first directory `made`\nthat had to be created, if any.\n\nYou can optionally pass in an alternate `fs` implementation by passing in\n`opts.fs`. Your implementation should have `opts.fs.mkdir(path, mode, cb)` and\n`opts.fs.stat(path, cb)`.\n\n## mkdirp.sync(dir, opts)\n\nSynchronously create a new directory and any necessary subdirectories at `dir`\nwith octal permission string `opts.mode`. If `opts` is a non-object, it will be\ntreated as the `opts.mode`.\n\nIf `opts.mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\nReturns the first directory that had to be created, if any.\n\nYou can optionally pass in an alternate `fs` implementation by passing in\n`opts.fs`. Your implementation should have `opts.fs.mkdirSync(path, mode)` and\n`opts.fs.statSync(path)`.\n\n# usage\n\nThis package also ships with a `mkdirp` command.\n\n```\nusage: mkdirp [DIR1,DIR2..] {OPTIONS}\n\n  Create each supplied directory including any necessary parent directories that\n  don\'t yet exist.\n  \n  If the directory already exists, do nothing.\n\nOPTIONS are:\n\n  -m, --mode   If a directory needs to be created, set the mode as an octal\n               permission string.\n\n```\n\n# install\n\nWith [npm](http://npmjs.org) do:\n\n```\nnpm install mkdirp\n```\n\nto get the library, or\n\n```\nnpm install -g mkdirp\n```\n\nto get the command.\n\n# license\n\nMIT\n',
+356 silly install resolved     readmeFilename: 'readme.markdown' },
+356 silly install resolved   { name: 'debug',
+356 silly install resolved     version: '2.0.0',
+356 silly install resolved     repository: { type: 'git', url: 'git://github.com/visionmedia/debug.git' },
+356 silly install resolved     description: 'small debugging utility',
+356 silly install resolved     keywords: [ 'debug', 'log', 'debugger' ],
+356 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+356 silly install resolved     contributors: [ [Object] ],
+356 silly install resolved     dependencies: { ms: '0.6.2' },
+356 silly install resolved     devDependencies: { browserify: '5.11.0', mocha: '*' },
+356 silly install resolved     main: './node.js',
+356 silly install resolved     browser: './browser.js',
+356 silly install resolved     component: { scripts: [Object] },
+356 silly install resolved     gitHead: 'c61ae82bde19c6fdedfc6684817ff7eb541ff029',
+356 silly install resolved     bugs: { url: 'https://github.com/visionmedia/debug/issues' },
+356 silly install resolved     homepage: 'https://github.com/visionmedia/debug',
+356 silly install resolved     _id: 'debug@2.0.0',
+356 silly install resolved     scripts: {},
+356 silly install resolved     _shasum: '89bd9df6732b51256bc6705342bba02ed12131ef',
+356 silly install resolved     _from: 'debug@2.0.0',
+356 silly install resolved     _npmVersion: '1.4.21',
+356 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+356 silly install resolved     maintainers: [ [Object], [Object] ],
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: '89bd9df6732b51256bc6705342bba02ed12131ef',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/debug/-/debug-2.0.0.tgz' },
+356 silly install resolved     directories: {},
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/debug/-/debug-2.0.0.tgz',
+356 silly install resolved     readme: '# debug\n\n  tiny node.js debugging utility modelled after node core\'s debugging technique.\n\n## Installation\n\n```bash\n$ npm install debug\n```\n\n## Usage\n\n With `debug` you simply invoke the exported function to generate your debug function, passing it a name which will determine if a noop function is returned, or a decorated `console.error`, so all of the `console` format string goodies you\'re used to work fine. A unique color is selected per-function for visibility.\n\nExample _app.js_:\n\n```js\nvar debug = require(\'debug\')(\'http\')\n  , http = require(\'http\')\n  , name = \'My App\';\n\n// fake app\n\ndebug(\'booting %s\', name);\n\nhttp.createServer(function(req, res){\n  debug(req.method + \' \' + req.url);\n  res.end(\'hello\\n\');\n}).listen(3000, function(){\n  debug(\'listening\');\n});\n\n// fake worker of some kind\n\nrequire(\'./worker\');\n```\n\nExample _worker.js_:\n\n```js\nvar debug = require(\'debug\')(\'worker\');\n\nsetInterval(function(){\n  debug(\'doing some work\');\n}, 1000);\n```\n\n The __DEBUG__ environment variable is then used to enable these based on space or comma-delimited names. Here are some examples:\n\n  ![debug http and worker](http://f.cl.ly/items/18471z1H402O24072r1J/Screenshot.png)\n\n  ![debug worker](http://f.cl.ly/items/1X413v1a3M0d3C2c1E0i/Screenshot.png)\n\n## Millisecond diff\n\n  When actively developing an application it can be useful to see when the time spent between one `debug()` call and the next. Suppose for example you invoke `debug()` before requesting a resource, and after as well, the "+NNNms" will show you how much time was spent between calls.\n\n  ![](http://f.cl.ly/items/2i3h1d3t121M2Z1A3Q0N/Screenshot.png)\n\n  When stdout is not a TTY, `Date#toUTCString()` is used, making it more useful for logging the debug information as shown below:\n\n  ![](http://f.cl.ly/items/112H3i0e0o0P0a2Q2r11/Screenshot.png)\n\n## Conventions\n\n If you\'re using this in one or more of your libraries, you _should_ use the name of your library so that developers may toggle debugging as desired without guessing names. If you have more than one debuggers you _should_ prefix them with your library name and use ":" to separate features. For example "bodyParser" from Connect would then be "connect:bodyParser".\n\n## Wildcards\n\n  The `*` character may be used as a wildcard. Suppose for example your library has debuggers named "connect:bodyParser", "connect:compress", "connect:session", instead of listing all three with `DEBUG=connect:bodyParser,connect.compress,connect:session`, you may simply do `DEBUG=connect:*`, or to run everything using this module simply use `DEBUG=*`.\n\n  You can also exclude specific debuggers by prefixing them with a "-" character.  For example, `DEBUG=*,-connect:*` would include all debuggers except those starting with "connect:".\n\n## Browser support\n\n  Debug works in the browser as well, currently persisted by `localStorage`. For example if you have `worker:a` and `worker:b` as shown below, and wish to debug both type `debug.enable(\'worker:*\')` in the console and refresh the page, this will remain until you disable with `debug.disable()`.\n\n```js\na = debug(\'worker:a\');\nb = debug(\'worker:b\');\n\nsetInterval(function(){\n  a(\'doing some work\');\n}, 1000);\n\nsetInterval(function(){\n  b(\'doing some work\');\n}, 1200);\n```\n\n#### Web Inspector Colors\n\n  Colors are also enabled on "Web Inspectors" that understand the `%c` formatting\n  option. These are WebKit web inspectors, Firefox ([since version\n  31](https://hacks.mozilla.org/2014/05/editable-box-model-multiple-selection-sublime-text-keys-much-more-firefox-developer-tools-episode-31/))\n  and the Firebug plugin for Firefox (any version).\n\n  Colored output looks something like:\n\n  ![](https://cloud.githubusercontent.com/assets/71256/3139768/b98c5fd8-e8ef-11e3-862a-f7253b6f47c6.png)\n\n### stderr vs stdout\n\nYou can set an alternative logging method per-namespace by overriding the `log` method on a per-namespace or globally:\n\nExample _stderr.js_:\n\n```js\nvar debug = require(\'../\');\nvar log = debug(\'app:log\');\n\n// by default console.log is used\nlog(\'goes to stdout!\');\n\nvar error = debug(\'app:error\');\n// set this namespace to log via console.error\nerror.log = console.error.bind(console); // don\'t forget to bind to console!\nerror(\'goes to stderr\');\nlog(\'still goes to stdout!\');\n\n// set all output to go via console.warn\n// overrides all per-namespace log settings\ndebug.log = console.warn.bind(console);\nlog(\'now goes to stderr via console.warn\');\nerror(\'still goes to stderr, but via console.warn now\');\n```\n\n## Authors\n\n - TJ Holowaychuk\n - Nathan Rajlich\n\n## License\n\n(The MIT License)\n\nCopyright (c) 2014 TJ Holowaychuk &lt;tj@vision-media.ca&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+356 silly install resolved     readmeFilename: 'Readme.md' },
+356 silly install resolved   { author:
+356 silly install resolved      { name: 'Isaac Z. Schlueter',
+356 silly install resolved        email: 'i@izs.me',
+356 silly install resolved        url: 'http://blog.izs.me/' },
+356 silly install resolved     name: 'glob',
+356 silly install resolved     description: 'a little globber',
+356 silly install resolved     version: '3.2.3',
+356 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/node-glob.git' },
+356 silly install resolved     main: 'glob.js',
+356 silly install resolved     engines: { node: '*' },
+356 silly install resolved     dependencies: { minimatch: '~0.2.11', 'graceful-fs': '~2.0.0', inherits: '2' },
+356 silly install resolved     devDependencies: { tap: '~0.4.0', mkdirp: '0', rimraf: '1' },
+356 silly install resolved     scripts: { test: 'tap test/*.js' },
+356 silly install resolved     license: 'BSD',
+356 silly install resolved     bugs: { url: 'https://github.com/isaacs/node-glob/issues' },
+356 silly install resolved     _id: 'glob@3.2.3',
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: 'e313eeb249c7affaa5c475286b0e115b59839467',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/glob/-/glob-3.2.3.tgz' },
+356 silly install resolved     _from: 'glob@3.2.3',
+356 silly install resolved     _npmVersion: '1.3.2',
+356 silly install resolved     _npmUser: { name: 'isaacs', email: 'i@izs.me' },
+356 silly install resolved     maintainers: [ [Object] ],
+356 silly install resolved     directories: {},
+356 silly install resolved     _shasum: 'e313eeb249c7affaa5c475286b0e115b59839467',
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/glob/-/glob-3.2.3.tgz',
+356 silly install resolved     readme: '# Glob\n\nMatch files using the patterns the shell uses, like stars and stuff.\n\nThis is a glob implementation in JavaScript.  It uses the `minimatch`\nlibrary to do its matching.\n\n## Attention: node-glob users!\n\nThe API has changed dramatically between 2.x and 3.x. This library is\nnow 100% JavaScript, and the integer flags have been replaced with an\noptions object.\n\nAlso, there\'s an event emitter class, proper tests, and all the other\nthings you\'ve come to expect from node modules.\n\nAnd best of all, no compilation!\n\n## Usage\n\n```javascript\nvar glob = require("glob")\n\n// options is optional\nglob("**/*.js", options, function (er, files) {\n  // files is an array of filenames.\n  // If the `nonull` option is set, and nothing\n  // was found, then files is ["**/*.js"]\n  // er is an error object or null.\n})\n```\n\n## Features\n\nPlease see the [minimatch\ndocumentation](https://github.com/isaacs/minimatch) for more details.\n\nSupports these glob features:\n\n* Brace Expansion\n* Extended glob matching\n* "Globstar" `**` matching\n\nSee:\n\n* `man sh`\n* `man bash`\n* `man 3 fnmatch`\n* `man 5 gitignore`\n* [minimatch documentation](https://github.com/isaacs/minimatch)\n\n## glob(pattern, [options], cb)\n\n* `pattern` {String} Pattern to be matched\n* `options` {Object}\n* `cb` {Function}\n  * `err` {Error | null}\n  * `matches` {Array<String>} filenames found matching the pattern\n\nPerform an asynchronous glob search.\n\n## glob.sync(pattern, [options])\n\n* `pattern` {String} Pattern to be matched\n* `options` {Object}\n* return: {Array<String>} filenames found matching the pattern\n\nPerform a synchronous glob search.\n\n## Class: glob.Glob\n\nCreate a Glob object by instanting the `glob.Glob` class.\n\n```javascript\nvar Glob = require("glob").Glob\nvar mg = new Glob(pattern, options, cb)\n```\n\nIt\'s an EventEmitter, and starts walking the filesystem to find matches\nimmediately.\n\n### new glob.Glob(pattern, [options], [cb])\n\n* `pattern` {String} pattern to search for\n* `options` {Object}\n* `cb` {Function} Called when an error occurs, or matches are found\n  * `err` {Error | null}\n  * `matches` {Array<String>} filenames found matching the pattern\n\nNote that if the `sync` flag is set in the options, then matches will\nbe immediately available on the `g.found` member.\n\n### Properties\n\n* `minimatch` The minimatch object that the glob uses.\n* `options` The options object passed in.\n* `error` The error encountered.  When an error is encountered, the\n  glob object is in an undefined state, and should be discarded.\n* `aborted` Boolean which is set to true when calling `abort()`.  There\n  is no way at this time to continue a glob search after aborting, but\n  you can re-use the statCache to avoid having to duplicate syscalls.\n* `statCache` Collection of all the stat results the glob search\n  performed.\n* `cache` Convenience object.  Each field has the following possible\n  values:\n  * `false` - Path does not exist\n  * `true` - Path exists\n  * `1` - Path exists, and is not a directory\n  * `2` - Path exists, and is a directory\n  * `[file, entries, ...]` - Path exists, is a directory, and the\n    array value is the results of `fs.readdir`\n\n### Events\n\n* `end` When the matching is finished, this is emitted with all the\n  matches found.  If the `nonull` option is set, and no match was found,\n  then the `matches` list contains the original pattern.  The matches\n  are sorted, unless the `nosort` flag is set.\n* `match` Every time a match is found, this is emitted with the matched.\n* `error` Emitted when an unexpected error is encountered, or whenever\n  any fs error occurs if `options.strict` is set.\n* `abort` When `abort()` is called, this event is raised.\n\n### Methods\n\n* `abort` Stop the search.\n\n### Options\n\nAll the options that can be passed to Minimatch can also be passed to\nGlob to change pattern matching behavior.  Also, some have been added,\nor have glob-specific ramifications.\n\nAll options are false by default, unless otherwise noted.\n\nAll options are added to the glob object, as well.\n\n* `cwd` The current working directory in which to search.  Defaults\n  to `process.cwd()`.\n* `root` The place where patterns starting with `/` will be mounted\n  onto.  Defaults to `path.resolve(options.cwd, "/")` (`/` on Unix\n  systems, and `C:\\` or some such on Windows.)\n* `dot` Include `.dot` files in normal matches and `globstar` matches.\n  Note that an explicit dot in a portion of the pattern will always\n  match dot files.\n* `nomount` By default, a pattern starting with a forward-slash will be\n  "mounted" onto the root setting, so that a valid filesystem path is\n  returned.  Set this flag to disable that behavior.\n* `mark` Add a `/` character to directory matches.  Note that this\n  requires additional stat calls.\n* `nosort` Don\'t sort the results.\n* `stat` Set to true to stat *all* results.  This reduces performance\n  somewhat, and is completely unnecessary, unless `readdir` is presumed\n  to be an untrustworthy indicator of file existence.  It will cause\n  ELOOP to be triggered one level sooner in the case of cyclical\n  symbolic links.\n* `silent` When an unusual error is encountered\n  when attempting to read a directory, a warning will be printed to\n  stderr.  Set the `silent` option to true to suppress these warnings.\n* `strict` When an unusual error is encountered\n  when attempting to read a directory, the process will just continue on\n  in search of other matches.  Set the `strict` option to raise an error\n  in these cases.\n* `cache` See `cache` property above.  Pass in a previously generated\n  cache object to save some fs calls.\n* `statCache` A cache of results of filesystem information, to prevent\n  unnecessary stat calls.  While it should not normally be necessary to\n  set this, you may pass the statCache from one glob() call to the\n  options object of another, if you know that the filesystem will not\n  change between calls.  (See "Race Conditions" below.)\n* `sync` Perform a synchronous glob search.\n* `nounique` In some cases, brace-expanded patterns can result in the\n  same file showing up multiple times in the result set.  By default,\n  this implementation prevents duplicates in the result set.\n  Set this flag to disable that behavior.\n* `nonull` Set to never return an empty set, instead returning a set\n  containing the pattern itself.  This is the default in glob(3).\n* `nocase` Perform a case-insensitive match.  Note that case-insensitive\n  filesystems will sometimes result in glob returning results that are\n  case-insensitively matched anyway, since readdir and stat will not\n  raise an error.\n* `debug` Set to enable debug logging in minimatch and glob.\n* `globDebug` Set to enable debug logging in glob, but not minimatch.\n\n## Comparisons to other fnmatch/glob implementations\n\nWhile strict compliance with the existing standards is a worthwhile\ngoal, some discrepancies exist between node-glob and other\nimplementations, and are intentional.\n\nIf the pattern starts with a `!` character, then it is negated.  Set the\n`nonegate` flag to suppress this behavior, and treat leading `!`\ncharacters normally.  This is perhaps relevant if you wish to start the\npattern with a negative extglob pattern like `!(a|B)`.  Multiple `!`\ncharacters at the start of a pattern will negate the pattern multiple\ntimes.\n\nIf a pattern starts with `#`, then it is treated as a comment, and\nwill not match anything.  Use `\\#` to match a literal `#` at the\nstart of a line, or set the `nocomment` flag to suppress this behavior.\n\nThe double-star character `**` is supported by default, unless the\n`noglobstar` flag is set.  This is supported in the manner of bsdglob\nand bash 4.1, where `**` only has special significance if it is the only\nthing in a path part.  That is, `a/**/b` will match `a/x/y/b`, but\n`a/**b` will not.\n\nIf an escaped pattern has no matches, and the `nonull` flag is set,\nthen glob returns the pattern as-provided, rather than\ninterpreting the character escapes.  For example,\n`glob.match([], "\\\\*a\\\\?")` will return `"\\\\*a\\\\?"` rather than\n`"*a?"`.  This is akin to setting the `nullglob` option in bash, except\nthat it does not resolve escaped pattern characters.\n\nIf brace expansion is not disabled, then it is performed before any\nother interpretation of the glob pattern.  Thus, a pattern like\n`+(a|{b),c)}`, which would not be valid in bash or zsh, is expanded\n**first** into the set of `+(a|b)` and `+(a|c)`, and those patterns are\nchecked for validity.  Since those two are valid, matching proceeds.\n\n## Windows\n\n**Please only use forward-slashes in glob expressions.**\n\nThough windows uses either `/` or `\\` as its path separator, only `/`\ncharacters are used by this glob implementation.  You must use\nforward-slashes **only** in glob expressions.  Back-slashes will always\nbe interpreted as escape characters, not path separators.\n\nResults from absolute patterns such as `/foo/*` are mounted onto the\nroot setting using `path.join`.  On windows, this will by default result\nin `/foo/*` matching `C:\\foo\\bar.txt`.\n\n## Race Conditions\n\nGlob searching, by its very nature, is susceptible to race conditions,\nsince it relies on directory walking and such.\n\nAs a result, it is possible that a file that exists when glob looks for\nit may have been deleted or modified by the time it returns the result.\n\nAs part of its internal implementation, this program caches all stat\nand readdir calls that it makes, in order to cut down on system\noverhead.  However, this also makes it even more susceptible to races,\nespecially if the cache or statCache objects are reused between glob\ncalls.\n\nUsers are thus advised not to use a glob result as a guarantee of\nfilesystem state in the face of rapid changes.  For the vast majority\nof operations, this is never a problem.\n',
+356 silly install resolved     readmeFilename: 'README.md',
+356 silly install resolved     homepage: 'https://github.com/isaacs/node-glob' },
+356 silly install resolved   { name: 'jade',
+356 silly install resolved     description: 'Jade template engine',
+356 silly install resolved     version: '0.26.3',
+356 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+356 silly install resolved     repository: { type: 'git', url: 'git://github.com/visionmedia/jade' },
+356 silly install resolved     main: './index.js',
+356 silly install resolved     bin: { jade: './bin/jade' },
+356 silly install resolved     man: [ './jade.1' ],
+356 silly install resolved     dependencies: { commander: '0.6.1', mkdirp: '0.3.0' },
+356 silly install resolved     devDependencies:
+356 silly install resolved      { mocha: '*',
+356 silly install resolved        markdown: '*',
+356 silly install resolved        stylus: '*',
+356 silly install resolved        uubench: '*',
+356 silly install resolved        should: '*',
+356 silly install resolved        less: '*',
+356 silly install resolved        'uglify-js': '*' },
+356 silly install resolved     component: { scripts: [Object] },
+356 silly install resolved     scripts: { prepublish: 'npm prune' },
+356 silly install resolved     _id: 'jade@0.26.3',
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: '8f10d7977d8d79f2f6ff862a81b0513ccb25686c',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/jade/-/jade-0.26.3.tgz' },
+356 silly install resolved     maintainers: [ [Object] ],
+356 silly install resolved     directories: {},
+356 silly install resolved     _shasum: '8f10d7977d8d79f2f6ff862a81b0513ccb25686c',
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/jade/-/jade-0.26.3.tgz',
+356 silly install resolved     _from: 'jade@0.26.3',
+356 silly install resolved     bugs: { url: 'https://github.com/visionmedia/jade/issues' },
+356 silly install resolved     readme: 'ERROR: No README data found!',
+356 silly install resolved     homepage: 'https://github.com/visionmedia/jade' },
+356 silly install resolved   { name: 'commander',
+356 silly install resolved     version: '2.3.0',
+356 silly install resolved     description: 'the complete solution for node.js command-line programs',
+356 silly install resolved     keywords: [ 'command', 'option', 'parser', 'prompt', 'stdin' ],
+356 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+356 silly install resolved     repository:
+356 silly install resolved      { type: 'git',
+356 silly install resolved        url: 'https://github.com/visionmedia/commander.js.git' },
+356 silly install resolved     devDependencies: { should: '>= 0.0.1' },
+356 silly install resolved     scripts: { test: 'make test' },
+356 silly install resolved     main: 'index',
+356 silly install resolved     engines: { node: '>= 0.6.x' },
+356 silly install resolved     files: [ 'index.js' ],
+356 silly install resolved     gitHead: '7e9f407ec03d4371a478c2fe417db4998ecb6169',
+356 silly install resolved     bugs: { url: 'https://github.com/visionmedia/commander.js/issues' },
+356 silly install resolved     homepage: 'https://github.com/visionmedia/commander.js',
+356 silly install resolved     _id: 'commander@2.3.0',
+356 silly install resolved     _shasum: 'fd430e889832ec353b9acd1de217c11cb3eef873',
+356 silly install resolved     _from: 'commander@2.3.0',
+356 silly install resolved     _npmVersion: '1.4.21',
+356 silly install resolved     _npmUser: { name: 'somekittens', email: 'rkoutnik@gmail.com' },
+356 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
+356 silly install resolved     dist:
+356 silly install resolved      { shasum: 'fd430e889832ec353b9acd1de217c11cb3eef873',
+356 silly install resolved        tarball: 'http://registry.npmjs.org/commander/-/commander-2.3.0.tgz' },
+356 silly install resolved     directories: {},
+356 silly install resolved     _resolved: 'http://registry.npmjs.org/commander/-/commander-2.3.0.tgz' } ]
+357 info install growl@1.8.1 into /usr/local/lib/node_modules/mocha
+358 info install diff@1.0.8 into /usr/local/lib/node_modules/mocha
+359 info install escape-string-regexp@1.0.2 into /usr/local/lib/node_modules/mocha
+360 info install mkdirp@0.5.0 into /usr/local/lib/node_modules/mocha
+361 info install debug@2.0.0 into /usr/local/lib/node_modules/mocha
+362 info install glob@3.2.3 into /usr/local/lib/node_modules/mocha
+363 info install jade@0.26.3 into /usr/local/lib/node_modules/mocha
+364 info install commander@2.3.0 into /usr/local/lib/node_modules/mocha
+365 info installOne growl@1.8.1
+366 verbose installOne of growl to /usr/local/lib/node_modules/mocha not in flight; installing
+367 info installOne diff@1.0.8
+368 verbose installOne of diff to /usr/local/lib/node_modules/mocha not in flight; installing
+369 info installOne escape-string-regexp@1.0.2
+370 verbose installOne of escape-string-regexp to /usr/local/lib/node_modules/mocha not in flight; installing
+371 info installOne mkdirp@0.5.0
+372 verbose installOne of mkdirp to /usr/local/lib/node_modules/mocha not in flight; installing
+373 info installOne debug@2.0.0
+374 verbose installOne of debug to /usr/local/lib/node_modules/mocha not in flight; installing
+375 info installOne glob@3.2.3
+376 verbose installOne of glob to /usr/local/lib/node_modules/mocha not in flight; installing
+377 info installOne jade@0.26.3
+378 verbose installOne of jade to /usr/local/lib/node_modules/mocha not in flight; installing
+379 info installOne commander@2.3.0
+380 verbose installOne of commander to /usr/local/lib/node_modules/mocha not in flight; installing
+381 verbose lock using /Users/goldibex/.npm/_locks/growl-7292f1f9bcd7edd3.lock for /usr/local/lib/node_modules/mocha/node_modules/growl
+382 verbose lock using /Users/goldibex/.npm/_locks/diff-f42ac278dd83b742.lock for /usr/local/lib/node_modules/mocha/node_modules/diff
+383 verbose lock using /Users/goldibex/.npm/_locks/escape-string-regexp-b15235b646308db1.lock for /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+384 verbose lock using /Users/goldibex/.npm/_locks/mkdirp-6e9bf42675355383.lock for /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+385 verbose lock using /Users/goldibex/.npm/_locks/debug-a96232c777b2604f.lock for /usr/local/lib/node_modules/mocha/node_modules/debug
+386 verbose lock using /Users/goldibex/.npm/_locks/glob-b0b1ce58c2087973.lock for /usr/local/lib/node_modules/mocha/node_modules/glob
+387 silly install write writing growl 1.8.1 to /usr/local/lib/node_modules/mocha/node_modules/growl
+388 silly cache addNamed cb growl@1.8.1
+389 verbose unbuild lib/node_modules/mocha/node_modules/growl
+390 silly install write writing diff 1.0.8 to /usr/local/lib/node_modules/mocha/node_modules/diff
+391 silly cache addNamed cb diff@1.0.8
+392 verbose unbuild lib/node_modules/mocha/node_modules/diff
+393 silly install write writing escape-string-regexp 1.0.2 to /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+394 silly cache addNamed cb escape-string-regexp@1.0.2
+395 verbose unbuild lib/node_modules/mocha/node_modules/escape-string-regexp
+396 silly install write writing mkdirp 0.5.0 to /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+397 silly cache addNamed cb mkdirp@0.5.0
+398 verbose unbuild lib/node_modules/mocha/node_modules/mkdirp
+399 silly install write writing debug 2.0.0 to /usr/local/lib/node_modules/mocha/node_modules/debug
+400 silly cache addNamed cb debug@2.0.0
+401 verbose unbuild lib/node_modules/mocha/node_modules/debug
+402 verbose lock using /Users/goldibex/.npm/_locks/jade-8bc9d54f5930ad8e.lock for /usr/local/lib/node_modules/mocha/node_modules/jade
+403 silly install write writing glob 3.2.3 to /usr/local/lib/node_modules/mocha/node_modules/glob
+404 silly cache addNamed cb glob@3.2.3
+405 verbose unbuild lib/node_modules/mocha/node_modules/glob
+406 verbose lock using /Users/goldibex/.npm/_locks/commander-956c96bb62f5fec4.lock for /usr/local/lib/node_modules/mocha/node_modules/commander
+407 silly install write writing jade 0.26.3 to /usr/local/lib/node_modules/mocha/node_modules/jade
+408 silly cache addNamed cb jade@0.26.3
+409 verbose unbuild lib/node_modules/mocha/node_modules/jade
+410 silly install write writing commander 2.3.0 to /usr/local/lib/node_modules/mocha/node_modules/commander
+411 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/growl
+412 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/diff
+413 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+414 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+415 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/debug
+416 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob
+417 verbose tar unpack /Users/goldibex/.npm/growl/1.8.1/package.tgz
+418 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/growl
+419 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/growl
+420 verbose tar unpack /Users/goldibex/.npm/diff/1.0.8/package.tgz
+421 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/diff
+422 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/diff
+423 verbose tar unpack /Users/goldibex/.npm/escape-string-regexp/1.0.2/package.tgz
+424 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+425 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+426 verbose tar unpack /Users/goldibex/.npm/mkdirp/0.5.0/package.tgz
+427 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+428 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+429 verbose tar unpack /Users/goldibex/.npm/debug/2.0.0/package.tgz
+430 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/debug
+431 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/debug
+432 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade
+433 verbose tar unpack /Users/goldibex/.npm/glob/3.2.3/package.tgz
+434 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob
+435 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob
+436 silly gunzTarPerm modes [ '755', '644' ]
+437 silly gunzTarPerm modes [ '755', '644' ]
+438 silly gunzTarPerm modes [ '755', '644' ]
+439 silly gunzTarPerm modes [ '755', '644' ]
+440 silly gunzTarPerm modes [ '755', '644' ]
+441 verbose tar unpack /Users/goldibex/.npm/jade/0.26.3/package.tgz
+442 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/jade
+443 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade
+444 silly gunzTarPerm modes [ '755', '644' ]
+445 silly gunzTarPerm modes [ '755', '644' ]
+446 silly gunzTarPerm extractEntry package.json
+447 silly gunzTarPerm extractEntry package.json
+448 silly gunzTarPerm extractEntry package.json
+449 silly gunzTarPerm extractEntry package.json
+450 silly gunzTarPerm extractEntry package.json
+451 silly gunzTarPerm extractEntry package.json
+452 silly cache addNamed cb commander@2.3.0
+453 verbose unbuild lib/node_modules/mocha/node_modules/commander
+454 silly gunzTarPerm extractEntry package.json
+455 silly gunzTarPerm extractEntry test.js
+456 silly gunzTarPerm extractEntry History.md
+457 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/commander
+458 silly gunzTarPerm extractEntry .npmignore
+459 silly gunzTarPerm extractEntry LICENSE
+460 silly gunzTarPerm extractEntry index.js
+461 silly gunzTarPerm extractEntry readme.md
+462 silly gunzTarPerm extractEntry README.md
+463 silly gunzTarPerm extractEntry diff.js
+464 verbose tar unpack /Users/goldibex/.npm/commander/2.3.0/package.tgz
+465 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/commander
+466 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/commander
+467 silly gunzTarPerm extractEntry .npmignore
+468 silly gunzTarPerm extractEntry browser.js
+469 silly gunzTarPerm extractEntry .npmignore
+470 silly gunzTarPerm extractEntry README.md
+471 silly gunzTarPerm modes [ '755', '644' ]
+472 silly gunzTarPerm extractEntry .npmignore
+473 silly gunzTarPerm extractEntry LICENSE
+474 silly gunzTarPerm extractEntry Readme.md
+475 silly gunzTarPerm extractEntry lib/growl.js
+476 silly gunzTarPerm extractEntry package.json
+477 silly gunzTarPerm extractEntry index.js
+478 silly gunzTarPerm extractEntry .travis.yml
+479 silly gunzTarPerm extractEntry debug.js
+480 silly gunzTarPerm extractEntry node.js
+481 silly gunzTarPerm extractEntry LICENSE
+482 silly gunzTarPerm extractEntry glob.js
+483 silly gunzTarPerm extractEntry index.js
+484 silly gunzTarPerm extractEntry jade.js
+485 silly gunzTarPerm extractEntry index.js
+486 silly gunzTarPerm extractEntry Readme.md
+487 silly gunzTarPerm extractEntry bin/cmd.js
+488 silly gunzTarPerm extractEntry bin/usage.txt
+489 silly gunzTarPerm extractEntry Readme.md
+490 silly gunzTarPerm extractEntry .jshintrc
+491 silly gunzTarPerm extractEntry History.md
+492 silly gunzTarPerm extractEntry Makefile
+493 silly gunzTarPerm extractEntry component.json
+494 silly gunzTarPerm extractEntry .travis.yml
+495 silly gunzTarPerm extractEntry jade.min.js
+496 silly gunzTarPerm extractEntry examples/pow.js
+497 silly gunzTarPerm extractEntry readme.markdown
+498 silly gunzTarPerm extractEntry runtime.js
+499 silly gunzTarPerm extractEntry runtime.min.js
+500 info preinstall escape-string-regexp@1.0.2
+501 silly gunzTarPerm extractEntry testing/index.js
+502 silly gunzTarPerm extractEntry testing/user.js
+503 silly gunzTarPerm extractEntry testing/head.jade
+504 silly install resolved []
+505 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+506 info build /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+507 verbose linkStuff [ true,
+507 verbose linkStuff   '/usr/local/lib/node_modules',
+507 verbose linkStuff   false,
+507 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+508 info linkStuff escape-string-regexp@1.0.2
+509 silly gunzTarPerm extractEntry test/chmod.js
+510 silly gunzTarPerm extractEntry test/opts_fs_sync.js
+511 silly gunzTarPerm extractEntry test/perm.js
+512 silly gunzTarPerm extractEntry test/perm_sync.js
+513 silly gunzTarPerm extractEntry test/opts_fs.js
+514 silly gunzTarPerm extractEntry test/rel.js
+515 silly gunzTarPerm extractEntry test/return.js
+516 silly gunzTarPerm extractEntry test/return_sync.js
+517 silly gunzTarPerm extractEntry test/root.js
+518 silly gunzTarPerm extractEntry test/sync.js
+519 silly gunzTarPerm extractEntry test/mkdirp.js
+520 silly gunzTarPerm extractEntry test/umask.js
+521 silly gunzTarPerm extractEntry test/clobber.js
+522 silly gunzTarPerm extractEntry test/umask_sync.js
+523 silly gunzTarPerm extractEntry test/race.js
+524 silly gunzTarPerm extractEntry examples/g.js
+525 silly gunzTarPerm extractEntry examples/usr-local.js
+526 verbose linkBins escape-string-regexp@1.0.2
+527 verbose linkMans escape-string-regexp@1.0.2
+528 verbose rebuildBundles escape-string-regexp@1.0.2
+529 info install escape-string-regexp@1.0.2
+530 silly gunzTarPerm extractEntry test/00-setup.js
+531 silly gunzTarPerm extractEntry test/stat.js
+532 silly gunzTarPerm extractEntry test/cwd-test.js
+533 info postinstall escape-string-regexp@1.0.2
+534 verbose unlock done using /Users/goldibex/.npm/_locks/escape-string-regexp-b15235b646308db1.lock for /usr/local/lib/node_modules/mocha/node_modules/escape-string-regexp
+535 info preinstall diff@1.0.8
+536 silly gunzTarPerm extractEntry testing/index.jade
+537 info preinstall growl@1.8.1
+538 silly install resolved []
+539 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/diff
+540 info build /usr/local/lib/node_modules/mocha/node_modules/diff
+541 verbose linkStuff [ true,
+541 verbose linkStuff   '/usr/local/lib/node_modules',
+541 verbose linkStuff   false,
+541 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+542 info linkStuff diff@1.0.8
+543 verbose linkBins diff@1.0.8
+544 verbose linkMans diff@1.0.8
+545 verbose rebuildBundles diff@1.0.8
+546 info install diff@1.0.8
+547 info postinstall diff@1.0.8
+548 silly install resolved []
+549 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/growl
+550 info build /usr/local/lib/node_modules/mocha/node_modules/growl
+551 verbose linkStuff [ true,
+551 verbose linkStuff   '/usr/local/lib/node_modules',
+551 verbose linkStuff   false,
+551 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+552 info linkStuff growl@1.8.1
+553 verbose linkBins growl@1.8.1
+554 verbose linkMans growl@1.8.1
+555 verbose rebuildBundles growl@1.8.1
+556 info install growl@1.8.1
+557 verbose unlock done using /Users/goldibex/.npm/_locks/diff-f42ac278dd83b742.lock for /usr/local/lib/node_modules/mocha/node_modules/diff
+558 info postinstall growl@1.8.1
+559 verbose unlock done using /Users/goldibex/.npm/_locks/growl-7292f1f9bcd7edd3.lock for /usr/local/lib/node_modules/mocha/node_modules/growl
+560 silly gunzTarPerm extractEntry test/globstar-match.js
+561 info preinstall commander@2.3.0
+562 silly gunzTarPerm extractEntry test/mark.js
+563 silly gunzTarPerm extractEntry test/bash-comparison.js
+564 silly install resolved []
+565 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/commander
+566 info build /usr/local/lib/node_modules/mocha/node_modules/commander
+567 verbose linkStuff [ true,
+567 verbose linkStuff   '/usr/local/lib/node_modules',
+567 verbose linkStuff   false,
+567 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+568 info linkStuff commander@2.3.0
+569 verbose linkBins commander@2.3.0
+570 verbose linkMans commander@2.3.0
+571 verbose rebuildBundles commander@2.3.0
+572 info install commander@2.3.0
+573 silly gunzTarPerm extractEntry testing/layout.jade
+574 info postinstall commander@2.3.0
+575 silly gunzTarPerm extractEntry test/pause-resume.js
+576 silly gunzTarPerm extractEntry test/root-nomount.js
+577 verbose unlock done using /Users/goldibex/.npm/_locks/commander-956c96bb62f5fec4.lock for /usr/local/lib/node_modules/mocha/node_modules/commander
+578 silly gunzTarPerm extractEntry test/root.js
+579 silly gunzTarPerm extractEntry test/zz-cleanup.js
+580 silly gunzTarPerm extractEntry test/nocase-nomagic.js
+581 silly gunzTarPerm extractEntry test/bash-results.json
+582 silly gunzTarPerm extractEntry testing/user.jade
+583 info preinstall debug@2.0.0
+584 silly prepareForInstallMany adding ms@0.6.2 from debug dependencies
+585 silly cache add args [ 'ms@0.6.2', null ]
+586 verbose cache add spec ms@0.6.2
+587 silly cache add parsed spec { raw: 'ms@0.6.2',
+587 silly cache add   scope: null,
+587 silly cache add   name: 'ms',
+587 silly cache add   rawSpec: '0.6.2',
+587 silly cache add   spec: '0.6.2',
+587 silly cache add   type: 'version' }
+588 verbose addNamed ms@0.6.2
+589 silly addNamed semver.valid 0.6.2
+590 silly addNamed semver.validRange 0.6.2
+591 silly mapToRegistry name ms
+592 silly mapToRegistry using default registry
+593 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+594 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms
+595 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms not in flight; fetching
+596 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms
+597 verbose request no auth needed
+598 info attempt registry request try #1 at 13:52:30
+599 verbose etag "735H5STM8VC1GQQ7K3AOTN8S0"
+600 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms
+601 silly gunzTarPerm extractEntry bin/jade
+602 silly gunzTarPerm extractEntry jade.md
+603 silly gunzTarPerm extractEntry test.jade
+604 silly gunzTarPerm extractEntry lib/compiler.js
+605 silly gunzTarPerm extractEntry lib/filters.js
+606 silly gunzTarPerm extractEntry lib/inline-tags.js
+607 silly gunzTarPerm extractEntry lib/jade.js
+608 silly gunzTarPerm extractEntry lib/doctypes.js
+609 info preinstall mkdirp@0.5.0
+610 silly prepareForInstallMany adding minimist@0.0.8 from mkdirp dependencies
+611 silly gunzTarPerm extractEntry lib/self-closing.js
+612 silly gunzTarPerm extractEntry lib/parser.js
+613 silly cache add args [ 'minimist@0.0.8', null ]
+614 verbose cache add spec minimist@0.0.8
+615 silly cache add parsed spec { raw: 'minimist@0.0.8',
+615 silly cache add   scope: null,
+615 silly cache add   name: 'minimist',
+615 silly cache add   rawSpec: '0.0.8',
+615 silly cache add   spec: '0.0.8',
+615 silly cache add   type: 'version' }
+616 verbose addNamed minimist@0.0.8
+617 silly addNamed semver.valid 0.0.8
+618 silly addNamed semver.validRange 0.0.8
+619 silly mapToRegistry name minimist
+620 silly mapToRegistry using default registry
+621 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+622 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist
+623 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist not in flight; fetching
+624 silly gunzTarPerm extractEntry lib/runtime.js
+625 silly gunzTarPerm extractEntry lib/utils.js
+626 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist
+627 verbose request no auth needed
+628 info attempt registry request try #1 at 13:52:30
+629 verbose etag "11FKYRTK1ZYP7VLP94OH7F7OQ"
+630 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist
+631 silly gunzTarPerm extractEntry lib/lexer.js
+632 silly gunzTarPerm extractEntry lib/nodes/attrs.js
+633 silly gunzTarPerm extractEntry lib/nodes/code.js
+634 silly gunzTarPerm extractEntry lib/nodes/comment.js
+635 silly gunzTarPerm extractEntry lib/nodes/doctype.js
+636 silly gunzTarPerm extractEntry lib/nodes/case.js
+637 silly gunzTarPerm extractEntry lib/nodes/filter.js
+638 silly gunzTarPerm extractEntry lib/nodes/index.js
+639 info preinstall glob@3.2.3
+640 silly gunzTarPerm extractEntry lib/nodes/literal.js
+641 silly gunzTarPerm extractEntry lib/nodes/mixin.js
+642 silly prepareForInstallMany adding minimatch@~0.2.11 from glob dependencies
+643 silly prepareForInstallMany adding graceful-fs@~2.0.0 from glob dependencies
+644 silly prepareForInstallMany adding inherits@2 from glob dependencies
+645 silly gunzTarPerm extractEntry lib/nodes/node.js
+646 silly gunzTarPerm extractEntry lib/nodes/block.js
+647 silly cache add args [ 'minimatch@~0.2.11', null ]
+648 verbose cache add spec minimatch@~0.2.11
+649 silly cache add args [ 'graceful-fs@~2.0.0', null ]
+650 verbose cache add spec graceful-fs@~2.0.0
+651 silly cache add parsed spec { raw: 'minimatch@~0.2.11',
+651 silly cache add   scope: null,
+651 silly cache add   name: 'minimatch',
+651 silly cache add   rawSpec: '~0.2.11',
+651 silly cache add   spec: '>=0.2.11 <0.3.0',
+651 silly cache add   type: 'range' }
+652 verbose addNamed minimatch@>=0.2.11 <0.3.0
+653 silly addNamed semver.valid null
+654 silly addNamed semver.validRange >=0.2.11 <0.3.0
+655 silly addNameRange { name: 'minimatch', range: '>=0.2.11 <0.3.0', hasData: false }
+656 silly mapToRegistry name minimatch
+657 silly mapToRegistry using default registry
+658 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+659 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch
+660 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch not in flight; fetching
+661 silly cache add parsed spec { raw: 'graceful-fs@~2.0.0',
+661 silly cache add   scope: null,
+661 silly cache add   name: 'graceful-fs',
+661 silly cache add   rawSpec: '~2.0.0',
+661 silly cache add   spec: '>=2.0.0 <2.1.0',
+661 silly cache add   type: 'range' }
+662 verbose addNamed graceful-fs@>=2.0.0 <2.1.0
+663 silly addNamed semver.valid null
+664 silly addNamed semver.validRange >=2.0.0 <2.1.0
+665 silly addNameRange { name: 'graceful-fs', range: '>=2.0.0 <2.1.0', hasData: false }
+666 silly mapToRegistry name graceful-fs
+667 silly mapToRegistry using default registry
+668 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+669 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs
+670 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs not in flight; fetching
+671 silly cache add args [ 'inherits@2', null ]
+672 verbose cache add spec inherits@2
+673 silly cache add parsed spec { raw: 'inherits@2',
+673 silly cache add   scope: null,
+673 silly cache add   name: 'inherits',
+673 silly cache add   rawSpec: '2',
+673 silly cache add   spec: '>=2.0.0 <3.0.0',
+673 silly cache add   type: 'range' }
+674 verbose addNamed inherits@>=2.0.0 <3.0.0
+675 silly addNamed semver.valid null
+676 silly addNamed semver.validRange >=2.0.0 <3.0.0
+677 silly addNameRange { name: 'inherits', range: '>=2.0.0 <3.0.0', hasData: false }
+678 silly mapToRegistry name inherits
+679 silly mapToRegistry using default registry
+680 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+681 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits
+682 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits not in flight; fetching
+683 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch
+684 verbose request no auth needed
+685 info attempt registry request try #1 at 13:52:30
+686 verbose etag "6RAFQUO1Q3A7GTG25N34H7NUT"
+687 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch
+688 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs
+689 verbose request no auth needed
+690 info attempt registry request try #1 at 13:52:30
+691 verbose etag "YI3CUA6DFZEU7F4JXVMK6K9"
+692 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs
+693 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits
+694 verbose request no auth needed
+695 info attempt registry request try #1 at 13:52:30
+696 verbose etag "9QY38ZTAA040M0IB8DZOWK7DH"
+697 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits
+698 silly gunzTarPerm extractEntry lib/nodes/tag.js
+699 silly gunzTarPerm extractEntry lib/nodes/block-comment.js
+700 silly gunzTarPerm extractEntry lib/nodes/text.js
+701 silly gunzTarPerm extractEntry lib/nodes/each.js
+702 info preinstall jade@0.26.3
+703 silly prepareForInstallMany adding commander@0.6.1 from jade dependencies
+704 silly prepareForInstallMany adding mkdirp@0.3.0 from jade dependencies
+705 silly cache add args [ 'commander@0.6.1', null ]
+706 verbose cache add spec commander@0.6.1
+707 silly cache add args [ 'mkdirp@0.3.0', null ]
+708 verbose cache add spec mkdirp@0.3.0
+709 silly cache add parsed spec { raw: 'commander@0.6.1',
+709 silly cache add   scope: null,
+709 silly cache add   name: 'commander',
+709 silly cache add   rawSpec: '0.6.1',
+709 silly cache add   spec: '0.6.1',
+709 silly cache add   type: 'version' }
+710 verbose addNamed commander@0.6.1
+711 silly addNamed semver.valid 0.6.1
+712 silly addNamed semver.validRange 0.6.1
+713 silly mapToRegistry name commander
+714 silly mapToRegistry using default registry
+715 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+716 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander
+717 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander not in flight; fetching
+718 silly cache add parsed spec { raw: 'mkdirp@0.3.0',
+718 silly cache add   scope: null,
+718 silly cache add   name: 'mkdirp',
+718 silly cache add   rawSpec: '0.3.0',
+718 silly cache add   spec: '0.3.0',
+718 silly cache add   type: 'version' }
+719 verbose addNamed mkdirp@0.3.0
+720 silly addNamed semver.valid 0.3.0
+721 silly addNamed semver.validRange 0.3.0
+722 silly mapToRegistry name mkdirp
+723 silly mapToRegistry using default registry
+724 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+725 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp
+726 verbose addNameVersion registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp not in flight; fetching
+727 verbose get https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/commander not expired, no request
+728 verbose get https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/mkdirp not expired, no request
+729 silly cache afterAdd commander@0.6.1
+730 verbose afterAdd /Users/goldibex/.npm/commander/0.6.1/package/package.json not in flight; writing
+731 silly cache afterAdd mkdirp@0.3.0
+732 verbose afterAdd /Users/goldibex/.npm/mkdirp/0.3.0/package/package.json not in flight; writing
+733 verbose afterAdd /Users/goldibex/.npm/commander/0.6.1/package/package.json written
+734 verbose afterAdd /Users/goldibex/.npm/mkdirp/0.3.0/package/package.json written
+735 silly install resolved [ { name: 'commander',
+735 silly install resolved     version: '0.6.1',
+735 silly install resolved     description: 'the complete solution for node.js command-line programs',
+735 silly install resolved     keywords: [ 'command', 'option', 'parser', 'prompt', 'stdin' ],
+735 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+735 silly install resolved     repository:
+735 silly install resolved      { type: 'git',
+735 silly install resolved        url: 'https://github.com/visionmedia/commander.js.git' },
+735 silly install resolved     dependencies: {},
+735 silly install resolved     devDependencies: { should: '>= 0.0.1' },
+735 silly install resolved     scripts: { test: 'make test' },
+735 silly install resolved     main: 'index',
+735 silly install resolved     engines: { node: '>= 0.4.x' },
+735 silly install resolved     readme: '# Commander.js\n\n  The complete solution for [node.js](http://nodejs.org) command-line interfaces, inspired by Ruby\'s [commander](https://github.com/visionmedia/commander).\n\n [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)\n\n## Installation\n\n    $ npm install commander\n\n## Option parsing\n\n Options with commander are defined with the `.option()` method, also serving as documentation for the options. The example below parses args and options from `process.argv`, leaving remaining args as the `program.args` array which were not consumed by options.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'commander\');\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-p, --peppers\', \'Add peppers\')\n  .option(\'-P, --pineapple\', \'Add pineapple\')\n  .option(\'-b, --bbq\', \'Add bbq sauce\')\n  .option(\'-c, --cheese [type]\', \'Add the specified type of cheese [marble]\', \'marble\')\n  .parse(process.argv);\n\nconsole.log(\'you ordered a pizza with:\');\nif (program.peppers) console.log(\'  - peppers\');\nif (program.pineapple) console.log(\'  - pineappe\');\nif (program.bbq) console.log(\'  - bbq\');\nconsole.log(\'  - %s cheese\', program.cheese);\n```\n\n Short flags may be passed as a single arg, for example `-abc` is equivalent to `-a -b -c`. Multi-word options such as "--template-engine" are camel-cased, becoming `program.templateEngine` etc.\n\n## Automated --help\n\n The help information is auto-generated based on the information commander already knows about your program, so the following `--help` info is for free:\n\n```  \n $ ./examples/pizza --help\n\n   Usage: pizza [options]\n\n   Options:\n\n     -V, --version        output the version number\n     -p, --peppers        Add peppers\n     -P, --pineapple      Add pineappe\n     -b, --bbq            Add bbq sauce\n     -c, --cheese <type>  Add the specified type of cheese [marble]\n     -h, --help           output usage information\n\n```\n\n## Coercion\n\n```js\nfunction range(val) {\n  return val.split(\'..\').map(Number);\n}\n\nfunction list(val) {\n  return val.split(\',\');\n}\n\nprogram\n  .version(\'0.0.1\')\n  .usage(\'[options] <file ...>\')\n  .option(\'-i, --integer <n>\', \'An integer argument\', parseInt)\n  .option(\'-f, --float <n>\', \'A float argument\', parseFloat)\n  .option(\'-r, --range <a>..<b>\', \'A range\', range)\n  .option(\'-l, --list <items>\', \'A list\', list)\n  .option(\'-o, --optional [value]\', \'An optional value\')\n  .parse(process.argv);\n\nconsole.log(\' int: %j\', program.integer);\nconsole.log(\' float: %j\', program.float);\nconsole.log(\' optional: %j\', program.optional);\nprogram.range = program.range || [];\nconsole.log(\' range: %j..%j\', program.range[0], program.range[1]);\nconsole.log(\' list: %j\', program.list);\nconsole.log(\' args: %j\', program.args);\n```\n\n## Custom help\n\n You can display arbitrary `-h, --help` information\n by listening for "--help". Commander will automatically\n exit once you are done so that the remainder of your program\n does not execute causing undesired behaviours, for example\n in the following executable "stuff" will not output when\n `--help` is used.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'../\');\n\nfunction list(val) {\n  return val.split(\',\').map(Number);\n}\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-f, --foo\', \'enable some foo\')\n  .option(\'-b, --bar\', \'enable some bar\')\n  .option(\'-B, --baz\', \'enable some baz\');\n\n// must be before .parse() since\n// node\'s emit() is immediate\n\nprogram.on(\'--help\', function(){\n  console.log(\'  Examples:\');\n  console.log(\'\');\n  console.log(\'    $ custom-help --help\');\n  console.log(\'    $ custom-help -h\');\n  console.log(\'\');\n});\n\nprogram.parse(process.argv);\n\nconsole.log(\'stuff\');\n```\n\nyielding the following help output:\n\n```\n\nUsage: custom-help [options]\n\nOptions:\n\n  -h, --help     output usage information\n  -V, --version  output the version number\n  -f, --foo      enable some foo\n  -b, --bar      enable some bar\n  -B, --baz      enable some baz\n\nExamples:\n\n  $ custom-help --help\n  $ custom-help -h\n\n```\n\n## .prompt(msg, fn)\n\n Single-line prompt:\n\n```js\nprogram.prompt(\'name: \', function(name){\n  console.log(\'hi %s\', name);\n});\n```\n\n Multi-line prompt:\n\n```js\nprogram.prompt(\'description:\', function(name){\n  console.log(\'hi %s\', name);\n});\n```\n\n Coercion:\n\n```js\nprogram.prompt(\'Age: \', Number, function(age){\n  console.log(\'age: %j\', age);\n});\n```\n\n```js\nprogram.prompt(\'Birthdate: \', Date, function(date){\n  console.log(\'date: %s\', date);\n});\n```\n\n## .password(msg[, mask], fn)\n\nPrompt for password without echoing:\n\n```js\nprogram.password(\'Password: \', function(pass){\n  console.log(\'got "%s"\', pass);\n  process.stdin.destroy();\n});\n```\n\nPrompt for password with mask char "*":\n\n```js\nprogram.password(\'Password: \', \'*\', function(pass){\n  console.log(\'got "%s"\', pass);\n  process.stdin.destroy();\n});\n```\n\n## .confirm(msg, fn)\n\n Confirm with the given `msg`:\n\n```js\nprogram.confirm(\'continue? \', function(ok){\n  console.log(\' got %j\', ok);\n});\n```\n\n## .choose(list, fn)\n\n Let the user choose from a `list`:\n\n```js\nvar list = [\'tobi\', \'loki\', \'jane\', \'manny\', \'luna\'];\n\nconsole.log(\'Choose the coolest pet:\');\nprogram.choose(list, function(i){\n  console.log(\'you chose %d "%s"\', i, list[i]);\n});\n```\n\n## Links\n\n - [API documentation](http://visionmedia.github.com/commander.js/)\n - [ascii tables](https://github.com/LearnBoost/cli-table)\n - [progress bars](https://github.com/visionmedia/node-progress)\n - [more progress bars](https://github.com/substack/node-multimeter)\n - [examples](https://github.com/visionmedia/commander.js/tree/master/examples)\n\n## License \n\n(The MIT License)\n\nCopyright (c) 2011 TJ Holowaychuk &lt;tj@vision-media.ca&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.',
+735 silly install resolved     readmeFilename: 'Readme.md',
+735 silly install resolved     bugs: { url: 'https://github.com/visionmedia/commander.js/issues' },
+735 silly install resolved     homepage: 'https://github.com/visionmedia/commander.js',
+735 silly install resolved     _id: 'commander@0.6.1',
+735 silly install resolved     _shasum: 'fa68a14f6a945d54dbbe50d8cdb3320e9e3b1a06',
+735 silly install resolved     _from: 'commander@0.6.1',
+735 silly install resolved     _resolved: 'http://registry.npmjs.org/commander/-/commander-0.6.1.tgz' },
+735 silly install resolved   { name: 'mkdirp',
+735 silly install resolved     description: 'Recursively mkdir, like `mkdir -p`',
+735 silly install resolved     version: '0.3.0',
+735 silly install resolved     author:
+735 silly install resolved      { name: 'James Halliday',
+735 silly install resolved        email: 'mail@substack.net',
+735 silly install resolved        url: 'http://substack.net' },
+735 silly install resolved     main: './index',
+735 silly install resolved     keywords: [ 'mkdir', 'directory' ],
+735 silly install resolved     repository:
+735 silly install resolved      { type: 'git',
+735 silly install resolved        url: 'http://github.com/substack/node-mkdirp.git' },
+735 silly install resolved     scripts: { test: 'tap test/*.js' },
+735 silly install resolved     devDependencies: { tap: '0.0.x' },
+735 silly install resolved     license: 'MIT/X11',
+735 silly install resolved     engines: { node: '*' },
+735 silly install resolved     readme: 'mkdirp\n======\n\nLike `mkdir -p`, but in node.js!\n\nexample\n=======\n\npow.js\n------\n    var mkdirp = require(\'mkdirp\');\n    \n    mkdirp(\'/tmp/foo/bar/baz\', function (err) {\n        if (err) console.error(err)\n        else console.log(\'pow!\')\n    });\n\nOutput\n    pow!\n\nAnd now /tmp/foo/bar/baz exists, huzzah!\n\nmethods\n=======\n\nvar mkdirp = require(\'mkdirp\');\n\nmkdirp(dir, mode, cb)\n---------------------\n\nCreate a new directory and any necessary subdirectories at `dir` with octal\npermission string `mode`.\n\nIf `mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\nmkdirp.sync(dir, mode)\n----------------------\n\nSynchronously create a new directory and any necessary subdirectories at `dir`\nwith octal permission string `mode`.\n\nIf `mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\ninstall\n=======\n\nWith [npm](http://npmjs.org) do:\n\n    npm install mkdirp\n\nlicense\n=======\n\nMIT/X11\n',
+735 silly install resolved     readmeFilename: 'README.markdown',
+735 silly install resolved     bugs: { url: 'https://github.com/substack/node-mkdirp/issues' },
+735 silly install resolved     homepage: 'https://github.com/substack/node-mkdirp',
+735 silly install resolved     _id: 'mkdirp@0.3.0',
+735 silly install resolved     _from: 'mkdirp@0.3.0' } ]
+736 info install commander@0.6.1 into /usr/local/lib/node_modules/mocha/node_modules/jade
+737 info install mkdirp@0.3.0 into /usr/local/lib/node_modules/mocha/node_modules/jade
+738 info installOne commander@0.6.1
+739 verbose installOne of commander to /usr/local/lib/node_modules/mocha/node_modules/jade not in flight; installing
+740 info installOne mkdirp@0.3.0
+741 verbose installOne of mkdirp to /usr/local/lib/node_modules/mocha/node_modules/jade not in flight; installing
+742 verbose lock using /Users/goldibex/.npm/_locks/commander-cf5c76e3cc14e4c5.lock for /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+743 silly install write writing commander 0.6.1 to /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+744 silly cache addNamed cb commander@0.6.1
+745 verbose unbuild lib/node_modules/mocha/node_modules/jade/node_modules/commander
+746 verbose lock using /Users/goldibex/.npm/_locks/mkdirp-3ea4aa97f56173ee.lock for /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+747 silly install write writing mkdirp 0.3.0 to /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+748 silly cache addNamed cb mkdirp@0.3.0
+749 verbose unbuild lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+750 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+751 verbose tar unpack /Users/goldibex/.npm/commander/0.6.1/package.tgz
+752 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+753 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+754 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+755 silly gunzTarPerm modes [ '755', '644' ]
+756 verbose tar unpack /Users/goldibex/.npm/mkdirp/0.3.0/package.tgz
+757 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+758 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+759 silly gunzTarPerm modes [ '755', '644' ]
+760 silly gunzTarPerm extractEntry .npmignore
+761 silly gunzTarPerm extractEntry package.json
+762 silly gunzTarPerm extractEntry .travis.yml
+763 silly gunzTarPerm extractEntry History.md
+764 silly gunzTarPerm extractEntry .npmignore
+765 silly gunzTarPerm extractEntry LICENSE
+766 silly gunzTarPerm extractEntry index.js
+767 silly gunzTarPerm extractEntry lib/
+768 silly gunzTarPerm extractEntry index.js
+769 silly gunzTarPerm extractEntry .gitignore.orig
+770 silly gunzTarPerm extractEntry lib/commander.js
+771 silly gunzTarPerm extractEntry Makefile
+772 silly gunzTarPerm extractEntry package.json
+773 silly gunzTarPerm extractEntry Readme.md
+774 silly gunzTarPerm extractEntry .gitignore.rej
+775 silly gunzTarPerm extractEntry README.markdown
+776 silly gunzTarPerm extractEntry examples/pow.js
+777 silly gunzTarPerm extractEntry examples/pow.js.orig
+778 silly gunzTarPerm extractEntry examples/pow.js.rej
+779 silly gunzTarPerm extractEntry test/chmod.js
+780 silly gunzTarPerm extractEntry test/clobber.js
+781 silly gunzTarPerm extractEntry test/mkdirp.js
+782 silly gunzTarPerm extractEntry test/perm.js
+783 silly gunzTarPerm extractEntry test/perm_sync.js
+784 silly gunzTarPerm extractEntry test/race.js
+785 silly gunzTarPerm extractEntry test/rel.js
+786 silly gunzTarPerm extractEntry test/sync.js
+787 silly gunzTarPerm extractEntry test/umask.js
+788 silly gunzTarPerm extractEntry test/umask_sync.js
+789 info preinstall commander@0.6.1
+790 silly install resolved []
+791 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+792 info build /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+793 verbose linkStuff [ true,
+793 verbose linkStuff   '/usr/local/lib/node_modules',
+793 verbose linkStuff   false,
+793 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/jade/node_modules' ]
+794 info linkStuff commander@0.6.1
+795 verbose linkBins commander@0.6.1
+796 verbose linkMans commander@0.6.1
+797 verbose rebuildBundles commander@0.6.1
+798 info install commander@0.6.1
+799 info postinstall commander@0.6.1
+800 verbose unlock done using /Users/goldibex/.npm/_locks/commander-cf5c76e3cc14e4c5.lock for /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/commander
+801 info preinstall mkdirp@0.3.0
+802 silly install resolved []
+803 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+804 info build /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+805 verbose linkStuff [ true,
+805 verbose linkStuff   '/usr/local/lib/node_modules',
+805 verbose linkStuff   false,
+805 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/jade/node_modules' ]
+806 info linkStuff mkdirp@0.3.0
+807 verbose linkBins mkdirp@0.3.0
+808 verbose linkMans mkdirp@0.3.0
+809 verbose rebuildBundles mkdirp@0.3.0
+810 info install mkdirp@0.3.0
+811 info postinstall mkdirp@0.3.0
+812 verbose unlock done using /Users/goldibex/.npm/_locks/mkdirp-3ea4aa97f56173ee.lock for /usr/local/lib/node_modules/mocha/node_modules/jade/node_modules/mkdirp
+813 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/jade
+814 info build /usr/local/lib/node_modules/mocha/node_modules/jade
+815 verbose linkStuff [ true,
+815 verbose linkStuff   '/usr/local/lib/node_modules',
+815 verbose linkStuff   false,
+815 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+816 info linkStuff jade@0.26.3
+817 verbose linkBins jade@0.26.3
+818 verbose link bins [ { jade: './bin/jade' },
+818 verbose link bins   '/usr/local/lib/node_modules/mocha/node_modules/.bin',
+818 verbose link bins   false ]
+819 verbose linkMans jade@0.26.3
+820 verbose rebuildBundles jade@0.26.3
+821 verbose rebuildBundles [ 'commander', 'mkdirp' ]
+822 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/.bin/jade
+823 info install jade@0.26.3
+824 info postinstall jade@0.26.3
+825 verbose unlock done using /Users/goldibex/.npm/_locks/jade-8bc9d54f5930ad8e.lock for /usr/local/lib/node_modules/mocha/node_modules/jade
+826 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms
+827 silly get cb [ 304,
+827 silly get   { 'content-length': '0',
+827 silly get     connection: 'keep-alive',
+827 silly get     age: '0',
+827 silly get     'cache-control': 'max-age=60',
+827 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+827 silly get     etag: '"735H5STM8VC1GQQ7K3AOTN8S0"',
+827 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:31 GMT',
+827 silly get     server: 'Apache',
+827 silly get     vary: 'Accept',
+827 silly get     via: '1.1 varnish, 1.1 vegur',
+827 silly get     'x-cache': 'MISS',
+827 silly get     'x-cache-hits': '0',
+827 silly get     'x-served-by': 'cache-iad2145-IAD',
+827 silly get     'x-timer': 'S1419544351.021124,VS0,VE88' } ]
+828 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/ms from cache
+829 silly cache afterAdd ms@0.6.2
+830 verbose afterAdd /Users/goldibex/.npm/ms/0.6.2/package/package.json not in flight; writing
+831 verbose afterAdd /Users/goldibex/.npm/ms/0.6.2/package/package.json written
+832 silly install resolved [ { name: 'ms',
+832 silly install resolved     version: '0.6.2',
+832 silly install resolved     description: 'Tiny ms conversion utility',
+832 silly install resolved     repository: { type: 'git', url: 'git://github.com/guille/ms.js.git' },
+832 silly install resolved     main: './index',
+832 silly install resolved     devDependencies: { mocha: '*', 'expect.js': '*', serve: '*' },
+832 silly install resolved     component: { scripts: [Object] },
+832 silly install resolved     readme: '# ms.js: miliseconds conversion utility\n\n```js\nms(\'1d\')      // 86400000\nms(\'10h\')     // 36000000\nms(\'2h\')      // 7200000\nms(\'1m\')      // 60000\nms(\'5s\')      // 5000\nms(\'100\')     // 100\n```\n\n```js\nms(60000)             // "1m"\nms(2 * 60000)         // "2m"\nms(ms(\'10 hours\'))    // "10h"\n```\n\n```js\nms(60000, { long: true })             // "1 minute"\nms(2 * 60000, { long: true })         // "2 minutes"\nms(ms(\'10 hours\', { long: true }))    // "10 hours"\n```\n\n- Node/Browser compatible. Published as `ms` in NPM.\n- If a number is supplied to `ms`, a string with a unit is returned.\n- If a string that contains the number is supplied, it returns it as\na number (e.g: it returns `100` for `\'100\'`).\n- If you pass a string with a number and a valid unit, the number of\nequivalent ms is returned.\n\n## License\n\nMIT',
+832 silly install resolved     readmeFilename: 'README.md',
+832 silly install resolved     bugs: { url: 'https://github.com/guille/ms.js/issues' },
+832 silly install resolved     homepage: 'https://github.com/guille/ms.js',
+832 silly install resolved     _id: 'ms@0.6.2',
+832 silly install resolved     _shasum: 'd89c2124c6fdc1353d65a8b77bf1aac4b193708c',
+832 silly install resolved     _from: 'ms@0.6.2',
+832 silly install resolved     _resolved: 'http://registry.npmjs.org/ms/-/ms-0.6.2.tgz',
+832 silly install resolved     scripts: {} } ]
+833 info install ms@0.6.2 into /usr/local/lib/node_modules/mocha/node_modules/debug
+834 info installOne ms@0.6.2
+835 verbose installOne of ms to /usr/local/lib/node_modules/mocha/node_modules/debug not in flight; installing
+836 verbose lock using /Users/goldibex/.npm/_locks/ms-b54bc356e8935366.lock for /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+837 silly install write writing ms 0.6.2 to /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+838 silly cache addNamed cb ms@0.6.2
+839 verbose unbuild lib/node_modules/mocha/node_modules/debug/node_modules/ms
+840 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+841 verbose tar unpack /Users/goldibex/.npm/ms/0.6.2/package.tgz
+842 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+843 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+844 silly gunzTarPerm modes [ '755', '644' ]
+845 silly gunzTarPerm extractEntry package.json
+846 silly gunzTarPerm extractEntry .npmignore
+847 silly gunzTarPerm extractEntry README.md
+848 silly gunzTarPerm extractEntry index.js
+849 info preinstall ms@0.6.2
+850 silly install resolved []
+851 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+852 info build /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+853 verbose linkStuff [ true,
+853 verbose linkStuff   '/usr/local/lib/node_modules',
+853 verbose linkStuff   false,
+853 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/debug/node_modules' ]
+854 info linkStuff ms@0.6.2
+855 verbose linkBins ms@0.6.2
+856 verbose linkMans ms@0.6.2
+857 verbose rebuildBundles ms@0.6.2
+858 info install ms@0.6.2
+859 info postinstall ms@0.6.2
+860 verbose unlock done using /Users/goldibex/.npm/_locks/ms-b54bc356e8935366.lock for /usr/local/lib/node_modules/mocha/node_modules/debug/node_modules/ms
+861 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/debug
+862 info build /usr/local/lib/node_modules/mocha/node_modules/debug
+863 verbose linkStuff [ true,
+863 verbose linkStuff   '/usr/local/lib/node_modules',
+863 verbose linkStuff   false,
+863 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+864 info linkStuff debug@2.0.0
+865 verbose linkBins debug@2.0.0
+866 verbose linkMans debug@2.0.0
+867 verbose rebuildBundles debug@2.0.0
+868 verbose rebuildBundles [ 'ms' ]
+869 info install debug@2.0.0
+870 info postinstall debug@2.0.0
+871 verbose unlock done using /Users/goldibex/.npm/_locks/debug-a96232c777b2604f.lock for /usr/local/lib/node_modules/mocha/node_modules/debug
+872 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs
+873 silly get cb [ 304,
+873 silly get   { 'content-length': '0',
+873 silly get     connection: 'keep-alive',
+873 silly get     age: '0',
+873 silly get     'cache-control': 'max-age=60',
+873 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+873 silly get     etag: '"YI3CUA6DFZEU7F4JXVMK6K9"',
+873 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:31 GMT',
+873 silly get     server: 'Apache',
+873 silly get     vary: 'Accept',
+873 silly get     via: '1.1 varnish, 1.1 vegur',
+873 silly get     'x-cache': 'MISS',
+873 silly get     'x-cache-hits': '0',
+873 silly get     'x-served-by': 'cache-iad2145-IAD',
+873 silly get     'x-timer': 'S1419544351.132086,VS0,VE62' } ]
+874 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/graceful-fs from cache
+875 silly addNameRange number 2 { name: 'graceful-fs', range: '>=2.0.0 <2.1.0', hasData: true }
+876 silly addNameRange versions [ 'graceful-fs',
+876 silly addNameRange   [ '1.0.0',
+876 silly addNameRange     '1.0.1',
+876 silly addNameRange     '1.0.2',
+876 silly addNameRange     '1.1.0',
+876 silly addNameRange     '1.1.1',
+876 silly addNameRange     '1.1.2',
+876 silly addNameRange     '1.1.3',
+876 silly addNameRange     '1.1.4',
+876 silly addNameRange     '1.1.5',
+876 silly addNameRange     '1.1.6',
+876 silly addNameRange     '1.1.7',
+876 silly addNameRange     '1.1.8',
+876 silly addNameRange     '1.1.9',
+876 silly addNameRange     '1.1.10',
+876 silly addNameRange     '1.1.11',
+876 silly addNameRange     '1.1.12',
+876 silly addNameRange     '1.1.13',
+876 silly addNameRange     '1.1.14',
+876 silly addNameRange     '1.2.0',
+876 silly addNameRange     '1.2.1',
+876 silly addNameRange     '1.2.2',
+876 silly addNameRange     '1.2.3',
+876 silly addNameRange     '2.0.0',
+876 silly addNameRange     '2.0.1',
+876 silly addNameRange     '2.0.2',
+876 silly addNameRange     '2.0.3',
+876 silly addNameRange     '3.0.0',
+876 silly addNameRange     '3.0.1',
+876 silly addNameRange     '3.0.2',
+876 silly addNameRange     '3.0.3',
+876 silly addNameRange     '3.0.4',
+876 silly addNameRange     '3.0.5' ] ]
+877 verbose addNamed graceful-fs@2.0.3
+878 silly addNamed semver.valid 2.0.3
+879 silly addNamed semver.validRange 2.0.3
+880 silly cache afterAdd graceful-fs@2.0.3
+881 verbose afterAdd /Users/goldibex/.npm/graceful-fs/2.0.3/package/package.json not in flight; writing
+882 verbose afterAdd /Users/goldibex/.npm/graceful-fs/2.0.3/package/package.json written
+883 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch
+884 silly get cb [ 304,
+884 silly get   { 'content-length': '0',
+884 silly get     connection: 'keep-alive',
+884 silly get     age: '0',
+884 silly get     'cache-control': 'max-age=60',
+884 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+884 silly get     etag: '"6RAFQUO1Q3A7GTG25N34H7NUT"',
+884 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:31 GMT',
+884 silly get     server: 'Apache',
+884 silly get     vary: 'Accept',
+884 silly get     via: '1.1 varnish, 1.1 vegur',
+884 silly get     'x-cache': 'MISS',
+884 silly get     'x-cache-hits': '0',
+884 silly get     'x-served-by': 'cache-iad2124-IAD',
+884 silly get     'x-timer': 'S1419544351.075080,VS0,VE169' } ]
+885 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimatch from cache
+886 silly addNameRange number 2 { name: 'minimatch', range: '>=0.2.11 <0.3.0', hasData: true }
+887 silly addNameRange versions [ 'minimatch',
+887 silly addNameRange   [ '0.0.1',
+887 silly addNameRange     '0.0.2',
+887 silly addNameRange     '0.0.4',
+887 silly addNameRange     '0.0.5',
+887 silly addNameRange     '0.1.1',
+887 silly addNameRange     '0.1.2',
+887 silly addNameRange     '0.1.3',
+887 silly addNameRange     '0.1.4',
+887 silly addNameRange     '0.1.5',
+887 silly addNameRange     '0.2.0',
+887 silly addNameRange     '0.2.2',
+887 silly addNameRange     '0.2.3',
+887 silly addNameRange     '0.2.4',
+887 silly addNameRange     '0.2.5',
+887 silly addNameRange     '0.2.6',
+887 silly addNameRange     '0.2.7',
+887 silly addNameRange     '0.2.8',
+887 silly addNameRange     '0.2.9',
+887 silly addNameRange     '0.2.10',
+887 silly addNameRange     '0.2.11',
+887 silly addNameRange     '0.2.12',
+887 silly addNameRange     '0.2.13',
+887 silly addNameRange     '0.2.14',
+887 silly addNameRange     '0.3.0',
+887 silly addNameRange     '0.4.0',
+887 silly addNameRange     '1.0.0',
+887 silly addNameRange     '2.0.0',
+887 silly addNameRange     '2.0.1' ] ]
+888 verbose addNamed minimatch@0.2.14
+889 silly addNamed semver.valid 0.2.14
+890 silly addNamed semver.validRange 0.2.14
+891 silly cache afterAdd minimatch@0.2.14
+892 verbose afterAdd /Users/goldibex/.npm/minimatch/0.2.14/package/package.json not in flight; writing
+893 verbose afterAdd /Users/goldibex/.npm/minimatch/0.2.14/package/package.json written
+894 http 200 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist
+895 silly get cb [ 200,
+895 silly get   { connection: 'keep-alive',
+895 silly get     'accept-ranges': 'bytes',
+895 silly get     age: '0',
+895 silly get     'cache-control': 'max-age=60',
+895 silly get     'content-length': '20907',
+895 silly get     'content-type': 'application/json',
+895 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+895 silly get     etag: '"D7X98D5NHT5ZM3SVQ6N1TH9MI"',
+895 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+895 silly get     vary: 'Accept',
+895 silly get     via: '1.1 varnish, 1.1 vegur',
+895 silly get     'x-cache': 'MISS',
+895 silly get     'x-cache-hits': '0',
+895 silly get     'x-served-by': 'cache-iad2136-IAD',
+895 silly get     'x-timer': 'S1419544351.111149,VS0,VE164' } ]
+896 silly mapToRegistry name minimist
+897 silly mapToRegistry using default registry
+898 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+899 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/minimist
+900 verbose addRemoteTarball http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz not in flight; adding
+901 verbose addRemoteTarball [ 'http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz',
+901 verbose addRemoteTarball   '857fcabfc3397d2625b8228262e86aa7a011b05d' ]
+902 info retry fetch attempt 1 at 13:52:31
+903 info attempt registry request try #1 at 13:52:31
+904 http fetch GET http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz
+905 http fetch 200 http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz
+906 silly fetchAndShaCheck shasum 857fcabfc3397d2625b8228262e86aa7a011b05d
+907 verbose addTmpTarball /var/folders/m_/mh9l0ytj0k99l5zmnmxvy1fw0000gn/T/npm-75823-e9574f0c/registry.npmjs.org/minimist/-/minimist-0.0.8.tgz not in flight; adding
+908 verbose addTmpTarball already have metadata; skipping unpack for minimist@0.0.8
+909 silly cache afterAdd minimist@0.0.8
+910 verbose afterAdd /Users/goldibex/.npm/minimist/0.0.8/package/package.json not in flight; writing
+911 verbose afterAdd /Users/goldibex/.npm/minimist/0.0.8/package/package.json written
+912 silly install resolved [ { name: 'minimist',
+912 silly install resolved     version: '0.0.8',
+912 silly install resolved     description: 'parse argument options',
+912 silly install resolved     main: 'index.js',
+912 silly install resolved     devDependencies: { tape: '~1.0.4', tap: '~0.4.0' },
+912 silly install resolved     scripts: { test: 'tap test/*.js' },
+912 silly install resolved     testling: { files: 'test/*.js', browsers: [Object] },
+912 silly install resolved     repository: { type: 'git', url: 'git://github.com/substack/minimist.git' },
+912 silly install resolved     homepage: 'https://github.com/substack/minimist',
+912 silly install resolved     keywords: [ 'argv', 'getopt', 'parser', 'optimist' ],
+912 silly install resolved     author:
+912 silly install resolved      { name: 'James Halliday',
+912 silly install resolved        email: 'mail@substack.net',
+912 silly install resolved        url: 'http://substack.net' },
+912 silly install resolved     license: 'MIT',
+912 silly install resolved     bugs: { url: 'https://github.com/substack/minimist/issues' },
+912 silly install resolved     _id: 'minimist@0.0.8',
+912 silly install resolved     dist:
+912 silly install resolved      { shasum: '857fcabfc3397d2625b8228262e86aa7a011b05d',
+912 silly install resolved        tarball: 'http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz' },
+912 silly install resolved     _from: 'minimist@0.0.8',
+912 silly install resolved     _npmVersion: '1.4.3',
+912 silly install resolved     _npmUser: { name: 'substack', email: 'mail@substack.net' },
+912 silly install resolved     maintainers: [ [Object] ],
+912 silly install resolved     directories: {},
+912 silly install resolved     _shasum: '857fcabfc3397d2625b8228262e86aa7a011b05d',
+912 silly install resolved     _resolved: 'http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz' } ]
+913 info install minimist@0.0.8 into /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+914 info installOne minimist@0.0.8
+915 verbose installOne of minimist to /usr/local/lib/node_modules/mocha/node_modules/mkdirp not in flight; installing
+916 verbose lock using /Users/goldibex/.npm/_locks/minimist-22c2c96fb50c7f09.lock for /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+917 silly install write writing minimist 0.0.8 to /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+918 silly cache addNamed cb minimist@0.0.8
+919 verbose unbuild lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+920 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+921 verbose tar unpack /Users/goldibex/.npm/minimist/0.0.8/package.tgz
+922 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+923 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+924 silly gunzTarPerm modes [ '755', '644' ]
+925 silly gunzTarPerm extractEntry package.json
+926 silly gunzTarPerm extractEntry LICENSE
+927 silly gunzTarPerm extractEntry index.js
+928 silly gunzTarPerm extractEntry .travis.yml
+929 silly gunzTarPerm extractEntry example/parse.js
+930 silly gunzTarPerm extractEntry readme.markdown
+931 silly gunzTarPerm extractEntry test/dash.js
+932 silly gunzTarPerm extractEntry test/default_bool.js
+933 silly gunzTarPerm extractEntry test/dotted.js
+934 silly gunzTarPerm extractEntry test/long.js
+935 silly gunzTarPerm extractEntry test/parse.js
+936 silly gunzTarPerm extractEntry test/parse_modified.js
+937 silly gunzTarPerm extractEntry test/short.js
+938 silly gunzTarPerm extractEntry test/whitespace.js
+939 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits
+940 silly get cb [ 304,
+940 silly get   { 'content-length': '0',
+940 silly get     connection: 'keep-alive',
+940 silly get     age: '0',
+940 silly get     'cache-control': 'max-age=60',
+940 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+940 silly get     etag: '"9QY38ZTAA040M0IB8DZOWK7DH"',
+940 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:31 GMT',
+940 silly get     server: 'Apache',
+940 silly get     vary: 'Accept',
+940 silly get     via: '1.1 varnish, 1.1 vegur',
+940 silly get     'x-cache': 'MISS',
+940 silly get     'x-cache-hits': '0',
+940 silly get     'x-served-by': 'cache-iad2147-IAD',
+940 silly get     'x-timer': 'S1419544351.110506,VS0,VE353' } ]
+941 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/inherits from cache
+942 silly addNameRange number 2 { name: 'inherits', range: '>=2.0.0 <3.0.0', hasData: true }
+943 silly addNameRange versions [ 'inherits', [ '1.0.0', '2.0.0', '2.0.1' ] ]
+944 verbose addNamed inherits@2.0.1
+945 silly addNamed semver.valid 2.0.1
+946 silly addNamed semver.validRange 2.0.1
+947 silly cache afterAdd inherits@2.0.1
+948 verbose afterAdd /Users/goldibex/.npm/inherits/2.0.1/package/package.json not in flight; writing
+949 verbose afterAdd /Users/goldibex/.npm/inherits/2.0.1/package/package.json written
+950 silly install resolved [ { author:
+950 silly install resolved      { name: 'Isaac Z. Schlueter',
+950 silly install resolved        email: 'i@izs.me',
+950 silly install resolved        url: 'http://blog.izs.me' },
+950 silly install resolved     name: 'graceful-fs',
+950 silly install resolved     description: 'A drop-in replacement for fs, making various improvements.',
+950 silly install resolved     version: '2.0.3',
+950 silly install resolved     repository:
+950 silly install resolved      { type: 'git',
+950 silly install resolved        url: 'git://github.com/isaacs/node-graceful-fs.git' },
+950 silly install resolved     main: 'graceful-fs.js',
+950 silly install resolved     engines: { node: '>=0.4.0' },
+950 silly install resolved     directories: { test: 'test' },
+950 silly install resolved     scripts: { test: 'tap test/*.js' },
+950 silly install resolved     keywords:
+950 silly install resolved      [ 'fs',
+950 silly install resolved        'module',
+950 silly install resolved        'reading',
+950 silly install resolved        'retry',
+950 silly install resolved        'retries',
+950 silly install resolved        'queue',
+950 silly install resolved        'error',
+950 silly install resolved        'errors',
+950 silly install resolved        'handling',
+950 silly install resolved        'EMFILE',
+950 silly install resolved        'EAGAIN',
+950 silly install resolved        'EINVAL',
+950 silly install resolved        'EPERM',
+950 silly install resolved        'EACCESS' ],
+950 silly install resolved     license: 'BSD',
+950 silly install resolved     readme: '# graceful-fs\n\ngraceful-fs functions as a drop-in replacement for the fs module,\nmaking various improvements.\n\nThe improvements are meant to normalize behavior across different\nplatforms and environments, and to make filesystem access more\nresilient to errors.\n\n## Improvements over fs module\n\ngraceful-fs:\n\n* Queues up `open` and `readdir` calls, and retries them once\n  something closes if there is an EMFILE error from too many file\n  descriptors.\n* fixes `lchmod` for Node versions prior to 0.6.2.\n* implements `fs.lutimes` if possible. Otherwise it becomes a noop.\n* ignores `EINVAL` and `EPERM` errors in `chown`, `fchown` or\n  `lchown` if the user isn\'t root.\n* makes `lchmod` and `lchown` become noops, if not available.\n* retries reading a file if `read` results in EAGAIN error.\n\nOn Windows, it retries renaming a file for up to one second if `EACCESS`\nor `EPERM` error occurs, likely because antivirus software has locked\nthe directory.\n',
+950 silly install resolved     readmeFilename: 'README.md',
+950 silly install resolved     bugs: { url: 'https://github.com/isaacs/node-graceful-fs/issues' },
+950 silly install resolved     homepage: 'https://github.com/isaacs/node-graceful-fs',
+950 silly install resolved     _id: 'graceful-fs@2.0.3',
+950 silly install resolved     _from: 'graceful-fs@>=2.0.0 <2.1.0' },
+950 silly install resolved   { author:
+950 silly install resolved      { name: 'Isaac Z. Schlueter',
+950 silly install resolved        email: 'i@izs.me',
+950 silly install resolved        url: 'http://blog.izs.me' },
+950 silly install resolved     name: 'minimatch',
+950 silly install resolved     description: 'a glob matcher in javascript',
+950 silly install resolved     version: '0.2.14',
+950 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/minimatch.git' },
+950 silly install resolved     main: 'minimatch.js',
+950 silly install resolved     scripts: { test: 'tap test/*.js' },
+950 silly install resolved     engines: { node: '*' },
+950 silly install resolved     dependencies: { 'lru-cache': '2', sigmund: '~1.0.0' },
+950 silly install resolved     devDependencies: { tap: '' },
+950 silly install resolved     license:
+950 silly install resolved      { type: 'MIT',
+950 silly install resolved        url: 'http://github.com/isaacs/minimatch/raw/master/LICENSE' },
+950 silly install resolved     readme: '# minimatch\n\nA minimal matching utility.\n\n[![Build Status](https://secure.travis-ci.org/isaacs/minimatch.png)](http://travis-ci.org/isaacs/minimatch)\n\n\nThis is the matching library used internally by npm.\n\nEventually, it will replace the C binding in node-glob.\n\nIt works by converting glob expressions into JavaScript `RegExp`\nobjects.\n\n## Usage\n\n```javascript\nvar minimatch = require("minimatch")\n\nminimatch("bar.foo", "*.foo") // true!\nminimatch("bar.foo", "*.bar") // false!\nminimatch("bar.foo", "*.+(bar|foo)", { debug: true }) // true, and noisy!\n```\n\n## Features\n\nSupports these glob features:\n\n* Brace Expansion\n* Extended glob matching\n* "Globstar" `**` matching\n\nSee:\n\n* `man sh`\n* `man bash`\n* `man 3 fnmatch`\n* `man 5 gitignore`\n\n## Minimatch Class\n\nCreate a minimatch object by instanting the `minimatch.Minimatch` class.\n\n```javascript\nvar Minimatch = require("minimatch").Minimatch\nvar mm = new Minimatch(pattern, options)\n```\n\n### Properties\n\n* `pattern` The original pattern the minimatch object represents.\n* `options` The options supplied to the constructor.\n* `set` A 2-dimensional array of regexp or string expressions.\n  Each row in the\n  array corresponds to a brace-expanded pattern.  Each item in the row\n  corresponds to a single path-part.  For example, the pattern\n  `{a,b/c}/d` would expand to a set of patterns like:\n\n        [ [ a, d ]\n        , [ b, c, d ] ]\n\n    If a portion of the pattern doesn\'t have any "magic" in it\n    (that is, it\'s something like `"foo"` rather than `fo*o?`), then it\n    will be left as a string rather than converted to a regular\n    expression.\n\n* `regexp` Created by the `makeRe` method.  A single regular expression\n  expressing the entire pattern.  This is useful in cases where you wish\n  to use the pattern somewhat like `fnmatch(3)` with `FNM_PATH` enabled.\n* `negate` True if the pattern is negated.\n* `comment` True if the pattern is a comment.\n* `empty` True if the pattern is `""`.\n\n### Methods\n\n* `makeRe` Generate the `regexp` member if necessary, and return it.\n  Will return `false` if the pattern is invalid.\n* `match(fname)` Return true if the filename matches the pattern, or\n  false otherwise.\n* `matchOne(fileArray, patternArray, partial)` Take a `/`-split\n  filename, and match it against a single row in the `regExpSet`.  This\n  method is mainly for internal use, but is exposed so that it can be\n  used by a glob-walker that needs to avoid excessive filesystem calls.\n\nAll other methods are internal, and will be called as necessary.\n\n## Functions\n\nThe top-level exported function has a `cache` property, which is an LRU\ncache set to store 100 items.  So, calling these methods repeatedly\nwith the same pattern and options will use the same Minimatch object,\nsaving the cost of parsing it multiple times.\n\n### minimatch(path, pattern, options)\n\nMain export.  Tests a path against the pattern using the options.\n\n```javascript\nvar isJS = minimatch(file, "*.js", { matchBase: true })\n```\n\n### minimatch.filter(pattern, options)\n\nReturns a function that tests its\nsupplied argument, suitable for use with `Array.filter`.  Example:\n\n```javascript\nvar javascripts = fileList.filter(minimatch.filter("*.js", {matchBase: true}))\n```\n\n### minimatch.match(list, pattern, options)\n\nMatch against the list of\nfiles, in the style of fnmatch or glob.  If nothing is matched, and\noptions.nonull is set, then return a list containing the pattern itself.\n\n```javascript\nvar javascripts = minimatch.match(fileList, "*.js", {matchBase: true}))\n```\n\n### minimatch.makeRe(pattern, options)\n\nMake a regular expression object from the pattern.\n\n## Options\n\nAll options are `false` by default.\n\n### debug\n\nDump a ton of stuff to stderr.\n\n### nobrace\n\nDo not expand `{a,b}` and `{1..3}` brace sets.\n\n### noglobstar\n\nDisable `**` matching against multiple folder names.\n\n### dot\n\nAllow patterns to match filenames starting with a period, even if\nthe pattern does not explicitly have a period in that spot.\n\nNote that by default, `a/**/b` will **not** match `a/.d/b`, unless `dot`\nis set.\n\n### noext\n\nDisable "extglob" style patterns like `+(a|b)`.\n\n### nocase\n\nPerform a case-insensitive match.\n\n### nonull\n\nWhen a match is not found by `minimatch.match`, return a list containing\nthe pattern itself.  When set, an empty list is returned if there are\nno matches.\n\n### matchBase\n\nIf set, then patterns without slashes will be matched\nagainst the basename of the path if it contains slashes.  For example,\n`a?b` would match the path `/xyz/123/acb`, but not `/xyz/acb/123`.\n\n### nocomment\n\nSuppress the behavior of treating `#` at the start of a pattern as a\ncomment.\n\n### nonegate\n\nSuppress the behavior of treating a leading `!` character as negation.\n\n### flipNegate\n\nReturns from negate expressions the same as if they were not negated.\n(Ie, true on a hit, false on a miss.)\n\n\n## Comparisons to other fnmatch/glob implementations\n\nWhile strict compliance with the existing standards is a worthwhile\ngoal, some discrepancies exist between minimatch and other\nimplementations, and are intentional.\n\nIf the pattern starts with a `!` character, then it is negated.  Set the\n`nonegate` flag to suppress this behavior, and treat leading `!`\ncharacters normally.  This is perhaps relevant if you wish to start the\npattern with a negative extglob pattern like `!(a|B)`.  Multiple `!`\ncharacters at the start of a pattern will negate the pattern multiple\ntimes.\n\nIf a pattern starts with `#`, then it is treated as a comment, and\nwill not match anything.  Use `\\#` to match a literal `#` at the\nstart of a line, or set the `nocomment` flag to suppress this behavior.\n\nThe double-star character `**` is supported by default, unless the\n`noglobstar` flag is set.  This is supported in the manner of bsdglob\nand bash 4.1, where `**` only has special significance if it is the only\nthing in a path part.  That is, `a/**/b` will match `a/x/y/b`, but\n`a/**b` will not.\n\nIf an escaped pattern has no matches, and the `nonull` flag is set,\nthen minimatch.match returns the pattern as-provided, rather than\ninterpreting the character escapes.  For example,\n`minimatch.match([], "\\\\*a\\\\?")` will return `"\\\\*a\\\\?"` rather than\n`"*a?"`.  This is akin to setting the `nullglob` option in bash, except\nthat it does not resolve escaped pattern characters.\n\nIf brace expansion is not disabled, then it is performed before any\nother interpretation of the glob pattern.  Thus, a pattern like\n`+(a|{b),c)}`, which would not be valid in bash or zsh, is expanded\n**first** into the set of `+(a|b)` and `+(a|c)`, and those patterns are\nchecked for validity.  Since those two are valid, matching proceeds.\n',
+950 silly install resolved     readmeFilename: 'README.md',
+950 silly install resolved     bugs: { url: 'https://github.com/isaacs/minimatch/issues' },
+950 silly install resolved     homepage: 'https://github.com/isaacs/minimatch',
+950 silly install resolved     _id: 'minimatch@0.2.14',
+950 silly install resolved     _from: 'minimatch@>=0.2.11 <0.3.0' },
+950 silly install resolved   { name: 'inherits',
+950 silly install resolved     description: 'Browser-friendly inheritance fully compatible with standard node.js inherits()',
+950 silly install resolved     version: '2.0.1',
+950 silly install resolved     keywords:
+950 silly install resolved      [ 'inheritance',
+950 silly install resolved        'class',
+950 silly install resolved        'klass',
+950 silly install resolved        'oop',
+950 silly install resolved        'object-oriented',
+950 silly install resolved        'inherits',
+950 silly install resolved        'browser',
+950 silly install resolved        'browserify' ],
+950 silly install resolved     main: './inherits.js',
+950 silly install resolved     browser: './inherits_browser.js',
+950 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/inherits' },
+950 silly install resolved     license: 'ISC',
+950 silly install resolved     scripts: { test: 'node test' },
+950 silly install resolved     readme: 'Browser-friendly inheritance fully compatible with standard node.js\n[inherits](http://nodejs.org/api/util.html#util_util_inherits_constructor_superconstructor).\n\nThis package exports standard `inherits` from node.js `util` module in\nnode environment, but also provides alternative browser-friendly\nimplementation through [browser\nfield](https://gist.github.com/shtylman/4339901). Alternative\nimplementation is a literal copy of standard one located in standalone\nmodule to avoid requiring of `util`. It also has a shim for old\nbrowsers with no `Object.create` support.\n\nWhile keeping you sure you are using standard `inherits`\nimplementation in node.js environment, it allows bundlers such as\n[browserify](https://github.com/substack/node-browserify) to not\ninclude full `util` package to your client code if all you need is\njust `inherits` function. It worth, because browser shim for `util`\npackage is large and `inherits` is often the single function you need\nfrom it.\n\nIt\'s recommended to use this package instead of\n`require(\'util\').inherits` for any code that has chances to be used\nnot only in node.js but in browser too.\n\n## usage\n\n```js\nvar inherits = require(\'inherits\');\n// then use exactly as the standard one\n```\n\n## note on version ~1.0\n\nVersion ~1.0 had completely different motivation and is not compatible\nneither with 2.0 nor with standard node.js `inherits`.\n\nIf you are using version ~1.0 and planning to switch to ~2.0, be\ncareful:\n\n* new version uses `super_` instead of `super` for referencing\n  superclass\n* new version overwrites current prototype while old one preserves any\n  existing fields on it\n',
+950 silly install resolved     readmeFilename: 'README.md',
+950 silly install resolved     bugs: { url: 'https://github.com/isaacs/inherits/issues' },
+950 silly install resolved     homepage: 'https://github.com/isaacs/inherits',
+950 silly install resolved     _id: 'inherits@2.0.1',
+950 silly install resolved     _shasum: 'b17d08d326b4423e568eff719f91b0b1cbdf69f1',
+950 silly install resolved     _from: 'inherits@>=2.0.0 <3.0.0',
+950 silly install resolved     _resolved: 'http://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz' } ]
+951 info install graceful-fs@2.0.3 into /usr/local/lib/node_modules/mocha/node_modules/glob
+952 info install minimatch@0.2.14 into /usr/local/lib/node_modules/mocha/node_modules/glob
+953 info install inherits@2.0.1 into /usr/local/lib/node_modules/mocha/node_modules/glob
+954 info installOne graceful-fs@2.0.3
+955 verbose installOne of graceful-fs to /usr/local/lib/node_modules/mocha/node_modules/glob not in flight; installing
+956 info installOne minimatch@0.2.14
+957 verbose installOne of minimatch to /usr/local/lib/node_modules/mocha/node_modules/glob not in flight; installing
+958 info installOne inherits@2.0.1
+959 verbose installOne of inherits to /usr/local/lib/node_modules/mocha/node_modules/glob not in flight; installing
+960 verbose lock using /Users/goldibex/.npm/_locks/graceful-fs-64127497f2635564.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+961 verbose lock using /Users/goldibex/.npm/_locks/minimatch-ea9100acc7f4d455.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+962 silly install write writing graceful-fs 2.0.3 to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+963 silly cache addNamed cb graceful-fs@2.0.3
+964 verbose unbuild lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+965 silly install write writing minimatch 0.2.14 to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+966 silly cache addNamed cb minimatch@0.2.14
+967 verbose unbuild lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+968 verbose lock using /Users/goldibex/.npm/_locks/inherits-2a35a552a0da6320.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+969 silly install write writing inherits 2.0.1 to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+970 silly cache addNamed cb inherits@2.0.1
+971 verbose unbuild lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+972 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+973 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+974 verbose tar unpack /Users/goldibex/.npm/graceful-fs/2.0.3/package.tgz
+975 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+976 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+977 verbose tar unpack /Users/goldibex/.npm/minimatch/0.2.14/package.tgz
+978 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+979 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+980 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+981 silly gunzTarPerm modes [ '755', '644' ]
+982 silly gunzTarPerm modes [ '755', '644' ]
+983 verbose tar unpack /Users/goldibex/.npm/inherits/2.0.1/package.tgz
+984 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+985 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+986 silly gunzTarPerm modes [ '755', '644' ]
+987 silly gunzTarPerm extractEntry package.json
+988 silly gunzTarPerm extractEntry package.json
+989 silly gunzTarPerm extractEntry package.json
+990 silly gunzTarPerm extractEntry .npmignore
+991 silly gunzTarPerm extractEntry README.md
+992 silly gunzTarPerm extractEntry .npmignore
+993 silly gunzTarPerm extractEntry README.md
+994 silly gunzTarPerm extractEntry README.md
+995 silly gunzTarPerm extractEntry LICENSE
+996 silly gunzTarPerm extractEntry LICENSE
+997 silly gunzTarPerm extractEntry graceful-fs.js
+998 silly gunzTarPerm extractEntry inherits.js
+999 silly gunzTarPerm extractEntry inherits_browser.js
+1000 silly gunzTarPerm extractEntry LICENSE
+1001 silly gunzTarPerm extractEntry minimatch.js
+1002 info preinstall minimist@0.0.8
+1003 silly gunzTarPerm extractEntry polyfills.js
+1004 silly gunzTarPerm extractEntry test/open.js
+1005 silly gunzTarPerm extractEntry test/readdir-sort.js
+1006 silly gunzTarPerm extractEntry test/basic.js
+1007 silly install resolved []
+1008 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+1009 info build /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+1010 verbose linkStuff [ true,
+1010 verbose linkStuff   '/usr/local/lib/node_modules',
+1010 verbose linkStuff   false,
+1010 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules' ]
+1011 info linkStuff minimist@0.0.8
+1012 verbose linkBins minimist@0.0.8
+1013 verbose linkMans minimist@0.0.8
+1014 verbose rebuildBundles minimist@0.0.8
+1015 silly gunzTarPerm extractEntry test.js
+1016 info install minimist@0.0.8
+1017 info postinstall minimist@0.0.8
+1018 verbose unlock done using /Users/goldibex/.npm/_locks/minimist-22c2c96fb50c7f09.lock for /usr/local/lib/node_modules/mocha/node_modules/mkdirp/node_modules/minimist
+1019 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+1020 info build /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+1021 verbose linkStuff [ true,
+1021 verbose linkStuff   '/usr/local/lib/node_modules',
+1021 verbose linkStuff   false,
+1021 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+1022 info linkStuff mkdirp@0.5.0
+1023 verbose linkBins mkdirp@0.5.0
+1024 verbose link bins [ { mkdirp: 'bin/cmd.js' },
+1024 verbose link bins   '/usr/local/lib/node_modules/mocha/node_modules/.bin',
+1024 verbose link bins   false ]
+1025 verbose linkMans mkdirp@0.5.0
+1026 verbose rebuildBundles mkdirp@0.5.0
+1027 verbose rebuildBundles [ 'minimist' ]
+1028 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/.bin/mkdirp
+1029 info install mkdirp@0.5.0
+1030 info postinstall mkdirp@0.5.0
+1031 silly gunzTarPerm extractEntry test/brace-expand.js
+1032 silly gunzTarPerm extractEntry test/caching.js
+1033 verbose unlock done using /Users/goldibex/.npm/_locks/mkdirp-6e9bf42675355383.lock for /usr/local/lib/node_modules/mocha/node_modules/mkdirp
+1034 silly gunzTarPerm extractEntry test/defaults.js
+1035 silly gunzTarPerm extractEntry test/extglob-ending-with-state-char.js
+1036 info preinstall inherits@2.0.1
+1037 silly install resolved []
+1038 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+1039 info build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+1040 verbose linkStuff [ true,
+1040 verbose linkStuff   '/usr/local/lib/node_modules',
+1040 verbose linkStuff   false,
+1040 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/glob/node_modules' ]
+1041 info linkStuff inherits@2.0.1
+1042 verbose linkBins inherits@2.0.1
+1043 verbose linkMans inherits@2.0.1
+1044 verbose rebuildBundles inherits@2.0.1
+1045 info install inherits@2.0.1
+1046 info postinstall inherits@2.0.1
+1047 verbose unlock done using /Users/goldibex/.npm/_locks/inherits-2a35a552a0da6320.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/inherits
+1048 info preinstall graceful-fs@2.0.3
+1049 silly install resolved []
+1050 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+1051 info build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+1052 verbose linkStuff [ true,
+1052 verbose linkStuff   '/usr/local/lib/node_modules',
+1052 verbose linkStuff   false,
+1052 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/glob/node_modules' ]
+1053 info linkStuff graceful-fs@2.0.3
+1054 verbose linkBins graceful-fs@2.0.3
+1055 verbose linkMans graceful-fs@2.0.3
+1056 verbose rebuildBundles graceful-fs@2.0.3
+1057 info install graceful-fs@2.0.3
+1058 info postinstall graceful-fs@2.0.3
+1059 verbose unlock done using /Users/goldibex/.npm/_locks/graceful-fs-64127497f2635564.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/graceful-fs
+1060 info preinstall minimatch@0.2.14
+1061 silly prepareForInstallMany adding lru-cache@2 from minimatch dependencies
+1062 silly prepareForInstallMany adding sigmund@~1.0.0 from minimatch dependencies
+1063 silly cache add args [ 'lru-cache@2', null ]
+1064 verbose cache add spec lru-cache@2
+1065 silly cache add args [ 'sigmund@~1.0.0', null ]
+1066 verbose cache add spec sigmund@~1.0.0
+1067 silly cache add parsed spec { raw: 'lru-cache@2',
+1067 silly cache add   scope: null,
+1067 silly cache add   name: 'lru-cache',
+1067 silly cache add   rawSpec: '2',
+1067 silly cache add   spec: '>=2.0.0 <3.0.0',
+1067 silly cache add   type: 'range' }
+1068 verbose addNamed lru-cache@>=2.0.0 <3.0.0
+1069 silly addNamed semver.valid null
+1070 silly addNamed semver.validRange >=2.0.0 <3.0.0
+1071 silly addNameRange { name: 'lru-cache', range: '>=2.0.0 <3.0.0', hasData: false }
+1072 silly mapToRegistry name lru-cache
+1073 silly mapToRegistry using default registry
+1074 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+1075 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache
+1076 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache not in flight; fetching
+1077 silly cache add parsed spec { raw: 'sigmund@~1.0.0',
+1077 silly cache add   scope: null,
+1077 silly cache add   name: 'sigmund',
+1077 silly cache add   rawSpec: '~1.0.0',
+1077 silly cache add   spec: '>=1.0.0 <1.1.0',
+1077 silly cache add   type: 'range' }
+1078 verbose addNamed sigmund@>=1.0.0 <1.1.0
+1079 silly addNamed semver.valid null
+1080 silly addNamed semver.validRange >=1.0.0 <1.1.0
+1081 silly addNameRange { name: 'sigmund', range: '>=1.0.0 <1.1.0', hasData: false }
+1082 silly mapToRegistry name sigmund
+1083 silly mapToRegistry using default registry
+1084 silly mapToRegistry registry https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/
+1085 silly mapToRegistry uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund
+1086 verbose addNameRange registry:https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund not in flight; fetching
+1087 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache
+1088 verbose request no auth needed
+1089 info attempt registry request try #1 at 13:52:31
+1090 verbose etag "9GS17NOV1J4IUGAIECQ8GFV3N"
+1091 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache
+1092 verbose request uri https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund
+1093 verbose request no auth needed
+1094 info attempt registry request try #1 at 13:52:31
+1095 verbose etag "B3EEO8J1FLHOF1JE91VSLO7DE"
+1096 http request GET https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund
+1097 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund
+1098 silly get cb [ 304,
+1098 silly get   { 'content-length': '0',
+1098 silly get     connection: 'keep-alive',
+1098 silly get     age: '0',
+1098 silly get     'cache-control': 'max-age=60',
+1098 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+1098 silly get     etag: '"B3EEO8J1FLHOF1JE91VSLO7DE"',
+1098 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:32 GMT',
+1098 silly get     server: 'Apache',
+1098 silly get     vary: 'Accept',
+1098 silly get     via: '1.1 varnish, 1.1 vegur',
+1098 silly get     'x-cache': 'MISS',
+1098 silly get     'x-cache-hits': '0',
+1098 silly get     'x-served-by': 'cache-iad2145-IAD',
+1098 silly get     'x-timer': 'S1419544351.997606,VS0,VE55' } ]
+1099 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/sigmund from cache
+1100 silly addNameRange number 2 { name: 'sigmund', range: '>=1.0.0 <1.1.0', hasData: true }
+1101 silly addNameRange versions [ 'sigmund', [ '1.0.0' ] ]
+1102 verbose addNamed sigmund@1.0.0
+1103 silly addNamed semver.valid 1.0.0
+1104 silly addNamed semver.validRange 1.0.0
+1105 silly cache afterAdd sigmund@1.0.0
+1106 verbose afterAdd /Users/goldibex/.npm/sigmund/1.0.0/package/package.json not in flight; writing
+1107 verbose afterAdd /Users/goldibex/.npm/sigmund/1.0.0/package/package.json written
+1108 http 304 https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache
+1109 silly get cb [ 304,
+1109 silly get   { 'content-length': '0',
+1109 silly get     connection: 'keep-alive',
+1109 silly get     age: '0',
+1109 silly get     'cache-control': 'max-age=60',
+1109 silly get     date: 'Thu, 25 Dec 2014 21:52:31 GMT',
+1109 silly get     etag: '"9GS17NOV1J4IUGAIECQ8GFV3N"',
+1109 silly get     'last-modified': 'Thu, 25 Dec 2014 21:52:32 GMT',
+1109 silly get     server: 'Apache',
+1109 silly get     vary: 'Accept',
+1109 silly get     via: '1.1 varnish, 1.1 vegur',
+1109 silly get     'x-cache': 'MISS',
+1109 silly get     'x-cache-hits': '0',
+1109 silly get     'x-served-by': 'cache-iad2124-IAD',
+1109 silly get     'x-timer': 'S1419544351.984461,VS0,VE167' } ]
+1110 verbose etag https://npm-proxy.fury.io/kx6Q8ijiysREJFZUhqJs/casetext/lru-cache from cache
+1111 silly addNameRange number 2 { name: 'lru-cache', range: '>=2.0.0 <3.0.0', hasData: true }
+1112 silly addNameRange versions [ 'lru-cache',
+1112 silly addNameRange   [ '1.0.1',
+1112 silly addNameRange     '1.0.2',
+1112 silly addNameRange     '1.0.3',
+1112 silly addNameRange     '1.0.4',
+1112 silly addNameRange     '1.0.5',
+1112 silly addNameRange     '1.0.6',
+1112 silly addNameRange     '1.1.0',
+1112 silly addNameRange     '1.1.1',
+1112 silly addNameRange     '2.0.0',
+1112 silly addNameRange     '2.0.1',
+1112 silly addNameRange     '2.0.2',
+1112 silly addNameRange     '2.0.3',
+1112 silly addNameRange     '2.0.4',
+1112 silly addNameRange     '2.1.0',
+1112 silly addNameRange     '2.2.0',
+1112 silly addNameRange     '2.2.1',
+1112 silly addNameRange     '2.2.2',
+1112 silly addNameRange     '2.2.4',
+1112 silly addNameRange     '2.3.0',
+1112 silly addNameRange     '2.3.1',
+1112 silly addNameRange     '2.5.0' ] ]
+1113 verbose addNamed lru-cache@2.5.0
+1114 silly addNamed semver.valid 2.5.0
+1115 silly addNamed semver.validRange 2.5.0
+1116 silly cache afterAdd lru-cache@2.5.0
+1117 verbose afterAdd /Users/goldibex/.npm/lru-cache/2.5.0/package/package.json not in flight; writing
+1118 verbose afterAdd /Users/goldibex/.npm/lru-cache/2.5.0/package/package.json written
+1119 silly install resolved [ { name: 'sigmund',
+1119 silly install resolved     version: '1.0.0',
+1119 silly install resolved     description: 'Quick and dirty signatures for Objects.',
+1119 silly install resolved     main: 'sigmund.js',
+1119 silly install resolved     directories: { test: 'test' },
+1119 silly install resolved     dependencies: {},
+1119 silly install resolved     devDependencies: { tap: '~0.3.0' },
+1119 silly install resolved     scripts: { test: 'tap test/*.js', bench: 'node bench.js' },
+1119 silly install resolved     repository: { type: 'git', url: 'git://github.com/isaacs/sigmund' },
+1119 silly install resolved     keywords: [ 'object', 'signature', 'key', 'data', 'psychoanalysis' ],
+1119 silly install resolved     author:
+1119 silly install resolved      { name: 'Isaac Z. Schlueter',
+1119 silly install resolved        email: 'i@izs.me',
+1119 silly install resolved        url: 'http://blog.izs.me/' },
+1119 silly install resolved     license: 'BSD',
+1119 silly install resolved     readme: '# sigmund\n\nQuick and dirty signatures for Objects.\n\nThis is like a much faster `deepEquals` comparison, which returns a\nstring key suitable for caches and the like.\n\n## Usage\n\n```javascript\nfunction doSomething (someObj) {\n  var key = sigmund(someObj, maxDepth) // max depth defaults to 10\n  var cached = cache.get(key)\n  if (cached) return cached)\n\n  var result = expensiveCalculation(someObj)\n  cache.set(key, result)\n  return result\n}\n```\n\nThe resulting key will be as unique and reproducible as calling\n`JSON.stringify` or `util.inspect` on the object, but is much faster.\nIn order to achieve this speed, some differences are glossed over.\nFor example, the object `{0:\'foo\'}` will be treated identically to the\narray `[\'foo\']`.\n\nAlso, just as there is no way to summon the soul from the scribblings\nof a cocain-addled psychoanalyst, there is no way to revive the object\nfrom the signature string that sigmund gives you.  In fact, it\'s\nbarely even readable.\n\nAs with `sys.inspect` and `JSON.stringify`, larger objects will\nproduce larger signature strings.\n\nBecause sigmund is a bit less strict than the more thorough\nalternatives, the strings will be shorter, and also there is a\nslightly higher chance for collisions.  For example, these objects\nhave the same signature:\n\n    var obj1 = {a:\'b\',c:/def/,g:[\'h\',\'i\',{j:\'\',k:\'l\'}]}\n    var obj2 = {a:\'b\',c:\'/def/\',g:[\'h\',\'i\',\'{jkl\']}\n\nLike a good Freudian, sigmund is most effective when you already have\nsome understanding of what you\'re looking for.  It can help you help\nyourself, but you must be willing to do some work as well.\n\nCycles are handled, and cyclical objects are silently omitted (though\nthe key is included in the signature output.)\n\nThe second argument is the maximum depth, which defaults to 10,\nbecause that is the maximum object traversal depth covered by most\ninsurance carriers.\n',
+1119 silly install resolved     readmeFilename: 'README.md',
+1119 silly install resolved     bugs: { url: 'https://github.com/isaacs/sigmund/issues' },
+1119 silly install resolved     homepage: 'https://github.com/isaacs/sigmund',
+1119 silly install resolved     _id: 'sigmund@1.0.0',
+1119 silly install resolved     _shasum: '66a2b3a749ae8b5fb89efd4fcc01dc94fbe02296',
+1119 silly install resolved     _from: 'sigmund@>=1.0.0 <1.1.0',
+1119 silly install resolved     _resolved: 'http://registry.npmjs.org/sigmund/-/sigmund-1.0.0.tgz' },
+1119 silly install resolved   { name: 'lru-cache',
+1119 silly install resolved     description: 'A cache object that deletes the least-recently-used items.',
+1119 silly install resolved     version: '2.5.0',
+1119 silly install resolved     author: { name: 'Isaac Z. Schlueter', email: 'i@izs.me' },
+1119 silly install resolved     scripts: { test: 'tap test --gc' },
+1119 silly install resolved     main: 'lib/lru-cache.js',
+1119 silly install resolved     repository:
+1119 silly install resolved      { type: 'git',
+1119 silly install resolved        url: 'git://github.com/isaacs/node-lru-cache.git' },
+1119 silly install resolved     devDependencies: { tap: '', weak: '' },
+1119 silly install resolved     license:
+1119 silly install resolved      { type: 'MIT',
+1119 silly install resolved        url: 'http://github.com/isaacs/node-lru-cache/raw/master/LICENSE' },
+1119 silly install resolved     readme: '# lru cache\n\nA cache object that deletes the least-recently-used items.\n\n## Usage:\n\n```javascript\nvar LRU = require("lru-cache")\n  , options = { max: 500\n              , length: function (n) { return n * 2 }\n              , dispose: function (key, n) { n.close() }\n              , maxAge: 1000 * 60 * 60 }\n  , cache = LRU(options)\n  , otherCache = LRU(50) // sets just the max size\n\ncache.set("key", "value")\ncache.get("key") // "value"\n\ncache.reset()    // empty the cache\n```\n\nIf you put more stuff in it, then items will fall out.\n\nIf you try to put an oversized thing in it, then it\'ll fall out right\naway.\n\n## Options\n\n* `max` The maximum size of the cache, checked by applying the length\n  function to all values in the cache.  Not setting this is kind of\n  silly, since that\'s the whole purpose of this lib, but it defaults\n  to `Infinity`.\n* `maxAge` Maximum age in ms.  Items are not pro-actively pruned out\n  as they age, but if you try to get an item that is too old, it\'ll\n  drop it and return undefined instead of giving it to you.\n* `length` Function that is used to calculate the length of stored\n  items.  If you\'re storing strings or buffers, then you probably want\n  to do something like `function(n){return n.length}`.  The default is\n  `function(n){return 1}`, which is fine if you want to store `n`\n  like-sized things.\n* `dispose` Function that is called on items when they are dropped\n  from the cache.  This can be handy if you want to close file\n  descriptors or do other cleanup tasks when items are no longer\n  accessible.  Called with `key, value`.  It\'s called *before*\n  actually removing the item from the internal cache, so if you want\n  to immediately put it back in, you\'ll have to do that in a\n  `nextTick` or `setTimeout` callback or it won\'t do anything.\n* `stale` By default, if you set a `maxAge`, it\'ll only actually pull\n  stale items out of the cache when you `get(key)`.  (That is, it\'s\n  not pre-emptively doing a `setTimeout` or anything.)  If you set\n  `stale:true`, it\'ll return the stale value before deleting it.  If\n  you don\'t set this, then it\'ll return `undefined` when you try to\n  get a stale entry, as if it had already been deleted.\n\n## API\n\n* `set(key, value)`\n* `get(key) => value`\n\n    Both of these will update the "recently used"-ness of the key.\n    They do what you think.\n\n* `peek(key)`\n\n    Returns the key value (or `undefined` if not found) without\n    updating the "recently used"-ness of the key.\n\n    (If you find yourself using this a lot, you *might* be using the\n    wrong sort of data structure, but there are some use cases where\n    it\'s handy.)\n\n* `del(key)`\n\n    Deletes a key out of the cache.\n\n* `reset()`\n\n    Clear the cache entirely, throwing away all values.\n\n* `has(key)`\n\n    Check if a key is in the cache, without updating the recent-ness\n    or deleting it for being stale.\n\n* `forEach(function(value,key,cache), [thisp])`\n\n    Just like `Array.prototype.forEach`.  Iterates over all the keys\n    in the cache, in order of recent-ness.  (Ie, more recently used\n    items are iterated over first.)\n\n* `keys()`\n\n    Return an array of the keys in the cache.\n\n* `values()`\n\n    Return an array of the values in the cache.\n',
+1119 silly install resolved     readmeFilename: 'README.md',
+1119 silly install resolved     bugs: { url: 'https://github.com/isaacs/node-lru-cache/issues' },
+1119 silly install resolved     homepage: 'https://github.com/isaacs/node-lru-cache',
+1119 silly install resolved     _id: 'lru-cache@2.5.0',
+1119 silly install resolved     _shasum: 'd82388ae9c960becbea0c73bb9eb79b6c6ce9aeb',
+1119 silly install resolved     _from: 'lru-cache@>=2.0.0 <3.0.0',
+1119 silly install resolved     _resolved: 'http://registry.npmjs.org/lru-cache/-/lru-cache-2.5.0.tgz' } ]
+1120 info install sigmund@1.0.0 into /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+1121 info install lru-cache@2.5.0 into /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+1122 info installOne sigmund@1.0.0
+1123 verbose installOne of sigmund to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch not in flight; installing
+1124 info installOne lru-cache@2.5.0
+1125 verbose installOne of lru-cache to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch not in flight; installing
+1126 verbose lock using /Users/goldibex/.npm/_locks/sigmund-985a64562eaf9b0e.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1127 silly install write writing sigmund 1.0.0 to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1128 silly cache addNamed cb sigmund@1.0.0
+1129 verbose unbuild lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1130 verbose lock using /Users/goldibex/.npm/_locks/lru-cache-801624134bb5738b.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1131 silly install write writing lru-cache 2.5.0 to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1132 silly cache addNamed cb lru-cache@2.5.0
+1133 verbose unbuild lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1134 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1135 verbose tar unpack /Users/goldibex/.npm/sigmund/1.0.0/package.tgz
+1136 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1137 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1138 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1139 silly gunzTarPerm modes [ '755', '644' ]
+1140 verbose tar unpack /Users/goldibex/.npm/lru-cache/2.5.0/package.tgz
+1141 verbose tar unpacking to /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1142 verbose gentlyRm vacuuming /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1143 silly gunzTarPerm modes [ '755', '644' ]
+1144 silly gunzTarPerm extractEntry package.json
+1145 silly gunzTarPerm extractEntry package.json
+1146 silly gunzTarPerm extractEntry README.md
+1147 silly gunzTarPerm extractEntry LICENSE
+1148 silly gunzTarPerm extractEntry .npmignore
+1149 silly gunzTarPerm extractEntry README.md
+1150 silly gunzTarPerm extractEntry bench.js
+1151 silly gunzTarPerm extractEntry sigmund.js
+1152 silly gunzTarPerm extractEntry LICENSE
+1153 silly gunzTarPerm extractEntry CONTRIBUTORS
+1154 silly gunzTarPerm extractEntry test/basic.js
+1155 silly gunzTarPerm extractEntry lib/lru-cache.js
+1156 silly gunzTarPerm extractEntry test/basic.js
+1157 silly gunzTarPerm extractEntry test/foreach.js
+1158 silly gunzTarPerm extractEntry test/memory-leak.js
+1159 info preinstall sigmund@1.0.0
+1160 silly install resolved []
+1161 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1162 info build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1163 verbose linkStuff [ true,
+1163 verbose linkStuff   '/usr/local/lib/node_modules',
+1163 verbose linkStuff   false,
+1163 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules' ]
+1164 info linkStuff sigmund@1.0.0
+1165 verbose linkBins sigmund@1.0.0
+1166 verbose linkMans sigmund@1.0.0
+1167 verbose rebuildBundles sigmund@1.0.0
+1168 info install sigmund@1.0.0
+1169 info postinstall sigmund@1.0.0
+1170 verbose unlock done using /Users/goldibex/.npm/_locks/sigmund-985a64562eaf9b0e.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/sigmund
+1171 info preinstall lru-cache@2.5.0
+1172 silly install resolved []
+1173 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1174 info build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1175 verbose linkStuff [ true,
+1175 verbose linkStuff   '/usr/local/lib/node_modules',
+1175 verbose linkStuff   false,
+1175 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules' ]
+1176 info linkStuff lru-cache@2.5.0
+1177 verbose linkBins lru-cache@2.5.0
+1178 verbose linkMans lru-cache@2.5.0
+1179 verbose rebuildBundles lru-cache@2.5.0
+1180 info install lru-cache@2.5.0
+1181 info postinstall lru-cache@2.5.0
+1182 verbose unlock done using /Users/goldibex/.npm/_locks/lru-cache-801624134bb5738b.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch/node_modules/lru-cache
+1183 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+1184 info build /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+1185 verbose linkStuff [ true,
+1185 verbose linkStuff   '/usr/local/lib/node_modules',
+1185 verbose linkStuff   false,
+1185 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules/glob/node_modules' ]
+1186 info linkStuff minimatch@0.2.14
+1187 verbose linkBins minimatch@0.2.14
+1188 verbose linkMans minimatch@0.2.14
+1189 verbose rebuildBundles minimatch@0.2.14
+1190 verbose rebuildBundles [ 'lru-cache', 'sigmund' ]
+1191 info install minimatch@0.2.14
+1192 info postinstall minimatch@0.2.14
+1193 verbose unlock done using /Users/goldibex/.npm/_locks/minimatch-ea9100acc7f4d455.lock for /usr/local/lib/node_modules/mocha/node_modules/glob/node_modules/minimatch
+1194 verbose about to build /usr/local/lib/node_modules/mocha/node_modules/glob
+1195 info build /usr/local/lib/node_modules/mocha/node_modules/glob
+1196 verbose linkStuff [ true,
+1196 verbose linkStuff   '/usr/local/lib/node_modules',
+1196 verbose linkStuff   false,
+1196 verbose linkStuff   '/usr/local/lib/node_modules/mocha/node_modules' ]
+1197 info linkStuff glob@3.2.3
+1198 verbose linkBins glob@3.2.3
+1199 verbose linkMans glob@3.2.3
+1200 verbose rebuildBundles glob@3.2.3
+1201 verbose rebuildBundles [ 'graceful-fs', 'inherits', 'minimatch' ]
+1202 info install glob@3.2.3
+1203 info postinstall glob@3.2.3
+1204 verbose unlock done using /Users/goldibex/.npm/_locks/glob-b0b1ce58c2087973.lock for /usr/local/lib/node_modules/mocha/node_modules/glob
+1205 verbose about to build /usr/local/lib/node_modules/mocha
+1206 info build /usr/local/lib/node_modules/mocha
+1207 verbose linkStuff [ true,
+1207 verbose linkStuff   '/usr/local/lib/node_modules',
+1207 verbose linkStuff   true,
+1207 verbose linkStuff   '/usr/local/lib/node_modules' ]
+1208 info linkStuff mocha@2.1.0
+1209 verbose linkBins mocha@2.1.0
+1210 verbose link bins [ { mocha: './bin/mocha', _mocha: './bin/_mocha' },
+1210 verbose link bins   '/usr/local/bin',
+1210 verbose link bins   true ]
+1211 verbose linkMans mocha@2.1.0
+1212 verbose rebuildBundles mocha@2.1.0
+1213 verbose gentlyRm verifying that /usr/local is managed by npm
+1214 verbose rebuildBundles [ '.bin',
+1214 verbose rebuildBundles   'commander',
+1214 verbose rebuildBundles   'debug',
+1214 verbose rebuildBundles   'diff',
+1214 verbose rebuildBundles   'escape-string-regexp',
+1214 verbose rebuildBundles   'glob',
+1214 verbose rebuildBundles   'growl',
+1214 verbose rebuildBundles   'jade',
+1214 verbose rebuildBundles   'mkdirp' ]
+1215 verbose gentlyRm verifying that /usr/local is managed by npm
+1216 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+1217 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+1218 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+1219 silly isManaged /usr/local is not inside /usr/local/lib/node_modules
+1220 silly isManaged /usr/local/bin is inside /usr/local
+1221 silly gentlyRm /usr/local is managed by npm
+1222 silly gentlyRm /usr/local/bin/mocha is under /usr/local
+1223 verbose gentlyRm vacuuming /usr/local/bin/mocha up to /usr/local
+1224 silly isManaged /usr/local/bin is inside /usr/local
+1225 silly gentlyRm /usr/local is managed by npm
+1226 silly gentlyRm /usr/local/bin/_mocha is under /usr/local
+1227 verbose gentlyRm vacuuming /usr/local/bin/_mocha up to /usr/local
+1228 info install mocha@2.1.0
+1229 info postinstall mocha@2.1.0
+1230 verbose unlock done using /Users/goldibex/.npm/_locks/mocha-1cb4102bb5230051.lock for /usr/local/lib/node_modules/mocha
+1231 warn unmet dependency /usr/local/lib/node_modules/fireproof/node_modules/firebase-admin requires firebase@'^1.0.17' but will load
+1231 warn unmet dependency /usr/local/lib/node_modules/fireproof/node_modules/firebase,
+1231 warn unmet dependency which is version 2.0.0
+1232 verbose stack Error: The package phantomjs does not satisfy its siblings' peerDependencies requirements!
+1232 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:103:32
+1232 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:225:5
+1232 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:138:5
+1232 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+1232 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+1232 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+1232 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+1232 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+1232 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+1232 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+1233 verbose cwd /Users/goldibex/Development/casetext/targaryen/docs/chai
+1234 error Darwin 14.0.0
+1235 error argv "node" "/usr/local/bin/npm" "install" "-g" "mocha"
+1236 error node v0.10.29
+1237 error npm  v2.1.14
+1238 error code EPEERINVALID
+1239 error peerinvalid The package phantomjs does not satisfy its siblings' peerDependencies requirements!
+1239 error peerinvalid Peer mocha-phantomjs@3.5.2 wants phantomjs@~1.9.1
+1240 verbose exit [ 1, true ]
