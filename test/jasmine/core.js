@@ -1,12 +1,12 @@
 
 'use strict';
 
-var targaryen = require('../../lib/jasmine');
+var targaryen = require('../../index');
 
 describe('the targaryen Jasmine plugin', function() {
 
   beforeEach(function() {
-    jasmine.addMatchers(targaryen.matchers);
+    jasmine.addMatchers(targaryen.jasmine.matchers);
   });
 
   describe('if not configured correctly', function() {

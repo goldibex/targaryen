@@ -2,7 +2,7 @@
 'use strict';
 
 var chai = require('chai'),
-  plugin = require('../../../lib/chai-plugin');
+  plugin = require('../../../lib/chai');
 
 describe('Chai plugin', function() {
 
