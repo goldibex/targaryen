@@ -6,6 +6,10 @@
   "directories": {
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goldibex/targaryen"
+  },
   "scripts": {
     "test": "mocha -r test/setup.js test/spec/**/*.js && jasmine"
   },
