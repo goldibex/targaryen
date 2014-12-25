@@ -23,7 +23,7 @@ var validRules = [
   'root.hasChildren(["foo", "bar", "baz"])',
   'root.hasChildren([$here])',
   'root.hasChildren([auth.uid])',
-  'root.child("users").child($here).val().replace("x", $here) === "yyzzy"',
+  'root.child("users").child(auth.uid).child($here).val().replace("x", $here) === "yyzzy"',
   'root.child("str").val().matches(/foo/)'
 ];
 var invalidRules = [
