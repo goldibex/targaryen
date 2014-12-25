@@ -15,7 +15,17 @@
   },
   "author": "Harry Schmidt <me@goldibex.com>",
   "license": "ISC",
+  "keywords": [
+    "firebase",
+    "testing",
+    "jasmine",
+    "mocha",
+    "chai",
+    "security",
+    "rules"
+  ],
   "dependencies": {
+    "esprima": "^1.2.2",
     "extend": "^2.0.0",
     "replaceall": "^0.1.3"
   },
