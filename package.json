@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha -r test/setup.js test/**/*.js"
+    "test": "mocha -r test/setup.js test/spec/**/*.js && jasmine"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
   "license": "ISC",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
+    "jasmine": "^2.1.1",
     "mocha": "^2.1.0"
   }
 }
