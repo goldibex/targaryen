@@ -13,14 +13,16 @@ describe('A valid set of security rules and data', function() {
     jasmine.addMatchers(targaryen.jasmine.matchers);
   });
 
-  it('can be tested against', function() {
+  it('can have read errors', function() {
+    expect(users.unauthenticated).canRead('users/simplelogin:1');
+  });
 
-    expect(users.unauthenticated).cannotRead('users/simplelogin:1');
-    expect(users.simplelogin).canRead('users/simplelogin:1');
+  it('can have write errors', function() {
+    expect(users.simplelogin).canWrite('users/simplelogin:1/innocent', true);
+  });
 
-    expect(users.simplelogin).cannotWrite('users/simplelogin:1/innocent', true);
-    expect({ uid: 'simplelogin:2' }).canWrite('users/simplelogin:1/on-fire', true);
-
+  it('can have validation errors', function() {
+    expect({ uid: 'simplelogin:2' }).canWrite('users/simplelogin:1/innocent', true);
   });
 
 });

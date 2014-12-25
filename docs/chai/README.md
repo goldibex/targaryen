@@ -37,6 +37,16 @@ See the API section below for details, or take a look at the example files here.
 
 7. Run the tests using `mocha test/security/**/*.js`.
 
+## Examples
+
+To run the examples:
+```
+npm install -g mocha
+npm install
+cd docs/chai
+mocha examples/<name of example>.js
+```
+
 ## API
 
 - `targaryen.chai`: The plugin object. Load this using `chai.use(targaryen.chai)` before running any tests.

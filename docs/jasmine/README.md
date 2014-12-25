@@ -1,7 +1,7 @@
 
 ## Using Targaryen with Jasmine
 
-1. Run `npm install --save-dev targaryen jasmine`.
+1. Run `npm install -g jasmine && npm install --save-dev targaryen`.
 
 2. Create a new directory for your security tests. Jasmine likes your tests to live in the directory `spec`, so a good choice might be `spec/security`. Add this directory to `spec/support/jasmine.json`.
 
@@ -36,9 +36,18 @@ See the API section below for details, or take a look at the example files here.
 
 7. Run the tests with `jasmine`.
 
+## Examples
+
+To run the examples:
+```
+npm install -g jasmine
+cd targaryen/docs/jasmine/examples
+jasmine spec/security/<name of example>.js
+```
+
 ## API
 
-- `targaryen.jasmine`: The plugin object. Load this using `chai.use(targaryen.chai)` before running any tests.
+- `targaryen.jasmine`: The plugin object. Load this using `jasmine.addMatchers(targaryen.jasmine.matchers)` before running any tests.
 - `targaryen.setFirebaseData(data)`: Set the mock data to be used as the existing Firebase data, i.e., `root` and `data`.
 - `targaryen.setFirebaseRules(rules)`: Set the security rules to be tested against. Throws if there's a syntax error in your rules. 
 - `targaryen.users`: A set of authentication objects you can use as the subject of the assertions. Has the following keys:
