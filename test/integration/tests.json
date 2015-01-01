@@ -1,0 +1,55 @@
+{
+  "root": {
+    "posts": {
+      "existing-post": {
+        ".priority": 85,
+        "title": "Can bees think?",
+        "content": "A new study confirms that no, they cannot.",
+        "clearance-level": 6,
+        "date": 1420066757609
+      },
+      "other-post": {
+        ".priority": 0,
+        "title": "President Harding Dies Several Months Ago",
+        "content": "Details on page Z88",
+        "clearance-level": 10,
+        "date": 1420066757620
+      }
+    },
+    "users": {
+      "simplelogin:3": {
+        "clearance-level": 6,
+        "author": true
+      },
+      "simplelogin:5": {
+        "clearance-level": 8
+      }
+    }
+  },
+  "users": {
+    "an author": { "uid": "simplelogin:3" },
+    "John Smith": { "uid": "simplelogin:5" }
+  },
+  "tests": {
+    "posts/existing-post": {
+      "canRead": [ "John Smith" ]
+    },
+    "posts/existing-post/date": {
+      "cannotWrite": [
+        { "auth": "John Smith", "data": 1420066757609 },
+        { "auth": "an author", "data": 1420066757609 }
+      ]
+    },
+    "posts/new-post/date": {
+      "canWrite": [
+        { "auth": "an author", "data": { ".sv": "timestamp" } }
+      ],
+      "cannotWrite": [
+        { "auth": "John Smith", "data": { ".sv": "timestamp" } }
+      ]
+    },
+    "posts/other-post": {
+      "cannotRead": ["John Smith"]
+    }
+  }
+}

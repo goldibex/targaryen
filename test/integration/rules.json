@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "posts": {
+      "$post": {
+        ".read": "root.child('users').child(auth.uid).child('clearance-level').val() >= data.child('clearance-level').val()",
+        ".write": "root.child('users').child(auth.uid).child('author').val() === true",
+        "date": {
+          ".validate": "data.parent().exists() === false && newData.val() <= now"
+        }
+      }
+    },
+    "flight-routes": {
+      "$from": {
+        "$to": {
+          ".read": "true",
+          ".write": "auth.ticketagent === true",
+          ".validate": "$from !== $to"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+
+'use strict';
+
+var path = require('path'),
+  Table = require('cli-table'),
+  colors = require('colors'),
+  helpers = require('../lib/test-helpers'),
+  TestJig = require('../lib/test-jig'),
+  argv = require('minimist')(process.argv.slice(2), { boolean: true });
+
+if (argv._.length < 2) {
+
+  console.error('Usage: targaryen RULES_JSON_PATH TEST_JSON_PATH');
+  process.exit(1);
+
+}
+
+
+var rulesJSONPath = path.resolve(argv._[0]),
+  testJSONPath = path.resolve(argv._[1]),
+  rules = require(rulesJSONPath),
+  tests = require(testJSONPath);
+
+var jig = new TestJig(rules, tests),
+  results = jig.run(),
+  totalCount = results.length,
+  failCount = 0,
+  table = new Table({
+    head: ['Path', 'Type', 'Auth', 'Expect', 'Got']
+  });
+
+results.forEach(function(result) {
+
+  var expected = result.expected ? '✓'.green : '✖'.red,
+    actual = result.allowed ? '✓'.green : '✖'.red;
+
+  var authStr;
+  if (result.auth.$description) {
+    authStr = result.auth.$description;
+  } else if (typeof result.auth === 'string') {
+    authStr = result.auth;
+  } else {
+    authStr = JSON.stringify(result.auth);
+  }
+
+  if (expected === actual) {
+    table.push([ result.path, result.type, authStr, expected, actual ]);
+  } else {
+    table.push([
+      colors.bgRed(result.path),
+      colors.bgRed(result.type),
+      colors.bgRed(authStr),
+      expected,
+      actual
+    ]);
+  }
+
+  if (result.type === 'read' && result.expected !== result.allowed) {
+
+    failCount++;
+    if (result.expected === true) {
+      console.error(colors.red(helpers.unreadableError(result)));
+    } else {
+      console.error(colors.red(helpers.readableError(result)));
+    }
+    console.error();
+
+  } else if (result.type === 'write' && result.expected !== result.allowed) {
+
+    failCount++;
+    if (result.expected === true) {
+      console.error(colors.red(helpers.unwritableError(result, result.newData)));
+    } else {
+      console.error(colors.red(helpers.writableError(result, result.newData)));
+    }
+    console.error();
+
+  }
+
+});
+
+if (argv.verbose) {
+  console.log(table.toString());
+}
+
+console.log();
+console.log(failCount + ' errors in ' + totalCount + ' tests');
+
+process.exit(failCount > 0 ? 1 : 0);
