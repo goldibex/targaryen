@@ -17,7 +17,7 @@ with the following 3 keys:
   an integer containing the number of milliseconds since the epoch.
 
     An example:
-    ```
+    ```json
       "root": {
         "crimes": {
           "6ca5": {
