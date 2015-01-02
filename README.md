@@ -2,6 +2,8 @@
 targaryen
 =========
 
+[![Build Status](https://travis-ci.org/goldibex/targaryen.svg)](https://travis-ci.org/goldibex/targaryen)
+
 Completely and thoroughly test your Firebase security rules without connecting to Firebase.
 
 ## Usage
