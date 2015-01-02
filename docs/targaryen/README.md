@@ -2,7 +2,7 @@
 ## Note
 
 The CLI utility is meant for somewhat simpler tests. If you have more complex
-requirements, please use targaryen as a plugin for either [Jasmine](https://jasmine.github.io) or [Chai](http://chaijs.com).
+requirements, please use targaryen as a plugin for either [Jasmine](https://github.com/goldibex/targaryen/blob/master/docs/jasmine) or [Chai](https://github.com/goldibex/targaryen/blob/master/docs/chai).
 
 ## Using Targaryen's standalone CLI
 
