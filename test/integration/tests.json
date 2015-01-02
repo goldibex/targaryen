@@ -22,7 +22,8 @@
         "author": true
       },
       "simplelogin:5": {
-        "clearance-level": 8
+        "clearance-level": 8,
+        "ticketagent": true
       }
     }
   },

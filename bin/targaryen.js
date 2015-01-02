@@ -10,7 +10,7 @@ var path = require('path'),
 
 if (argv._.length < 2) {
 
-  console.error('Usage: targaryen RULES_JSON_PATH TEST_JSON_PATH');
+  console.error('Usage: targaryen [--verbose] RULES_JSON_PATH TEST_JSON_PATH');
   process.exit(1);
 
 }
@@ -84,6 +84,6 @@ if (argv.verbose) {
 }
 
 console.log();
-console.log(failCount + ' errors in ' + totalCount + ' tests');
+console.log(failCount + ' failures in ' + totalCount + ' tests');
 
 process.exit(failCount > 0 ? 1 : 0);
