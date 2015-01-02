@@ -10,7 +10,7 @@ requirements, please use targaryen as a plugin for either [Jasmine](https://jasm
 2. Create a JSON security tests file. The file should contain a single base object
 with the following 3 keys:
 
-  a. `root`: an object containing the mock data the security tests should
+  `root`: an object containing the mock data the security tests should
   operate on. This data can either be formatted identically to the kind of value that
   comes out of `exportVal`, or just given as plain values if you don't care about priorities.
   Additionally, the special object `{ ".sv": "timestamp" }` will be replaced with
@@ -30,7 +30,7 @@ with the following 3 keys:
       }
     ```
   
-  b. `users`: an object that describes the authentication state of any kind of user
+    `users`: an object that describes the authentication state of any kind of user
     that might access your system. The keys should be the names by which you want to refer
     to the auth payload in the tests; the values should be the auth payloads themselves.
     
@@ -43,7 +43,7 @@ with the following 3 keys:
       }
     ```
 
-  c. `tests`: an object that describes the tests, that is, operations that should or
+    `tests`: an object that describes the tests, that is, operations that should or
     should not be possible given the current data in `root`, one of the users from `users`,
     and possibly some new data to be written.
   
