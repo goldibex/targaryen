@@ -10,7 +10,7 @@ var path = require('path'),
 
 if (argv._.length < 2) {
 
-  console.error('Usage: targaryen [--verbose] RULES_JSON_PATH TEST_JSON_PATH');
+  console.error('Usage: targaryen [--verbose] [--debug] RULES_JSON_PATH TEST_JSON_PATH');
   process.exit(1);
 
 }
@@ -30,6 +30,11 @@ var jig = new TestJig(rules, tests),
   });
 
 results.forEach(function(result) {
+
+  if (argv.debug) {
+    console.log(result.info);
+    console.log();
+  }
 
   var expected = result.expected ? '✓'.green : '✖'.red,
     actual = result.allowed ? '✓'.green : '✖'.red;

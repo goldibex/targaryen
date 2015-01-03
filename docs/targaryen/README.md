@@ -83,6 +83,10 @@ Targaryen will run the tests and report any failures on stderr.
 If you specify `--verbose`, Targaryen will pretty-print a nicely formatted table
 containing a list of the tests and their status.
 
+If you specify `--debug', Targaryen will print the full debug output for each test,
+indicating which rules were tested and what their outcomes were. This is the same
+as the output of the Firebase Forge's simulator.
+
 Targaryen exits with a non-zero status code if at least one test failed, or zero if
 all tests succeeded.
 
