@@ -74,9 +74,9 @@ results.forEach(function(result) {
 
     failCount++;
     if (result.expected === true) {
-      console.error(colors.red(helpers.unwritableError(result, result.newData)));
+      console.error(colors.red(helpers.unwritableError(result)));
     } else {
-      console.error(colors.red(helpers.writableError(result, result.newData)));
+      console.error(colors.red(helpers.writableError(result)));
     }
     console.error();
 
