@@ -54,11 +54,10 @@ describe('Chai plugin', function() {
             }
           },
           posts: {
-            '.validate': 'newData.child("author").val() === auth.uid',
             '$post': {
               '.read': true,
               '.write': true,
-              '.validate': 'newData.hasChildren(["created", "text"])'
+              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid'
             }
           }
         }
@@ -83,7 +82,11 @@ describe('Chai plugin', function() {
       expect({ uid: 'simplelogin:1', isSuper: true }).can.write({stupid: true})
       .to.path('users/simplelogin:1');
 
-      expect({ uid: 'simplelogin:1'}).cannot.write({ author: 'simplelogin:2'})
+      expect({ uid: 'simplelogin:1'}).cannot.write({
+        author: 'simplelogin:2',
+        created: Date.now(),
+        text: 'Hello!'
+      })
       .to.path('posts/newpost');
 
       expect({ uid: 'simplelogin:1' }).cannot.write({ author: 'simplelogin:1'})

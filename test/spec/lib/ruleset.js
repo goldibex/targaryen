@@ -186,7 +186,7 @@ describe('Ruleset', function() {
     it('returns the result of attempting to write the given path with the given DB state and new data', function() {
 
       var root = getRoot(),
-        newData = new RuleDataSnapshot({ 'wut': { '.value': true } }),
+        newData = { 'wut': { '.value': true } },
         noAuth = null,
         superAuth = { id: 1 };
 
