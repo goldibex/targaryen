@@ -41,6 +41,18 @@
         { "auth": "an author", "data": 1420066757609 }
       ]
     },
+    "posts/new-post": {
+      "canWrite": [{
+        "auth": "an author", "data": {
+          "date": { ".sv": "timestamp" }
+        }
+      }],
+      "cannotWrite": [{
+        "auth": "John Smith", "data": {
+          "date": { ".sv": "timestamp" }
+        }
+      }]
+    },
     "posts/new-post/date": {
       "canWrite": [
         { "auth": "an author", "data": { ".sv": "timestamp" } }
