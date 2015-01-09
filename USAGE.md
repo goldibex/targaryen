@@ -86,13 +86,13 @@ describe('A set of rules and data', function() {
 
   it('can be tested', function() {
 
-    expect(targaryenChai.users.unauthenticated)
+    expect(targaryen.users.unauthenticated)
     .cannot.read.path('users/simplelogin:1');
 
-    expect(targaryenChai.users.simplelogin)
+    expect(targaryen.users.simplelogin)
     .can.read.path('users/simplelogin:1');
 
-    expect(targaryenChai.users.simplelogin)
+    expect(targaryen.users.simplelogin)
     .cannot.write(true).to.path('users/simplelogin:1/innocent');
 
     expect({ uid: 'simplelogin:2' })
