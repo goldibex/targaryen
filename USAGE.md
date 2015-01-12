@@ -77,7 +77,7 @@ describe('A set of rules and data', function() {
       rules: {
         users: {
           '.read': 'auth !== null',
-          '.write': 'root.child('users').child(auth.uid).child('king').val() === true'
+          '.write': "root.child('users').child(auth.uid).child('king').val() === true"
         }
       }
     });
