@@ -97,7 +97,7 @@ var validRulesets = [{
     '.indexOn': 'wut',
     '.validate': true
   }
-}, 
+}, {
   rules: {
     '.indexOn': ['wut', 'the', 'heck']
   }
