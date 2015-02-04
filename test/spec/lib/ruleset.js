@@ -99,6 +99,10 @@ var validRulesets = [{
   }
 }, {
   rules: {
+    '.indexOn': ['wut', 'the', 'heck']
+  }
+}, {
+  rules: {
   }
 }];
 
