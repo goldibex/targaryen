@@ -14,15 +14,15 @@ describe('A valid set of security rules and data', function() {
   });
 
   it('can have read errors', function() {
-    expect(users.unauthenticated).canRead('users/simplelogin:1');
+    expect(users.unauthenticated).canRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
   });
 
   it('can have write errors', function() {
-    expect(users.simplelogin).canWrite('users/simplelogin:1/innocent', true);
+    expect(users.password).canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent', true);
   });
 
   it('can have validation errors', function() {
-    expect({ uid: 'simplelogin:2' }).canWrite('users/simplelogin:1/innocent', true);
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' }).canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent', true);
   });
 
 });

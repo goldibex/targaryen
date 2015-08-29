@@ -59,13 +59,13 @@ describe('A set of rules and data', function() {
 
     targaryen.setFirebaseData({
       users: {
-        'simplelogin:1': {
+        'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
           name: {
             '.value': 'Rickard Stark',
             '.priority': 2
           }
         },
-        'simplelogin:2': {
+        'password:3403291b-fdc9-4995-9a54-9656241c835d': {
           name: 'Mad Aerys',
           king: true
         }
@@ -87,16 +87,16 @@ describe('A set of rules and data', function() {
   it('can be tested', function() {
 
     expect(targaryen.users.unauthenticated)
-    .cannot.read.path('users/simplelogin:1');
+    .cannot.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-    expect(targaryen.users.simplelogin)
-    .can.read.path('users/simplelogin:1');
+    expect(targaryen.users.password)
+    .can.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-    expect(targaryen.users.simplelogin)
-    .cannot.write(true).to.path('users/simplelogin:1/innocent');
+    expect(targaryen.users.password)
+    .cannot.write(true).to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent');
 
-    expect({ uid: 'simplelogin:2' })
-    .can.write(true).to.path('users/simplelogin:2/on-fire');
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' })
+    .can.write(true).to.path('users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire');
 
   });
 
@@ -126,16 +126,16 @@ describe('A set of rules and data', function() {
   it('can be tested', function() {
 
     expect(targaryen.users.unauthenticated)
-    .cannotRead('users/simplelogin:1');
+    .cannotRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-    expect(targaryen.users.simplelogin)
-    .canRead('users/simplelogin:1');
+    expect(targaryen.users.password)
+    .canRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-    expect(targaryen.users.simplelogin)
-    .cannotWrite('users/simplelogin:1/innocent', true);
+    expect(targaryen.users.password)
+    .cannotWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent', true);
 
-    expect({ uid: 'simplelogin:2'})
-    .canWrite('users/simplelogin:1/onFire', true);
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'})
+    .canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire', true);
 
   });
 

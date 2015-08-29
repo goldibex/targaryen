@@ -6,17 +6,17 @@ var RuleDataSnapshot = require('../../../lib/rule-data-snapshot');
 var rootObj = {
   '.priority': 'hello',
   users: {
-    'simplelogin:0': {
+    'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
       '.priority': 1,
       name: { '.value': 'Sherlock Holmes' },
       genius: { '.value': true },
       arrests: { '.value': 70 }
     },
-    'simplelogin:1': {
+    'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
       '.priority': 2,
       name: { '.value': 'John Watson' }
     },
-    'simplelogin:2': {
+    'password:3403291b-fdc9-4995-9a54-9656241c835d': {
       '.priority': 0,
       name: { '.value': 'Inspector Lestrade'},
       arrests: { '.value': 35 }
@@ -81,9 +81,9 @@ describe('RuleDataSnapshot', function() {
 
       expect(root.val()).to.deep.equal({
         users: {
-          'simplelogin:0': { name: 'Sherlock Holmes', genius: true, arrests: 70 },
-          'simplelogin:1': { name: 'John Watson' },
-          'simplelogin:2': { name: 'Inspector Lestrade', arrests: 35 }
+          'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': { name: 'Sherlock Holmes', genius: true, arrests: 70 },
+          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': { name: 'John Watson' },
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': { name: 'Inspector Lestrade', arrests: 35 }
         }
       });
 
@@ -102,7 +102,7 @@ describe('RuleDataSnapshot', function() {
   describe('#child', function() {
 
     it('gets a new data snapshot for the specified child key', function() {
-      expect(root.child('users/simplelogin:1').child('name').val())
+      expect(root.child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3').child('name').val())
       .to.equal('John Watson');
     });
 
@@ -112,7 +112,7 @@ describe('RuleDataSnapshot', function() {
 
     it('gets the parent of the snap', function() {
 
-      expect(root.child('users/simplelogin:1/name').parent().val())
+      expect(root.child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/name').parent().val())
       .to.deep.equal({
         name: 'John Watson'
       });
@@ -154,11 +154,11 @@ describe('RuleDataSnapshot', function() {
     describe('with no arguments', function() {
 
       it('returns true if the path has any children at all', function() {
-        expect(root.child('users/simplelogin:1').hasChildren()).to.be.true;
+        expect(root.child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3').hasChildren()).to.be.true;
       });
 
       it('returns false if the path has no children', function() {
-        expect(root.child('users/simplelogin:1/name').hasChildren()).to.be.false;
+        expect(root.child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/name').hasChildren()).to.be.false;
       });
 
     });
@@ -167,13 +167,13 @@ describe('RuleDataSnapshot', function() {
 
       it('returns true if the path has all the specified children', function() {
 
-        expect(root.child('users/simplelogin:0').hasChildren(['name', 'genius', 'arrests']))
+        expect(root.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e').hasChildren(['name', 'genius', 'arrests']))
         .to.be.true;
 
       });
 
       it('returns false if the path is missing even one of the specified children', function() {
-        expect(root.child('users/simplelogin:2').hasChildren(['name', 'genius', 'arrests']))
+        expect(root.child('users/password:3403291b-fdc9-4995-9a54-9656241c835d').hasChildren(['name', 'genius', 'arrests']))
         .to.be.false;
       });
 
@@ -184,11 +184,11 @@ describe('RuleDataSnapshot', function() {
   describe('#isNumber', function() {
 
     it('returns true if the value at the path has type number', function() {
-      expect(root.child('users/simplelogin:2/arrests').isNumber()).to.be.true;
+      expect(root.child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/arrests').isNumber()).to.be.true;
     });
 
     it('returns false if the value at the path does not have type number', function() {
-      expect(root.child('users/simplelogin:1/arrests').isNumber()).to.be.false;
+      expect(root.child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/arrests').isNumber()).to.be.false;
     });
 
   });
@@ -196,11 +196,11 @@ describe('RuleDataSnapshot', function() {
   describe('#isBoolean', function() {
 
     it('returns true if the value at the path has type boolean', function() {
-      expect(root.child('users/simplelogin:0/genius').isBoolean()).to.be.true;
+      expect(root.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e/genius').isBoolean()).to.be.true;
     });
 
     it('returns false if the value at the path does not have type boolean', function() {
-      expect(root.child('users/simplelogin:2/name').isBoolean()).to.be.false;
+      expect(root.child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name').isBoolean()).to.be.false;
     });
 
   });
@@ -208,11 +208,11 @@ describe('RuleDataSnapshot', function() {
   describe('#isString', function() {
 
     it('returns true if the value at the path has type string', function() {
-      expect(root.child('users/simplelogin:2/name').isString()).to.be.true;
+      expect(root.child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name').isString()).to.be.true;
     });
 
     it('returns false if the value at the path does not have type string', function() {
-      expect(root.child('users/simplelogin:2').isString()).to.be.false;
+      expect(root.child('users/password:3403291b-fdc9-4995-9a54-9656241c835d').isString()).to.be.false;
     });
 
   });

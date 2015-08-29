@@ -15,11 +15,11 @@ describe('A valid set of security rules and data', function() {
 
   it('can be tested against', function() {
 
-    expect(users.unauthenticated).cannotRead('users/simplelogin:1');
-    expect(users.simplelogin).canRead('users/simplelogin:1');
+    expect(users.unauthenticated).cannotRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
+    expect(users.password).canRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-    expect(users.simplelogin).cannotWrite('users/simplelogin:1/innocent', true);
-    expect({ uid: 'simplelogin:2' }).canWrite('users/simplelogin:1/on-fire', true);
+    expect(users.password).cannotWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent', true);
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' }).canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/on-fire', true);
 
   });
 
