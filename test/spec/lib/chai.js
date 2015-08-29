@@ -28,10 +28,10 @@ describe('Chai plugin', function() {
 
       plugin.setFirebaseData({
         users: {
-          'simplelogin:1': {
+          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             name: 'Sherlock Holmes'
           },
-          'simplelogin:2': {
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
             name: 'John Watson'
           }
         }
@@ -70,30 +70,30 @@ describe('Chai plugin', function() {
   describe('when properly configured', function() {
 
     it('permits read tests', function() {
-      expect(null).cannot.read.path('users/simplelogin:1');
-      expect({ uid: 'simplelogin:1'}).can.read.path('users/simplelogin:1');
+      expect(null).cannot.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).can.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
     });
 
     it('permits write tests', function() {
 
-      expect({ uid: 'simplelogin:1'}).cannot.write({smart: true})
-      .to.path('users/simplelogin:1');
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.write({smart: true})
+      .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-      expect({ uid: 'simplelogin:1', isSuper: true }).can.write({stupid: true})
-      .to.path('users/simplelogin:1');
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3', isSuper: true }).can.write({stupid: true})
+      .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-      expect({ uid: 'simplelogin:1'}).cannot.write({
-        author: 'simplelogin:2',
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.write({
+        author: 'password:3403291b-fdc9-4995-9a54-9656241c835d',
         created: Date.now(),
         text: 'Hello!'
       })
       .to.path('posts/newpost');
 
-      expect({ uid: 'simplelogin:1' }).cannot.write({ author: 'simplelogin:1'})
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).cannot.write({ author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'})
       .to.path('posts/newpost');
 
-      expect({ uid: 'simplelogin:1' }).can.write({
-        author: 'simplelogin:1',
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).can.write({
+        author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3',
         created: Date.now(),
         text: 'Hello!'
       })

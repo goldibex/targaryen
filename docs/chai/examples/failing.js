@@ -14,20 +14,20 @@ describe('A valid set of security rules and data', function() {
   });
 
   it('can have read errors', function() {
-    expect(users.unauthenticated).can.read.path('users/simplelogin:1');
+    expect(users.unauthenticated).can.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
   });
 
   it('can have write errors', function() {
 
-    expect(users.simplelogin).can.write(true)
-    .to.path('users/simplelogin:1/innocent');
+    expect(users.password).can.write(true)
+    .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent');
 
   });
 
   it('can have validation errors', function() {
 
-    expect({ uid: 'simplelogin:2' }).can.write(true)
-    .to.path('users/simplelogin:1/innocent');
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' }).can.write(true)
+    .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent');
 
   });
 

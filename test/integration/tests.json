@@ -17,19 +17,19 @@
       }
     },
     "users": {
-      "simplelogin:3": {
+      "password:ad7ebe2e-f547-4110-bda8-678af95b7efd": {
         "clearance-level": 6,
         "author": true
       },
-      "simplelogin:5": {
+      "password:bb9c1467-8ad3-4b33-8913-f2b491cdbb86": {
         "clearance-level": 8,
         "ticketagent": true
       }
     }
   },
   "users": {
-    "an author": { "uid": "simplelogin:3" },
-    "John Smith": { "uid": "simplelogin:5" }
+    "an author": { "uid": "password:ad7ebe2e-f547-4110-bda8-678af95b7efd" },
+    "John Smith": { "uid": "password:bb9c1467-8ad3-4b33-8913-f2b491cdbb86" }
   },
   "tests": {
     "posts/existing-post": {

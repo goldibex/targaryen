@@ -39,10 +39,10 @@ describe('the targaryen Jasmine plugin', function() {
 
       targaryen.setFirebaseData({
         users: {
-          'simplelogin:1': {
+          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             name: 'Sherlock Holmes'
           },
-          'simplelogin:2': {
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
             name: 'John Watson'
           },
 
@@ -70,14 +70,14 @@ describe('the targaryen Jasmine plugin', function() {
 
     it('runs tests against the provided data and rules', function() {
 
-      expect(targaryen.users.simplelogin).canRead('users/simplelogin:1');
+      expect(targaryen.users.password).canRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
       expect(targaryen.users.unauthenticated).canRead('posts/first');
-      expect(targaryen.users.unauthenticated).cannotRead('users/simplelogin:1');
+      expect(targaryen.users.unauthenticated).cannotRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
 
-      expect(targaryen.users.simplelogin)
-      .canWrite('users/simplelogin:1', { name: 'Sherlock Holmes, Ph.D'});
-      expect(targaryen.users.simplelogin)
-      .cannotWrite('posts/newpost', { author: 'simplelogin:2'});
+      expect(targaryen.users.password)
+      .canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3', { name: 'Sherlock Holmes, Ph.D'});
+      expect(targaryen.users.password)
+      .cannotWrite('posts/newpost', { author: 'password:3403291b-fdc9-4995-9a54-9656241c835d'});
 
     });
 
