@@ -3,7 +3,7 @@
   "version": "1.1.4",
   "description": "Test Firebase security rules without connecting to Firebase.",
   "bin": {
-    "targaryen": "bin/targaryen.js"
+    "targaryen": "bin/targaryen"
   },
   "main": "index.js",
   "directories": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/goldibex/targaryen"
   },
   "scripts": {
-    "test": "mocha -r test/setup.js test/spec/**/*.js && jasmine && node ./bin/targaryen.js --verbose test/integration/rules.json test/integration/tests.json"
+    "test": "mocha -r test/setup.js test/spec/**/*.js && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
   "license": "ISC",
