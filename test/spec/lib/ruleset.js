@@ -155,7 +155,27 @@ describe('Ruleset', function() {
       expect(writeRules[3].rule).to.be.null;
 
     });
+    it('gets all the rules along a given node path even if path starts with "/"', function() {
 
+      var rules = getRuleset();
+
+      var readRules = rules.get('/foo/bar/baz/quux', 'read');
+      expect(readRules.length).to.equal(4);
+      expect(readRules[0].path).to.equal('/');
+      expect(readRules[1].path).to.equal('/foo');
+      expect(readRules[2].path).to.equal('/foo/bar');
+      expect(readRules[3].path).to.equal('/foo/bar/baz');
+
+      var writeRules = rules.get('/foo/bar/baz/quux', 'write');
+      expect(writeRules.length).to.equal(4);
+      expect(writeRules[0].path).to.equal('/');
+      expect(writeRules[0].rule).to.be.null;
+      expect(writeRules[1].path).to.equal('/foo');
+      expect(writeRules[2].path).to.equal('/foo/bar');
+      expect(writeRules[3].path).to.equal('/foo/bar/baz');
+      expect(writeRules[3].rule).to.be.null;
+
+    });
   });
 
   describe('#tryRead', function() {
