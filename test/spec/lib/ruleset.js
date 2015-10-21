@@ -104,6 +104,11 @@ var validRulesets = [{
 }, {
   rules: {
   }
+}, {
+  rules: {
+    ".validate": "newData.val() + 1 === data.val()",
+    ".write": "newData.val() / 2 > 0"
+  }
 }];
 
 describe('Ruleset', function() {
