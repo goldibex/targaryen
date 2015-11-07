@@ -89,7 +89,9 @@ describe('Chai plugin', function() {
       })
       .to.path('posts/newpost');
 
-      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).cannot.write({ author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'})
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).cannot.write({
+        author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'
+      })
       .to.path('posts/newpost');
 
       expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).can.write({
