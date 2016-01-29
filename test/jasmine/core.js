@@ -83,5 +83,67 @@ describe('the targaryen Jasmine plugin', function() {
 
   });
 
+  xdescribe('using nested variables in path', function() {
 
+    beforeEach(function() {
+      // using double quotes to make the data & rules compatible with Firebase (web interface)
+
+      targaryen.setFirebaseData({
+        "users": {
+          "password": {
+            "password:500f6e96-92c6-4f60-ad5d-207253aee4d3": {
+              "name": "Sherlock Holmes"
+            },
+            "password:3403291b-fdc9-4995-9a54-9656241c835d": {
+              "name": "John Watson"
+            },
+          },
+        },
+        "first": {
+          "second": {
+            "third": {
+              "any": "value"
+            }
+          }
+        }
+      });
+
+      targaryen.setFirebaseRules({
+        "rules": {
+          "users": {
+            "$provider": {
+              "$user": {
+                // all data is personal (read and write)
+                ".read": "auth !== null && auth.uid === $user && auth.provider === $provider",
+                ".write": "auth !== null && auth.uid === $user && auth.provider === $provider",
+              }
+            }
+          },
+          "posts": {
+            "$post": {
+              ".read": true,
+              ".write": "newData.child('author').val() == auth.uid"
+            }
+          },
+          "$one": {
+            "$two": {
+              "$three": {
+                ".read": "$one == 'first' && $two == 'second' && $three == 'third'"
+              }
+            }
+          }
+        }
+      });
+
+    });
+
+    it('should allow read based on auth uid and provider', function() {
+      expect(targaryen.users.password).canRead('users/password/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
+    });
+
+    it('should allow read based on 3 path segment names', function() {
+      expect(targaryen.users.unauthenticated).canRead('first/second/third');
+    });
+
+  });
 });
