@@ -99,6 +99,17 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: { root: new RuleDataSnapshot({ '.value': 'bar' }) },
   result: false
+}, {
+  rule: 'root.isNumber()',
+  wildchildren: [],
+  scope: { root: new RuleDataSnapshot({ '.value': null }) },
+  result: true,
+  skipOnNoValue: true
+}, {
+  rule: 'root.isString()',
+  wildchildren: [],
+  scope: { root: new RuleDataSnapshot({ '.value': null }) },
+  result: false
 }];
 
 describe('Rule', function() {
@@ -141,13 +152,13 @@ describe('Rule', function() {
 
           expect(function() {
             var rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
-            rule.evaluate(ruleTest.scope);
+            rule.evaluate(ruleTest.scope, ruleTest.skipOnNoValue);
           }).to.throw();
 
         } else {
 
           var rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
-          expect(rule.evaluate(ruleTest.scope), ruleTest.rule)
+          expect(rule.evaluate(ruleTest.scope, ruleTest.skipOnNoValue), ruleTest.rule)
           .to.equal(ruleTest.result);
 
         }
