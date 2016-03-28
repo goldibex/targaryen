@@ -83,6 +83,27 @@ describe('the targaryen Jasmine plugin', function() {
 
   });
 
+  describe("deep write", function(){
+    beforeEach(function(){
+      targaryen.setFirebaseData(
+        { flats: { "221bbakerst": { landlady: 'Mrs Hudson' }  } }
+      )
+        targaryen.setFirebaseRules({
+          "rules": {
+            "flats": {
+              "$cid": {
+                ".validate": "newData.hasChildren(['landlady'])",
+                ".write": "true",
+                ".read": "true"
+              }
+            }
+          }
+        })
+    })  
+    it("should not check parent validations", function(){
+      expect({uid:'holmes'}).canWrite('/flats/221bbakerst/tenants/Holmes',{})
+    });
+  });
   xdescribe('using nested variables in path', function() {
 
     beforeEach(function() {
