@@ -1,4 +1,8 @@
 
+## 2.1.0 (2016-05-04)
+
+- [newData is now correctly merged with existing root state](https://github.com/goldibex/targaryen/pull/27). Fixes [a bug demonstrated](https://github.com/goldibex/targaryen/pull/25) by @bijoutrouvaille. Thanks to @ibash for fixing it.
+
 ## 2.0.1 (2016-03-23)
 
 - [Nested variables in rules](https://github.com/goldibex/targaryen/pull/23). Thanks to @petrusek.
