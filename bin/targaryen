@@ -41,7 +41,7 @@ results.forEach(function(result) {
     actual = result.allowed ? '✓'.green : '✖'.red;
 
   var authStr;
-  if (result.auth.$description) {
+  if (result.auth && result.auth.$description) {
     authStr = result.auth.$description;
   } else if (typeof result.auth === 'string') {
     authStr = result.auth;
