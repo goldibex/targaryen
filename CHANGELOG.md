@@ -1,4 +1,8 @@
 
+## 2.1.1 (2016-05-11)
+
+- [You can now use unauthenticated users in CLI testing](https://github.com/goldibex/targaryen/pull/28). Thanks to @jbearer.
+
 ## 2.1.0 (2016-05-04)
 
 - [newData is now correctly merged with existing root state](https://github.com/goldibex/targaryen/pull/27). Fixes [a bug demonstrated](https://github.com/goldibex/targaryen/pull/25) by @bijoutrouvaille. Thanks to @ibash for fixing it.
