@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 'use strict';
+var fs = require('fs');
+var stripJsonComments = require('strip-json-comments');
 
 var path = require('path'),
   Table = require('cli-table'),
@@ -19,7 +21,8 @@ if (argv._.length < 2) {
 
 var rulesJSONPath = path.resolve(argv._[0]),
   testJSONPath = path.resolve(argv._[1]),
-  rules = require(rulesJSONPath),
+  rulesJSONFile = fs.readFileSync(rulesJSONPath),
+  rules = JSON.parse(stripJsonComments(rulesJSONFile.toString()).replace(/\r?\n|\r/g, "")),
   tests = require(testJSONPath);
 
 var jig = new TestJig(rules, tests),
