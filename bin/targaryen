@@ -22,7 +22,7 @@ if (argv._.length < 2) {
 var rulesJSONPath = path.resolve(argv._[0]),
   testJSONPath = path.resolve(argv._[1]),
   rulesJSONFile = fs.readFileSync(rulesJSONPath),
-  rules = JSON.parse(stripJsonComments(rulesJSONFile.toString()).replace(/\r?\n|\r/g, "")),
+  rules = JSON.parse(stripJsonComments(rulesJSONFile.toString())),
   tests = require(testJSONPath);
 
 var jig = new TestJig(rules, tests),
