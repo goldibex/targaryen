@@ -167,4 +167,45 @@ describe('the targaryen Jasmine plugin', function() {
     });
 
   });
+
+  describe('when using priorities and nested data', function() {
+
+    beforeEach(function() {
+
+      targaryen.setFirebaseRules({
+        rules: {
+          somepath: {
+            ".write": true,
+            ".validate": "newData.hasChildren(['child1', 'child2']) && newData.getPriority() == 'prio'",
+            "child1": {
+              ".validate": "newData.val() == newData.parent().getPriority()"
+            }
+          }
+        }
+      });
+
+    });
+
+    it('it should validate priorities correctly', function() {
+
+      expect(targaryen.users.unauthenticated).canWrite("somepath", {
+        ".priority": "prio",
+        "child1": "prio",
+        "child2": "something"
+      });
+
+      expect(targaryen.users.unauthenticated).cannotWrite("somepath", {
+        ".priority": "prio",
+        "child1": "wrong-prio",
+        "child2": "something"
+      });
+
+      expect(targaryen.users.unauthenticated).cannotWrite("somepath", {
+        ".priority": "prio",
+        "child1": "prio"
+      });
+
+    });
+
+  });
 });
