@@ -167,4 +167,5 @@ describe('the targaryen Jasmine plugin', function() {
     });
 
   });
+
 });

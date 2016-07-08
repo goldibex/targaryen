@@ -70,9 +70,22 @@ describe('RuleDataSnapshot', function() {
           '.priority': null
         }
       });
-
     });
 
+    it('transparently handles objects for which a priority is set in the root', function() {
+      expect(RuleDataSnapshot.convert({ '.priority': 100, foo: { '.value': true, '.priority': 5}, bar: 8 }))
+          .to.deep.equal({
+        '.priority': 100,
+        foo: {
+          '.value': true,
+          '.priority': 5
+        },
+        bar: {
+          '.value': 8,
+          '.priority': null
+        }
+      });
+    });
   });
 
   describe('#val', function() {
