@@ -168,4 +168,75 @@ describe('the targaryen Jasmine plugin', function() {
 
   });
 
+  describe("delete nodes", function(){
+    beforeEach(function(){
+      targaryen.setFirebaseData({
+        "test": {
+          "number": 42,
+          "bool": true
+        },
+        "canDelete": "test"
+      });
+      targaryen.setFirebaseRules({
+        "rules": {
+          "test": {
+            ".write": "true",
+            ".read": "true",
+            ".validate": "newData.hasChildren(['number', 'bool'])",
+            "number": {
+              ".validate": "newData.isNumber()"
+            },
+            "bool": {
+              ".validate": "newData.isBoolean()"
+            }
+          },
+          "canDelete": {
+            ".read": "true",
+            ".write": "true",
+            ".validate": "newData.isString()"
+          }
+        }
+      });
+    });
+
+    it("should not be able to delete /test/number", function(){
+      expect({uid:'anyone'}).cannotWrite('test/number', null);
+    });
+
+    it("should be able to delete /test", function(){
+      expect({uid:'anyone'}).canWrite('test', null);
+    });
+
+    it("should be able to delete /canDelete", function(){
+      expect({uid:'anyone'}).canWrite('canDelete', null);
+    });
+
+    it("should not be able to delete part of /test in a multi-update", function () {
+      expect({uid:'anyone'}).cannotWrite('/', {
+        "test": {
+          "bool": null
+        },
+        "canDelete": null
+      });
+    });
+
+    it("should be able to delete as part of a multi-path write", function () {
+      expect({uid:'anyone'}).canWrite('/', {
+        "test": {
+          "bool": false,
+          "number": 5
+        },
+        "canDelete": null
+      });
+    });
+
+    it("should be able to delete a whole object by nulling all children", function () {
+      expect({uid:'anyone'}).canWrite('test', {
+          "bool": null,
+          "number": null
+      });
+
+      pending("This doesn't work in the tests, but this works at least in the Javascrip SDK");
+    })
+  });
 });
