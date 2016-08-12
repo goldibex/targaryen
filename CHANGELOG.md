@@ -1,4 +1,12 @@
 
+## 2.2.0 (2016-08-12)
+
+- [Wildcards are now correctly propagated at multiple levels](https://github.com/goldibex/targaryen/pull/39). Thanks to @dinoboff.
+- [Support for testing update operations, including multi-location updates](https://github.com/goldibex/targaryen/pull/37). Thanks to @dinoboff.
+- [.validate rules are now ignored during delete operations, reflecting the actual behavior of Firebase](https://github.com/goldibex/targaryen/pull/36). Thanks to @matijse. Fun fact: "ij" is a single letter in Dutch.
+- ["JSON comments" in rules files are now correctly ignored, reflecting the actual behavior of Firebase](https://github.com/goldibex/targaryen/pull/32). Thanks to @sebastianovide.
+- [The .priority key was inadvertently overwritten under some conditions; this is now fixed.](https://github.com/goldibex/targaryen/pull/35). Thanks to @matijse. 
+
 ## 2.1.1 (2016-05-11)
 
 - [You can now use unauthenticated users in CLI testing](https://github.com/goldibex/targaryen/pull/28). Thanks to @jbearer.
