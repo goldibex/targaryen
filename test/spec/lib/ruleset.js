@@ -19,6 +19,13 @@ function getRuleset() {
             '.read': 'root.child("users").child($bar).exists()'
           }
         }
+      },
+      nested: {
+        $first: {
+          $second: {
+            '.read': '$first == $second'
+          }
+        }
       }
     }
   });
@@ -40,6 +47,12 @@ function getRoot() {
         baz: {
           '.value': false
         }
+      }
+    },
+    'nested': {
+      'one': {
+        'one': true,
+        'two': true
       }
     },
     'users': {
@@ -198,6 +211,16 @@ describe('Ruleset', function() {
 
       expect(rules.tryRead('foo/firstChild/baz', root, auth).allowed).to.be.true;
       expect(rules.tryRead('foo/secondChild/baz', root, auth).allowed).to.be.false;
+
+    });
+
+    it('should propagate variables in path', function() {
+
+      var root = getRoot(),
+        auth = null;
+
+      expect(rules.tryRead('nested/one/two', root, auth).allowed).to.be.false;
+      expect(rules.tryRead('nested/one/one', root, auth).allowed).to.be.true;
 
     });
 
