@@ -33,7 +33,8 @@
     "esprima": "^1.2.2",
     "extend": "^2.0.0",
     "minimist": "^1.1.0",
-    "replaceall": "^0.1.3"
+    "replaceall": "^0.1.3",
+    "strip-json-comments": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^1.10.0",
