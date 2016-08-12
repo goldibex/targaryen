@@ -1,6 +1,8 @@
 
 ## 2.2.0 (2016-08-12)
 
+Starting from this release, Node.js version 0.12 is no longer supported. Please use 2.1 for Node versions 0.12 and below.
+
 - [Wildcards are now correctly propagated at multiple levels](https://github.com/goldibex/targaryen/pull/39). Thanks to @dinoboff.
 - [Support for testing update operations, including multi-location updates](https://github.com/goldibex/targaryen/pull/37). Thanks to @dinoboff.
 - [.validate rules are now ignored during delete operations, reflecting the actual behavior of Firebase](https://github.com/goldibex/targaryen/pull/36). Thanks to @matijse. Fun fact: "ij" is a single letter in Dutch.
