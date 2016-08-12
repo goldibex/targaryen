@@ -57,7 +57,13 @@ describe('Chai plugin', function() {
             '$post': {
               '.read': true,
               '.write': true,
-              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid'
+              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid',
+              created: {
+                '.validate': 'data.exists() == false'
+              },
+              author: {
+                '.validate': 'data.exists() == false'
+              }
             }
           }
         }
@@ -68,6 +74,45 @@ describe('Chai plugin', function() {
   });
 
   describe('when properly configured', function() {
+    var now;
+
+    beforeEach(function() {
+
+      plugin.setFirebaseData({
+        users: {
+          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
+            name: 'Sherlock Holmes'
+          },
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
+            name: 'John Watson'
+          }
+        }
+      });
+
+      plugin.setFirebaseRules({
+        rules: {
+          users: {
+            '$user': {
+              '.read': 'auth.uid === $user',
+              '.write': 'auth.isSuper === true'
+            }
+          },
+          posts: {
+            '$post': {
+              '.read': true,
+              '.write': true,
+              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid',
+              created: {
+                '.validate': 'data.exists() == false'
+              },
+              author: {
+                '.validate': 'data.exists() == false'
+              }
+            }
+          }
+        }
+      });
+    });
 
     it('permits read tests', function() {
       expect(null).cannot.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
@@ -100,6 +145,38 @@ describe('Chai plugin', function() {
         text: 'Hello!'
       })
       .to.path('posts/newpost');
+
+    });
+
+    it('should permit patch tests', function() {
+      plugin.setFirebaseData({
+        users: {
+          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
+            name: 'Sherlock Holmes'
+          },
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
+            name: 'John Watson'
+          }
+        },
+        posts: {
+          somePost: {
+            author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3',
+            created: Date.now(),
+            text: 'Hello!'
+          }
+        }
+      });
+
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).can.patch({
+        text: 'Hello World!'
+      })
+      .to.path('posts/somePost');
+
+      expect({ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3' }).cannot.patch({
+        text: 'Hello World!',
+        created: Date.now()
+      })
+      .to.path('posts/somePost');
 
     });
 

@@ -249,4 +249,53 @@ describe('Ruleset', function() {
 
   });
 
+  describe('#tryPatch', function() {
+
+    var rules, root, auth;
+
+    beforeEach(function() {
+      rules = new Ruleset({
+        rules: {
+          '.read': false,
+          foo: {
+            '.read': 'auth !== null',
+            '.write': 'auth.id === 1',
+            '.validate': 'newData.hasChildren(["bar", "baz", "fooz"])',
+            bar: {
+              '.validate': 'data.exists() == false'
+            }
+          }
+        }
+      });
+      root = new RuleDataSnapshot({
+        foo: {
+          bar: {
+            '.value': true
+          },
+          baz: {
+            '.value': true
+          },
+          fooz: {
+            '.value': true
+          }
+        }
+      });
+      auth = {id: 1}
+    });
+
+    it('should allow validate write', function() {
+      var newData = {
+        'foo/baz': false,
+        'foo/fooz': false
+      };
+
+      expect(rules.tryPatch('/', root, newData, auth).allowed).to.be.true
+      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.false
+
+      newData['foo/bar'] = false;
+      expect(rules.tryPatch('/', root, newData, auth).allowed).to.be.false
+    });
+
+  });
+
 });

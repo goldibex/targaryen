@@ -99,11 +99,69 @@ describe('the targaryen Jasmine plugin', function() {
             }
           }
         })
-    })  
+    })
     it("should not check parent validations", function(){
       expect({uid:'holmes'}).canWrite('/flats/221bbakerst/tenants/Holmes',{})
     });
   });
+
+  describe('canPatch', function() {
+    beforeEach(function() {
+      targaryen.setFirebaseData({
+        users: {
+          'some-provider:1': {
+            name: 'Sherlock Holmes'
+          },
+          'some-provider:2': {
+            name: 'John Watson'
+          }
+        },
+        posts: {
+          somePost: {
+            author: 'some-provider:1',
+            created: Date.now(),
+            text: 'Hello!'
+          }
+        }
+      });
+
+      targaryen.setFirebaseRules({
+        rules: {
+          users: {
+            '$user': {
+              '.read': 'auth.uid === $user',
+              '.write': 'auth.isSuper === true'
+            }
+          },
+          posts: {
+            '$post': {
+              '.read': true,
+              '.write': true,
+              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid',
+              created: {
+                '.validate': 'data.exists() == false'
+              },
+              author: {
+                '.validate': 'data.exists() == false'
+              }
+            }
+          }
+        }
+      });
+    });
+    it('should test a patch operation is allowed', function() {
+      expect({uid:'some-provider:1'}).canPatch('/posts/somePost', {
+        'text': 'Hello World!'
+      });
+    });
+    it('should test a patch operation is not allowed', function() {
+      expect({uid:'some-provider:1'}).cannotPatch('/posts/somePost', {
+        'text': 'Hello World!',
+        'created': Date.now()
+      });
+    });
+  });
+
   xdescribe('using nested variables in path', function() {
 
     beforeEach(function() {
