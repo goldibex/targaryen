@@ -23,7 +23,11 @@ function getRuleset() {
       nested: {
         $first: {
           $second: {
-            '.read': '$first == $second'
+            '.read': '$first == $second',
+            '.write': '$first == $second',
+            $key: {
+              '.validate': '$key !== "id" || newData.val() == $second'
+            }
           }
         }
       }
@@ -51,8 +55,8 @@ function getRoot() {
     },
     'nested': {
       'one': {
-        'one': true,
-        'two': true
+        'one': {id: {'.value': 'one'}},
+        'two': {id: {'.value': 'two'}}
       }
     },
     'users': {
@@ -247,6 +251,16 @@ describe('Ruleset', function() {
 
     });
 
+    it('should propagate variables in path', function() {
+
+      var root = getRoot(),
+        auth = null;
+
+      expect(rules.tryWrite('nested/one/two', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
+      expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'one'}}, auth).allowed).to.be.true;
+      expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
+    });
+
   });
 
   describe('#tryPatch', function() {
@@ -264,6 +278,13 @@ describe('Ruleset', function() {
             bar: {
               '.validate': 'data.exists() == false'
             }
+          },
+          nested: {
+            $first: {
+              $second: {
+                '.write': '$first == $second'
+              }
+            }
           }
         }
       });
@@ -277,6 +298,20 @@ describe('Ruleset', function() {
           },
           fooz: {
             '.value': true
+          }
+        },
+        nested: {
+          one: {
+            one: {
+              foo: {
+                '.value': 1
+              }
+            },
+            two: {
+              foo: {
+                '.value': 1
+              }
+            },
           }
         }
       });
@@ -294,6 +329,11 @@ describe('Ruleset', function() {
 
       newData['foo/bar'] = false;
       expect(rules.tryPatch('/', root, newData, auth).allowed).to.be.false
+    });
+
+    it('should propagate variables in path', function() {
+      expect(rules.tryPatch('nested/one/one', root, {foo: 2}, auth).allowed).to.be.true;
+      expect(rules.tryPatch('nested/one/two', root, {foo: 2}, auth).allowed).to.be.false;
     });
 
   });
