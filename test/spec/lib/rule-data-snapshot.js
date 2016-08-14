@@ -28,6 +28,19 @@ var root = new RuleDataSnapshot(rootObj);
 
 describe('RuleDataSnapshot', function() {
 
+  describe('now', function() {
+
+    it('should return a fixes date', function(done) {
+      var t1 = RuleDataSnapshot.now();
+
+      setTimeout(function() {
+        expect(t1).to.equal(RuleDataSnapshot.now());
+        done();
+      }, 10);
+    });
+
+  });
+
   describe('convert', function() {
 
     it('converts plain Javascript objects into Firebase data format', function() {
@@ -86,6 +99,16 @@ describe('RuleDataSnapshot', function() {
         }
       });
     });
+
+    it('should convert timestamp to a predictable date', function(done) {
+      var snapshot = RuleDataSnapshot.convert({ts: {'.sv': 'timestamp'}});
+
+      setTimeout(function() {
+        expect(snapshot.ts['.value']).to.equal(RuleDataSnapshot.now());
+        done();
+      }, 10);
+    });
+
   });
 
   describe('#val', function() {
