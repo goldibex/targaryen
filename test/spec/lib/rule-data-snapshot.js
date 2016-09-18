@@ -20,6 +20,10 @@ var rootObj = {
       '.priority': 0,
       name: { '.value': 'Inspector Lestrade'},
       arrests: { '.value': 35 }
+    },
+    'password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx': {
+      '.priority': 0,
+      '.value': null
     }
   }
 };
@@ -88,6 +92,48 @@ describe('RuleDataSnapshot', function() {
     });
   });
 
+  describe('#merge', function() {
+
+    it('can set a node to null', function() {
+      var patch = new RuleDataSnapshot({users: {'.value': null, '.priority': null}});
+      var newDataRoot = root.merge(patch);
+
+      expect(newDataRoot.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e').exists()).to.be.false;
+    });
+
+    it('can override null', function() {
+      var patch = new RuleDataSnapshot({users: {
+        'password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx': {
+          name: {'.value': 'James Moriarty'},
+          genius: {'.value': true},
+          arrests: {'.value': 0 }
+        }
+      }});
+      var newDataRoot = root.merge(patch);
+
+
+      expect(newDataRoot.child('users/password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx').val()).to.deep.equal({
+        name: 'James Moriarty',
+        genius: true,
+        arrests: 0
+      });
+    });
+
+    it('can override other literal value and keep their priority', function() {
+      var patch = new RuleDataSnapshot({
+        users: {
+          'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
+            '.value': null
+          }
+        }
+      });
+      var newDataRoot = root.merge(patch);
+
+      expect(newDataRoot.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e').getPriority()).to.equal(1);
+    });
+
+  });
+
   describe('#val', function() {
 
     it('gets the value at the specified path', function() {
@@ -96,7 +142,8 @@ describe('RuleDataSnapshot', function() {
         users: {
           'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': { name: 'Sherlock Holmes', genius: true, arrests: 70 },
           'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': { name: 'John Watson' },
-          'password:3403291b-fdc9-4995-9a54-9656241c835d': { name: 'Inspector Lestrade', arrests: 35 }
+          'password:3403291b-fdc9-4995-9a54-9656241c835d': { name: 'Inspector Lestrade', arrests: 35 },
+          'password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx': null
         }
       });
 
