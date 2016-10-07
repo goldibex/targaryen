@@ -1,3 +1,8 @@
+## 2.2.1 (upcoming)
+
+- [Properly merge literal value nodes (including null)](https://github.com/goldibex/targaryen/pull/44);
+  a node would have been set to null but it's - deleted - children would still have been validated with their old value.
+- [Skipping validation of node set to null would skip validation of sibling nodes; this is now fixed](https://github.com/goldibex/targaryen/pull/48).
 
 ## 2.2.0 (2016-08-12)
 
@@ -7,7 +12,7 @@ Starting from this release, Node.js version 0.12 is no longer supported. Please 
 - [Support for testing update operations, including multi-location updates](https://github.com/goldibex/targaryen/pull/37). Thanks to @dinoboff.
 - [.validate rules are now ignored during delete operations, reflecting the actual behavior of Firebase](https://github.com/goldibex/targaryen/pull/36). Thanks to @matijse. Fun fact: "ij" is a single letter in Dutch.
 - ["JSON comments" in rules files are now correctly ignored, reflecting the actual behavior of Firebase](https://github.com/goldibex/targaryen/pull/32). Thanks to @sebastianovide.
-- [The .priority key was inadvertently overwritten under some conditions; this is now fixed.](https://github.com/goldibex/targaryen/pull/35). Thanks to @matijse. 
+- [The .priority key was inadvertently overwritten under some conditions; this is now fixed.](https://github.com/goldibex/targaryen/pull/35). Thanks to @matijse.
 
 ## 2.1.1 (2016-05-11)
 
