@@ -233,7 +233,8 @@ describe('the targaryen Jasmine plugin', function() {
           "number": 42,
           "bool": true
         },
-        "canDelete": "test"
+        "canDelete": "test",
+        "otherCanDelete": "test"
       });
       targaryen.setFirebaseRules({
         "rules": {
@@ -252,7 +253,17 @@ describe('the targaryen Jasmine plugin', function() {
             ".read": "true",
             ".write": "true",
             ".validate": "newData.isString()"
-          }
+          },
+          "shouldValidate": {
+            ".read": "true",
+            ".write": "true",
+            ".validate": "newData.isBoolean()"
+          },
+          "otherCanDelete": {
+            ".read": "true",
+            ".write": "true",
+            ".validate": "newData.isString()"
+          },
         }
       });
     });
@@ -295,6 +306,15 @@ describe('the targaryen Jasmine plugin', function() {
       });
 
       pending("This doesn't work in the tests, but this works at least in the Javascrip SDK");
-    })
+    });
+
+    it('should not be able to write invalid data by deleting a sibling', function() {
+      expect({uid:'anyone'}).cannotWrite('/', {
+        "canDelete": null,
+        "shouldValidate": "not a boolean",
+        "otherCanDelete": null
+      });
+    });
+
   });
 });
