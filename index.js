@@ -9,5 +9,8 @@ module.exports = {
   setDebug: helpers.setDebug,
   users: helpers.userDefinitions,
   chai: require('./lib/chai'),
-  jasmine: require('./lib/jasmine')
+  jasmine: require('./lib/jasmine'),
+  Ruleset: require("./lib/ruleset.js"),
+  DataSnapshot: require("./lib/rule-data-snapshot.js"),
+  helpers: require("./lib/helpers.js")
 };
