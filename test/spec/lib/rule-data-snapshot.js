@@ -41,7 +41,7 @@ describe('RuleDataSnapshot', function() {
         '.priority': null
       });
 
-      expect(RuleDataSnapshot.convert({ foo: { bar: true, baz: true } }))
+      expect(RuleDataSnapshot.convert({ foo: { bar: true, baz: true, quxEmpty: {}, quxNull: null} }))
       .to.deep.equal({
         '.priority': null,
         foo: {
@@ -52,6 +52,14 @@ describe('RuleDataSnapshot', function() {
           },
           baz: {
             '.value': true,
+            '.priority': null
+          },
+          quxEmpty: {
+            '.value': null,
+            '.priority': null
+          },
+          quxNull: {
+            '.value': null,
             '.priority': null
           }
         }
@@ -99,6 +107,13 @@ describe('RuleDataSnapshot', function() {
       var newDataRoot = root.merge(patch);
 
       expect(newDataRoot.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e').exists()).to.be.false;
+    });
+
+    it('treats empty object as null', function() {
+      var patch = new RuleDataSnapshot(RuleDataSnapshot.convert({users: {}}));
+      var newDataRoot = root.merge(patch);
+
+      expect(newDataRoot.child('users').exists()).to.be.false;
     });
 
     it('can override null', function() {
