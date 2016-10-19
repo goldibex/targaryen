@@ -336,6 +336,13 @@ describe('Ruleset', function() {
       expect(rules.tryPatch('nested/one/two', root, {foo: 2}, auth).allowed).to.be.false;
     });
 
+    it('should handle empty patch', function() {
+      const result = rules.tryPatch('nested/one/one', root, {}, auth)
+
+      expect(result.allowed).to.be.true;
+      expect(result.newData).to.eql({foo: 1});
+    });
+
   });
 
 });
