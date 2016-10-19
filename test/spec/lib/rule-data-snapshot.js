@@ -32,6 +32,20 @@ var root = new RuleDataSnapshot(rootObj);
 
 describe('RuleDataSnapshot', function() {
 
+  describe('create', function() {
+
+    it('should create a new snapshot', function() {
+      expect(RuleDataSnapshot.create('foo/bar/baz', 1).val()).to.eql({
+        foo: {
+          bar: {
+            baz: 1
+          }
+        }
+      });
+    });
+
+  });
+
   describe('convert', function() {
 
     it('converts plain Javascript objects into Firebase data format', function() {
@@ -145,6 +159,51 @@ describe('RuleDataSnapshot', function() {
       var newDataRoot = root.merge(patch);
 
       expect(newDataRoot.child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e').getPriority()).to.equal(1);
+    });
+
+  });
+
+  describe('#set', function() {
+
+    it('should replace the root data', function() {
+      expect(root.set('/', {foo: 1}).val()).to.eql({foo: 1});
+    });
+
+    it('should replace a node', function() {
+      const path = 'users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e';
+      const newRoot = root.set(path, {
+        name: 'Sherlock Holmes',
+        genius: true
+      });
+
+      expect(newRoot.child(path).val()).to.eql({
+        name: 'Sherlock Holmes',
+        genius: true
+      });
+    });
+
+    it('should replace a literal node', function() {
+      const path = 'users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e/arrests';
+      const newRoot = root.set(path, {first: 1887, second: 1887});
+
+      expect(newRoot.child(path).val()).to.eql({first: 1887, second: 1887});
+    });
+
+    it('should replace node with a literal', function() {
+      const path = 'users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e/arrests';
+      const newRoot = root.set(path, null);
+
+      expect(newRoot.child(path).val()).to.equal(null);
+    });
+
+    it('should preserve the priority', function() {
+      const path = 'users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e';
+      const newRoot = root.set(path, {
+        name: 'Sherlock Holmes',
+        genius: true
+      });
+
+      expect(newRoot.child(path).getPriority()).to.equal(1);
     });
 
   });
