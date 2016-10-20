@@ -284,7 +284,17 @@ describe('Ruleset', function() {
       var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
         rules = new Ruleset({rules: {'.write': true}});
 
-      expect(rules.tryWrite('/a', root, {}, null).newRoot.val()).to.be.deep.equal({'b': 2});
+      expect(rules.tryWrite('/a', root, null, null).newRoot.val()).to.be.deep.equal({'b': 2});
+
+    })
+
+    it('should prune null keys deeply', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
+          rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/a/b', root, null, null).newRoot.val()).to.be.null
+      expect(rules.tryWrite('/a/b', root, null, null).newRoot.exists()).to.be.false
 
     })
 
