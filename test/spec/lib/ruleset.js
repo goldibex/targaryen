@@ -261,6 +261,43 @@ describe('Ruleset', function() {
       expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
     });
 
+    it('should treat empty object as null', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+        rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/a', root, {}, null).newData).to.be.null;
+      expect(rules.tryWrite('/', root, {}, null).newData).to.be.null;
+
+    });
+
+    it('should replace value at target path', function(){
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+          rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/', root, {'c': 3}, null).newData).to.be.deep.equal({'c': 3});
+
+    });
+
+    it('should prune null keys', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+        rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/a', root, null, null).newRoot.val()).to.be.deep.equal({'b': 2});
+
+    })
+
+    it('should prune null keys deeply', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
+          rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/a/b', root, null, null).newRoot.val()).to.be.null
+      expect(rules.tryWrite('/a/b', root, null, null).newRoot.exists()).to.be.false
+
+    })
+
   });
 
   describe('#tryPatch', function() {
@@ -337,11 +374,41 @@ describe('Ruleset', function() {
     });
 
     it('should handle empty patch', function() {
-      const result = rules.tryPatch('nested/one/one', root, {}, auth)
+      var result = rules.tryPatch('nested/one/one', root, {}, auth)
 
       expect(result.allowed).to.be.true;
       expect(result.newData).to.eql({foo: 1});
+
+      var root2 = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+          rules2 = new Ruleset({rules: {'.write': true}});
+
+      expect(rules2.tryPatch('/a', root2, {}, null).newRoot.val()).to.deep.equal({'a': 1, 'b': 2});
+      expect(rules2.tryPatch('/', root2, {'a': {}}, null).newRoot.child('a').val()).to.be.null;
+
     });
+
+    it('should merge one level deep', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+          rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryPatch('/', root, {'c': 3}, null).newRoot.val()).to.deep.equal({'a': 1, 'b': 2, 'c': 3});
+
+    });
+
+    it('should replace values at target paths', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'foo': {'a': 1, 'b': 2}})),
+          rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryPatch('/', root, {'foo/c': 3}, null).newRoot.val()).to.deep.equal({'foo': {'a': 1, 'b': 2, 'c': 3}});
+      expect(rules.tryPatch('/', root, {'foo': {'c': 3}}, null).newRoot.val()).to.deep.equal({'foo': {'c': 3}});
+
+    })
+
+
+
+
 
   });
 
