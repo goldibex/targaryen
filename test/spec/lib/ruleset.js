@@ -95,11 +95,11 @@ function getRoot() {
 
 }
 
-var invalidRulesets = [
-  null,
-  'wut',
-  { noTopLevelRules: true },
-  {
+var invalidRulesets = {
+  'are null': null,
+  'are a string': 'wut',
+  'are missing': { noTopLevelRules: true },
+  'include extra props': {
     rules: {
       '.read': true,
       '.write': true,
@@ -108,29 +108,41 @@ var invalidRulesets = [
     },
     otherStuff: true
   },
-  {
+  'include invalid index': {
     rules: {
       '.read': true,
       '.indexOn': true
     }
   },
-  {
+  'include unknown props': {
     rules: {
       '.read': true,
       '.woops': true
     }
   },
-  {
+  'include unknown wildchild': {
     rules: {
       '.read': '$somewhere === true'
     }
   },
-  {
+  'set index to an object': {
     rules: {
       '.indexOn': {}
     }
+  },
+  'include unknown variables': {
+    rules: {
+      ".validate": "something.val() + 1 === date.val()",
+      ".write": "something.val() / 2 > 0"
+    }
+  },
+  'include rules composed with unknown variables': {
+    rules: {
+      ".validate": "auth != null && something.val() + 1 === date.val()",
+      ".write": "auth != null && something.val() / 2 > 0"
+    }
   }
-];
+};
 
 var validRulesets = [{
   rules: {}
@@ -159,14 +171,12 @@ describe('Ruleset', function() {
 
   describe('constructor', function() {
 
-    it('rejects invalid rulesets', function() {
-
-      invalidRulesets.forEach(function(rules) {
+    Object.keys(invalidRulesets).forEach(function(reason) {
+      it(`rejects when rulesets ${reason}`, function() {
         expect(function() {
-          return new Ruleset(rules);
+          return new Ruleset(invalidRulesets[reason]);
         }).to.throw();
       });
-
     });
 
     it('accepts valid rulesets', function() {
