@@ -24,7 +24,8 @@ var validRules = [
   'root.hasChildren([$here])',
   'root.hasChildren([auth.uid])',
   'root.child("users").child(auth.uid).child($here).val().replace("x", $here) === "yyzzy"',
-  'root.child("str").val().matches(/foo/)'
+  'root.child("str").val().matches(/foo/)',
+  'root.child("users/"+auth.uid).exists()'
 ];
 var invalidRules = [
   'var foo = 8', // invalid syntax (no declarations allowed)
