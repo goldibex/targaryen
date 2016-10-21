@@ -1,3 +1,13 @@
+## 2.3.0 (upcoming)
+
+- [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50); thanks to @mhuebert.
+- [Write operations now replace nodes instead of merging them](https://github.com/goldibex/targaryen/pull/52).
+- [Fix initial timestamps](https://github.com/goldibex/targaryen/pull/41); The timestamp used to replace a timestamp server value will now match the `now` variable in rule tests.
+- `setFirebaseData` gains a `now parameter: `targaryen.setFirebaseData(data[, now]);`.
+- jasmine matchers gain an optional now parameter.
+- chai plugin `write` and `patch` methods gain an optional now parameter.
+- chai plugin gains a `readAt(now)` method.
+
 ## 2.2.1 (upcoming)
 
 - [Properly merge literal value nodes (including null)](https://github.com/goldibex/targaryen/pull/44);
