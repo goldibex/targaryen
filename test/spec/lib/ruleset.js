@@ -45,6 +45,12 @@ function getRuleset() {
             '.validate': 'newData.parent().child("type").val() == "b" \n&& newData.parent().child("a").exists() == false'
           }
         }
+      },
+      timestamp: {
+        $foo: {
+          '.write': true,
+          '.validate': 'newData.val() == now'
+        }
       }
     }
   });
@@ -254,10 +260,34 @@ describe('Ruleset', function() {
 
   describe('#tryWrite', function() {
 
-    var rules;
+    var rules, _now;
 
     before(function() {
       rules = getRuleset();
+    });
+
+    beforeEach(function() {
+      _now = Date.now;
+
+      var now = 1000;
+
+      Date.now = function() {
+        return now++;
+      }
+    });
+
+    afterEach(function() {
+      Date.now = _now;
+    });
+
+    it('should match "now" with the server timestamp', function() {
+
+      var root = getRoot(),
+        newData = {'.sv': 'timestamp'},
+        noAuth = null;
+
+      expect(rules.tryWrite('timestamp/foo', root, newData, noAuth).allowed).to.be.true;
+
     });
 
     it('returns the result of attempting to write the given path with the given DB state and new data', function() {
@@ -305,12 +335,32 @@ describe('Ruleset', function() {
 
   describe('#tryPatch', function() {
 
-    var rules, root, auth;
+    var rules, root, auth, _now;
+
+    beforeEach(function() {
+      _now = Date.now;
+
+      var now = 1000;
+
+      Date.now = function() {
+        return now++;
+      }
+    });
+
+    afterEach(function() {
+      Date.now = _now;
+    });
 
     beforeEach(function() {
       rules = new Ruleset({
         rules: {
           '.read': false,
+          timestamps: {
+            $foo: {
+              '.write': true,
+              '.validate': 'newData.val() == now'
+            }
+          },
           foo: {
             '.read': 'auth !== null',
             '.write': 'auth.id === 1',
@@ -356,6 +406,19 @@ describe('Ruleset', function() {
         }
       });
       auth = {id: 1}
+    });
+
+    it('should match "now" with the server timestamp', function() {
+      var newData = {
+        'timestamps/foo': {'.sv': 'timestamp'},
+        'timestamps/bar': {'.sv': 'timestamp'},
+        'timestamps/baz': 12345000
+      };
+
+      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.false;
+
+      delete newData['timestamps/baz'];
+      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.true;
     });
 
     it('should allow validate write', function() {

@@ -32,6 +32,26 @@ var root = new RuleDataSnapshot(rootObj);
 
 describe('RuleDataSnapshot', function() {
 
+  it('should take the server timestamp as optional argument', function() {
+    var now = 12345000,
+      snapshot1 = new RuleDataSnapshot({}),
+      snapshot2 = new RuleDataSnapshot({}, 'foo/bar'),
+      snapshot3 = new RuleDataSnapshot({}, now),
+      snapshot4 = new RuleDataSnapshot({}, now, 'foo/bar');
+
+    expect(snapshot1._timestamp).not.to.be.NaN;
+    expect(snapshot1._path).to.be.undefined;
+
+    expect(snapshot2._timestamp).not.to.be.NaN;
+    expect(snapshot2._path).to.equal('foo/bar');
+
+    expect(snapshot3._timestamp).to.equal(now);
+    expect(snapshot3._path).to.be.undefined;
+
+    expect(snapshot4._timestamp).to.equal(now);
+    expect(snapshot4._path).to.equal('foo/bar');
+  });
+
   describe('create', function() {
 
     it('should create a new snapshot', function() {
@@ -112,9 +132,38 @@ describe('RuleDataSnapshot', function() {
         }
       });
     });
+
+    it('converts "timestamp" server value', function() {
+      var now = 12345000;
+
+      expect(RuleDataSnapshot.convert({'.sv': 'timestamp'}, now)).to.deep.equal({
+        '.value': now,
+        '.priority': null
+      });
+    });
   });
 
   describe('#merge', function() {
+
+    it('should merge snapshot data', function() {
+      var snapshot1 = new RuleDataSnapshot({foo: {'.value': 1}}),
+        snapshot2 = new RuleDataSnapshot({bar: {'.value': 2}}),
+        mergedSnapshot = snapshot1.merge(snapshot2);
+
+      expect(mergedSnapshot).not.to.equal(snapshot1);
+      expect(mergedSnapshot).not.to.equal(snapshot2);
+      expect(mergedSnapshot.child('foo').val()).to.equal(1);
+      expect(mergedSnapshot.child('bar').val()).to.equal(2);
+    });
+
+    it('should conserve the timestamp', function() {
+      var now = 12345000,
+        snapshot1 = new RuleDataSnapshot({foo: {'.value': 1}}, now - 1000),
+        snapshot2 = new RuleDataSnapshot({bar: {'.value': 2}}, now),
+        mergedSnapshot = snapshot1.merge(snapshot2);
+
+        expect(mergedSnapshot._timestamp).to.equal(now);
+    });
 
     it('can set a node to null', function() {
       var patch = new RuleDataSnapshot({users: {'.value': null, '.priority': null}});
@@ -240,6 +289,13 @@ describe('RuleDataSnapshot', function() {
       .to.equal('John Watson');
     });
 
+    it('should conserve the timestamp', function() {
+      var now = 12345000,
+        snapshot = new RuleDataSnapshot({foo: {'.value': 1}}, now);
+
+        expect(snapshot.child('foo')._timestamp).to.equal(now);
+    });
+
   });
 
   describe('#parent', function() {
@@ -255,6 +311,13 @@ describe('RuleDataSnapshot', function() {
 
     it('returns null if we are at the top', function() {
       expect(root.parent()).to.be.null;
+    });
+
+    it('should conserve the timestamp', function() {
+      var now = 12345000,
+        snapshot = new RuleDataSnapshot({foo: {'.value': 1}}, now);
+
+        expect(snapshot.child('foo').parent()._timestamp).to.equal(now);
     });
 
   });
