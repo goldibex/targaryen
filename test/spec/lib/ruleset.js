@@ -30,6 +30,21 @@ function getRuleset() {
             }
           }
         }
+      },
+      mixedType: {
+        $item: {
+          '.write': true,
+          '.validate': 'newData.hasChildren(["type", "a"]) || newData.hasChildren(["type", "b"])',
+          type: {
+            '.validate': 'newData.val() == "a" || newData.val() == "b"'
+          },
+          a: {
+            '.validate': 'newData.parent().child("type").val() == "a" \n&& newData.parent().child("b").exists() == false'
+          },
+          b: {
+            '.validate': 'newData.parent().child("type").val() == "b" \n&& newData.parent().child("a").exists() == false'
+          }
+        }
       }
     }
   });
@@ -57,6 +72,12 @@ function getRoot() {
       'one': {
         'one': {id: {'.value': 'one'}},
         'two': {id: {'.value': 'two'}}
+      }
+    },
+    'mixedType': {
+      'first': {
+        type: {'.value': 'a'},
+        a: {'.value': 1}
       }
     },
     'users': {
@@ -259,6 +280,25 @@ describe('Ruleset', function() {
       expect(rules.tryWrite('nested/one/two', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
       expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'one'}}, auth).allowed).to.be.true;
       expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
+    });
+
+    it('should replace a node, not merge it', function() {
+      var root = getRoot(),
+        auth = null,
+        result;
+
+      result = rules.tryWrite('mixedType/first', root, {
+        type: {'.value': 'b'},
+        b: {'.value': 1}
+      }, auth);
+      expect(result.newData).to.eql({type: 'b', b: 1});
+      expect(result.allowed).to.be.true;
+
+      result = rules.tryWrite('mixedType/first', root, {
+        type: {'.value': 'a'},
+        b: {'.value': 1}
+      }, auth)
+      expect(result.allowed).to.be.false;
     });
 
   });
