@@ -3,6 +3,7 @@
 - [Properly merge literal value nodes (including null)](https://github.com/goldibex/targaryen/pull/44);
   a node would have been set to null but it's - deleted - children would still have been validated with their old value.
 - [Skipping validation of node set to null would skip validation of sibling nodes; this is now fixed](https://github.com/goldibex/targaryen/pull/48).
+- [Treat empty objects as null](https://github.com/goldibex/targaryen/pull/51). Thanks to @mhuebert.
 
 ## 2.2.0 (2016-08-12)
 
