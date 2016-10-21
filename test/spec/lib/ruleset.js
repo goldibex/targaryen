@@ -322,6 +322,30 @@ describe('Ruleset', function() {
       expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
     });
 
+    it('should prune null keys', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
+        rules = new Ruleset({rules: {'.write': true}});
+
+      expect(rules.tryWrite('/a', root, null, null).newRoot.val()).to.be.deep.equal({'b': 2});
+      expect(rules.tryWrite('/', root, {'a': 1, 'b': {}}, null).newRoot.val()).to.be.deep.equal({'a': 1});
+
+    });
+
+    it('should prune null keys deeply', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
+          rules = new Ruleset({rules: {'.write': true}}),
+          result = rules.tryWrite('/a/b', root, null, null);
+
+      expect(result.newRoot.val()).to.be.deep.equal(null);
+      expect(result.newRoot.child('a').val()).to.be.null;
+      expect(result.newRoot.child('a').exists()).to.be.false;
+      expect(result.newRoot.val()).to.be.null;
+      expect(result.newRoot.exists()).to.be.false;
+
+    });
+
     it('should replace a node, not merge it', function() {
       var root = getRoot(),
         auth = null,
@@ -454,6 +478,20 @@ describe('Ruleset', function() {
 
       expect(result.allowed).to.be.true;
       expect(result.newData.val()).to.eql({foo: 1});
+    });
+
+    it('should prune null keys deeply', function(){
+
+      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
+          rules = new Ruleset({rules: {'.write': true}}),
+          result = rules.tryPatch('/', root, {'/a/b': {}}, null);
+
+      expect(result.newRoot.val()).to.be.deep.equal(null);
+      expect(result.newRoot.child('a').val()).to.be.null;
+      expect(result.newRoot.child('a').exists()).to.be.false;
+      expect(result.newRoot.val()).to.be.null;
+      expect(result.newRoot.exists()).to.be.false;
+
     });
 
   });
