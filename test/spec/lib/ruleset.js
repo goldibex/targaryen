@@ -321,7 +321,7 @@ describe('Ruleset', function() {
         type: {'.value': 'b'},
         b: {'.value': 1}
       }, auth);
-      expect(result.newData).to.eql({type: 'b', b: 1});
+      expect(result.newData.val()).to.eql({type: 'b', b: 1});
       expect(result.allowed).to.be.true;
 
       result = rules.tryWrite('mixedType/first', root, {
@@ -443,7 +443,7 @@ describe('Ruleset', function() {
       const result = rules.tryPatch('nested/one/one', root, {}, auth)
 
       expect(result.allowed).to.be.true;
-      expect(result.newData).to.eql({foo: 1});
+      expect(result.newData.val()).to.eql({foo: 1});
     });
 
   });
