@@ -40,10 +40,11 @@ var invalidRules = [
   'root.child($here).exists() ? auth.foo.contains("bar", "baz") : false', // nested argument error
   '$somewhere === "over the rainbow"', // $somewhere is undefined
   'skies === "blue"', // skies is undefined
-  '"the dreams that you dare to dream" === true', // binary expression needs same type on both sides
   'root.hasChildren("foo", "bar")', // hasChildren takes an array
   'root.hasChildren(["foo", 7])', // hasChildren only takes strings
-  'root.child("str").val().matches("/foo/")' // matches only takes a regular expression literal
+  'root.child("str").val().matches("/foo/")', // matches only takes a regular expression literal
+  'auth.foo.notFound() == false', // auth properties can only be an object or a primitives
+  'root.val().notFound == false' // val only returns primitives.
 ];
 
 var ruleEvaluationTests = [{
