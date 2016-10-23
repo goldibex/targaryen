@@ -1,13 +1,19 @@
 ## 2.3.0 (upcoming)
 
-- [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50); thanks to @mhuebert.
+- [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50).
 - [Write operations now replace nodes instead of merging them](https://github.com/goldibex/targaryen/pull/52).
-- [Fix initial timestamps](https://github.com/goldibex/targaryen/pull/41); The timestamp used to replace a timestamp server value will now match the `now` variable in rule tests.
-- [Fix paring rules with unknown identifers](https://github.com/goldibex/targaryen/pull/55).
+- [Fix initial timestamps](https://github.com/goldibex/targaryen/pull/41); The timestamp used to replace a server value will match the `now` variable in rule tests.
+- [Fix parsing rules with unknown identifers](https://github.com/goldibex/targaryen/pull/55).
+- [Fix `Ruleset#tryWrite` returning `data` and `newData` as a value instead of a snapshot](https://github.com/goldibex/targaryen/pull/59).
+- [Fix inconsistence between Ruleset's `tryRead`, `tryWrite`, and `tryPatch` returned result](https://github.com/goldibex/targaryen/pull/59): they now all return a root and data snapshot, and a newRoot and newData snapshot when appropriate.
+- [Prune off null value and empty node after any update](https://github.com/goldibex/targaryen/pull/56).
+- [Partially fix type inference while building the rules](https://github.com/goldibex/targaryen/pull/57).
 - `setFirebaseData` gains a `now` parameter: `targaryen.setFirebaseData(data[, now]);`.
 - jasmine matchers gain an optional `now` parameter.
 - chai plugin `write` and `patch` methods gain an optional `now` parameter.
 - chai plugin gains a `readAt(now)` method.
+
+Thanks goes to @mhuebert for his many contributions.
 
 ## 2.2.1 (2016-10-21)
 
