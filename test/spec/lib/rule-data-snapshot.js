@@ -201,7 +201,7 @@ describe('RuleDataSnapshot', function() {
       var patch = new RuleDataSnapshot({
         users: {
           'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
-            '.value': null
+            '.value': 'xyz'
           }
         }
       });
