@@ -4,7 +4,7 @@
       "$post": {
         ".read": "root.child('users').child(auth.uid).child('clearance-level').val() >= data.child('clearance-level').val()",
         ".write": "root.child('users').child(auth.uid).child('author').val() === true",
-        ".validate": "newData.isObject() && newData.hasChild('date')",
+        ".validate": "newData.hasChildren() && newData.hasChild('date')",
         "date": {
           ".validate": "data.parent().exists() === false && newData.val() <= now"
         }
