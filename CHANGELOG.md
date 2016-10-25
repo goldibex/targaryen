@@ -8,6 +8,8 @@
 - [Fix inconsistence between Ruleset's `tryRead`, `tryWrite`, and `tryPatch` returned result](https://github.com/goldibex/targaryen/pull/59): they now all return a root and data snapshot, and a newRoot and newData snapshot when appropriate.
 - [Prune off null value and empty node after any update](https://github.com/goldibex/targaryen/pull/56).
 - [Partially fix type inference while building the rules](https://github.com/goldibex/targaryen/pull/57).
+- [Fix missing auth properties evaluation](https://github.com/goldibex/targaryen/issues/60).
+- [Fix evaluation error handling in write/patch operations](https://github.com/goldibex/targaryen/issues/61).
 - `setFirebaseData` gains a `now` parameter: `targaryen.setFirebaseData(data[, now]);`.
 - jasmine matchers gain an optional `now` parameter.
 - chai plugin `write` and `patch` methods gain an optional `now` parameter.
