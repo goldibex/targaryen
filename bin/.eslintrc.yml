@@ -1,0 +1,3 @@
+extends: '../.eslintrc.yml'
+rules:
+  no-console: "off"
