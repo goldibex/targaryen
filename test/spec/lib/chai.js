@@ -74,7 +74,6 @@ describe('Chai plugin', function() {
   });
 
   describe('when properly configured', function() {
-    var now;
 
     beforeEach(function() {
 

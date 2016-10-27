@@ -1,7 +1,6 @@
 'use strict';
 
-var helpers = require('../../../lib/helpers.js'),
-    RuleDataSnapshot = require('../../../lib/rule-data-snapshot');
+const helpers = require('../../../lib/helpers.js');
 
 describe('helpers', function() {
 
@@ -36,47 +35,6 @@ describe('helpers', function() {
 
     it('should trim the beginning of the path', function() {
       expect(helpers.pathSplitter('/foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);
-    });
-
-  });
-
-  describe('makeNewDataSnap', function() {
-
-    it('should create a snapshot for the path', function() {
-      var snapshot = helpers.makeNewDataSnap('foo/bar/baz', 1);
-
-      expect(snapshot.val()).to.eql({
-        foo: {
-          bar: {
-            baz: 1
-          }
-        }
-      });
-    });
-
-    it('should trim the begining of the path', function() {
-      var snapshot = helpers.makeNewDataSnap('/foo/bar/baz', 1);
-
-      expect(snapshot.val()).to.eql({
-        foo: {
-          bar: {
-            baz: 1
-          }
-        }
-      });
-    });
-
-    it('should convert timestamp server values', function() {
-      var now = 12345000,
-        snapshot = helpers.makeNewDataSnap('foo/bar/baz', {'.sv': 'timestamp'}, now);
-
-      expect(snapshot.val()).to.eql({
-        foo: {
-          bar: {
-            baz: now
-          }
-        }
-      });
     });
 
   });

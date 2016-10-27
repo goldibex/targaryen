@@ -1,8 +1,8 @@
 
 'use strict';
 
-var Ruleset = require('../../../lib/ruleset'),
-  RuleDataSnapshot = require('../../../lib/rule-data-snapshot');
+const Ruleset = require('../../../lib/ruleset');
+const store = require('../../../lib/store');
 
 function getRuleset() {
 
@@ -57,9 +57,9 @@ function getRuleset() {
 
 }
 
-function getRoot() {
+function getData() {
 
-  return new RuleDataSnapshot({
+  return store.create({
     'foo': {
       'firstChild': {
         '.priority': 0,
@@ -192,18 +192,30 @@ describe('Ruleset', function() {
   });
 
   describe('rule evaluation', function(){
+    let initialData;
+
+    beforeEach(function() {
+      initialData = store.create({'a': 1});
+    });
 
     it('should fail on error in validate', function() {
-      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1})),
-          rules = new Ruleset({rules: {".write": "true", "a": {".validate": "newData.val().contains('one') === true"}}}),
-          result = rules.tryWrite('/a', root, 2, {});
+      const rules = new Ruleset({
+        rules: {
+          '.write': true,
+          a: {
+            '.validate': 'newData.val().contains("one") === true'
+          }
+        }
+      });
+      const result = rules.tryWrite('/a', initialData, 2, {});
+
       expect(result.allowed).to.be.false;
     });
 
     it('should treat nonexistent properties of "auth" as null', function(){
-      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1})),
-          rules = new Ruleset({rules: {'.write': 'auth.x === null'}}),
-          result = rules.tryWrite('/a', root, 2, {});
+      const rules = new Ruleset({rules: {'.write': 'auth.x === null'}});
+      const result = rules.tryWrite('/a', initialData, 2, {});
+
       expect(result.allowed).to.be.true;
     });
 
@@ -256,30 +268,25 @@ describe('Ruleset', function() {
   });
 
   describe('#tryRead', function() {
-
-    var rules;
+    const auth = null;
+    let rules, initialData;
 
     before(function() {
       rules = getRuleset();
+      initialData = getData();
     });
 
     it('returns the result of attempting to read the given path with the given DB state', function() {
 
-      var root = getRoot(),
-        auth = null;
-
-      expect(rules.tryRead('foo/firstChild/baz', root, auth).allowed).to.be.true;
-      expect(rules.tryRead('foo/secondChild/baz', root, auth).allowed).to.be.false;
+      expect(rules.tryRead('foo/firstChild/baz', initialData, auth).allowed).to.be.true;
+      expect(rules.tryRead('foo/secondChild/baz', initialData, auth).allowed).to.be.false;
 
     });
 
     it('should propagate variables in path', function() {
 
-      var root = getRoot(),
-        auth = null;
-
-      expect(rules.tryRead('nested/one/two', root, auth).allowed).to.be.false;
-      expect(rules.tryRead('nested/one/one', root, auth).allowed).to.be.true;
+      expect(rules.tryRead('nested/one/two', initialData, auth).allowed).to.be.false;
+      expect(rules.tryRead('nested/one/one', initialData, auth).allowed).to.be.true;
 
     });
 
@@ -287,74 +294,76 @@ describe('Ruleset', function() {
 
 
   describe('#tryWrite', function() {
-
-    var rules, _now;
-
-    before(function() {
-      rules = getRuleset();
-    });
+    const _now = Date.now;
+    const noAuth = null;
+    const superAuth = {id: 1};
+    let rules, initialData;
 
     beforeEach(function() {
-      _now = Date.now;
+      let now = 1000;
 
-      var now = 1000;
-
-      Date.now = function() {
-        return now++;
-      }
+      Date.now = () => now++;
     });
 
     afterEach(function() {
       Date.now = _now;
     });
 
+    beforeEach(function() {
+      rules = getRuleset();
+      initialData = getData();
+    });
+
     it('should match "now" with the server timestamp', function() {
 
-      var root = getRoot(),
-        newData = {'.sv': 'timestamp'},
-        noAuth = null;
+      const newData = {'.sv': 'timestamp'};
 
-      expect(rules.tryWrite('timestamp/foo', root, newData, noAuth).allowed).to.be.true;
+      expect(rules.tryWrite('timestamp/foo', initialData, newData, noAuth).allowed).to.be.true;
 
     });
 
     it('returns the result of attempting to write the given path with the given DB state and new data', function() {
 
-      var root = getRoot(),
-        newData = { 'wut': { '.value': true } },
-        noAuth = null,
-        superAuth = { id: 1 };
+      const newData = {'wut': {'.value': true}};
 
-      expect(rules.tryWrite('foo/firstChild', root, newData, noAuth).allowed).to.be.false;
-      expect(rules.tryWrite('foo/firstChild', root, newData, superAuth).allowed).to.be.true;
+      expect(rules.tryWrite('foo/firstChild', initialData, newData, noAuth).allowed).to.be.false;
+      expect(rules.tryWrite('foo/firstChild', initialData, newData, superAuth).allowed).to.be.true;
 
     });
 
     it('should propagate variables in path', function() {
 
-      var root = getRoot(),
-        auth = null;
+      expect(rules.tryWrite('nested/one/two', initialData, {id: {'.value': 'two'}}, noAuth).allowed).to.be.false;
+      expect(rules.tryWrite('nested/one/one', initialData, {id: {'.value': 'one'}}, noAuth).allowed).to.be.true;
+      expect(rules.tryWrite('nested/one/one', initialData, {id: {'.value': 'two'}}, noAuth).allowed).to.be.false;
 
-      expect(rules.tryWrite('nested/one/two', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
-      expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'one'}}, auth).allowed).to.be.true;
-      expect(rules.tryWrite('nested/one/one', root, {id: {'.value': 'two'}}, auth).allowed).to.be.false;
     });
 
     it('should prune null keys', function(){
 
-      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': 1, 'b': 2})),
-        rules = new Ruleset({rules: {'.write': true}});
+      initialData = store.create({'a': 1, 'b': 2});
+      rules = new Ruleset({rules: {'.write': true}});
 
-      expect(rules.tryWrite('/a', root, null, null).newRoot.val()).to.be.deep.equal({'b': 2});
-      expect(rules.tryWrite('/', root, {'a': 1, 'b': {}}, null).newRoot.val()).to.be.deep.equal({'a': 1});
+      expect(
+        rules.tryWrite('/a', initialData, null, noAuth).newRoot.val()
+      ).to.be.deep.equal(
+        {'b': 2}
+      );
+
+      expect(
+        rules.tryWrite('/', initialData, {'a': 1, 'b': {}}, noAuth).newRoot.val()
+      ).to.be.deep.equal(
+        {'a': 1}
+      );
 
     });
 
     it('should prune null keys deeply', function(){
 
-      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
-          rules = new Ruleset({rules: {'.write': true}}),
-          result = rules.tryWrite('/a/b', root, null, null);
+      initialData = store.create({'a': {'b': 2}});
+      rules = new Ruleset({rules: {'.write': true}});
+
+      const result = rules.tryWrite('/a/b', initialData, null, noAuth);
 
       expect(result.newRoot.val()).to.be.deep.equal(null);
       expect(result.newRoot.child('a').val()).to.be.null;
@@ -365,38 +374,32 @@ describe('Ruleset', function() {
     });
 
     it('should replace a node, not merge it', function() {
-      var root = getRoot(),
-        auth = null,
-        result;
-
-      result = rules.tryWrite('mixedType/first', root, {
+      let result = rules.tryWrite('mixedType/first', initialData, {
         type: {'.value': 'b'},
         b: {'.value': 1}
-      }, auth);
+      }, noAuth);
+
       expect(result.newData.val()).to.eql({type: 'b', b: 1});
       expect(result.allowed).to.be.true;
 
-      result = rules.tryWrite('mixedType/first', root, {
+      result = rules.tryWrite('mixedType/first', initialData, {
         type: {'.value': 'a'},
         b: {'.value': 1}
-      }, auth)
+      }, noAuth);
+
       expect(result.allowed).to.be.false;
     });
 
   });
 
   describe('#tryPatch', function() {
-
-    var rules, root, auth, _now;
+    const _now = Date.now;
+    let rules, initialData, auth;
 
     beforeEach(function() {
-      _now = Date.now;
+      let now = 1000;
 
-      var now = 1000;
-
-      Date.now = function() {
-        return now++;
-      }
+      Date.now = () => now++;
     });
 
     afterEach(function() {
@@ -430,7 +433,8 @@ describe('Ruleset', function() {
           }
         }
       });
-      root = new RuleDataSnapshot({
+
+      initialData = store.create({
         foo: {
           bar: {
             '.value': true
@@ -461,16 +465,16 @@ describe('Ruleset', function() {
     });
 
     it('should match "now" with the server timestamp', function() {
-      var newData = {
+      const newData = {
         'timestamps/foo': {'.sv': 'timestamp'},
         'timestamps/bar': {'.sv': 'timestamp'},
         'timestamps/baz': 12345000
       };
 
-      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.false;
-
+      expect(rules.tryPatch('/', initialData, newData, null).allowed).to.be.false;
       delete newData['timestamps/baz'];
-      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.true;
+
+      expect(rules.tryPatch('/', initialData, newData, null).allowed).to.be.true;
     });
 
     it('should allow validate write', function() {
@@ -479,20 +483,20 @@ describe('Ruleset', function() {
         'foo/fooz': false
       };
 
-      expect(rules.tryPatch('/', root, newData, auth).allowed).to.be.true
-      expect(rules.tryPatch('/', root, newData, null).allowed).to.be.false
+      expect(rules.tryPatch('/', initialData, newData, auth).allowed).to.be.true;
+      expect(rules.tryPatch('/', initialData, newData, null).allowed).to.be.false;
 
       newData['foo/bar'] = false;
-      expect(rules.tryPatch('/', root, newData, auth).allowed).to.be.false
+      expect(rules.tryPatch('/', initialData, newData, auth).allowed).to.be.false;
     });
 
     it('should propagate variables in path', function() {
-      expect(rules.tryPatch('nested/one/one', root, {foo: 2}, auth).allowed).to.be.true;
-      expect(rules.tryPatch('nested/one/two', root, {foo: 2}, auth).allowed).to.be.false;
+      expect(rules.tryPatch('nested/one/one', initialData, {foo: 2}, auth).allowed).to.be.true;
+      expect(rules.tryPatch('nested/one/two', initialData, {foo: 2}, auth).allowed).to.be.false;
     });
 
     it('should handle empty patch', function() {
-      const result = rules.tryPatch('nested/one/one', root, {}, auth)
+      const result = rules.tryPatch('nested/one/one', initialData, {}, auth);
 
       expect(result.allowed).to.be.true;
       expect(result.newData.val()).to.eql({foo: 1});
@@ -500,9 +504,10 @@ describe('Ruleset', function() {
 
     it('should prune null keys deeply', function(){
 
-      var root = new RuleDataSnapshot(RuleDataSnapshot.convert({'a': {'b': 2}})),
-          rules = new Ruleset({rules: {'.write': true}}),
-          result = rules.tryPatch('/', root, {'/a/b': {}}, null);
+      initialData = store.create({'a': {'b': 2}});
+      rules = new Ruleset({rules: {'.write': true}});
+
+      const result = rules.tryPatch('/', initialData, {'/a/b': {}}, null);
 
       expect(result.newRoot.val()).to.be.deep.equal(null);
       expect(result.newRoot.child('a').val()).to.be.null;

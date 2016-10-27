@@ -1,8 +1,8 @@
 
 'use strict';
 
-var Rule = require('../../../../lib/parser/rule'),
-  RuleDataSnapshot = require('../../../../lib/rule-data-snapshot');
+const Rule = require('../../../../lib/parser/rule');
+const store = require('../../../../lib/store');
 
 var testWildchildren = ['$here', '$there'];
 var validRules = [
@@ -85,33 +85,33 @@ var ruleEvaluationTests = [{
 }, {
   rule: 'root.val() == "bar"',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': 'bar' }) },
+  scope: { root: store.snapshot('/', { '.value': 'bar' }) },
   result: true
 }, {
   rule: 'root.val().contains("ba")',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': 'bar' }) },
+  scope: { root: store.snapshot('/', { '.value': 'bar' }) },
   result: true
 }, {
   rule: 'root.val().matches(/^ba/)',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': 'bar' }) },
+  scope: { root: store.snapshot('/', { '.value': 'bar' }) },
   result: true
 }, {
   rule: 'root.val().matches(/^wa/)',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': 'bar' }) },
+  scope: { root: store.snapshot('/', { '.value': 'bar' }) },
   result: false
 }, {
   rule: 'root.isNumber()',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': null }) },
+  scope: { root: store.snapshot('/', { '.value': null }) },
   result: true,
   skipOnNoValue: true
 }, {
   rule: 'root.isString()',
   wildchildren: [],
-  scope: { root: new RuleDataSnapshot({ '.value': null }) },
+  scope: { root: store.snapshot('/', { '.value': null }) },
   result: false
 }, {
   rule: 'auth.foo[$bar] == true',
