@@ -1,0 +1,35 @@
+plugins:
+  - node
+extends: 'eslint:recommended'
+env:
+  node: true
+  commonjs: true
+  es6: true
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
+  strict:
+    - error
+    - safe
+  node/no-unsupported-features:
+    - error
+    - version: 4
+  space-in-parens:
+    - error
+    - never
+  computed-property-spacing: 
+    - error
+    - never
+  array-bracket-spacing: 
+    - error
+    - never
