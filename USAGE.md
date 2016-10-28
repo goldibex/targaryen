@@ -98,6 +98,18 @@ describe('A set of rules and data', function() {
     expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' })
     .can.write(true).to.path('users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire');
 
+    expect(targaryen.users.password)
+    .cannot.patch({
+      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire': null,
+      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent': true
+    });
+
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' })
+    .can.patch({
+      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire': true,
+      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent': null
+    });
+
   });
 
 });
@@ -136,6 +148,18 @@ describe('A set of rules and data', function() {
 
     expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'})
     .canWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire', true);
+
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'})
+    .canPatch({
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire': true,
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent': null
+    });
+
+    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'})
+    .cannotPatch({
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire': null,
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent': true
+    });
 
   });
 

@@ -61,6 +61,8 @@ jasmine spec/security/<name of example>.js
   - `github`: a user authenticated by their Github account.
 - `expect(auth).canRead(path)`: asserts that the given path is readable by a user with the given authentication data.
 - `expect(auth).cannotRead(path)`: asserts that the given path is not readable by a user with the given authentication data.
- - `expect(auth).canWrite(path, data)`: asserts that the given path is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).canWrite(path, data)`: asserts that the given path is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
 - `expect(auth).cannotWrite(path, data)`: asserts that the given path is not writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).canPatch(patch, data)`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).cannotPatch(patch, data)`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
 
