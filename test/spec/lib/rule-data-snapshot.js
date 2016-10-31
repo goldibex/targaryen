@@ -241,4 +241,16 @@ describe('RuleDataSnapshot', function() {
 
   });
 
+  describe('toString', function() {
+
+    it('should return the snapshot path', function() {
+      expect(
+        root
+          .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name')
+          .toString()
+      ).to.equal('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name');
+    });
+
+  });
+
 });

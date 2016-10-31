@@ -281,16 +281,14 @@ describe('the targaryen Jasmine plugin', function() {
     });
 
     it("should not be able to delete part of /test in a multi-update", function () {
-      expect({uid:'anyone'}).cannotWrite('/', {
-        "test": {
-          "bool": null
-        },
+      expect({uid:'anyone'}).cannotPatch('/', {
+        "test/bool": null,
         "canDelete": null
       });
     });
 
     it("should be able to delete as part of a multi-path write", function () {
-      expect({uid:'anyone'}).canWrite('/', {
+      expect({uid:'anyone'}).canPatch('/', {
         "test": {
           "bool": false,
           "number": 5

@@ -114,6 +114,16 @@ var invalidRulesets = {
       '.indexOn': true
     }
   },
+  'include null nodes': {
+    rules: {
+      'foo': null
+    }
+  },
+  'include primitive nodes': {
+    rules: {
+      'foo': 'true'
+    }
+  },
   'include unknown props': {
     rules: {
       '.read': true,
@@ -125,66 +135,354 @@ var invalidRulesets = {
       '.read': '$somewhere === true'
     }
   },
+  'set rules to numbers': {
+    rules: {
+      '.read': 1
+    }
+  },
   'set index to an object': {
     rules: {
       '.indexOn': {}
     }
   },
+  'set index to an array of number': {
+    rules: {
+      '.indexOn': [1,2,3]
+    }
+  },
   'include unknown variables': {
     rules: {
-      ".validate": "something.val() + 1 === date.val()",
-      ".write": "something.val() / 2 > 0"
+      '.validate': 'something.val() + 1 === date.val()',
+      '.write': 'something.val() / 2 > 0'
     }
   },
   'include rules composed with unknown variables': {
     rules: {
-      ".validate": "auth != null && something.val() + 1 === date.val()",
-      ".write": "auth != null && something.val() / 2 > 0"
+      '.validate': 'auth != null && something.val() + 1 === date.val()',
+      '.write': 'auth != null && something.val() / 2 > 0'
+    }
+  },
+  'include duplicated wildchlidren': {
+    rules: {
+      $uid: {
+        foo: {
+          $uid: {
+            '.write': true
+          }
+        }
+      }
+    }
+  },
+  'include multiple wildchlidren on the same node': {
+    rules: {
+      foo: {
+        $uid: {
+          '.write': true
+        },
+        $foo: {
+          '.write': true
+        }
+      }
     }
   }
 };
 
-var validRulesets = [{
-  rules: {}
-}, {
-  rules: {
-    '.read': true,
-    '.write': true,
-    '.indexOn': 'wut',
-    '.validate': true
+var validRulesets = {
+  'sets an empty rules property': {rules: {}},
+  'defines valid read/write/indexOn/validate rules': {
+    rules: {
+      '.read': true,
+      '.write': true,
+      '.indexOn': 'wut',
+      '.validate': true
+    }
+  },
+  'includes array indexes': {
+    rules: {
+      '.indexOn': ['wut', 'the', 'heck']
+    }
+  },
+  'uses addition of unknow types': {
+    rules: {
+      '.validate': 'newData.val() + 1 === data.val()',
+      '.write': 'newData.val() / 2 > 0'
+    }
+  },
+  'uses wildchildren': {
+    rules: {
+      $uid: {
+        foo: {
+          $other: {
+            '.write': true
+          }
+        }
+      }
+    }
   }
-}, {
-  rules: {
-    '.indexOn': ['wut', 'the', 'heck']
-  }
-}, {
-  rules: {
-  }
-}, {
-  rules: {
-    ".validate": "newData.val() + 1 === data.val()",
-    ".write": "newData.val() / 2 > 0"
-  }
-}];
+};
 
 describe('Ruleset', function() {
 
   describe('constructor', function() {
 
     Object.keys(invalidRulesets).forEach(function(reason) {
-      it(`rejects when rulesets ${reason}`, function() {
-        expect(function() {
-          return new Ruleset(invalidRulesets[reason]);
-        }).to.throw();
+      it(`should rejects when rulesets ${reason}`, function() {
+        expect(() => new Ruleset(invalidRulesets[reason])).to.throw();
       });
     });
 
-    it('accepts valid rulesets', function() {
+    Object.keys(validRulesets).forEach(function(reason) {
+      it(`accepts accept a rulesets when it ${reason}`, function() {
+        expect(() => new Ruleset(validRulesets[reason])).to.not.throw();
+      });
+    });
 
-      validRulesets.forEach(function(rules) {
-        expect(function() {
-          return new Ruleset(rules);
-        }).not.to.throw();
+    it('should define a tree', function() {
+      const ruleset = new Ruleset({
+        rules: {
+          '.read': true,
+          a: {
+            '.write': false,
+            b: {
+              '.validate': true
+            }
+          }
+        }
+      });
+
+      expect(ruleset.rules.$read.toString()).to.equal('true');
+      expect(ruleset.rules.a.$write.toString()).to.equal('false');
+      expect(ruleset.rules.a.b.$validate.toString()).to.equal('true');
+    });
+
+    it('should define a tree with wildchildren', function() {
+      const ruleset = new Ruleset({
+        rules: {
+          '.read': true,
+          a: {
+            '.write': false,
+            $b: {
+              '.validate': true
+            }
+          }
+        }
+      });
+
+      expect(ruleset.rules.a.$wildchild.$validate.toString()).to.equal('true');
+      expect(ruleset.rules.a.$wildchild.$name).to.equal('$b');
+      expect(ruleset.rules.a.$wildchild.$isWildchild).to.be.true;
+    });
+
+  });
+
+  describe('#rules', function() {
+
+    describe('#$child', function() {
+
+      it('should return rules for a direct child node', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              '.write': false
+            },
+            $b: {
+              '.validate': true
+            }
+          }
+        });
+
+        expect(ruleset.rules.$child('a').rules).to.equal(ruleset.rules.a);
+      });
+
+      it('should return rules for a direct wildchild node', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              '.write': false
+            },
+            $b: {
+              '.validate': true
+            }
+          }
+        });
+        const child = ruleset.rules.$child('foo');
+
+        expect(child.rules).to.equal(ruleset.rules.$wildchild);
+        expect(child.wildchildren).to.eql({$b: 'foo'});
+      });
+
+      it('should return rules for a deep child node', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              $b: {
+                $c: {
+                  d: {
+                    '.read': true
+                  }
+                }
+              }
+            }
+          }
+        });
+        const child = ruleset.rules.$child('a/foo/bar/d');
+
+        expect(child.rules).to.equal(ruleset.rules.a.$wildchild.$wildchild.d);
+        expect(child.wildchildren).to.eql({$b: 'foo', $c: 'bar'});
+      });
+
+      it('should return rules for a direct wildchild node', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              '.write': false
+            },
+            $b: {
+              '.validate': true
+            }
+          }
+        });
+        const child = ruleset.rules.$child('foo');
+
+        expect(child.rules).to.equal(ruleset.rules.$wildchild);
+        expect(child.wildchildren).to.eql({$b: 'foo'});
+      });
+
+    });
+
+    describe('#$traverse', function() {
+
+      it('should yield each node on its path', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              b: {
+                c: {
+                  no: {
+                    '.read': true
+                  }
+                }
+              },
+              no: {
+                '.read': true
+              }
+            },
+            no: {
+              '.read': true
+            }
+          }
+        });
+        const cb = sinon.spy();
+
+        ruleset.rules.$traverse('a/b/c', cb);
+
+        expect(cb).to.have.been.calledWith('', ruleset.rules, {});
+        expect(cb).to.have.been.calledWith('a', ruleset.rules.a);
+        expect(cb).to.have.been.calledWith('a/b', ruleset.rules.a.b);
+        expect(cb).to.have.been.calledWith('a/b/c', ruleset.rules.a.b.c);
+
+        expect(cb).to.have.callCount(4);
+      });
+
+      it('should yield wildchild nodes on its path', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              $b: {
+                $c: {
+                  '.read': true
+                }
+              }
+            }
+          }
+        });
+        const cb = sinon.spy();
+
+        ruleset.rules.$traverse('a/foo/bar', cb);
+
+        expect(cb).to.have.been.calledWith('', ruleset.rules, {});
+        expect(cb).to.have.been.calledWith('a', ruleset.rules.a, {});
+        expect(cb).to.have.been.calledWith('a/foo', ruleset.rules.a.$wildchild, {$b: 'foo'});
+        expect(cb).to.have.been.calledWith('a/foo/bar', ruleset.rules.a.$wildchild.$wildchild, {$b: 'foo', $c: 'bar'});
+
+        expect(cb).to.have.callCount(4);
+      });
+
+      it('should extend wildchildren list', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              $b: {
+                $c: {
+                  '.read': true
+                }
+              }
+            }
+          }
+        });
+        const cb = sinon.spy();
+
+        ruleset.rules.a.$wildchild.$traverse('bar', {$b: 'foo'}, cb);
+
+        expect(cb).to.have.been.calledWith('', ruleset.rules.a.$wildchild, {$b: 'foo'});
+        expect(cb).to.have.been.calledWith('bar', ruleset.rules.a.$wildchild.$wildchild, {$b: 'foo', $c: 'bar'});
+        expect(cb).to.have.callCount(2);
+      });
+
+      it('should yield each node in descending or', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              b: {
+                c: {
+                  '.read': true
+                }
+              }
+            }
+          }
+        });
+        const cb = sinon.spy();
+
+        ruleset.rules.$traverse('a/b/c', cb);
+
+        expect(cb.getCall(0).args[0]).to.equal('');
+        expect(cb.getCall(1).args[0]).to.equal('a');
+        expect(cb.getCall(2).args[0]).to.equal('a/b');
+        expect(cb.getCall(3).args[0]).to.equal('a/b/c');
+      });
+
+      it('should allow traversing to stop', function() {
+        const ruleset = new Ruleset({
+          rules: {
+            '.read': true,
+            a: {
+              b: {
+                c: {
+                  '.read': true
+                }
+              }
+            }
+          }
+        });
+        const cb = sinon.stub();
+
+        cb.returns(false);
+        cb.withArgs('a').returns(true);
+
+        ruleset.rules.$traverse('a/b/c', cb);
+
+        expect(cb).to.have.been.calledWith('', ruleset.rules);
+        expect(cb).to.have.been.calledWith('a', ruleset.rules.a);
+
+        expect(cb).to.have.callCount(2);
       });
 
     });
@@ -221,52 +519,6 @@ describe('Ruleset', function() {
 
   });
 
-  describe('#get', function() {
-
-    it('gets all the rules along a given node path', function() {
-
-      var rules = getRuleset();
-
-      var readRules = rules.get('foo/bar/baz/quux', 'read');
-      expect(readRules.length).to.equal(4);
-      expect(readRules[0].path).to.equal('/');
-      expect(readRules[1].path).to.equal('/foo');
-      expect(readRules[2].path).to.equal('/foo/bar');
-      expect(readRules[3].path).to.equal('/foo/bar/baz');
-
-      var writeRules = rules.get('foo/bar/baz/quux', 'write');
-      expect(writeRules.length).to.equal(4);
-      expect(writeRules[0].path).to.equal('/');
-      expect(writeRules[0].rule).to.be.null;
-      expect(writeRules[1].path).to.equal('/foo');
-      expect(writeRules[2].path).to.equal('/foo/bar');
-      expect(writeRules[3].path).to.equal('/foo/bar/baz');
-      expect(writeRules[3].rule).to.be.null;
-
-    });
-    it('gets all the rules along a given node path even if path starts with "/"', function() {
-
-      var rules = getRuleset();
-
-      var readRules = rules.get('/foo/bar/baz/quux', 'read');
-      expect(readRules.length).to.equal(4);
-      expect(readRules[0].path).to.equal('/');
-      expect(readRules[1].path).to.equal('/foo');
-      expect(readRules[2].path).to.equal('/foo/bar');
-      expect(readRules[3].path).to.equal('/foo/bar/baz');
-
-      var writeRules = rules.get('/foo/bar/baz/quux', 'write');
-      expect(writeRules.length).to.equal(4);
-      expect(writeRules[0].path).to.equal('/');
-      expect(writeRules[0].rule).to.be.null;
-      expect(writeRules[1].path).to.equal('/foo');
-      expect(writeRules[2].path).to.equal('/foo/bar');
-      expect(writeRules[3].path).to.equal('/foo/bar/baz');
-      expect(writeRules[3].rule).to.be.null;
-
-    });
-  });
-
   describe('#tryRead', function() {
     const auth = null;
     let rules, initialData;
@@ -288,6 +540,71 @@ describe('Ruleset', function() {
       expect(rules.tryRead('nested/one/two', initialData, auth).allowed).to.be.false;
       expect(rules.tryRead('nested/one/one', initialData, auth).allowed).to.be.true;
 
+    });
+
+    it('should traverse all read rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.read': 'false',
+          $a: {
+            '.read': 'false',
+            $b: {
+              '.read': 'false',
+              $c: {
+                '.read': 'false'
+              }
+            }
+          }
+        }
+      });
+      const result = rules.tryRead('foo/bar/baz', initialData, auth);
+
+      expect(result.logs.map(r => r.path)).to.eql([
+        '',
+        'foo',
+        'foo/bar',
+        'foo/bar/baz'
+      ]);
+    });
+
+    it('should traverse all read rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.read': 'false',
+          $a: {
+            '.read': 'true',
+            $b: {
+              '.read': 'true',
+              $c: {
+                '.read': 'true'
+              }
+            }
+          }
+        }
+      });
+      const result = rules.tryRead('foo/bar/baz', initialData, auth);
+
+      expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
+    });
+
+    it('should only evaluate read rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.read': 'false',
+          $a: {
+            '.write': 'true',
+            $b: {
+              '.write': 'true',
+              $c: {
+                '.read': 'true'
+              }
+            }
+          }
+        }
+      });
+      const result = rules.tryRead('foo/bar/baz', initialData, auth);
+
+      expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
 
   });
@@ -388,6 +705,184 @@ describe('Ruleset', function() {
       }, noAuth);
 
       expect(result.allowed).to.be.false;
+    });
+
+    it('should traverse all write rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.write': 'false',
+          $a: {
+            '.write': 'false',
+            $b: {
+              '.write': 'false',
+              $c: {
+                '.write': 'false',
+                'd': {
+                  '.write': 'false'
+                }
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), true, noAuth);
+
+      expect(result.logs.map(r => r.path)).to.eql([
+        '',
+        'foo',
+        'foo/bar',
+        'foo/bar/baz'
+      ]);
+    });
+
+    it('should traverse write rules until write is permitted', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.write': 'false',
+          $a: {
+            '.write': 'true',
+            $b: {
+              '.write': 'true'
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), true, noAuth);
+
+      expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
+    });
+
+    it('should only traverse node with write rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.write': 'false',
+          $a: {
+            '.read': 'false',
+            $b: {
+              '.read': 'true',
+              $c: {
+                '.write': 'true'
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), true, noAuth);
+
+      expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
+    });
+
+    it('should traverse/walk all validate rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          '.validate': 'true',
+          '.write': 'true',
+          $a: {
+            '.validate': 'true',
+            $b: {
+              '.validate': 'true',
+              $c: {
+                '.validate': 'true',
+                d: {
+                  '.validate': 'true'
+                },
+                e: {
+                  '.validate': 'false',
+                  f: {
+                    '.validate': 'true'
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), {d: true, e: {f: true}}, noAuth);
+
+      expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
+        '',
+        'foo',
+        'foo/bar',
+        'foo/bar/baz',
+        'foo/bar/baz/d',
+        'foo/bar/baz/e',
+        'foo/bar/baz/e/f'
+      ]);
+    });
+
+    it('should only traverse/walk node with validate rules', function() {
+      const rules = new Ruleset({
+        rules: {
+          $a: {
+            '.read': 'false',
+            $b: {
+              '.read': 'false',
+              $c: {
+                '.read': 'false',
+                d: {
+                  '.validate': 'false'
+                },
+                e: {
+                  '.read': 'false',
+                  f: {
+                    '.validate': 'false'
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), {d: true, e: {f: true}}, noAuth);
+
+      expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
+        'foo/bar/baz/d',
+        'foo/bar/baz/e/f'
+      ]);
+    });
+
+    it('should only traverse/walk node with existing value to write', function() {
+      const rules = new Ruleset({
+        rules: {
+          $a: {
+            $b: {
+              $c: {
+                d: {
+                  '.validate': 'false'
+                },
+                e: {
+                  '.validate': 'false',
+                  f: {
+                    '.validate': 'false'
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), {d: true}, noAuth);
+
+      expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql(['foo/bar/baz/d']);
+    });
+
+    it('should stop traverse/walk when write is permitted and there is no data to validate', function() {
+      const rules = new Ruleset({
+        rules: {
+          $a: {
+            '.write': 'true',
+            $b: {
+              '.write': 'true',
+              $c: {
+                '.validate': 'false'
+              }
+            }
+          }
+        }
+      });
+      let result = rules.tryWrite('foo/bar/baz', store.create(), null, noAuth);
+
+      expect(result.logs.map(r => r.path)).to.eql(['foo']);
     });
 
   });
