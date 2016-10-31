@@ -51,6 +51,13 @@ function getRuleset() {
           '.write': true,
           '.validate': 'newData.val() == now'
         }
+      },
+      patch: {
+        $foo: {
+          bar: {
+            '.write': true
+          }
+        }
       }
     }
   });
@@ -380,6 +387,18 @@ describe('Ruleset', function() {
         type: {'.value': 'a'},
         b: {'.value': 1}
       }, auth)
+      expect(result.allowed).to.be.false;
+    });
+
+    it('should not allow write via child write rule', function() {
+      var root = getRoot(),
+        auth = null,
+        result = rules.tryWrite('/patch', root, {foo1: {bar: 1}, foo2: {bar: 2}}, auth);
+
+      if (result.allowed) {
+        console.log(result.info);
+      }
+
       expect(result.allowed).to.be.false;
     });
 
