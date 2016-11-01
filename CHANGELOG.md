@@ -1,4 +1,4 @@
-## 2.3.0 (upcoming)
+## 2.3.0 (2016-11-01)
 
 - [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50).
 - [Write operations now replace nodes instead of merging them](https://github.com/goldibex/targaryen/pull/52).
@@ -10,12 +10,13 @@
 - [Partially fix type inference while building the rules](https://github.com/goldibex/targaryen/pull/57).
 - [Fix missing auth properties evaluation](https://github.com/goldibex/targaryen/issues/60).
 - [Fix evaluation error handling in write/patch operations](https://github.com/goldibex/targaryen/issues/61).
+- [Fix evaluation of computed member expression](https://github.com/goldibex/targaryen/issues/75).
 - `setFirebaseData` gains a `now` parameter: `targaryen.setFirebaseData(data[, now]);`.
 - jasmine matchers gain an optional `now` parameter.
 - chai plugin `write` and `patch` methods gain an optional `now` parameter.
 - chai plugin gains a `readAt(now)` method.
 
-Thanks goes to @mhuebert for his many contributions.
+Thanks goes to @georgesboris and @mhuebert for their contributions.
 
 ## 2.2.1 (2016-10-21)
 
