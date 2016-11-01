@@ -1,3 +1,10 @@
+## 3.0.0 (upcoming)
+
+- [Fix type inferring](https://github.com/goldibex/targaryen/pull/64).
+- [Fix write permission test](https://github.com/goldibex/targaryen/issues/73).
+
+Thanks goes to @mhuebert for his contributions.
+
 ## 2.3.0 (2016-11-01)
 
 - [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50).
