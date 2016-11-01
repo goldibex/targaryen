@@ -25,13 +25,27 @@
         "clearance-level": 8,
         "ticketagent": true
       }
+    },
+    "chats": {
+      "chat-01": {
+        "orgID": "org-01"
+      }
     }
   },
   "users": {
     "an author": { "uid": "password:ad7ebe2e-f547-4110-bda8-678af95b7efd" },
-    "John Smith": { "uid": "password:bb9c1467-8ad3-4b33-8913-f2b491cdbb86" }
+    "John Smith": { "uid": "password:bb9c1467-8ad3-4b33-8913-f2b491cdbb86" },
+    "org user": {
+      "uid": "password:53b20901-4c02-4ad9-95f6-5c2622ff09b1",
+      "orgs": {
+        "org-01": true
+      }
+    }
   },
   "tests": {
+    "chats/chat-01": {
+      "canRead": [ "org user" ]
+    },
     "posts/existing-post": {
       "canRead": [ "John Smith" ]
     },
