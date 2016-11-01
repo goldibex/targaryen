@@ -112,6 +112,21 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: { root: new RuleDataSnapshot({ '.value': null }) },
   result: false
+}, {
+  rule: 'auth.foo[$bar] == true',
+  wildchildren: ['$bar'],
+  scope: { $bar: 'baz', auth: {foo: {baz: true}}},
+  result: true
+}, {
+  rule: 'auth.foo["baz"] == true',
+  wildchildren: [],
+  scope: {auth: {foo: {baz: true}}},
+  result: true
+}, {
+  rule: 'auth.foo.baz == true',
+  wildchildren: [],
+  scope: {auth: {foo: {baz: true}}},
+  result: true
 }];
 
 describe('Rule', function() {
