@@ -7,8 +7,19 @@
   },
   "main": "index.js",
   "directories": {
+    "bin": "bin",
+    "lib": "lib",
     "test": "test"
   },
+  "files": [
+    "bin",
+    "docs",
+    "lib",
+    "plugins",
+    "index.js",
+    "utils.js",
+    "USAGE.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/goldibex/targaryen"

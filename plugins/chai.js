@@ -1,7 +1,7 @@
 
 'use strict';
 
-var helpers = require('./test-helpers');
+var helpers = require('../util');
 
 var plugin = function chaiTargaryen(chai, utils) {
 

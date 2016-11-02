@@ -1,13 +1,13 @@
 
 'use strict';
 
-const Ruleset = require('./ruleset');
-const store = require('./store');
+const Ruleset = require('./lib/ruleset');
+const store = require('./lib/store');
 
 let debug = true;
 let data, rules;
 
-const userDefinitions = exports.userDefinitions = {
+const users = exports.users = {
 
   unauthenticated: null,
   facebook: {
@@ -48,17 +48,17 @@ function getUserDescription(auth) {
 
   if (auth === null || auth === undefined) {
     return 'an unauthenticated user';
-  } else if (auth === userDefinitions.facebook) {
+  } else if (auth === users.facebook) {
     return 'a user authenticated via Facebook';
-  } else if (auth === userDefinitions.twitter) {
+  } else if (auth === users.twitter) {
     return 'a user authenticated via Twitter';
-  } else if (auth === userDefinitions.anonymous) {
+  } else if (auth === users.anonymous) {
     return 'a user authenticated anonymously';
-  } else if (auth === userDefinitions.github) {
+  } else if (auth === users.github) {
     return 'a user authenticated via Github';
-  } else if (auth === userDefinitions.google) {
+  } else if (auth === users.google) {
     return 'a user authenticated via Google';
-  } else if (auth === userDefinitions.password) {
+  } else if (auth === users.password) {
     return 'a user authenticated via Password Login';
   } else if (auth.$description) {
     return auth.$description;

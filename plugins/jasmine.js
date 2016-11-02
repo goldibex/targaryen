@@ -1,11 +1,11 @@
 
 'use strict';
 
-var helpers = require('./test-helpers');
+var helpers = require('../util');
 
 exports.setFirebaseData = helpers.setFirebaseData;
 exports.setFirebaseRules = helpers.setFirebaseRules;
-exports.users = helpers.userDefinitions;
+exports.users = helpers.users;
 
 exports.matchers = {
 
