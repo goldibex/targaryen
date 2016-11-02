@@ -91,110 +91,6 @@ describe('store', function() {
 
   });
 
-  describe('#set', function() {
-    let data;
-
-    beforeEach(function() {
-      data = store.create({
-        a: 1,
-        b: {
-          c: {
-            d: 2
-          }
-        }
-      });
-    });
-
-    it('should return a new tree with an updated root', function() {
-      const newData = data.set('/', 3);
-
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.equal(3);
-    });
-
-    it('should return a new tree with updated values', function() {
-      const newData = data.set('a', 3);
-
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.a.$value()).to.equal(3);
-    });
-
-    it('should return a new tree with updated deep values', function() {
-      const newData = data.set('b/c/d', 3);
-
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root.b.c.d.$value()).to.equal(3);
-    });
-
-    it('should return a new tree with removed branches', function() {
-      const newData = data.set('a', null);
-
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root).not.to.have.property('a');
-    });
-
-    it('should return a new tree without empty branches', function() {
-      const newData = data.set('b/c', {d: null, e: null});
-
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root).not.to.have.property('b');
-    });
-
-  });
-
-  describe('#remove', function() {
-    let data;
-
-    beforeEach(function() {
-      data = store.create({
-        a: 1,
-        b: {
-          c: {d: 2},
-          e: 3
-        }
-      });
-    });
-
-    it('should return a new tree with an updated root', function() {
-      const newData = data.remove('/');
-
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.equal(null);
-    });
-
-    it('should return a new tree with updated values', function() {
-      const newData = data.remove('a');
-
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.eql({b: {c: {d: 2}, e: 3}});
-    });
-
-    it('should return a new tree with updated deep values', function() {
-      const newData = data.remove('b/c/d');
-
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root.$value()).to.eql({a: 1, b: {e: 3}});
-    });
-
-  });
-
-  describe('#get', function() {
-    let data;
-
-    beforeEach(function() {
-      data = store.create(2, {path: 'b/c/d'});
-    });
-
-    it('should return the node at specific path', function() {
-      expect(data.get('b/c/d').$value()).to.equal(2);
-    });
-
-    it('should return a node if no node exists at a specific path', function() {
-      expect(data.get('foo/bar').$value()).to.equal(null);
-    });
-
-  });
-
   describe('#walk', function() {
     let data;
 
@@ -296,6 +192,110 @@ describe('store', function() {
       it('should return the node isPrimitive', function() {
         expect(data.root.a.$isPrimitive()).to.be.true;
         expect(data.root.b.$isPrimitive()).to.be.false;
+      });
+
+    });
+
+    describe('#$set', function() {
+      let data;
+
+      beforeEach(function() {
+        data = store.create({
+          a: 1,
+          b: {
+            c: {
+              d: 2
+            }
+          }
+        });
+      });
+
+      it('should return a new tree with an updated root', function() {
+        const newRoot = data.root.$set('/', 3);
+
+        expect(data.root.a.$value()).to.equal(1);
+        expect(newRoot.$value()).to.equal(3);
+      });
+
+      it('should return a new tree with updated values', function() {
+        const newRoot = data.root.$set('a', 3);
+
+        expect(data.root.a.$value()).to.equal(1);
+        expect(newRoot.a.$value()).to.equal(3);
+      });
+
+      it('should return a new tree with updated deep values', function() {
+        const newRoot = data.root.$set('b/c/d', 3);
+
+        expect(data.root.b.c.d.$value()).to.equal(2);
+        expect(newRoot.b.c.d.$value()).to.equal(3);
+      });
+
+      it('should return a new tree with removed branches', function() {
+        const newRoot = data.root.$set('a', null);
+
+        expect(data.root.a.$value()).to.equal(1);
+        expect(newRoot).not.to.have.property('a');
+      });
+
+      it('should return a new tree without empty branches', function() {
+        const newRoot = data.root.$set('b/c', {d: null, e: null});
+
+        expect(data.root.b.c.d.$value()).to.equal(2);
+        expect(newRoot).not.to.have.property('b');
+      });
+
+    });
+
+    describe('#$remove', function() {
+      let data;
+
+      beforeEach(function() {
+        data = store.create({
+          a: 1,
+          b: {
+            c: {d: 2},
+            e: 3
+          }
+        });
+      });
+
+      it('should return a new tree with an updated root', function() {
+        const newRoot = data.root.$remove('/');
+
+        expect(data.root.a.$value()).to.equal(1);
+        expect(newRoot.$value()).to.equal(null);
+      });
+
+      it('should return a new tree with updated values', function() {
+        const newRoot = data.root.$remove('a');
+
+        expect(data.root.a.$value()).to.equal(1);
+        expect(newRoot.$value()).to.eql({b: {c: {d: 2}, e: 3}});
+      });
+
+      it('should return a new tree with updated deep values', function() {
+        const newRoot = data.root.$remove('b/c/d');
+
+        expect(data.root.b.c.d.$value()).to.equal(2);
+        expect(newRoot.$value()).to.eql({a: 1, b: {e: 3}});
+      });
+
+    });
+
+    describe('#get', function() {
+      let data;
+
+      beforeEach(function() {
+        data = store.create(2, {path: 'b/c/d'});
+      });
+
+      it('should return the node at specific path', function() {
+        expect(data.get('b/c/d').$value()).to.equal(2);
+      });
+
+      it('should return a node if no node exists at a specific path', function() {
+        expect(data.get('foo/bar').$value()).to.equal(null);
       });
 
     });
