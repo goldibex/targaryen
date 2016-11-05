@@ -13,10 +13,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryRead(path, root, auth, now);
+      var result = data.read(path, now);
 
       return {
         pass: result.allowed === true,
@@ -30,10 +29,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryRead(path, root, auth, now);
+      var result = data.read(path, now);
 
       return {
         pass: result.allowed === false,
@@ -47,10 +45,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryWrite(path, root, newData, auth, false, false, false, now);
+      var result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === true,
@@ -64,10 +61,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryWrite(path, root, newData, auth, false, false, false, now);
+      var result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === false,
@@ -80,10 +76,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryPatch(path, root, newData, auth, false, false, false, now);
+      var result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === true,
@@ -97,10 +92,9 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var root = helpers.getFirebaseData(),
-        rules = helpers.getFirebaseRules();
+      var data = helpers.getFirebaseData().as(auth);
 
-      var result = rules.tryPatch(path, root, newData, auth, false, false, false, now);
+      var result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === false,

@@ -1,11 +1,11 @@
 
 'use strict';
 
-const Ruleset = require('./lib/ruleset');
-const store = require('./lib/store');
+const ruleset = require('./lib/ruleset');
+const database = require('./lib/database');
 
 let debug = true;
-let data, rules;
+let data, rules, db;
 
 const users = exports.users = {
 
@@ -99,7 +99,7 @@ exports.unreadableError = function(result) {
 exports.writableError = function(result) {
 
   var msg = 'Expected ' + getUserDescription(result.auth) +
-    ' not to be able to write ' + JSON.stringify(result.newData) +
+    ' not to be able to write ' + JSON.stringify(result.newValue) +
     ' to ' + result.path +
     ', but the rules allowed the write.';
 
@@ -114,7 +114,7 @@ exports.writableError = function(result) {
 exports.unwritableError = function(result) {
 
   var msg = 'Expected ' + getUserDescription(result.auth) +
-    ' to be able to write ' + JSON.stringify(result.newData) +
+    ' to be able to write ' + JSON.stringify(result.newValue) +
     ' to ' + result.path +
     ', but the rules denied the write.';
 
@@ -144,7 +144,8 @@ exports.setFirebaseData = function(value, now) {
   now = now || Date.now();
 
   try {
-    data = store.create(value, now);
+    data = {value, now};
+    db = undefined;
   } catch(e) {
     throw new Error('Proposed Firebase data is not valid: ' + e.message);
   }
@@ -152,25 +153,21 @@ exports.setFirebaseData = function(value, now) {
 };
 
 exports.getFirebaseData = function() {
-  return data;
+  exports.assertConfigured();
+
+  if (!db) {
+    db = database.create(rules, data.value, data.now);
+  }
+
+  return db;
 };
 
 exports.setFirebaseRules = function(ruleDefinition) {
 
   try {
-    rules = new Ruleset(ruleDefinition);
+    rules = ruleset.create(ruleDefinition);
   } catch(e) {
     throw new Error('Proposed Firebase rules are not valid: ' + e.message);
   }
 
-};
-
-exports.getFirebaseRules = function() {
-  return rules;
-};
-
-exports.makeNewStore = store.create;
-
-exports.makeNewRuleSet = function(ruleDefinition) {
-  return new Ruleset(ruleDefinition);
 };

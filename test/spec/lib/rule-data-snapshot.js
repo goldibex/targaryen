@@ -1,13 +1,13 @@
 
 'use strict';
 
-const store = require('../../../lib/store');
+const database = require('../../../lib/database');
 
 describe('RuleDataSnapshot', function() {
   let root;
 
   beforeEach(function() {
-    root = store.snapshot('/', {
+    root = database.snapshot('/', {
       '.priority': 'hello',
       users: {
         'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
@@ -36,7 +36,7 @@ describe('RuleDataSnapshot', function() {
   describe('create', function() {
 
     it('should create a new snapshot', function() {
-      expect(store.snapshot('foo/bar/baz', 1).val()).to.eql({
+      expect(database.snapshot('foo/bar/baz', 1).val()).to.eql({
         foo: {
           bar: {
             baz: 1

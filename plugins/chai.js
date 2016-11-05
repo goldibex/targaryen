@@ -55,42 +55,38 @@ var plugin = function chaiTargaryen(chai, utils) {
 
     helpers.assertConfigured();
 
-    var root = helpers.getFirebaseData(),
-      rules = helpers.getFirebaseRules(),
+    var auth = this._obj,
+      data = helpers.getFirebaseData().as(auth),
       operationType = utils.flag(this, 'operation'),
       now = utils.flag(this, 'operationTimestamp'),
       positivity = utils.flag(this, 'positivity'),
-      result;
+      result, newData;
 
     switch(operationType) {
-      case 'read':
-        result = rules.tryRead(path, root, this._obj, now);
 
-        if (positivity) {
-          chai.assert(result.allowed === true, helpers.unreadableError(result));
-        } else {
-          chai.assert(result.allowed === false, helpers.readableError(result));
-        }
+    case 'read':
+      result = data.read(path, now);
 
-        return;
+      if (positivity) {
+        chai.assert(result.allowed === true, helpers.unreadableError(result));
+      } else {
+        chai.assert(result.allowed === false, helpers.readableError(result));
+      }
 
-      case 'write':
-        var newData = utils.flag(this, 'operationData');
+      return;
 
-        result = rules.tryWrite(path, root, newData, this._obj, false, false, false, now);
+    case 'write':
+      newData = utils.flag(this, 'operationData');
+      result = data.write(path, newData, now);
+      break;
 
-        break;
+    case 'patch':
+      newData = utils.flag(this, 'operationData');
+      result = data.update(path, newData, now);
+      break;
 
-      case 'patch':
-        var newData = utils.flag(this, 'operationData');
-
-        result = rules.tryPatch(path, root, newData, this._obj, false, false, false, now);
-
-        break;
-
-      default:
-
-        return;
+    default:
+      return;
     }
 
     if (positivity) {

@@ -3,8 +3,10 @@
 
 const helpers = require('./util');
 const util = require('util');
+const database = require('./lib/database');
 
 exports.util = helpers;
+exports.database = database.create;
 
 // Deprecate direct access to plugin helpers
 Object.defineProperties(exports, [
