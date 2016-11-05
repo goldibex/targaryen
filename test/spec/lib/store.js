@@ -45,14 +45,20 @@ describe('store', function() {
     expect(data.root.$value()).to.eql({b: {c: {d: 2}}});
   });
 
-  [true, 'two', 3].forEach(function(v) {
-    it(`should let ${typeof v} be used as value`, function() {
+  [true, 'two', 3, [1,2,3], null].forEach(function(v) {
+    let vType = typeof v;
+
+    if (vType === 'object') {
+      vType = v == null ? 'null' : v.constructor.name;
+    }
+
+    it(`should let  ${vType} be used as value`, function() {
       expect(() => store.create(v)).to.not.throw();
       expect(() => store.create({v})).to.not.throw();
     });
   });
 
-  [new Date(), [1,2,3], /foo/].forEach(function(v) {
+  [new Date(), /foo/].forEach(function(v) {
     it(`should not let ${v.constructor.name} be used as value`, function() {
       expect(() => store.create(v)).to.throw();
       expect(() => store.create({v})).to.throw();
