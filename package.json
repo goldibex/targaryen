@@ -17,7 +17,6 @@
     "lib",
     "plugins",
     "index.js",
-    "utils.js",
     "USAGE.md"
   ],
   "repository": {

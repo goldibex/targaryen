@@ -1,7 +1,7 @@
 
 'use strict';
 
-const helpers = require('./util');
+const helpers = require('./lib/util');
 const util = require('util');
 const database = require('./lib/database');
 

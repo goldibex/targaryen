@@ -1,11 +1,12 @@
 
 'use strict';
 
-var helpers = require('../util');
+var targaryen = require('../');
 
-exports.setFirebaseData = helpers.setFirebaseData;
-exports.setFirebaseRules = helpers.setFirebaseRules;
-exports.users = helpers.users;
+exports.setFirebaseData = targaryen.util.setFirebaseData;
+exports.setFirebaseRules = targaryen.util.setFirebaseRules;
+exports.setDebug = targaryen.util.setDebug;
+exports.users = targaryen.util.users;
 
 exports.matchers = {
 
@@ -13,13 +14,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.read(path, now);
 
       return {
         pass: result.allowed === true,
-        message: helpers.unreadableError(result)
+        message: targaryen.util.unreadableError(result)
       };
 
     }};
@@ -29,13 +30,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.read(path, now);
 
       return {
         pass: result.allowed === false,
-        message: helpers.readableError(result)
+        message: targaryen.util.readableError(result)
       };
 
     }};
@@ -45,13 +46,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === true,
-        message: helpers.unwritableError(result)
+        message: targaryen.util.unwritableError(result)
       };
 
     }};
@@ -61,13 +62,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === false,
-        message: helpers.writableError(result)
+        message: targaryen.util.writableError(result)
       };
 
     }};
@@ -76,13 +77,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === true,
-        message: helpers.unwritableError(result)
+        message: targaryen.util.unwritableError(result)
       };
 
     }};
@@ -92,13 +93,13 @@ exports.matchers = {
 
     return { compare: function(auth, path, newData, now) {
 
-      var data = helpers.getFirebaseData().as(auth);
+      var data = targaryen.util.getFirebaseData().as(auth);
 
       var result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === false,
-        message: helpers.writableError(result)
+        message: targaryen.util.writableError(result)
       };
 
     }};

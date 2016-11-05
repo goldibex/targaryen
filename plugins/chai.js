@@ -1,7 +1,7 @@
 
 'use strict';
 
-var helpers = require('../util');
+var targaryen = require('../');
 
 var plugin = function chaiTargaryen(chai, utils) {
 
@@ -53,10 +53,10 @@ var plugin = function chaiTargaryen(chai, utils) {
 
   chai.Assertion.addMethod('path', function(path) {
 
-    helpers.assertConfigured();
+    targaryen.util.assertConfigured();
 
     var auth = this._obj,
-      data = helpers.getFirebaseData().as(auth),
+      data = targaryen.util.getFirebaseData().as(auth),
       operationType = utils.flag(this, 'operation'),
       now = utils.flag(this, 'operationTimestamp'),
       positivity = utils.flag(this, 'positivity'),
@@ -68,9 +68,9 @@ var plugin = function chaiTargaryen(chai, utils) {
       result = data.read(path, now);
 
       if (positivity) {
-        chai.assert(result.allowed === true, helpers.unreadableError(result));
+        chai.assert(result.allowed === true, targaryen.util.unreadableError(result));
       } else {
-        chai.assert(result.allowed === false, helpers.readableError(result));
+        chai.assert(result.allowed === false, targaryen.util.readableError(result));
       }
 
       return;
@@ -90,17 +90,18 @@ var plugin = function chaiTargaryen(chai, utils) {
     }
 
     if (positivity) {
-      chai.assert(result.allowed === true, helpers.unwritableError(result));
+      chai.assert(result.allowed === true, targaryen.util.unwritableError(result));
     } else {
-      chai.assert(result.allowed === false, helpers.writableError(result));
+      chai.assert(result.allowed === false, targaryen.util.writableError(result));
     }
 
   });
 
 };
 
-plugin.users = helpers.userDefinitions;
-plugin.setFirebaseData = helpers.setFirebaseData;
-plugin.setFirebaseRules = helpers.setFirebaseRules;
+plugin.users = targaryen.util.users;
+plugin.setDebug = targaryen.util.setDebug;
+plugin.setFirebaseData = targaryen.util.setFirebaseData;
+plugin.setFirebaseRules = targaryen.util.setFirebaseRules;
 
 module.exports = plugin;

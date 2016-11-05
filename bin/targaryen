@@ -7,7 +7,7 @@ var stripJsonComments = require('strip-json-comments');
 var path = require('path'),
   Table = require('cli-table'),
   colors = require('colors'),
-  helpers = require('../util'),
+  helpers = require('../lib/util'),
   TestJig = require('../lib/test-cmd'),
   argv = require('minimist')(process.argv.slice(2), { boolean: true });
 
