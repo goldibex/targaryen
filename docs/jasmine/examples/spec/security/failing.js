@@ -1,8 +1,8 @@
-
 'use strict';
 
-var targaryen = require('../../../../../index'), // in your app this would be require('targaryen')
-  users = targaryen.users;
+// in your app this would be require('targaryen/plugins/jasmine')
+const targaryen = require('../../../plugins/jasmine');
+const users = targaryen.users;
 
 targaryen.setFirebaseData(require('./data.json'));
 targaryen.setFirebaseRules(require('./rules.json'));
@@ -10,7 +10,7 @@ targaryen.setFirebaseRules(require('./rules.json'));
 describe('A valid set of security rules and data', function() {
 
   beforeEach(function() {
-    jasmine.addMatchers(targaryen.jasmine.matchers);
+    jasmine.addMatchers(targaryen.matchers);
   });
 
   it('can have read errors', function() {
