@@ -1,3 +1,6 @@
+/**
+ * Test path helper functions.
+ */
 'use strict';
 
 const paths = require('../../../lib/paths.js');

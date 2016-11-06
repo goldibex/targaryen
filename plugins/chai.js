@@ -1,4 +1,8 @@
-
+/**
+ * targaryen/plugins/chai - Reference implementation of a chai plugin for
+ * targaryen.
+ *
+ */
 'use strict';
 
 var targaryen = require('../');

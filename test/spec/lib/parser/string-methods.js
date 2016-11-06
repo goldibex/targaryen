@@ -1,4 +1,6 @@
-
+/**
+ * Test firebase string methods.
+ */
 'use strict';
 
 var stringMethods = require('../../../../lib/parser/string-methods');

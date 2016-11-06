@@ -1,4 +1,10 @@
-
+/**
+ * Test firebase rule set structure validation and navigation.
+ *
+ * How a rule is validated (type inferring, unknown variable, etc...) should be
+ * tested in "test/spec/lib/parser/rule.js".
+ *
+ */
 'use strict';
 
 const ruleset = require('../../../lib/ruleset');

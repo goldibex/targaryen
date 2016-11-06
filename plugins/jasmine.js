@@ -1,4 +1,8 @@
-
+/**
+ * targaryen/plugins/jasmine - Reference implementation of a jasmine plugin for
+ * targaryen.
+ *
+ */
 'use strict';
 
 var targaryen = require('../');

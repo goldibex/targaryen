@@ -1,3 +1,6 @@
+/**
+ * Test firebase data structure validation and navigation.
+ */
 'use strict';
 
 const store = require('../../../lib/store');

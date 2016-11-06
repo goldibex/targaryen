@@ -1,4 +1,6 @@
-
+/**
+ * Jasmine test definition to test targaryen Jasmine integration.
+ */
 'use strict';
 
 var targaryen = require('../../plugins/jasmine');

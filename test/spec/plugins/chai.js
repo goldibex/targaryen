@@ -1,4 +1,6 @@
-
+/**
+ * Mocha test definition to test targaryen chai integration.
+ */
 'use strict';
 
 var chai = require('chai'),

@@ -1,4 +1,6 @@
-
+/**
+ * Test firebase rule parsing and evaluation.
+ */
 'use strict';
 
 const Rule = require('../../../../lib/parser/rule');

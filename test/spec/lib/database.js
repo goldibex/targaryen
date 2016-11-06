@@ -1,4 +1,13 @@
-
+/**
+ * Test firebase read /write / update operation simulation.
+ *
+ * It should only test the correct rules are evaluate, with the correct
+ * variables and reported correctly.
+ *
+ * How a rule should be evaluated should be tested in
+ * "test/spec/lib/parser/rule.js".
+ *
+ */
 'use strict';
 
 const database = require('../../../lib/database');

@@ -1,3 +1,10 @@
+/**
+ * Register chai plugins and augment mocha global.
+ *
+ * Should be used with mocha's "require" flag to be imported before any mocha
+ * test are loaded or run.
+ *
+ */
 'use strict';
 
 const chai = require('chai');
