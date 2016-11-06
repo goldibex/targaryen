@@ -65,7 +65,7 @@ function getRuleset() {
 
 }
 
-function getData() {
+function getDB() {
 
   const rules = getRuleset();
   const initialData = {
@@ -360,23 +360,23 @@ describe('database', function() {
   });
 
   describe('#read', function() {
-    let data;
+    let db;
 
     before(function() {
-      data = getData();
+      db = getDB();
     });
 
     it('returns the result of attempting to read the given path with the given DB state', function() {
 
-      expect(data.read('foo/firstChild/baz').allowed).to.be.true;
-      expect(data.read('foo/secondChild/baz').allowed).to.be.false;
+      expect(db.read('foo/firstChild/baz').allowed).to.be.true;
+      expect(db.read('foo/secondChild/baz').allowed).to.be.false;
 
     });
 
     it('should propagate variables in path', function() {
 
-      expect(data.read('nested/one/two').allowed).to.be.false;
-      expect(data.read('nested/one/one').allowed).to.be.true;
+      expect(db.read('nested/one/two').allowed).to.be.false;
+      expect(db.read('nested/one/one').allowed).to.be.true;
 
     });
 
@@ -395,7 +395,7 @@ describe('database', function() {
           }
         }
       };
-      const result = data.with({rules}).read('foo/bar/baz');
+      const result = db.with({rules}).read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql([
         '',
@@ -420,7 +420,7 @@ describe('database', function() {
           }
         }
       };
-      const result = data.with({rules}).read('foo/bar/baz');
+      const result = db.with({rules}).read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
     });
@@ -440,7 +440,7 @@ describe('database', function() {
           }
         }
       };
-      const result = data.with({rules}).read('foo/bar/baz');
+      const result = db.with({rules}).read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
@@ -453,10 +453,10 @@ describe('database', function() {
           }
         }
       };
-      const data = database.create(rules, {'a': 1});
-      const result = data.read('/a');
 
-      expect(result.allowed).to.be.false;
+      db = database.create(rules, {'a': 1});
+
+      expect(db.read('/a').allowed).to.be.false;
     });
 
   });
@@ -464,7 +464,7 @@ describe('database', function() {
   describe('#write', function() {
     const _now = Date.now;
     const superAuth = {id: 1};
-    let data;
+    let db;
 
     beforeEach(function() {
       let now = 1000;
@@ -477,14 +477,14 @@ describe('database', function() {
     });
 
     beforeEach(function() {
-      data = getData();
+      db = getDB();
     });
 
     it('should match "now" with the server timestamp', function() {
 
       const newData = {'.sv': 'timestamp'};
 
-      expect(data.write('timestamp/foo', newData).allowed).to.be.true;
+      expect(db.write('timestamp/foo', newData).allowed).to.be.true;
 
     });
 
@@ -492,16 +492,16 @@ describe('database', function() {
 
       const newData = {'wut': {'.value': true}};
 
-      expect(data.write('foo/firstChild', newData).allowed).to.be.false;
-      expect(data.as(superAuth).write('foo/firstChild', newData).allowed).to.be.true;
+      expect(db.write('foo/firstChild', newData).allowed).to.be.false;
+      expect(db.as(superAuth).write('foo/firstChild', newData).allowed).to.be.true;
 
     });
 
     it('should propagate variables in path', function() {
 
-      expect(data.write('nested/one/two', {id: 'two'}).allowed).to.be.false;
-      expect(data.write('nested/one/one', {id: 'one'}).allowed).to.be.true;
-      expect(data.write('nested/one/one', {id: 'two'}).allowed).to.be.false;
+      expect(db.write('nested/one/two', {id: 'two'}).allowed).to.be.false;
+      expect(db.write('nested/one/one', {id: 'one'}).allowed).to.be.true;
+      expect(db.write('nested/one/one', {id: 'two'}).allowed).to.be.false;
 
     });
 
@@ -510,10 +510,10 @@ describe('database', function() {
       const value = {'a': 1, 'b': 2};
       const rules = {rules: {'.write': true}};
 
-      data = database.create(rules, value);
+      db = database.create(rules, value);
 
-      expect(data.write('/a', null).newRoot.val()).to.be.deep.equal({'b': 2});
-      expect(data.write('/', {'a': 1, 'b': {}}).newRoot.val()).to.be.deep.equal({'a': 1});
+      expect(db.write('/a', null).newRoot.val()).to.be.deep.equal({'b': 2});
+      expect(db.write('/', {'a': 1, 'b': {}}).newRoot.val()).to.be.deep.equal({'a': 1});
 
     });
 
@@ -522,9 +522,9 @@ describe('database', function() {
       const value = {'a': {'b': 2}};
       const rules = {rules: {'.write': true}};
 
-      data = database.create(rules, value);
+      db = database.create(rules, value);
 
-      const result = data.write('/a/b', null);
+      const result = db.write('/a/b', null);
 
       expect(result.newRoot.val()).to.be.deep.equal(null);
       expect(result.newRoot.child('a').val()).to.be.null;
@@ -535,7 +535,7 @@ describe('database', function() {
     });
 
     it('should replace a node, not merge it', function() {
-      let result = data.write('mixedType/first', {
+      let result = db.write('mixedType/first', {
         type: {'.value': 'b'},
         b: {'.value': 1}
       });
@@ -543,7 +543,7 @@ describe('database', function() {
       expect(result.newData.val()).to.eql({type: 'b', b: 1});
       expect(result.allowed).to.be.true;
 
-      result = data.write('mixedType/first', {
+      result = db.write('mixedType/first', {
         type: {'.value': 'a'},
         b: {'.value': 1}
       });
@@ -570,9 +570,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', true);
+      let result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql([
         '',
@@ -595,9 +595,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', true);
+      let result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
     });
@@ -618,9 +618,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', true);
+      let result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
@@ -651,9 +651,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', {d: true, e: {f: true}});
+      let result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
         '',
@@ -690,9 +690,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', {d: true, e: {f: true}});
+      let result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
         'foo/bar/baz/d',
@@ -721,9 +721,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', {d: true});
+      let result = db.write('foo/bar/baz', {d: true});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql(['foo/bar/baz/d']);
     });
@@ -743,9 +743,9 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, null);
+      db = database.create(rules, null);
 
-      let result = data.write('foo/bar/baz', null);
+      let result = db.write('foo/bar/baz', null);
 
       expect(result.logs.map(r => r.path)).to.eql(['foo']);
     });
@@ -758,10 +758,10 @@ describe('database', function() {
           }
         }
       };
-      const data = database.create(rules, {'a': 1});
-      const result = data.write('/a', 2);
 
-      expect(result.allowed).to.be.false;
+      db = database.create(rules, {'a': 1});
+
+      expect(db.write('/a', 2).allowed).to.be.false;
     });
 
     it('should fail on error in validate rules evaluation', function() {
@@ -773,17 +773,17 @@ describe('database', function() {
           }
         }
       };
-      const data = database.create(rules, {'a': 1});
-      const result = data.write('/a', 2);
 
-      expect(result.allowed).to.be.false;
+      db = database.create(rules, {'a': 1});
+
+      expect(db.write('/a', 2).allowed).to.be.false;
     });
 
   });
 
   describe('#update', function() {
     const _now = Date.now;
-    let data, auth;
+    let db, auth;
 
     beforeEach(function() {
       let now = 1000;
@@ -851,7 +851,7 @@ describe('database', function() {
         }
       };
 
-      data = database.create(rules, initialData);
+      db = database.create(rules, initialData);
 
       auth = {id: 1};
     });
@@ -863,10 +863,10 @@ describe('database', function() {
         'timestamps/baz': 12345000
       };
 
-      expect(data.update('/', newData).allowed).to.be.false;
+      expect(db.update('/', newData).allowed).to.be.false;
       delete newData['timestamps/baz'];
 
-      expect(data.update('/', newData).allowed).to.be.true;
+      expect(db.update('/', newData).allowed).to.be.true;
     });
 
     it('should allow validate write', function() {
@@ -875,20 +875,20 @@ describe('database', function() {
         'foo/fooz': false
       };
 
-      expect(data.as(auth).update('/', newData).allowed).to.be.true;
-      expect(data.update('/', newData).allowed).to.be.false;
+      expect(db.as(auth).update('/', newData).allowed).to.be.true;
+      expect(db.update('/', newData).allowed).to.be.false;
 
       newData['foo/bar'] = false;
-      expect(data.as(auth).update('/', newData).allowed).to.be.false;
+      expect(db.as(auth).update('/', newData).allowed).to.be.false;
     });
 
     it('should propagate variables in path', function() {
-      expect(data.as(auth).update('nested/one/one', {foo: 2}).allowed).to.be.true;
-      expect(data.as(auth).update('nested/one/two', {foo: 2}).allowed).to.be.false;
+      expect(db.as(auth).update('nested/one/one', {foo: 2}).allowed).to.be.true;
+      expect(db.as(auth).update('nested/one/two', {foo: 2}).allowed).to.be.false;
     });
 
     it('should handle empty patch', function() {
-      const result = data.as(auth).update('nested/one/one', {});
+      const result = db.as(auth).update('nested/one/one', {});
 
       expect(result.allowed).to.be.true;
       expect(result.newData.val()).to.eql({foo: 1});
@@ -899,9 +899,9 @@ describe('database', function() {
       const value = {'a': {'b': 2}};
       const rules = {rules: {'.write': true}};
 
-      data = database.create(rules, value);
+      db = database.create(rules, value);
 
-      const result = data.update('/', {'/a/b': {}});
+      const result = db.update('/', {'/a/b': {}});
 
       expect(result.newRoot.val()).to.be.deep.equal(null);
       expect(result.newRoot.child('a').val()).to.be.null;
@@ -919,10 +919,10 @@ describe('database', function() {
           }
         }
       };
-      const data = database.create(rules, {'a': 1});
-      const result = data.update('/', {a: 2});
 
-      expect(result.allowed).to.be.false;
+      db = database.create(rules, {'a': 1});
+
+      expect(db.update('/', {a: 2}).allowed).to.be.false;
     });
 
     it('should fail on error in validate rules evaluation', function() {
@@ -934,10 +934,10 @@ describe('database', function() {
           }
         }
       };
-      const data = database.create(rules, {'a': 1});
-      const result = data.update('/', {a: 2});
 
-      expect(result.allowed).to.be.false;
+      db = database.create(rules, {'a': 1});
+
+      expect(db.update('/', {a: 2}).allowed).to.be.false;
     });
 
   });
