@@ -4,20 +4,20 @@ const paths = require('../../../lib/paths.js');
 
 describe('paths', function() {
 
-  describe('pathMerger', function() {
+  describe('join', function() {
 
     it('should merge path', function() {
-      expect(paths.pathMerger('foo', 'bar/baz')).to.equal('foo/bar/baz');
-      expect(paths.pathMerger('foo', '')).to.equal('foo');
-      expect(paths.pathMerger('', 'bar/baz')).to.equal('bar/baz');
+      expect(paths.join('foo', 'bar/baz')).to.equal('foo/bar/baz');
+      expect(paths.join('foo', '')).to.equal('foo');
+      expect(paths.join('', 'bar/baz')).to.equal('bar/baz');
     });
 
     it('should trim root path', function() {
-      expect(paths.pathMerger('/foo/', 'bar/baz')).to.equal('foo/bar/baz');
+      expect(paths.join('/foo/', 'bar/baz')).to.equal('foo/bar/baz');
     });
 
     it('should trim the beginning of the path', function() {
-      expect(paths.pathMerger('foo', '/bar/baz')).to.equal('foo/bar/baz');
+      expect(paths.join('foo', '/bar/baz')).to.equal('foo/bar/baz');
     });
 
   });
