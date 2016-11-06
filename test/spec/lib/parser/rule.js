@@ -128,6 +128,11 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: {auth: {foo: {baz: true}}},
   result: true
+}, {
+  rule: 'auth.foo.baz == null',
+  wildchildren: [],
+  scope: {auth: {}},
+  result: true
 }];
 
 describe('Rule', function() {

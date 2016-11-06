@@ -2,7 +2,6 @@
 'use strict';
 
 const ruleset = require('../../../lib/ruleset');
-const database = require('../../../lib/database');
 
 var invalidRulesets = {
   'are null': null,
@@ -394,23 +393,6 @@ describe('Ruleset', function() {
         expect(cb).to.have.callCount(2);
       });
 
-    });
-
-  });
-
-  describe('rule evaluation', function(){
-    let initialData;
-
-    beforeEach(function() {
-      initialData = {'a': 1};
-    });
-
-    it('should treat nonexistent properties of "auth" as null', function(){
-      const rules = {rules: {'.write': 'auth.x === null'}};
-      const data = database.create(rules, initialData);
-      const result = data.write('/a', initialData, 2, {});
-
-      expect(result.allowed).to.be.true;
     });
 
   });
