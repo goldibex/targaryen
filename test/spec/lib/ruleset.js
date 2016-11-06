@@ -405,21 +405,6 @@ describe('Ruleset', function() {
       initialData = {'a': 1};
     });
 
-    it('should fail on error in validate', function() {
-      const rules = {
-        rules: {
-          '.write': true,
-          a: {
-            '.validate': 'newData.val().contains("one") === true'
-          }
-        }
-      };
-      const data = database.create(rules, initialData);
-      const result = data.write('/a', 2);
-
-      expect(result.allowed).to.be.false;
-    });
-
     it('should treat nonexistent properties of "auth" as null', function(){
       const rules = {rules: {'.write': 'auth.x === null'}};
       const data = database.create(rules, initialData);

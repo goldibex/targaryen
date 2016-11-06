@@ -436,8 +436,21 @@ describe('database', function() {
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
 
-  });
+    it('should fail on type error in read rules evaluation', function() {
+      const rules = {
+        rules: {
+          a: {
+            '.read': 'data.val().contains("one") === true'
+          }
+        }
+      };
+      const data = database.create(rules, {'a': 1});
+      const result = data.read('/a');
 
+      expect(result.allowed).to.be.false;
+    });
+
+  });
 
   describe('#write', function() {
     const _now = Date.now;
@@ -728,6 +741,35 @@ describe('database', function() {
       expect(result.logs.map(r => r.path)).to.eql(['foo']);
     });
 
+    it('should fail on type error in write rules evaluation', function() {
+      const rules = {
+        rules: {
+          a: {
+            '.write': 'newData.val().contains("one") === true'
+          }
+        }
+      };
+      const data = database.create(rules, {'a': 1});
+      const result = data.write('/a', 2);
+
+      expect(result.allowed).to.be.false;
+    });
+
+    it('should fail on error in validate rules evaluation', function() {
+      const rules = {
+        rules: {
+          '.write': true,
+          a: {
+            '.validate': 'newData.val().contains("one") === true'
+          }
+        }
+      };
+      const data = database.create(rules, {'a': 1});
+      const result = data.write('/a', 2);
+
+      expect(result.allowed).to.be.false;
+    });
+
   });
 
   describe('#update', function() {
@@ -858,6 +900,35 @@ describe('database', function() {
       expect(result.newRoot.val()).to.be.null;
       expect(result.newRoot.exists()).to.be.false;
 
+    });
+
+    it('should fail on type error in write rules evaluation', function() {
+      const rules = {
+        rules: {
+          a: {
+            '.write': 'newData.val().contains("one") === true'
+          }
+        }
+      };
+      const data = database.create(rules, {'a': 1});
+      const result = data.update('/', {a: 2});
+
+      expect(result.allowed).to.be.false;
+    });
+
+    it('should fail on error in validate rules evaluation', function() {
+      const rules = {
+        rules: {
+          '.write': true,
+          a: {
+            '.validate': 'newData.val().contains("one") === true'
+          }
+        }
+      };
+      const data = database.create(rules, {'a': 1});
+      const result = data.update('/', {a: 2});
+
+      expect(result.allowed).to.be.false;
     });
 
   });
