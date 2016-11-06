@@ -298,6 +298,4 @@ describe('store', function() {
 
   });
 
-
-
 });
