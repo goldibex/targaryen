@@ -22,19 +22,19 @@ describe('paths', function() {
 
   });
 
-  describe('pathSplitter', function() {
+  describe('split', function() {
 
     it('should split the path', function() {
-      expect(paths.pathSplitter('foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);
+      expect(paths.split('foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);
     });
 
     it('should no split empty path', function() {
-      expect(paths.pathSplitter('')).to.eql([]);
+      expect(paths.split('')).to.eql([]);
     });
 
 
     it('should trim the beginning of the path', function() {
-      expect(paths.pathSplitter('/foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);
+      expect(paths.split('/foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);
     });
 
   });
