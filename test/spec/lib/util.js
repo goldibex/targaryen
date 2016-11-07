@@ -7,7 +7,7 @@ describe('util', function() {
 
   describe('setFirebaseData', function() {
 
-    it.skip('should throw on invalid data', function() {
+    it('should throw on invalid data', function() {
       expect(
         () => util.setFirebaseData(new Date())
       ).to.throw();
