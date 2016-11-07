@@ -382,6 +382,53 @@ describe('database', function() {
 
   });
 
+  describe('#walk', function() {
+    let data;
+
+    beforeEach(function() {
+      data = database.create({rules: {}}, {
+        a: 1,
+        b: {
+          c: 2,
+          d: {
+            e: {
+              f: 3
+            }
+          }
+        }
+      });
+    });
+
+    it('should yield each child nodes as a snapshot', function() {
+      const snaps = [];
+
+      data.walk('b', s => {snaps.push(s.toString());});
+
+      expect(snaps.sort()).to.eql(['b/c', 'b/d', 'b/d/e', 'b/d/e/f']);
+    });
+
+    it('should yield nodes in descending order', function() {
+      const snaps = [];
+
+      data.walk('b/d', s => {snaps.push(s.toString());});
+
+      expect(snaps).to.eql(['b/d/e', 'b/d/e/f']);
+    });
+
+    it('should stop yield children when the callback return true', function() {
+      const snaps = [];
+
+      data.walk('b/d', s => {
+        snaps.push(s.toString());
+
+        return true;
+      });
+
+      expect(snaps).to.eql(['b/d/e']);
+    });
+
+  });
+
   describe('#read', function() {
     let db;
 
