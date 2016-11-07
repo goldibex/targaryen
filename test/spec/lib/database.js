@@ -106,6 +106,29 @@ function getDB() {
 }
 
 describe('database', function() {
+  const _now = Date.now;
+
+  beforeEach(function() {
+    let now = 1000;
+
+    Date.now = () => now++;
+  });
+
+  afterEach(function() {
+    Date.now = _now;
+  });
+
+  it('should set auth to null by default', function() {
+    expect(database.create({rules: {}}, null, 1234)).to.have.property('auth', null);
+  });
+
+  it('should set the timestamp ', function() {
+    expect(database.create({rules: {}}, null, 1234)).to.have.property('timestamp', 1234);
+  });
+
+  it('should set the timestamp to now by default', function() {
+    expect(database.create({rules: {}}, null)).to.have.property('timestamp', 1000);
+  });
 
   describe('snapshot', function() {
     let root;
@@ -462,19 +485,8 @@ describe('database', function() {
   });
 
   describe('#write', function() {
-    const _now = Date.now;
     const superAuth = {id: 1};
     let db;
-
-    beforeEach(function() {
-      let now = 1000;
-
-      Date.now = () => now++;
-    });
-
-    afterEach(function() {
-      Date.now = _now;
-    });
 
     beforeEach(function() {
       db = getDB();
