@@ -56,7 +56,7 @@ Targaryen provides three convenient ways to run tests:
         targaryen.setFirebaseRules(require(RULES_PATH));
       });
 
-      it('should allow authenticated used to rule all data', function() {
+      it('should allow authenticated user to read all data', function() {
         expect({uid: 'foo'}).canRead('/');
         expect(null).cannotRead('/');
       })
@@ -80,7 +80,7 @@ Targaryen provides three convenient ways to run tests:
         targaryen.setFirebaseRules(require(RULES_PATH));
       });
 
-      it('should allow authenticated used to rule all data', function() {
+      it('should allow authenticated user to read all data', function() {
         expect({uid: 'foo'}).can.read.path('/');
         expect(null).cannot.read.path('/');
       })
