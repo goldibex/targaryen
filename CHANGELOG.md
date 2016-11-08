@@ -2,6 +2,27 @@
 
 - [Fix type inferring](https://github.com/goldibex/targaryen/pull/64).
 - [Fix write permission test](https://github.com/goldibex/targaryen/issues/73).
+- [Refactor API](https://github.com/goldibex/targaryen/pull/80):
+
+    Plugins scripts should be imported directly, e.g. `require('targaryen/plugins/chai')`:
+
+    * Add `targaryen/plugins/chai`.
+    * Add `targaryen/plugins/jasmine`.
+    * Deprecate `targaryen.chai`.
+    * Deprecate `targaryen.jasmine`.
+    * Deprecate `targaryen.setFirebaseData`.
+    * Deprecate `targaryen.setFirebaseRules`.
+    * Deprecate `targaryen.setDebug`.
+    * Deprecate `targaryen.users`.
+
+    Simpler API to use targaryen directly:
+
+    * Add `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`.
+    * Add `targaryen.util` functions used by the CLI and the reference plugins for chai and jasmin
+    * Remove `targaryen.Ruleset`.
+    * Remove `targaryen.DataSnapshot`.
+    * Remove `targaryen.helpers`.
+
 
 Thanks goes to @mhuebert for his contributions.
 
