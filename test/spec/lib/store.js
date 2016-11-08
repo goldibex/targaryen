@@ -1,3 +1,6 @@
+/**
+ * Test firebase data structure validation and navigation.
+ */
 'use strict';
 
 const store = require('../../../lib/store');
@@ -16,9 +19,9 @@ describe('store', function() {
   });
 
   it('should create an empty tree by default', function() {
-    expect(store.create().root.$value()).to.equal(null);
-    expect(store.create(null).root.$value()).to.equal(null);
-    expect(store.create({}).root.$value()).to.equal(null);
+    expect(store.create().$value()).to.equal(null);
+    expect(store.create(null).$value()).to.equal(null);
+    expect(store.create({}).$value()).to.equal(null);
   });
 
   it('should create a three', function() {
@@ -32,17 +35,17 @@ describe('store', function() {
     };
     const data = store.create(plain);
 
-    expect(data.root.$value()).to.eql(plain);
-    expect(data.root.a.$value()).to.equal(1);
-    expect(data.root.b.$value()).to.eql({c: {d: 2}});
-    expect(data.root.b.c.$value()).to.eql({d: 2});
-    expect(data.root.b.c.d.$value()).to.equal(2);
+    expect(data.$value()).to.eql(plain);
+    expect(data.a.$value()).to.equal(1);
+    expect(data.b.$value()).to.eql({c: {d: 2}});
+    expect(data.b.c.$value()).to.eql({d: 2});
+    expect(data.b.c.d.$value()).to.equal(2);
   });
 
   it('should create a three at a path', function() {
     const data = store.create(2, {path: 'b/c/d'});
 
-    expect(data.root.$value()).to.eql({b: {c: {d: 2}}});
+    expect(data.$value()).to.eql({b: {c: {d: 2}}});
   });
 
   [true, 'two', 3, [1,2,3], null].forEach(function(v) {
@@ -78,9 +81,9 @@ describe('store', function() {
       };
       const data = store.create(plain, {now: 1234});
 
-      expect(data.timestamp).to.equal(1234);
-      expect(data.root.a.$value()).to.equal(1234);
-      expect(data.root.b.c.d.$value()).to.equal(1234);
+      // expect(data.timestamp).to.equal(1234);
+      expect(data.a.$value()).to.equal(1234);
+      expect(data.b.c.d.$value()).to.equal(1234);
     });
 
     it('should throw with unknown type', function() {
@@ -91,7 +94,63 @@ describe('store', function() {
 
   });
 
-  describe('#set', function() {
+  describe('#$priority', function() {
+    const priority = 1;
+    let data;
+
+    it('should return the node priority', function() {
+      data = store.create({
+        a: 1,
+        b: {
+          c: {
+            d: {
+              '.value': 2,
+              '.priority': priority
+            }
+          }
+        }
+      });
+      expect(data.a.$priority()).to.be.undefined;
+      expect(data.b.c.d.$priority()).to.equal(priority);
+    });
+
+    it('should return the node priority set with explicite priority', function() {
+      data = store.create().$set('a', 3, priority);
+
+      expect(data.a.$priority()).to.equal(priority);
+    });
+
+    it('should return the node priority of a timestamp', function() {
+      const plain = {
+        a: {
+          '.sv': 'timestamp',
+          '.priority': priority
+        }
+      };
+
+      data = store.create(plain, {now: 1234});
+
+      expect(data.a.$value()).to.equal(1234);
+      expect(data.a.$priority()).to.equal(priority);
+    });
+
+  });
+
+  describe('#$isPrimitive', function() {
+    let data;
+
+    beforeEach(function() {
+      data = store.create({a: 1}).$set('b/c/d', 2);
+    });
+
+    it('should return the node isPrimitive', function() {
+      expect(data.a.$isPrimitive()).to.be.true;
+      expect(data.b.$isPrimitive()).to.be.false;
+    });
+
+  });
+
+  describe('#$set', function() {
     let data;
 
     beforeEach(function() {
@@ -106,43 +165,43 @@ describe('store', function() {
     });
 
     it('should return a new tree with an updated root', function() {
-      const newData = data.set('/', 3);
+      const newRoot = data.$set('/', 3);
 
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.equal(3);
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot.$value()).to.equal(3);
     });
 
     it('should return a new tree with updated values', function() {
-      const newData = data.set('a', 3);
+      const newRoot = data.$set('a', 3);
 
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.a.$value()).to.equal(3);
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot.a.$value()).to.equal(3);
     });
 
     it('should return a new tree with updated deep values', function() {
-      const newData = data.set('b/c/d', 3);
+      const newRoot = data.$set('b/c/d', 3);
 
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root.b.c.d.$value()).to.equal(3);
+      expect(data.b.c.d.$value()).to.equal(2);
+      expect(newRoot.b.c.d.$value()).to.equal(3);
     });
 
     it('should return a new tree with removed branches', function() {
-      const newData = data.set('a', null);
+      const newRoot = data.$set('a', null);
 
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root).not.to.have.property('a');
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot).not.to.have.property('a');
     });
 
     it('should return a new tree without empty branches', function() {
-      const newData = data.set('b/c', {d: null, e: null});
+      const newRoot = data.$set('b/c', {d: null, e: null});
 
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root).not.to.have.property('b');
+      expect(data.b.c.d.$value()).to.equal(2);
+      expect(newRoot).not.to.have.property('b');
     });
 
   });
 
-  describe('#remove', function() {
+  describe('#$remove', function() {
     let data;
 
     beforeEach(function() {
@@ -156,29 +215,29 @@ describe('store', function() {
     });
 
     it('should return a new tree with an updated root', function() {
-      const newData = data.remove('/');
+      const newRoot = data.$remove('/');
 
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.equal(null);
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot.$value()).to.equal(null);
     });
 
     it('should return a new tree with updated values', function() {
-      const newData = data.remove('a');
+      const newRoot = data.$remove('a');
 
-      expect(data.root.a.$value()).to.equal(1);
-      expect(newData.root.$value()).to.eql({b: {c: {d: 2}, e: 3}});
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot.$value()).to.eql({b: {c: {d: 2}, e: 3}});
     });
 
     it('should return a new tree with updated deep values', function() {
-      const newData = data.remove('b/c/d');
+      const newRoot = data.$remove('b/c/d');
 
-      expect(data.root.b.c.d.$value()).to.equal(2);
-      expect(newData.root.$value()).to.eql({a: 1, b: {e: 3}});
+      expect(data.b.c.d.$value()).to.equal(2);
+      expect(newRoot.$value()).to.eql({a: 1, b: {e: 3}});
     });
 
   });
 
-  describe('#get', function() {
+  describe('#$child', function() {
     let data;
 
     beforeEach(function() {
@@ -186,118 +245,11 @@ describe('store', function() {
     });
 
     it('should return the node at specific path', function() {
-      expect(data.get('b/c/d').$value()).to.equal(2);
+      expect(data.$child('b/c/d').$value()).to.equal(2);
     });
 
     it('should return a node if no node exists at a specific path', function() {
-      expect(data.get('foo/bar').$value()).to.equal(null);
-    });
-
-  });
-
-  describe('#walk', function() {
-    let data;
-
-    beforeEach(function() {
-      data = store.create({
-        a: 1,
-        b: {
-          c: 2,
-          d: {
-            e: {
-              f: 3
-            }
-          }
-        }
-      });
-    });
-
-    it('should yield each child nodes as a snapshot', function() {
-      const snaps = [];
-
-      data.walk('b', s => {snaps.push(s.toString());});
-
-      expect(snaps.sort()).to.eql(['b/c', 'b/d', 'b/d/e', 'b/d/e/f']);
-    });
-
-    it('should yield nodes in descending order', function() {
-      const snaps = [];
-
-      data.walk('b/d', s => {snaps.push(s.toString());});
-
-      expect(snaps).to.eql(['b/d/e', 'b/d/e/f']);
-    });
-
-    it('should stop yield children when the callback return true', function() {
-      const snaps = [];
-
-      data.walk('b/d', s => {
-        snaps.push(s.toString());
-
-        return true;
-      });
-
-      expect(snaps).to.eql(['b/d/e']);
-    });
-
-  });
-
-  describe('#root', function() {
-
-    describe('#$priority', function() {
-      const priority = 1;
-      let data;
-
-      it('should return the node priority', function() {
-        data = store.create({
-          a: 1,
-          b: {
-            c: {
-              d: {
-                '.value': 2,
-                '.priority': priority
-              }
-            }
-          }
-        });
-        expect(data.root.a.$priority()).to.be.undefined;
-        expect(data.root.b.c.d.$priority()).to.equal(priority);
-      });
-
-      it('should return the node priority set with explicite priority', function() {
-        data = store.create().set('a', 3, priority);
-
-        expect(data.root.a.$priority()).to.equal(priority);
-      });
-
-      it('should return the node priority of a timestamp', function() {
-        const plain = {
-          a: {
-            '.sv': 'timestamp',
-            '.priority': priority
-          }
-        };
-
-        data = store.create(plain, {now: 1234});
-
-        expect(data.root.a.$value()).to.equal(1234);
-        expect(data.root.a.$priority()).to.equal(priority);
-      });
-
-    });
-
-    describe('#$isPrimitive', function() {
-      let data;
-
-      beforeEach(function() {
-        data = store.create({a: 1}).set('b/c/d', 2);
-      });
-
-      it('should return the node isPrimitive', function() {
-        expect(data.root.a.$isPrimitive()).to.be.true;
-        expect(data.root.b.$isPrimitive()).to.be.false;
-      });
-
+      expect(data.$child('foo/bar').$value()).to.equal(null);
     });
 
   });

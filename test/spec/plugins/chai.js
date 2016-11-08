@@ -1,13 +1,15 @@
-
+/**
+ * Mocha test definition to test targaryen chai integration.
+ */
 'use strict';
 
 var chai = require('chai'),
-  plugin = require('../../../lib/chai');
+  targaryen = require('../../../plugins/chai');
 
 describe('Chai plugin', function() {
 
   before(function() {
-    chai.use(plugin);
+    chai.use(targaryen);
   });
 
   describe('if unconfigured', function() {
@@ -26,7 +28,7 @@ describe('Chai plugin', function() {
 
     it('sets the underlying Firebase database to the supplied data', function() {
 
-      plugin.setFirebaseData({
+      targaryen.setFirebaseData({
         users: {
           'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             name: 'Sherlock Holmes'
@@ -45,7 +47,7 @@ describe('Chai plugin', function() {
 
     it('sets the underlying Firebase database to the supplied data', function() {
 
-      plugin.setFirebaseRules({
+      targaryen.setFirebaseRules({
         rules: {
           users: {
             '$user': {
@@ -77,7 +79,7 @@ describe('Chai plugin', function() {
 
     beforeEach(function() {
 
-      plugin.setFirebaseData({
+      targaryen.setFirebaseData({
         users: {
           'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             name: 'Sherlock Holmes'
@@ -88,7 +90,7 @@ describe('Chai plugin', function() {
         }
       });
 
-      plugin.setFirebaseRules({
+      targaryen.setFirebaseRules({
         rules: {
           users: {
             '$user': {
@@ -148,7 +150,7 @@ describe('Chai plugin', function() {
     });
 
     it('should permit patch tests', function() {
-      plugin.setFirebaseData({
+      targaryen.setFirebaseData({
         users: {
           'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             name: 'Sherlock Holmes'

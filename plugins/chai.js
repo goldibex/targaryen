@@ -1,7 +1,11 @@
-
+/**
+ * targaryen/plugins/chai - Reference implementation of a chai plugin for
+ * targaryen.
+ *
+ */
 'use strict';
 
-var helpers = require('./test-helpers');
+var targaryen = require('../');
 
 var plugin = function chaiTargaryen(chai, utils) {
 
@@ -53,58 +57,55 @@ var plugin = function chaiTargaryen(chai, utils) {
 
   chai.Assertion.addMethod('path', function(path) {
 
-    helpers.assertConfigured();
+    targaryen.util.assertConfigured();
 
-    var root = helpers.getFirebaseData(),
-      rules = helpers.getFirebaseRules(),
+    var auth = this._obj,
+      data = targaryen.util.getFirebaseData().as(auth),
       operationType = utils.flag(this, 'operation'),
       now = utils.flag(this, 'operationTimestamp'),
       positivity = utils.flag(this, 'positivity'),
-      result;
+      result, newData;
 
     switch(operationType) {
-      case 'read':
-        result = rules.tryRead(path, root, this._obj, now);
 
-        if (positivity) {
-          chai.assert(result.allowed === true, helpers.unreadableError(result));
-        } else {
-          chai.assert(result.allowed === false, helpers.readableError(result));
-        }
+    case 'read':
+      result = data.read(path, now);
 
-        return;
+      if (positivity) {
+        chai.assert(result.allowed === true, targaryen.util.unreadableError(result));
+      } else {
+        chai.assert(result.allowed === false, targaryen.util.readableError(result));
+      }
 
-      case 'write':
-        var newData = utils.flag(this, 'operationData');
+      return;
 
-        result = rules.tryWrite(path, root, newData, this._obj, false, false, false, now);
+    case 'write':
+      newData = utils.flag(this, 'operationData');
+      result = data.write(path, newData, now);
+      break;
 
-        break;
+    case 'patch':
+      newData = utils.flag(this, 'operationData');
+      result = data.update(path, newData, now);
+      break;
 
-      case 'patch':
-        var newData = utils.flag(this, 'operationData');
-
-        result = rules.tryPatch(path, root, newData, this._obj, false, false, false, now);
-
-        break;
-
-      default:
-
-        return;
+    default:
+      return;
     }
 
     if (positivity) {
-      chai.assert(result.allowed === true, helpers.unwritableError(result));
+      chai.assert(result.allowed === true, targaryen.util.unwritableError(result));
     } else {
-      chai.assert(result.allowed === false, helpers.writableError(result));
+      chai.assert(result.allowed === false, targaryen.util.writableError(result));
     }
 
   });
 
 };
 
-plugin.users = helpers.userDefinitions;
-plugin.setFirebaseData = helpers.setFirebaseData;
-plugin.setFirebaseRules = helpers.setFirebaseRules;
+plugin.users = targaryen.util.users;
+plugin.setDebug = targaryen.util.setDebug;
+plugin.setFirebaseData = targaryen.util.setFirebaseData;
+plugin.setFirebaseRules = targaryen.util.setFirebaseRules;
 
 module.exports = plugin;
