@@ -100,50 +100,44 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
 ## API
 
-### `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`
+- `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`
 
-Creates a set of rules and initial data to simulate read, write and update of operations.
+    Creates a set of rules and initial data to simulate read, write and update of operations.
 
-The Database objects are immutable; to get an updated Database object with different the user auth data, rules, data or timestamp, use its `with(options)` method.
+    The Database objects are immutable; to get an updated Database object with different the user auth data, rules, data or timestamp, use its `with(options)` method.
 
+- `Database.prototype.with({rules: {rules: object}, data: any, auth: null|object, now: number}): Database`
 
-### `Database.prototype.with({rules: {rules: object}, data: any, auth: null|object, now: number}): Database`
+    Extends the database object with new rules, data, auth data, or time stamp.
 
-Extends the database object with new rules, data, auth data, or time stamp.
+- `Database.prototype.as(auth: null|object): Database`
 
+    Extends the database object with auth data.
 
-### `Database.prototype.as(auth: null|object): Database`
+- `Database.prototype.read(path: string, now: null|number): Result`
 
-Extends the database object with auth data.
+    Simulates a read operation.
 
+- `Database.prototype.write(path: string, value: any, priority: any, now: null|number): Result`
 
-### `Database.prototype.read(path: string, now: null|number): Result`
+    Simulates a write operation.
 
-Simulates a read operation.
+- `Database.prototype.update(path: string, patch: object, now: null|number): Result`
 
+    Simulates an update operation (including multi-location update).
 
-### `Database.prototype.write(path: string, value: any, priority: any, now: null|number): Result`
+- `Result: {allowed: boolean, info: string, database: Database, newDatabase: Database, newValue: any}`
 
-Simulates a write operation.
+    It holds:
 
+    - `allowed`: the success status;
+    - `info`: the rule evaluation info;
+    - `database`: the original database.
 
-### `Database.prototype.update(path: string, patch: object, now: null|number): Result`
+    For write and update operations, it also includes:
 
-Simulates an update operation (including multi-location update).
-
-
-### `Result: {allowed: boolean, info: string, database: Database, newDatabase: Database, newValue: any}`
-
-It holds:
-
-- `allowed`: the success status;
-- `info`: the rule evaluation info;
-- `database`: the original database.
-
-For write and update operations, it also includes:
-
-- `newDatabase`: the resulting database;
-- `newValue`: the value written to the database.
+    - `newDatabase`: the resulting database;
+    - `newValue`: the value written to the database.
 
 
 ## Why is it named Targaryen?
