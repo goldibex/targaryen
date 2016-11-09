@@ -26,6 +26,10 @@
 
 Thanks goes to @mhuebert for his contributions.
 
+## 2.3.1 (2016-11-08)
+
+- Fix npm description
+
 ## 2.3.0 (2016-11-01)
 
 - [Expose Ruleset, DataSnapshot and helpers](https://github.com/goldibex/targaryen/pull/50).
