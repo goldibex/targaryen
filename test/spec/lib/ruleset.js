@@ -184,7 +184,7 @@ describe('Ruleset', function() {
 
       expect(set.root.a.$wildchild.$validate.toString()).to.equal('true');
       expect(set.root.a.$wildchild.$name).to.equal('$b');
-      expect(set.root.a.$wildchild.$isWildchild).to.be.true;
+      expect(set.root.a.$wildchild.$isWildchild).to.be.true();
     });
 
   });

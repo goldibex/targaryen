@@ -53,7 +53,7 @@ results.forEach(function(result) {
   }
 
   if (expected === actual) {
-    table.push([ result.path, result.type, authStr, expected, actual ]);
+    table.push([result.path, result.type, authStr, expected, actual]);
   } else {
     table.push([
       colors.bgRed(result.path),

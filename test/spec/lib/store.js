@@ -110,7 +110,7 @@ describe('store', function() {
           }
         }
       });
-      expect(data.a.$priority()).to.be.undefined;
+      expect(data.a.$priority()).to.be.undefined();
       expect(data.b.c.d.$priority()).to.equal(priority);
     });
 
@@ -144,8 +144,8 @@ describe('store', function() {
     });
 
     it('should return the node isPrimitive', function() {
-      expect(data.a.$isPrimitive()).to.be.true;
-      expect(data.b.$isPrimitive()).to.be.false;
+      expect(data.a.$isPrimitive()).to.be.true();
+      expect(data.b.$isPrimitive()).to.be.false();
     });
 
   });

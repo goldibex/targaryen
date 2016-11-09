@@ -10,11 +10,11 @@ describe('stringMethods', function() {
   describe('contains', function() {
 
     it('returns true if the given string contains the given substring', function() {
-      expect(stringMethods.contains('bar', 'ar')).to.be.true;
+      expect(stringMethods.contains('bar', 'ar')).to.be.true();
     });
 
     it('returns false if the given string does not contain the given substring', function() {
-      expect(stringMethods.contains('bar', 'war')).to.be.false;
+      expect(stringMethods.contains('bar', 'war')).to.be.false();
     });
 
   });
@@ -22,11 +22,11 @@ describe('stringMethods', function() {
   describe('beginsWith', function() {
 
     it('returns true if the given string begins with the given substring', function() {
-      expect(stringMethods.beginsWith('bar', 'ba')).to.be.true;
+      expect(stringMethods.beginsWith('bar', 'ba')).to.be.true();
     });
 
     it('returns false if the given string does not begin with the given substring', function() {
-      expect(stringMethods.beginsWith('bar', 'wa')).to.be.false;
+      expect(stringMethods.beginsWith('bar', 'wa')).to.be.false();
     });
 
   });
@@ -34,11 +34,11 @@ describe('stringMethods', function() {
   describe('endsWith', function() {
 
     it('returns true if the given string ends with the given substring', function() {
-      expect(stringMethods.endsWith('bar', 'ar')).to.be.true;
+      expect(stringMethods.endsWith('bar', 'ar')).to.be.true();
     });
 
     it('returns false if the given string does not end with the given substring', function() {
-      expect(stringMethods.endsWith('bar', 'az')).to.be.false;
+      expect(stringMethods.endsWith('bar', 'az')).to.be.false();
     });
 
   });
@@ -54,11 +54,11 @@ describe('stringMethods', function() {
   describe('matches', function() {
 
     it('returns true if the given string matches the given regex', function() {
-      expect(stringMethods.matches('bar', /^ba/)).to.be.true;
+      expect(stringMethods.matches('bar', /^ba/)).to.be.true();
     });
 
     it('returns false if the given string does not match the given regex', function() {
-      expect(stringMethods.matches('bar', /^wa/)).to.be.false;
+      expect(stringMethods.matches('bar', /^wa/)).to.be.false();
     });
 
   });

@@ -77,7 +77,7 @@ var ruleEvaluationTests = [{
 }, {
   rule: 'auth.dreams.length > 1 ? false : true',
   wildchildren: [],
-  scope: { auth: { dreams: 'really do',  } },
+  scope: { auth: { dreams: 'really do'  } },
   result: false
 }, {
   rule: '!(auth.dreams.length > 1)',

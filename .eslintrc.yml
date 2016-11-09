@@ -6,6 +6,29 @@ env:
   commonjs: true
   es6: true
 rules:
+  strict:
+    - error
+    - safe
+  no-extend-native:
+    - error
+  no-bitwise:
+    - error
+  eqeqeq:
+    - error
+    - smart
+  no-use-before-define:
+    - error
+    - functions: false
+      classes: false
+  node/no-unsupported-features:
+    - error
+    - version: 4
+  no-caller:
+    - error
+  no-invalid-regexp:
+    - error
+
+  # styling
   indent:
     - error
     - 2
@@ -18,12 +41,6 @@ rules:
   semi:
     - error
     - always
-  strict:
-    - error
-    - safe
-  node/no-unsupported-features:
-    - error
-    - version: 4
   space-in-parens:
     - error
     - never
@@ -31,5 +48,19 @@ rules:
     - error
     - never
   array-bracket-spacing: 
+    - error
+    - never
+  camelcase:
+    - error
+  curly:
+    - error
+  wrap-iife:
+    - error
+    - inside
+  new-cap:
+    - error
+  no-trailing-spaces:
+    - error
+  comma-dangle:
     - error
     - never
