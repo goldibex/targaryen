@@ -1,21 +1,26 @@
 plugins:
   - node
-extends: 'eslint:recommended'
+extends: xo
 env:
   node: true
   commonjs: true
   es6: true
+parserOptions: 
+  ecmaFeatures: 
+    jsx: false
+    experimentalObjectRestSpread: false
+  ecmaVersion: 2016
+  sourceType: script
 rules:
-  strict:
-    - error
-    - safe
-  no-extend-native:
-    - error
-  no-bitwise:
-    - error
+  
+  # possible errors
   eqeqeq:
     - error
     - smart
+  no-confusing-arrow:
+    - error
+  no-eq-null:
+    - "off"
   no-use-before-define:
     - error
     - functions: false
@@ -23,44 +28,42 @@ rules:
   node/no-unsupported-features:
     - error
     - version: 4
-  no-caller:
+  no-var:
     - error
-  no-invalid-regexp:
+  strict:
     - error
+    - safe
 
   # styling
+  arrow-body-style:
+    - error
+    - as-needed
+  brace-style:
+    - error
+    - 1tbs
+    - allowSingleLine: true
   indent:
     - error
     - 2
-  linebreak-style:
-    - error
-    - unix
-  quotes:
-    - error
-    - single
-  semi:
+  lines-around-directive:
     - error
     - always
-  space-in-parens:
+  newline-after-var:
     - error
-    - never
-  computed-property-spacing: 
+    - always
+  object-shorthand:
     - error
-    - never
-  array-bracket-spacing: 
+  one-var:
     - error
-    - never
-  camelcase:
+    - initialized: never
+      uninitialized: always
+  padded-blocks:
+    - "off"
+  prefer-arrow-callback:
     - error
-  curly:
+    - allowNamedFunctions: true
+  prefer-const:
     - error
-  wrap-iife:
-    - error
-    - inside
-  new-cap:
-    - error
-  no-trailing-spaces:
-    - error
-  comma-dangle:
+  space-before-function-paren:
     - error
     - never

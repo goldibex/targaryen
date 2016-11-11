@@ -1,6 +1,7 @@
 /**
  * Test firebase data structure validation and navigation.
  */
+
 'use strict';
 
 const store = require('../../../lib/store');
@@ -48,7 +49,7 @@ describe('store', function() {
     expect(data.$value()).to.eql({b: {c: {d: 2}}});
   });
 
-  [true, 'two', 3, [1,2,3], null].forEach(function(v) {
+  [true, 'two', 3, [1, 2, 3], null].forEach(function(v) {
     let vType = typeof v;
 
     if (vType === 'object') {

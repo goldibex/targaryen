@@ -1,6 +1,7 @@
 /**
  * Test path helper functions.
  */
+
 'use strict';
 
 const paths = require('../../../lib/paths.js');
@@ -34,7 +35,6 @@ describe('paths', function() {
     it('should no split empty path', function() {
       expect(paths.split('')).to.eql([]);
     });
-
 
     it('should trim the beginning of the path', function() {
       expect(paths.split('/foo/bar/baz')).to.eql(['foo', 'bar', 'baz']);

@@ -8,6 +8,7 @@
  * "test/spec/lib/parser/rule.js".
  *
  */
+
 'use strict';
 
 const database = require('../../../lib/database');
@@ -20,7 +21,7 @@ function getRuleset() {
       foo: {
         '.read': false,
         '.write': false,
-        '$bar': {
+        $bar: {
           '.read': 'auth !== null',
           '.write': 'auth.id === 1',
           baz: {
@@ -69,34 +70,34 @@ function getDB() {
 
   const rules = getRuleset();
   const initialData = {
-    'foo': {
-      'firstChild': {
+    foo: {
+      firstChild: {
         '.priority': 0,
         baz: {
           '.value': true
         }
       },
-      'secondChild': {
+      secondChild: {
         '.priority': 1,
         baz: {
           '.value': false
         }
       }
     },
-    'nested': {
-      'one': {
-        'one': {id: {'.value': 'one'}},
-        'two': {id: {'.value': 'two'}}
+    nested: {
+      one: {
+        one: {id: {'.value': 'one'}},
+        two: {id: {'.value': 'two'}}
       }
     },
-    'mixedType': {
-      'first': {
+    mixedType: {
+      first: {
         type: {'.value': 'a'},
         a: {'.value': 1}
       }
     },
-    'users': {
-      'firstChild': {
+    users: {
+      firstChild: {
         '.value': true
       }
     }
@@ -139,18 +140,18 @@ describe('database', function() {
         users: {
           'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
             '.priority': 1,
-            name: { '.value': 'Sherlock Holmes' },
-            genius: { '.value': true },
-            arrests: { '.value': 70 }
+            name: {'.value': 'Sherlock Holmes'},
+            genius: {'.value': true},
+            arrests: {'.value': 70}
           },
           'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
             '.priority': 2,
-            name: { '.value': 'John Watson' }
+            name: {'.value': 'John Watson'}
           },
           'password:3403291b-fdc9-4995-9a54-9656241c835d': {
             '.priority': 0,
-            name: { '.value': 'Inspector Lestrade'},
-            arrests: { '.value': 35 }
+            name: {'.value': 'Inspector Lestrade'},
+            arrests: {'.value': 35}
           },
           'password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx': {
             '.priority': 0,
@@ -180,9 +181,9 @@ describe('database', function() {
 
         expect(root.val()).to.deep.equal({
           users: {
-            'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': { name: 'Sherlock Holmes', genius: true, arrests: 70 },
-            'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': { name: 'John Watson' },
-            'password:3403291b-fdc9-4995-9a54-9656241c835d': { name: 'Inspector Lestrade', arrests: 35 }
+            'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {name: 'Sherlock Holmes', genius: true, arrests: 70},
+            'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {name: 'John Watson'},
+            'password:3403291b-fdc9-4995-9a54-9656241c835d': {name: 'Inspector Lestrade', arrests: 35}
           }
         });
 
@@ -402,7 +403,9 @@ describe('database', function() {
     it('should yield each child nodes as a snapshot', function() {
       const snaps = [];
 
-      data.walk('b', s => {snaps.push(s.toString());});
+      data.walk('b', s => {
+        snaps.push(s.toString());
+      });
 
       expect(snaps.sort()).to.eql(['b/c', 'b/d', 'b/d/e', 'b/d/e/f']);
     });
@@ -410,7 +413,9 @@ describe('database', function() {
     it('should yield nodes in descending order', function() {
       const snaps = [];
 
-      data.walk('b/d', s => {snaps.push(s.toString());});
+      data.walk('b/d', s => {
+        snaps.push(s.toString());
+      });
 
       expect(snaps).to.eql(['b/d/e', 'b/d/e/f']);
     });
@@ -524,7 +529,7 @@ describe('database', function() {
         }
       };
 
-      db = database.create(rules, {'a': 1});
+      db = database.create(rules, {a: 1});
 
       expect(db.read('/a').allowed).to.be.false();
     });
@@ -549,7 +554,7 @@ describe('database', function() {
 
     it('returns the result of attempting to write the given path with the given DB state and new data', function() {
 
-      const newData = {'wut': {'.value': true}};
+      const newData = {wut: {'.value': true}};
 
       expect(db.write('foo/firstChild', newData).allowed).to.be.false();
       expect(db.as(superAuth).write('foo/firstChild', newData).allowed).to.be.true();
@@ -564,21 +569,21 @@ describe('database', function() {
 
     });
 
-    it('should prune null keys', function(){
+    it('should prune null keys', function() {
 
-      const value = {'a': 1, 'b': 2};
+      const value = {a: 1, b: 2};
       const rules = {rules: {'.write': true}};
 
       db = database.create(rules, value);
 
-      expect(db.write('/a', null).newRoot.val()).to.be.deep.equal({'b': 2});
-      expect(db.write('/', {'a': 1, 'b': {}}).newRoot.val()).to.be.deep.equal({'a': 1});
+      expect(db.write('/a', null).newRoot.val()).to.be.deep.equal({b: 2});
+      expect(db.write('/', {a: 1, b: {}}).newRoot.val()).to.be.deep.equal({a: 1});
 
     });
 
-    it('should prune null keys deeply', function(){
+    it('should prune null keys deeply', function() {
 
-      const value = {'a': {'b': 2}};
+      const value = {a: {b: 2}};
       const rules = {rules: {'.write': true}};
 
       db = database.create(rules, value);
@@ -620,7 +625,7 @@ describe('database', function() {
               '.write': 'false',
               $c: {
                 '.write': 'false',
-                'd': {
+                d: {
                   '.write': 'false'
                 }
               }
@@ -631,7 +636,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', true);
+      const result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql([
         '',
@@ -656,7 +661,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', true);
+      const result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
     });
@@ -679,7 +684,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', true);
+      const result = db.write('foo/bar/baz', true);
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
@@ -712,7 +717,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', {d: true, e: {f: true}});
+      const result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
         '',
@@ -751,7 +756,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', {d: true, e: {f: true}});
+      const result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
         'foo/bar/baz/d',
@@ -782,7 +787,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', {d: true});
+      const result = db.write('foo/bar/baz', {d: true});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql(['foo/bar/baz/d']);
     });
@@ -804,7 +809,7 @@ describe('database', function() {
 
       db = database.create(rules, null);
 
-      let result = db.write('foo/bar/baz', null);
+      const result = db.write('foo/bar/baz', null);
 
       expect(result.logs.map(r => r.path)).to.eql(['foo']);
     });
@@ -818,7 +823,7 @@ describe('database', function() {
         }
       };
 
-      db = database.create(rules, {'a': 1});
+      db = database.create(rules, {a: 1});
 
       expect(db.write('/a', 2).allowed).to.be.false();
     });
@@ -833,7 +838,7 @@ describe('database', function() {
         }
       };
 
-      db = database.create(rules, {'a': 1});
+      db = database.create(rules, {a: 1});
 
       expect(db.write('/a', 2).allowed).to.be.false();
     });
@@ -929,7 +934,7 @@ describe('database', function() {
     });
 
     it('should allow validate write', function() {
-      var newData = {
+      const newData = {
         'foo/baz': false,
         'foo/fooz': false
       };
@@ -953,9 +958,9 @@ describe('database', function() {
       expect(result.newData.val()).to.eql({foo: 1});
     });
 
-    it('should prune null keys deeply', function(){
+    it('should prune null keys deeply', function() {
 
-      const value = {'a': {'b': 2}};
+      const value = {a: {b: 2}};
       const rules = {rules: {'.write': true}};
 
       db = database.create(rules, value);
@@ -979,7 +984,7 @@ describe('database', function() {
         }
       };
 
-      db = database.create(rules, {'a': 1});
+      db = database.create(rules, {a: 1});
 
       expect(db.update('/', {a: 2}).allowed).to.be.false();
     });
@@ -994,12 +999,11 @@ describe('database', function() {
         }
       };
 
-      db = database.create(rules, {'a': 1});
+      db = database.create(rules, {a: 1});
 
       expect(db.update('/', {a: 2}).allowed).to.be.false();
     });
 
   });
-
 
 });

@@ -3,9 +3,10 @@
  * targaryen.
  *
  */
+
 'use strict';
 
-var targaryen = require('../');
+const targaryen = require('../');
 
 exports.setFirebaseData = targaryen.util.setFirebaseData;
 exports.setFirebaseRules = targaryen.util.setFirebaseRules;
@@ -14,13 +15,13 @@ exports.users = targaryen.util.users;
 
 exports.matchers = {
 
-  canRead: function() {
+  canRead() {
 
-    return { compare: function(auth, path, now) {
+    return {compare(auth, path, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.read(path, now);
+      const result = data.read(path, now);
 
       return {
         pass: result.allowed === true,
@@ -30,13 +31,13 @@ exports.matchers = {
     }};
 
   },
-  cannotRead: function() {
+  cannotRead() {
 
-    return { compare: function(auth, path, now) {
+    return {compare(auth, path, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.read(path, now);
+      const result = data.read(path, now);
 
       return {
         pass: result.allowed === false,
@@ -46,13 +47,13 @@ exports.matchers = {
     }};
 
   },
-  canWrite: function() {
+  canWrite() {
 
-    return { compare: function(auth, path, newData, now) {
+    return {compare(auth, path, newData, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.write(path, newData, now);
+      const result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === true,
@@ -62,13 +63,13 @@ exports.matchers = {
     }};
 
   },
-  cannotWrite: function() {
+  cannotWrite() {
 
-    return { compare: function(auth, path, newData, now) {
+    return {compare(auth, path, newData, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.write(path, newData, now);
+      const result = data.write(path, newData, now);
 
       return {
         pass: result.allowed === false,
@@ -77,13 +78,13 @@ exports.matchers = {
 
     }};
   },
-  canPatch: function() {
+  canPatch() {
 
-    return { compare: function(auth, path, newData, now) {
+    return {compare(auth, path, newData, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.update(path, newData, now);
+      const result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === true,
@@ -93,13 +94,13 @@ exports.matchers = {
     }};
 
   },
-  cannotPatch: function() {
+  cannotPatch() {
 
-    return { compare: function(auth, path, newData, now) {
+    return {compare(auth, path, newData, now) {
 
-      var data = targaryen.util.getFirebaseData().as(auth);
+      const data = targaryen.util.getFirebaseData().as(auth);
 
-      var result = data.update(path, newData, now);
+      const result = data.update(path, newData, now);
 
       return {
         pass: result.allowed === false,

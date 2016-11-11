@@ -1,3 +1,4 @@
 extends: '../.eslintrc.yml'
 rules:
   no-console: "off"
+  no-restricted-modules: "off"

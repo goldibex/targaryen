@@ -25,7 +25,9 @@
   },
   "scripts": {
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
-    "lint": "eslint lib/ test/ bin/targaryen",
+    "format": "npm run lint -- --fix",
+    "lint": "eslint lib/ plugins/ test/ bin/targaryen",
+    "lint:html": "(npm run -s lint -- --max-warnings 0 -f html -o lint.html && rm lint.html) || echo 'open lint.html for linting errors'",
     "test": "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
@@ -51,7 +53,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "dirty-chai": "^1.2.2",
-    "eslint": "^3.8.1",
+    "eslint": "^3.9.1",
+    "eslint-config-xo": "^0.17.0",
     "eslint-plugin-node": "^2.1.3",
     "istanbul": "^0.4.5",
     "jasmine": "^2.1.1",

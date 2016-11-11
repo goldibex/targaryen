@@ -1,13 +1,14 @@
 /**
  * Test firebase rule parsing and evaluation.
  */
+
 'use strict';
 
 const Rule = require('../../../../lib/parser/rule');
 const database = require('../../../../lib/database');
 
-var testWildchildren = ['$here', '$there'];
-var validRules = [
+const testWildchildren = ['$here', '$there'];
+const validRules = [
   'true',
   'false',
   'auth !== null',
@@ -30,7 +31,7 @@ var validRules = [
   'root.child("users/"+auth.uid).exists()',
   'root.child(auth.x+auth.y).exists()'
 ];
-var invalidRules = [
+const invalidRules = [
   'var foo = 8', // invalid syntax (no declarations allowed)
   'root = 5', // invalid syntax (no assignments allowed)
   'auth.uid === "5"; auth.id === 5', // invalid syntax (2 statements)
@@ -49,15 +50,15 @@ var invalidRules = [
   'root.val().notFound == false' // val only returns primitives.
 ];
 
-var ruleEvaluationTests = [{
+const ruleEvaluationTests = [{
   rule: '$skies == "blue"',
   wildchildren: ['$skies'],
-  scope: { $skies: 'blue' },
+  scope: {$skies: 'blue'},
   result: true
 }, {
   rule: '$skies == "green"',
   wildchildren: ['$skies'],
-  scope: { $skies: 'orange' },
+  scope: {$skies: 'orange'},
   result: false
 }, {
   rule: '$skies == "red"',
@@ -67,58 +68,58 @@ var ruleEvaluationTests = [{
 }, {
   rule: '$skies == "blue" && auth.dreams == true',
   wildchildren: ['$skies'],
-  scope: { $skies: 'blue', auth: { dreams: true } },
+  scope: {$skies: 'blue', auth: {dreams: true}},
   result: true
 }, {
   rule: 'auth.dreams.length > 1',
   wildchildren: [],
-  scope: { auth: { dreams: 'really do' } },
+  scope: {auth: {dreams: 'really do'}},
   result: true
 }, {
   rule: 'auth.dreams.length > 1 ? false : true',
   wildchildren: [],
-  scope: { auth: { dreams: 'really do'  } },
+  scope: {auth: {dreams: 'really do'}},
   result: false
 }, {
   rule: '!(auth.dreams.length > 1)',
   wildchildren: [],
-  scope: { auth: { dreams: 'really do' } },
+  scope: {auth: {dreams: 'really do'}},
   result: false
 }, {
   rule: 'root.val() == "bar"',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': 'bar' }) },
+  scope: {root: database.snapshot('/', {'.value': 'bar'})},
   result: true
 }, {
   rule: 'root.val().contains("ba")',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': 'bar' }) },
+  scope: {root: database.snapshot('/', {'.value': 'bar'})},
   result: true
 }, {
   rule: 'root.val().matches(/^ba/)',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': 'bar' }) },
+  scope: {root: database.snapshot('/', {'.value': 'bar'})},
   result: true
 }, {
   rule: 'root.val().matches(/^wa/)',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': 'bar' }) },
+  scope: {root: database.snapshot('/', {'.value': 'bar'})},
   result: false
 }, {
   rule: 'root.isNumber()',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': null }) },
+  scope: {root: database.snapshot('/', {'.value': null})},
   result: true,
   skipOnNoValue: true
 }, {
   rule: 'root.isString()',
   wildchildren: [],
-  scope: { root: database.snapshot('/', { '.value': null }) },
+  scope: {root: database.snapshot('/', {'.value': null})},
   result: false
 }, {
   rule: 'auth.foo[$bar] == true',
   wildchildren: ['$bar'],
-  scope: { $bar: 'baz', auth: {foo: {baz: true}}},
+  scope: {$bar: 'baz', auth: {foo: {baz: true}}},
   result: true
 }, {
   rule: 'auth.foo["baz"] == true',
@@ -176,13 +177,15 @@ describe('Rule', function() {
         if (ruleTest.willThrow) {
 
           expect(function() {
-            var rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
+            const rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
+
             rule.evaluate(ruleTest.scope, ruleTest.skipOnNoValue);
           }).to.throw();
 
         } else {
 
-          var rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
+          const rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
+
           expect(rule.evaluate(ruleTest.scope, ruleTest.skipOnNoValue), ruleTest.rule)
           .to.equal(ruleTest.result);
 
