@@ -1,3 +1,6 @@
 extends: '../../.eslintrc.yml'
 env:
   jasmine: true
+rules:
+  prefer-arrow-callback:
+    - "off"

@@ -3,11 +3,12 @@
  * targaryen.
  *
  */
+
 'use strict';
 
-var targaryen = require('../');
+const targaryen = require('../');
 
-var plugin = function chaiTargaryen(chai, utils) {
+function chaiTargaryen(chai, utils) {
 
   chai.Assertion.addProperty('can', function() {
     utils.flag(this, 'positivity', true);
@@ -59,14 +60,14 @@ var plugin = function chaiTargaryen(chai, utils) {
 
     targaryen.util.assertConfigured();
 
-    var auth = this._obj,
-      data = targaryen.util.getFirebaseData().as(auth),
-      operationType = utils.flag(this, 'operation'),
-      now = utils.flag(this, 'operationTimestamp'),
-      positivity = utils.flag(this, 'positivity'),
-      result, newData;
+    const auth = this._obj;
+    const data = targaryen.util.getFirebaseData().as(auth);
+    const operationType = utils.flag(this, 'operation');
+    const now = utils.flag(this, 'operationTimestamp');
+    const positivity = utils.flag(this, 'positivity');
+    let result, newData;
 
-    switch(operationType) {
+    switch (operationType) {
 
     case 'read':
       result = data.read(path, now);
@@ -101,11 +102,11 @@ var plugin = function chaiTargaryen(chai, utils) {
 
   });
 
-};
+}
 
-plugin.users = targaryen.util.users;
-plugin.setDebug = targaryen.util.setDebug;
-plugin.setFirebaseData = targaryen.util.setFirebaseData;
-plugin.setFirebaseRules = targaryen.util.setFirebaseRules;
+chaiTargaryen.users = targaryen.util.users;
+chaiTargaryen.setDebug = targaryen.util.setDebug;
+chaiTargaryen.setFirebaseData = targaryen.util.setFirebaseData;
+chaiTargaryen.setFirebaseRules = targaryen.util.setFirebaseRules;
 
-module.exports = plugin;
+module.exports = chaiTargaryen;

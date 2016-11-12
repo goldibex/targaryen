@@ -5,14 +5,15 @@
  * tested in "test/spec/lib/parser/rule.js".
  *
  */
+
 'use strict';
 
 const ruleset = require('../../../lib/ruleset');
 
-var invalidRulesets = {
+const invalidRulesets = {
   'are null': null,
   'are a string': 'wut',
-  'are missing': { noTopLevelRules: true },
+  'are missing': {noTopLevelRules: true},
   'include extra props': {
     rules: {
       '.read': true,
@@ -30,12 +31,12 @@ var invalidRulesets = {
   },
   'include null nodes': {
     rules: {
-      'foo': null
+      foo: null
     }
   },
   'include primitive nodes': {
     rules: {
-      'foo': 'true'
+      foo: 'true'
     }
   },
   'include unknown props': {
@@ -61,7 +62,7 @@ var invalidRulesets = {
   },
   'set index to an array of number': {
     rules: {
-      '.indexOn': [1,2,3]
+      '.indexOn': [1, 2, 3]
     }
   },
   'include unknown variables': {
@@ -101,7 +102,7 @@ var invalidRulesets = {
   }
 };
 
-var validRulesets = {
+const validRulesets = {
   'sets an empty rules property': {rules: {}},
   'defines valid read/write/indexOn/validate rules': {
     rules: {
@@ -184,7 +185,7 @@ describe('Ruleset', function() {
 
       expect(set.root.a.$wildchild.$validate.toString()).to.equal('true');
       expect(set.root.a.$wildchild.$name).to.equal('$b');
-      expect(set.root.a.$wildchild.$isWildchild).to.be.true;
+      expect(set.root.a.$wildchild.$isWildchild).to.be.true();
     });
 
   });

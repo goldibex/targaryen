@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
 'use strict';
-var fs = require('fs');
-var stripJsonComments = require('strip-json-comments');
 
-var path = require('path'),
-  Table = require('cli-table'),
-  colors = require('colors'),
-  helpers = require('../lib/util'),
-  TestJig = require('../lib/test-cmd'),
-  argv = require('minimist')(process.argv.slice(2), { boolean: true });
+const fs = require('fs');
+const stripJsonComments = require('strip-json-comments');
+
+const path = require('path');
+const Table = require('cli-table');
+const colors = require('colors');
+const helpers = require('../lib/util');
+const TestJig = require('../lib/test-cmd');
+const argv = require('minimist')(process.argv.slice(2), {boolean: true});
 
 if (argv._.length < 2) {
 
@@ -18,32 +19,31 @@ if (argv._.length < 2) {
 
 }
 
+const rulesJSONPath = path.resolve(argv._[0]);
+const testJSONPath = path.resolve(argv._[1]);
+const rulesJSONFile = fs.readFileSync(rulesJSONPath);
+const rules = JSON.parse(stripJsonComments(rulesJSONFile.toString()));
+const tests = require(testJSONPath);
 
-var rulesJSONPath = path.resolve(argv._[0]),
-  testJSONPath = path.resolve(argv._[1]),
-  rulesJSONFile = fs.readFileSync(rulesJSONPath),
-  rules = JSON.parse(stripJsonComments(rulesJSONFile.toString())),
-  tests = require(testJSONPath);
+const jig = new TestJig(rules, tests);
+const results = jig.run();
+const totalCount = results.length;
+const table = new Table({
+  head: ['Path', 'Type', 'Auth', 'Expect', 'Got']
+});
+let failCount = 0;
 
-var jig = new TestJig(rules, tests),
-  results = jig.run(),
-  totalCount = results.length,
-  failCount = 0,
-  table = new Table({
-    head: ['Path', 'Type', 'Auth', 'Expect', 'Got']
-  });
-
-results.forEach(function(result) {
+results.forEach(result => {
 
   if (argv.debug) {
     console.log(result.info);
     console.log();
   }
 
-  var expected = result.expected ? '✓'.green : '✖'.red,
-    actual = result.allowed ? '✓'.green : '✖'.red;
+  const expected = result.expected ? '✓'.green : '✖'.red;
+  const actual = result.allowed ? '✓'.green : '✖'.red;
+  let authStr;
 
-  var authStr;
   if (result.auth && result.auth.$description) {
     authStr = result.auth.$description;
   } else if (typeof result.auth === 'string') {
@@ -53,7 +53,7 @@ results.forEach(function(result) {
   }
 
   if (expected === actual) {
-    table.push([ result.path, result.type, authStr, expected, actual ]);
+    table.push([result.path, result.type, authStr, expected, actual]);
   } else {
     table.push([
       colors.bgRed(result.path),
