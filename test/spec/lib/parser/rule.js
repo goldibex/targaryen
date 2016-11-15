@@ -172,6 +172,51 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
   willThrow: true
+}, {
+  rule: '"foo".contains(auth.foo)',
+  wildchildren: [],
+  scope: {auth: null},
+  willThrow: true
+}, {
+  rule: '"foo1".contains(auth.foo)',
+  wildchildren: [],
+  scope: {auth: {foo: 1}},
+  willThrow: true
+}, {
+  rule: '"foo".beginsWith(auth.foo)',
+  wildchildren: [],
+  scope: {auth: null},
+  willThrow: true
+}, {
+  rule: '"1foo".beginsWith(auth.foo)',
+  wildchildren: [],
+  scope: {auth: {foo: 1}},
+  willThrow: true
+}, {
+  rule: '"foo".endsWith(auth.foo)',
+  wildchildren: [],
+  scope: {auth: null},
+  willThrow: true
+}, {
+  rule: '"foo1".endsWith(auth.foo)',
+  wildchildren: [],
+  scope: {auth: {foo: 1}},
+  willThrow: true
+}, {
+  rule: '"foo".replace(auth.foo, "bar") == "foo"',
+  wildchildren: [],
+  scope: {auth: null},
+  willThrow: true
+}, {
+  rule: '"foo1".replace(auth.foo, "bar") == "foobar"',
+  wildchildren: [],
+  scope: {auth: {foo: 1}},
+  willThrow: true
+}, {
+  rule: '"foobar".replace("bar", auth.foo) == "foo1"',
+  wildchildren: [],
+  scope: {auth: {foo: 1}},
+  willThrow: true
 }];
 
 describe('Rule', function() {
@@ -215,7 +260,7 @@ describe('Rule', function() {
           expect(function() {
             var rule = new Rule(ruleTest.rule, ruleTest.wildchildren);
             rule.evaluate(ruleTest.scope, ruleTest.skipOnNoValue);
-          }).to.throw();
+          }, ruleTest.rule).to.throw();
 
         } else {
 
