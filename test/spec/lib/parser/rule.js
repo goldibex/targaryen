@@ -127,6 +127,51 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: {auth: {foo: {baz: true}}},
   result: true
+}, {
+  rule: 'auth.foo.baz == null',
+  wildchildren: [],
+  scope: {auth: {}},
+  result: true
+}, {
+  rule: 'root.child("foo").child(auth.foo).val() != null',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").child(auth.foo).val() == null',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").child(auth.foo).exists()',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").child(auth.foo).exists() == false',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").hasChild(auth.foo)',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").hasChild(auth.foo) == false',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").hasChildren([auth.foo])',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
+}, {
+  rule: 'root.child("foo").hasChildren([auth.foo]) == false',
+  wildchildren: [],
+  scope: {auth: null, root: new RuleDataSnapshot({foo: {bar: {'.value': true}}})},
+  willThrow: true
 }];
 
 describe('Rule', function() {
