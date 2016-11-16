@@ -47,7 +47,12 @@ const invalidRules = [
   'root.hasChildren(["foo", 7])', // hasChildren only takes strings
   'root.child("str").val().matches("/foo/")', // matches only takes a regular expression literal
   'auth.foo.notFound() == false', // auth properties can only be an object or a primitives
-  'root.val().notFound == false' // val only returns primitives.
+  'root.val().notFound == false', // val only returns primitives.
+  'root.child("foo") != null', // child returned value is not a primitive.
+  'root.val() > true', // comparaison to  number and string only.
+  'root.val() < true',
+  'root.val() >= true',
+  'root.val() <= true'
 ];
 
 const ruleEvaluationTests = [{
