@@ -217,6 +217,26 @@ var ruleEvaluationTests = [{
   wildchildren: [],
   scope: {auth: {foo: 1}},
   willThrow: true
+}, {
+  rule: '-auth.foo == -1',
+  wildchildren: [],
+  scope: {auth: null},
+  willThrow: true
+}, {
+  rule: '-auth.foo == -1',
+  wildchildren: [],
+  scope: {auth: {foo: 'one'}},
+  willThrow: true
+}, {
+  rule: '!(auth.foo == null)',
+  wildchildren: [],
+  scope: {auth: null},
+  result: false
+}, {
+  rule: '!(auth.foo == null)',
+  wildchildren: [],
+  scope: {auth: {foo: 'one'}},
+  result: true
 }];
 
 describe('Rule', function() {
@@ -270,6 +290,149 @@ describe('Rule', function() {
 
         }
 
+      });
+
+    });
+
+    describe('with arithmetic operator', function() {
+      const expectWith = (rule, auth) => expect(() => new Rule(rule, []).evaluate({auth}), rule);
+
+      ['+', '-', '*', '%'].forEach(function(op) {
+        const r1 = `(auth.foo ${op} 1) == 1`;
+        const r2 = `(auth.foo ${op} 1) != 1`;
+        const r3 = `(1 ${op} auth.foo) == 1`;
+        const r4 = `(1 ${op} auth.foo) != 1`;
+
+        describe(op, function() {
+
+          it('should throw on null values', function() {
+            const auth = null;
+
+            [r1, r2, r3, r4].forEach(r => expectWith(r, auth).to.throw());
+          });
+
+          it('should throw on boolean values', function() {
+            const auth = {foo: true};
+
+            [r1, r2, r3, r4].forEach(r => expectWith(r, auth).to.throw());
+          });
+
+          it.skip('should not throw on number values', function() {
+            const auth = {foo: 1};
+
+            [r1, r2, r3, r4].forEach(r => expectWith(r, auth).to.not.throw());
+          });
+
+          if (op === '+') {
+
+            it('should not throw on string values', function() {
+              const auth = {foo: 'one'};
+
+              [r1, r2, r3, r4].forEach(r => expectWith(r, auth).to.not.throw());
+            });
+
+          } else {
+
+            it('should throw on string values', function() {
+              const auth = {foo: 'one'};
+
+              [r1, r2, r3, r4].forEach(r => expectWith(r, auth).to.throw());
+            });
+
+          }
+
+        });
+
+      });
+
+    });
+
+    describe('with equality operators', function() {
+
+      it('should not throw on null value', function() {
+        ['==', '===', '!=', '!=='].forEach(function(op) {
+          const r1 = `'foo' ${op} auth.foo`;
+          const r2 = `auth.foo ${op} 'foo'`;
+          const auth = null;
+
+          [r1, r2].forEach(r => expect(() => new Rule(r, []).evaluate({auth}), r).to.not.throw());
+        });
+      });
+
+    });
+
+    describe('with equality operators', function() {
+
+      it('should not throw on null value', function() {
+        ['==', '===', '!=', '!=='].forEach(function(op) {
+          const r1 = `'foo' ${op} auth.foo`;
+          const r2 = `auth.foo ${op} 'foo'`;
+          const auth = null;
+
+          [r1, r2].forEach(r => expect(() => new Rule(r, []).evaluate({auth}), r).to.not.throw());
+        });
+      });
+
+      it('should not throw on different value type tests', function() {
+        ['==', '===', '!=', '!=='].forEach(function(op) {
+          const r1 = `'one' ${op} auth.foo`;
+          const r2 = `auth.foo ${op} 'one'`;
+          const auth = {foo: 1};
+
+          [r1, r2].forEach(r => expect(() => new Rule(r, []).evaluate({auth}), r).to.not.throw());
+        });
+      });
+
+    });
+
+    describe('with comparison operators', function() {
+
+      it('should not throw on null value', function() {
+        ['>', '>=', '<', '<='].forEach(function(op) {
+          const r1 = `auth.bar ${op} auth.foo`;
+          const r2 = `auth.foo ${op} auth.bar`;
+          const auth = null;
+
+          [r1, r2].forEach(r => expect(() => new Rule(r, []).evaluate({auth}), r).to.not.throw());
+        });
+      });
+
+      it('should throw on different value type tests', function() {
+        ['>', '>=', '<', '<='].forEach(function(op) {
+          const r1 = `'one' ${op} auth.foo`;
+          const r2 = `auth.foo ${op} 'one'`;
+          const auth = {foo: 1};
+
+          [r1, r2].forEach(r => expect(() => new Rule(r, []).evaluate({auth}), r).to.throw());
+        });
+      });
+
+    });
+
+    describe('with logical expression', function() {
+
+      it('should evaluate each branch lazily', function() {
+        const fail = new Rule('auth.foo > 1 || true', []);
+        const pass = new Rule('true || auth.foo > 1', []);
+        const scope = {auth: null};
+
+        expect(() => fail.evaluate(scope)).to.throw();
+        expect(() => pass.evaluate(scope)).to.not.throw();
+        expect(pass.evaluate(scope)).to.be.true;
+      });
+
+    });
+
+    describe('with logical expression', function() {
+
+      it('should evaluate each branch lazily', function() {
+        const fail = new Rule('true ? auth.foo > 1 : true', []);
+        const pass = new Rule('true ? true : auth.foo > 1', []);
+        const scope = {auth: null};
+
+        expect(() => fail.evaluate(scope)).to.throw();
+        expect(() => pass.evaluate(scope)).to.not.throw();
+        expect(pass.evaluate(scope)).to.be.true;
       });
 
     });
