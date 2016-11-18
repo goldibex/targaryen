@@ -26,6 +26,12 @@
 
 Thanks goes to @mhuebert for his contributions.
 
+## 2.3.2 (2016-11-18)
+
+- [Fix runtime handling of null value](https://github.com/goldibex/targaryen/issues/86).
+
+Thanks to @RomansBermans and @simenbrekken for spotting the issue.
+
 ## 2.3.1 (2016-11-08)
 
 - Fix npm description
