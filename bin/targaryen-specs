@@ -8,7 +8,6 @@
  * It uses the npm "debug" package to send debug info to stderr.
  *
  */
-/* eslint no-console: "off" */
 
 'use strict';
 
