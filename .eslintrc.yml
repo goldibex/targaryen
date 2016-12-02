@@ -17,6 +17,8 @@ rules:
   eqeqeq:
     - error
     - smart
+  no-console:
+    - warn
   no-confusing-arrow:
     - error
   no-eq-null:

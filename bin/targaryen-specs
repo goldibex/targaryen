@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+/**
+ * Create parsing test fixtures by evaluating rules against a live Firebase DB.
+ *
+ * Expect in the stdin the JSON encoded rules to update. The JSON result will
+ * be sent to stdout.
+ *
+ * It uses the npm "debug" package to send debug info to stderr.
+ *
+ */
+
+'use strict';
+
+const HELP = `targaryen-specs [-v] [-h] [-s SPECS_SOURCE] [-i] [-a NEW_SPECS_TO_APPEND]
+
+Usages:
+
+    # Evaluate rules live in ./fixtures.json and print them in stdout
+    targaryen-specs -s ./fixtures.json
+
+    # Evaluate rules live in ./fixtures.json and print debug info to sdterr
+    targaryen-specs -v -s ./fixtures.json
+
+    # Evaluate rules live in ./fixtures.json and save the results in place
+    targaryen-specs -i -s ./fixtures.json
+
+    # Evaluate and append new rules to ./fixtures.json
+    targaryen-specs -i -s ./fixtures.json -a '{"tests": [{"rule": "true"}]'
+
+`;
+
+const argv = require('minimist')(process.argv.slice(2), {boolean: ['i', 'v', 'h']});
+
+const VERBOSE = argv.v;
+const PRINT_HELP = argv.h;
+const SOURCE = argv.s;
+const IN_PLACE = argv.i;
+const NEW_SPECS = JSON.parse(argv.a || 'null');
+
+if (PRINT_HELP) {
+  console.error(HELP);
+  process.exit(0);
+}
+
+if (VERBOSE && !process.env.DEBUG) {
+  process.env.DEBUG = '*';
+}
+
+const specs = require('../lib/parser/specs');
+const path = require('path');
+const fs = require('fs');
+
+const OLD_SPECS = SOURCE ? require(path.resolve(SOURCE)) : {users: {}, tests: []};
+
+const task = NEW_SPECS ? append(NEW_SPECS, OLD_SPECS) : update(OLD_SPECS);
+
+task.then(save).then(test).catch(e => {
+  console.error(e);
+  process.exit(1);
+});
+
+function append(newFixtures, fixtures) {
+  const users = Object.assign(
+    {},
+    fixtures.users,
+    newFixtures.users,
+    {unauth: null}
+  );
+  const newTests = newFixtures.tests.map(
+    t => Object.assign({user: 'unauth'}, t)
+  );
+
+  return specs.test(newTests, users).then(tests => ({
+    users,
+    tests: fixtures.tests.concat(tests)
+  }));
+}
+
+function update(fixtures) {
+  const users = Object.assign({}, fixtures.users, {unauth: null});
+  const oldTests = fixtures.tests.map(
+    t => Object.assign({user: 'unauth'}, t)
+  );
+
+  return specs.test(oldTests, users).then(tests => ({users, tests}));
+}
+
+function save(fixtures) {
+  const output = JSON.stringify(fixtures, null, 2);
+
+  if (!IN_PLACE) {
+    console.log(output);
+    return fixtures;
+  }
+
+  fs.writeFileSync(SOURCE, output);
+  return fixtures;
+}
+
+function test(fixtures) {
+  fixtures.tests
+    .filter(t => typeof t.compare === 'function')
+    .forEach(t => t.compare(fixtures.users));
+}

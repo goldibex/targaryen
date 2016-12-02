@@ -165,7 +165,7 @@ describe('the targaryen Jasmine plugin', function() {
     });
   });
 
-  xdescribe('using nested variables in path', function() {
+  describe('using nested variables in path', function() {
 
     beforeEach(function() {
       // using double quotes to make the data & rules compatible with Firebase (web interface)
@@ -305,8 +305,6 @@ describe('the targaryen Jasmine plugin', function() {
         bool: null,
         number: null
       });
-
-      pending('This doesn\'t work in the tests, but this works at least in the Javascrip SDK');
     });
 
     it('should not be able to write invalid data by deleting a sibling', function() {

@@ -14,6 +14,56 @@ git remote add upstream https://github.com/goldibex/targaryen.git
 npm install
 ```
 
+## Reporting a parsing error
+
+If the error relates to rule parsing and evaluation, you can use
+`./bin/targaryen-specs`; e.g.:
+```
+$ ./bin/targaryen-specs -a '{"tests": [{"rule": "1/0 > 2"}]}'
+{
+  "users": {
+    "unauth": null
+  },
+  "tests": [
+    {
+      "rule": "1/0 > 2",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    }
+  ]
+}
+{ Error: Targaryen and Firebase evaluation of "1/0 > 2" diverges.
+The rule should evaluate to false.
+    at MatchError (/targaryen/lib/parser/specs.js:28:5)
+    at Rule.match (/targaryen/lib/parser/specs.js:235:13)
+    at fixtures.tests.filter.forEach.t (/targaryen/bin/targaryen-specs:103:21)
+    at Array.forEach (native)
+    at test (/targaryen/bin/targaryen-specs:103:6)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+  spec:
+   Rule {
+     rule: '1/0 > 2',
+     user: 'unauth',
+     wildchildren: undefined,
+     data: undefined,
+     isValid: true,
+     failAtRuntime: false,
+     evaluateTo: false },
+  targaryen: { isValid: true, failAtRuntime: false, evaluateTo: true } }
+```
+
+To add it to the list of test fixture in `test/spec/lib/parser/fixtures.json`:
+```
+./bin/targaryen-specs -s test/spec/lib/parser/fixtures.json -i -a '{"tests": [{"rule": "1/0 > 2"}]}'
+
+# or
+npm run fixtures -- -a '{"tests": [{"rule": "1/0 > 2"}]}'
+```
+
+For other type of bug, you should submit regular mocha tests if possible.
+
 
 ## Feature branch
 
