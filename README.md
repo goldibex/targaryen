@@ -12,7 +12,7 @@ All you need to do is supply the security rules and some mock data, then write t
 
 ```js
 const assert = require('assert');
-const targaryen = require('targaryen');
+const targaryen = require('./');
 
 const rules = {
   rules: {
@@ -24,8 +24,8 @@ const rules = {
 const data = {foo: 1};
 const auth = {uid: 'someuid'};
 
-const database = targaryen.database(rules, data);
-const {allowed, newDatabase, info} = database.as(auth).write('/foo', 2);
+const database = targaryen.database(rules, data).as(auth).with({debug: true});
+const {allowed, newDatabase, info} = database.write('/foo', 2);
 
 console.log('Rule evaluations:\n', info);
 assert.ok(allowed);
@@ -126,7 +126,7 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
     Simulates an update operation (including multi-location update).
 
-- `Result: {allowed: boolean, info: string, database: Database, newDatabase: Database, newValue: any}`
+- `Result: {path: string, auth: any, allowed: boolean, info: string, database: Database, newDatabase: Database, newValue: any}`
 
     It holds:
 
