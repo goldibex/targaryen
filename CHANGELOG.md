@@ -27,6 +27,12 @@
 
 Thanks goes to @mhuebert, @RomansBermans and @simenbrekken for their contributions.
 
+## 2.3.3 (2016-12-04)
+
+- [Fix write/patch debug message](https://github.com/goldibex/targaryen/pull/93).
+
+Thanks to @RomansBermans for reporting the issue.
+
 ## 2.3.2 (2016-11-18)
 
 - [Fix runtime handling of null value](https://github.com/goldibex/targaryen/issues/86).
