@@ -73,9 +73,9 @@ function chaiTargaryen(chai, utils) {
       result = data.read(path, now);
 
       if (positivity) {
-        chai.assert(result.allowed === true, targaryen.util.unreadableError(result));
+        chai.assert(result.allowed === true, targaryen.util.unreadableError(result, 6).trim());
       } else {
-        chai.assert(result.allowed === false, targaryen.util.readableError(result));
+        chai.assert(result.allowed === false, targaryen.util.readableError(result, 6).trim());
       }
 
       return;
@@ -95,9 +95,9 @@ function chaiTargaryen(chai, utils) {
     }
 
     if (positivity) {
-      chai.assert(result.allowed === true, targaryen.util.unwritableError(result));
+      chai.assert(result.allowed === true, targaryen.util.unwritableError(result, 6).trim());
     } else {
-      chai.assert(result.allowed === false, targaryen.util.writableError(result));
+      chai.assert(result.allowed === false, targaryen.util.writableError(result, 6).trim());
     }
 
   });
