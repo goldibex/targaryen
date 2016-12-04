@@ -25,7 +25,7 @@
     * Remove `targaryen.helpers`.
 
 
-Thanks goes to @mhuebert for his contributions.
+Thanks goes to @mhuebert, @RomansBermans and @simenbrekken for their contributions.
 
 ## 2.3.2 (2016-11-18)
 
