@@ -52,6 +52,8 @@ jasmine spec/security/<name of example>.js
 - `jasmineTargaryen.matchers`: The plugin object. Load this using `jasmine.addMatchers(jasmineTargaryen.matchers)` before running any tests.
 - `jasmineTargaryen.setFirebaseData(data)`: Set the mock data to be used as the existing Firebase data, i.e., `root` and `data`.
 - `jasmineTargaryen.setFirebaseRules(rules)`: Set the security rules to be tested against. Throws if there's a syntax error in your rules.
+- `jasmineTargaryen.setDebug(flag)`: Failed expectations will show the result of each rule when debug is set to `true` (`true` by default).
+- `jasmineTargaryen.setVerbose(flag)`: Failed expectations will show the detailed evaluation of each rule when verbose is set to `true`(`true` by default).
 - `jasmineTargaryen.users`: A set of authentication objects you can use as the subject of the assertions. Has the following keys:
   - `unauthenticated`: an unauthenticated user, i.e., `auth === null`.
   - `anonymous`: a user authenticated using Firebase anonymous sessions.
