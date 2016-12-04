@@ -6,7 +6,7 @@
           ".validate": "data.parent().child('on-fire').val() === false"
         },
         ".read": "auth !== null",
-        ".write": "root.child('users').child(auth.uid).child('king').val() === true"
+        ".write": "auth !== null && root.child('users').child(auth.uid).child('king').val() === true"
       }
     }
   }
