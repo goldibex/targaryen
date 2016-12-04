@@ -2,7 +2,7 @@
 'use strict';
 
 // in your app this would be require('targaryen/plugins/jasmine')
-const targaryen = require('../../../plugins/jasmine');
+const targaryen = require('../../../../../plugins/jasmine');
 const users = targaryen.users;
 
 targaryen.setFirebaseData(require('./data.json'));

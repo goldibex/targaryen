@@ -86,4 +86,142 @@ describe('Rule', function() {
 
   });
 
+  describe('#debug', function() {
+
+    it('should format literal', function() {
+      const rule = parser.parse('true', []);
+      const state = {};
+
+      expect(rule.debug(state).detailed).to.equal('true  [=> true]');
+    });
+
+    it('should format binary', function() {
+      const rule = parser.parse('2 > 1', []);
+      const state = {};
+
+      expect(rule.debug(state).detailed).to.equal('2 > 1  [=> true]');
+    });
+
+    it('should format string call', function() {
+      const rule = parser.parse('"foo".contains("o")', []);
+      const state = {};
+
+      expect(rule.debug(state).detailed).to.equal(
+        '"foo".contains("o")  [=> true]\n' +
+        'using [\n' +
+        '  "foo".contains("o") = true\n' +
+        ']'
+      );
+    });
+
+    it('should format snapshot call', function() {
+      const rule = parser.parse('root.hasChildren()', []);
+      const state = {root: database.snapshot('/', null)};
+
+      expect(rule.debug(state).detailed).to.equal(
+        'root.hasChildren()  [=> false]\n' +
+        'using [\n' +
+        '  root = {"path":"","exists":false}\n' +
+        '  root.hasChildren() = false\n' +
+        ']'
+      );
+    });
+
+    it('should format ternary expression 1/2', function() {
+      const rule = parser.parse('auth.isAdmin === true ? true : root.child("open").exists()', []);
+      const state = {root: database.snapshot('/', null), auth: {isAdmin: true}};
+
+      expect(rule.debug(state).detailed).to.equal(
+        'auth.isAdmin === true  [=> true]  ?\n' +
+        '  true  [=> true]  :\n' +
+        '  root.child("open").exists()  [=> undefined]\n' +
+        '  [=> true]\n' +
+        'using [\n' +
+        '  auth = {"isAdmin":true}\n' +
+        '  auth.isAdmin = true\n' +
+        ']'
+      );
+    });
+
+    it('should format ternary expression 2/2', function() {
+      const rule = parser.parse('auth.isAdmin === false ? root.child("open").exists() : true', []);
+      const state = {root: database.snapshot('/', null), auth: {isAdmin: true}};
+
+      expect(rule.debug(state).detailed).to.equal(
+        'auth.isAdmin === false  [=> false]  ?\n' +
+        '  root.child("open").exists()  [=> undefined]  :\n' +
+        '  true  [=> true]\n' +
+        '  [=> true]\n' +
+        'using [\n' +
+        '  auth = {"isAdmin":true}\n' +
+        '  auth.isAdmin = true\n' +
+        ']'
+      );
+    });
+
+    it('should format indentifier', function() {
+      const rule = parser.parse('$foo == "bar"', ['$foo']);
+      const state = {$foo: 'bar'};
+
+      expect(rule.debug(state).detailed).to.equal(
+        '$foo == "bar"  [=> true]\n' +
+        'using [\n' +
+        '  $foo = "bar"\n' +
+        ']'
+      );
+    });
+
+    it('should format logical expression', function() {
+      const rule = parser.parse(
+        'root.hasChild("foo") || root.hasChild("bar") || root.hasChild("baz")',
+        []
+      );
+      const state = {root: database.snapshot('/', {bar: true})};
+
+      expect(rule.debug(state).detailed).to.equal(
+        '(\n' +
+        '  (\n' +
+        '    root.hasChild("foo")  [=> false]\n' +
+        '    || root.hasChild("bar")  [=> true]\n' +
+        '  )  [=> true]\n' +
+        '  || root.hasChild("baz")  [=> undefined]\n' +
+        ')  [=> true]\n' +
+        'using [\n' +
+        '  root = {"path":"","exists":true}\n' +
+        '  root.hasChild("bar") = true\n' +
+        '  root.hasChild("foo") = false\n' +
+        ']'
+      );
+    });
+
+    it('should format unary expressions', function() {
+      const rule = parser.parse('!(root.exists())', []);
+      const state = {root: database.snapshot('/', null)};
+
+      expect(rule.debug(state).detailed).to.equal(
+        '!(root.exists())  [=> true]\n' +
+        'using [\n' +
+        '  root = {"path":"","exists":false}\n' +
+        '  root.exists() = false\n' +
+        ']'
+      );
+    });
+
+    it('should format array expressions', function() {
+      const rule = parser.parse('root.hasChildren(["foo",auth.bar])', []);
+      const state = {root: database.snapshot('/', null), auth: {bar: 'baz'}};
+
+      expect(rule.debug(state).detailed).to.equal(
+        'root.hasChildren(["foo", auth.bar])  [=> false]\n' +
+        'using [\n' +
+        '  auth = {"bar":"baz"}\n' +
+        '  auth.bar = "baz"\n' +
+        '  root = {"path":"","exists":false}\n' +
+        '  root.hasChildren(["foo",auth.bar]) = false\n' +
+        ']'
+      );
+    });
+
+  });
+
 });

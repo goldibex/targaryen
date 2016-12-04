@@ -1,7 +1,7 @@
 'use strict';
 
 // in your app this would be require('targaryen/plugins/jasmine')
-const targaryen = require('../../../plugins/jasmine');
+const targaryen = require('../../../../../plugins/jasmine');
 
 describe('An invalid set of security rules and data', function() {
 

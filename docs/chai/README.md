@@ -53,6 +53,8 @@ mocha examples/<name of example>.js
 - `chaiTargaryen.chai`: The plugin object. Load this using `chai.use(chaiTargaryen.chai)` before running any tests.
 - `chaiTargaryen.setFirebaseData(data)`: Set the mock data to be used as the existing Firebase data, i.e., `root` and `data`.
 - `chaiTargaryen.setFirebaseRules(rules)`: Set the security rules to be tested against. Throws if there's a syntax error in your rules.
+- `chaiTargaryen.setDebug(flag)`: Failed expectations will show the result of each rule when debug is set to `true` (`true` by default).
+- `chaiTargaryen.setVerbose(flag)`: Failed expectations will show the detailed evaluation of each rule when verbose is set to `true`(`true` by default).
 - `chaiTargaryen.users`: A set of authentication objects you can use as the subject of the assertions. Has the following keys:
   - `unauthenticated`: an unauthenticated user, i.e., `auth === null`.
   - `anonymous`: a user authenticated using Firebase anonymous sessions.
