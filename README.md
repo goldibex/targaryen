@@ -106,7 +106,7 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
     The Database objects are immutable; to get an updated Database object with different the user auth data, rules, data or timestamp, use its `with(options)` method.
 
-- `Database.prototype.with({rules: {rules: object}, data: any, auth: null|object, now: number}): Database`
+- `Database.prototype.with({rules: {rules: object}, data: any, auth: null|object, now: number, debug: boolean}): Database`
 
     Extends the database object with new rules, data, auth data, or time stamp.
 

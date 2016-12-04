@@ -2,6 +2,7 @@
 
 - [Fix type inferring](https://github.com/goldibex/targaryen/pull/64).
 - [Fix write permission test](https://github.com/goldibex/targaryen/issues/73).
+- [Add a verbose mode displaying detailed evaluation info](https://github.com/goldibex/targaryen/pull/83).
 - [Refactor API](https://github.com/goldibex/targaryen/pull/80):
 
     Plugins scripts should be imported directly, e.g. `require('targaryen/plugins/chai')`:
