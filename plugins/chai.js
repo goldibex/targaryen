@@ -106,6 +106,7 @@ function chaiTargaryen(chai, utils) {
 
 chaiTargaryen.users = targaryen.util.users;
 chaiTargaryen.setDebug = targaryen.util.setDebug;
+chaiTargaryen.setVerbose = targaryen.util.setVerbose;
 chaiTargaryen.setFirebaseData = targaryen.util.setFirebaseData;
 chaiTargaryen.setFirebaseRules = targaryen.util.setFirebaseRules;
 

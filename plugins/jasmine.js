@@ -11,6 +11,7 @@ const targaryen = require('../');
 exports.setFirebaseData = targaryen.util.setFirebaseData;
 exports.setFirebaseRules = targaryen.util.setFirebaseRules;
 exports.setDebug = targaryen.util.setDebug;
+exports.setVerbose = targaryen.util.setVerbose;
 exports.users = targaryen.util.users;
 
 exports.matchers = {
