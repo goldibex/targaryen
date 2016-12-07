@@ -18,6 +18,11 @@
           ".validate": "$from !== $to"
         }
       }
+    },
+    "chats": {
+      "$chatID": {
+        ".read": "root.child('chats').child($chatID).child('orgID').val() != null && auth.orgs != null && auth.orgs[root.child('chats').child($chatID).child('orgID').val()] == true"
+      }
     }
   }
 }
