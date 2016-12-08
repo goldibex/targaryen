@@ -116,6 +116,28 @@ describe('store', function() {
     });
 
     it('should return the node priority set with explicite priority', function() {
+      const value = 3;
+
+      data = store.create();
+
+      expect(data.$set('foo', value).foo.$priority()).to.undefined();
+      expect(data.$set('foo', value, 1).foo.$priority()).to.equal(1);
+      expect(data.$set('foo', value, 'something').foo.$priority()).to.equal('something');
+    });
+
+    it.skip('should throw when setting invalid priority', function() {
+      expect(() => store.create({'.value': 1, '.priority': {foo: 'bar'}})).to.throw();
+      expect(() => store.create({'.value': 1, '.priority': true})).to.throw();
+
+      const value = 3;
+
+      data = store.create();
+
+      expect(() => data.$set('foo', value, true)).to.throw();
+      expect(() => data.$set('foo', value, {foo: 'bar'})).to.throw();
+    });
+
+    it('should return the node priority set with explicite priority', function() {
       data = store.create().$set('a', 3, priority);
 
       expect(data.a.$priority()).to.equal(priority);

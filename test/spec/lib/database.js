@@ -13,98 +13,7 @@
 
 const database = require('../../../lib/database');
 
-function getRuleset() {
-
-  return {
-    rules: {
-      '.read': false,
-      foo: {
-        '.read': false,
-        '.write': false,
-        $bar: {
-          '.read': 'auth !== null',
-          '.write': 'auth.id === 1',
-          baz: {
-            '.read': 'root.child("users").child($bar).exists()'
-          }
-        }
-      },
-      nested: {
-        $first: {
-          $second: {
-            '.read': '$first == $second',
-            '.write': '$first == $second',
-            $key: {
-              '.validate': 'newData.val() == $second'
-            }
-          }
-        }
-      },
-      mixedType: {
-        $item: {
-          '.write': true,
-          '.validate': 'newData.hasChildren(["type", "a"]) || newData.hasChildren(["type", "b"])',
-          type: {
-            '.validate': 'newData.val() == "a" || newData.val() == "b"'
-          },
-          a: {
-            '.validate': 'newData.parent().child("type").val() == "a" \n&& newData.parent().child("b").exists() == false'
-          },
-          b: {
-            '.validate': 'newData.parent().child("type").val() == "b" \n&& newData.parent().child("a").exists() == false'
-          }
-        }
-      },
-      timestamp: {
-        $foo: {
-          '.write': true,
-          '.validate': 'newData.val() == now'
-        }
-      }
-    }
-  };
-
-}
-
-function getDB() {
-
-  const rules = getRuleset();
-  const initialData = {
-    foo: {
-      firstChild: {
-        '.priority': 0,
-        baz: {
-          '.value': true
-        }
-      },
-      secondChild: {
-        '.priority': 1,
-        baz: {
-          '.value': false
-        }
-      }
-    },
-    nested: {
-      one: {
-        one: {id: {'.value': 'one'}},
-        two: {id: {'.value': 'two'}}
-      }
-    },
-    mixedType: {
-      first: {
-        type: {'.value': 'a'},
-        a: {'.value': 1}
-      }
-    },
-    users: {
-      firstChild: {
-        '.value': true
-      }
-    }
-  };
-
-  return database.create(rules, initialData);
-}
+const TS = Object.freeze({'.sv': 'timestamp'});
 
 describe('database', function() {
   const _now = Date.now;
@@ -132,33 +41,10 @@ describe('database', function() {
   });
 
   describe('snapshot', function() {
-    let root;
+    let rules;
 
     beforeEach(function() {
-      root = database.snapshot('/', {
-        '.priority': 'hello',
-        users: {
-          'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {
-            '.priority': 1,
-            name: {'.value': 'Sherlock Holmes'},
-            genius: {'.value': true},
-            arrests: {'.value': 70}
-          },
-          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
-            '.priority': 2,
-            name: {'.value': 'John Watson'}
-          },
-          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
-            '.priority': 0,
-            name: {'.value': 'Inspector Lestrade'},
-            arrests: {'.value': 35}
-          },
-          'password:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx': {
-            '.priority': 0,
-            '.value': null
-          }
-        }
-      });
+      rules = {rules: {}};
     });
 
     describe('create', function() {
@@ -178,23 +64,42 @@ describe('database', function() {
     describe('#val', function() {
 
       it('gets the value at the specified path', function() {
+        const data = {
+          foo: {
+            bar: 1,
+            baz: 2
+          },
+          qux: 3
+        };
+        const db = database.create(rules, data);
 
-        expect(root.val()).to.deep.equal({
-          users: {
-            'password:c7ec6752-45b3-404f-a2b9-7df07b78d28e': {name: 'Sherlock Holmes', genius: true, arrests: 70},
-            'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {name: 'John Watson'},
-            'password:3403291b-fdc9-4995-9a54-9656241c835d': {name: 'Inspector Lestrade', arrests: 35}
-          }
-        });
-
+        expect(db.snapshot('/').val()).to.deep.equal(data);
+        expect(db.snapshot('/foo').val()).to.deep.equal(data.foo);
+        expect(db.snapshot('/foo/bar').val()).to.deep.equal(data.foo.bar);
+        expect(db.snapshot('/foo/baz').val()).to.deep.equal(data.foo.baz);
+        expect(db.snapshot('/qux').val()).to.deep.equal(data.qux);
       });
 
     });
 
     describe('#getPriority', function() {
 
-      it('gets the priority at the specified path', function() {
-        expect(root.getPriority()).to.equal('hello');
+      it.skip('gets the priority at the specified path', function() {
+        const data = {
+          '.priority': 1,
+          foo: {
+            bar: {
+              '.priority': 10,
+              '.value': 1
+            },
+            baz: 2
+          }
+        };
+        const db = database.create(rules, data);
+
+        expect(db.snapshot('/').getPriority()).to.equal(1);
+        expect(db.snapshot('/foo/bar').getPriority()).to.equal(10);
+        expect(db.snapshot('/foo/baz').getPriority()).to.be.null();
       });
 
     });
@@ -202,12 +107,16 @@ describe('database', function() {
     describe('#child', function() {
 
       it('gets a new data snapshot for the specified child key', function() {
-        expect(
-          root
-            .child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3')
-            .child('name')
-            .val()
-        ).to.equal('John Watson');
+        const data = {
+          foo: {
+            bar: 1,
+            baz: 2
+          },
+          qux: 3
+        };
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.child('foo').val()).to.deep.equal(data.foo);
       });
 
     });
@@ -215,18 +124,20 @@ describe('database', function() {
     describe('#parent', function() {
 
       it('gets the parent of the snap', function() {
+        const foo = {
+          bar: 1,
+          baz: 2
+        };
+        const snap = database.create(rules, {foo}).snapshot('/foo');
 
-        expect(
-          root
-            .child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/name')
-            .parent()
-            .val()
-        ).to.deep.equal({name: 'John Watson'});
-
+        expect(snap.parent().val()).to.deep.equal({foo});
       });
 
-      it('returns null if we are at the top', function() {
-        expect(root.parent()).to.be.null();
+      it.skip('fail if the snapshot was refering to the data root ', function() {
+        const data = null;
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(() => snap.parent()).to.throw();
       });
 
     });
@@ -234,11 +145,19 @@ describe('database', function() {
     describe('#exists', function() {
 
       it('returns true if some data is at that key', function() {
-        expect(root.child('users').exists()).to.be.true();
+        const data = {foo: 1};
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.exists()).to.be.true();
+        expect(snap.child('foo').exists()).to.be.true();
       });
 
-      it('returns false if no data is at that key', function() {
-        expect(root.child('nonexistent').exists()).to.be.false();
+      it('returns true if some data is at that key', function() {
+        const data = null;
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.exists()).to.be.false();
+        expect(snap.child('foo').exists()).to.be.false();
       });
 
     });
@@ -246,11 +165,17 @@ describe('database', function() {
     describe('#hasChild', function() {
 
       it('returns true if the path has a child with the given name', function() {
-        expect(root.hasChild('users')).to.be.true();
+        const data = {foo: 1};
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.hasChild('foo')).to.be.true();
       });
 
       it('returns false if the path does not have a child with the given name', function() {
-        expect(root.hasChild('nonexistent')).to.be.false();
+        const data = {foo: 1};
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.hasChild('bar')).to.be.false();
       });
 
     });
@@ -260,19 +185,17 @@ describe('database', function() {
       describe('with no arguments', function() {
 
         it('returns true if the path has any children at all', function() {
-          expect(
-            root
-              .child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3')
-              .hasChildren()
-          ).to.be.true();
+          const data = {foo: 1};
+          const snap = database.create(rules, data).snapshot('/');
+
+          expect(snap.hasChildren()).to.be.true();
         });
 
         it('returns false if the path has no children', function() {
-          expect(
-            root
-              .child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/name')
-              .hasChildren()
-          ).to.be.false();
+          const data = null;
+          const snap = database.create(rules, data).snapshot('/');
+
+          expect(snap.hasChildren()).to.be.false();
         });
 
       });
@@ -280,7 +203,10 @@ describe('database', function() {
       describe('with an empty array', function() {
 
         it('should should throw', function() {
-          expect(() => root.hasChildren([])).to.throw();
+          const data = {foo: 1};
+          const snap = database.create(rules, data).snapshot('/');
+
+          expect(() => snap.hasChildren([])).to.throw();
         });
 
       });
@@ -288,21 +214,17 @@ describe('database', function() {
       describe('with an array of child names', function() {
 
         it('returns true if the path has all the specified children', function() {
+          const data = {foo: 1, bar: 2};
+          const snap = database.create(rules, data).snapshot('/');
 
-          expect(
-            root
-              .child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e')
-              .hasChildren(['name', 'genius', 'arrests'])
-          ).to.be.true();
-
+          expect(snap.hasChildren(['foo', 'bar'])).to.be.true();
         });
 
         it('returns false if the path is missing even one of the specified children', function() {
-          expect(
-            root
-              .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d')
-              .hasChildren(['name', 'genius', 'arrests'])
-          ).to.be.false();
+          const data = {foo: 1};
+          const snap = database.create(rules, data).snapshot('/');
+
+          expect(snap.hasChildren(['foo', 'bar'])).to.be.false();
         });
 
       });
@@ -312,19 +234,19 @@ describe('database', function() {
     describe('#isNumber', function() {
 
       it('returns true if the value at the path has type number', function() {
-        expect(
-          root
-            .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/arrests')
-            .isNumber()
-        ).to.be.true();
+        const data = 1;
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.isNumber()).to.be.true();
       });
 
       it('returns false if the value at the path does not have type number', function() {
-        expect(
-          root
-            .child('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/arrests')
-            .isNumber()
-        ).to.be.false();
+        const data = {foo: 'bar', bar: false};
+        const db = database.create(rules, data);
+
+        expect(db.snapshot('/').isNumber()).to.be.false();
+        expect(db.snapshot('/foo').isNumber()).to.be.false();
+        expect(db.snapshot('/bar').isNumber()).to.be.false();
       });
 
     });
@@ -332,19 +254,19 @@ describe('database', function() {
     describe('#isBoolean', function() {
 
       it('returns true if the value at the path has type boolean', function() {
-        expect(
-          root
-            .child('users/password:c7ec6752-45b3-404f-a2b9-7df07b78d28e/genius')
-            .isBoolean()
-        ).to.be.true();
+        const data = false;
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.isBoolean()).to.be.true();
       });
 
       it('returns false if the value at the path does not have type boolean', function() {
-        expect(
-          root
-            .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name')
-            .isBoolean()
-        ).to.be.false();
+        const data = {foo: 'bar', bar: 1};
+        const db = database.create(rules, data);
+
+        expect(db.snapshot('/').isBoolean()).to.be.false();
+        expect(db.snapshot('/foo').isBoolean()).to.be.false();
+        expect(db.snapshot('/bar').isBoolean()).to.be.false();
       });
 
     });
@@ -352,19 +274,19 @@ describe('database', function() {
     describe('#isString', function() {
 
       it('returns true if the value at the path has type string', function() {
-        expect(
-          root
-            .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name')
-            .isString()
-        ).to.be.true();
+        const data = 'foo';
+        const snap = database.create(rules, data).snapshot('/');
+
+        expect(snap.isString()).to.be.true();
       });
 
       it('returns false if the value at the path does not have type string', function() {
-        expect(
-          root
-            .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d')
-            .isString()
-        ).to.be.false();
+        const data = {foo: 1, bar: true};
+        const db = database.create(rules, data);
+
+        expect(db.snapshot('/').isString()).to.be.false();
+        expect(db.snapshot('/foo').isString()).to.be.false();
+        expect(db.snapshot('/bar').isString()).to.be.false();
       });
 
     });
@@ -372,11 +294,12 @@ describe('database', function() {
     describe('toString', function() {
 
       it('should return the snapshot path', function() {
-        expect(
-          root
-            .child('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name')
-            .toString()
-        ).to.equal('users/password:3403291b-fdc9-4995-9a54-9656241c835d/name');
+        const data = null;
+        const db = database.create(rules, data);
+
+        expect(db.snapshot('/').toString()).to.equal('');
+        expect(db.snapshot('/foo').toString()).to.equal('foo');
+        expect(db.snapshot('/foo/bar').toString()).to.equal('foo/bar');
       });
 
     });
@@ -435,27 +358,110 @@ describe('database', function() {
   });
 
   describe('#read', function() {
-    let db;
 
-    before(function() {
-      db = getDB();
-    });
+    it('returns the result of attempting to read', function() {
+      const rules = {
+        rules: {
+          foo: {
+            bar: {
+              '.read': 'false'
+            },
+            baz: {
+              '.read': 'true'
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
 
-    it('returns the result of attempting to read the given path with the given DB state', function() {
-
-      expect(db.read('foo/firstChild/baz').allowed).to.be.true();
-      expect(db.read('foo/secondChild/baz').allowed).to.be.false();
-
+      expect(db.read('foo').allowed).to.be.false();
+      expect(db.read('foo/bar').allowed).to.be.false();
+      expect(db.read('foo/baz').allowed).to.be.true();
     });
 
     it('should propagate variables in path', function() {
+      const rules = {
+        rules: {
+          $a: {
+            $b: {
+              '.read': 'false',
+              $c: {
+                '.read': '$a != $b && $b != $c'
+              }
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
 
-      expect(db.read('nested/one/two').allowed).to.be.false();
-      expect(db.read('nested/one/one').allowed).to.be.true();
-
+      expect(db.read('foo/foo/foo').allowed).to.be.false();
+      expect(db.read('foo/foo/bar').allowed).to.be.false();
+      expect(db.read('foo/bar/baz').allowed).to.be.true();
     });
 
-    it('should traverse all read rules', function() {
+    it('should have access to data', function() {
+      const rules = {
+        rules: {
+          '.read': 'false',
+          foo: {
+            bar: {
+              '.read': 'data.val() == true'
+            },
+            baz: {
+              '.read': 'data.val() == true'
+            },
+            fooz: {
+              '.read': 'root.child("foo/bar").val() == true'
+            },
+            qux: {
+              '.read': 'root.child("foo/baz").val() == true'
+            }
+          }
+        }
+      };
+      const data = {
+        foo: {
+          bar: false,
+          baz: true
+        }
+      };
+      const db = database.create(rules, data);
+
+      expect(db.read('foo/bar').allowed).to.be.false();
+      expect(db.read('foo/baz').allowed).to.be.true();
+      expect(db.read('foo/fooz').allowed).to.be.false();
+      expect(db.read('foo/qux').allowed).to.be.true();
+    });
+
+    it('should have access to auth', function() {
+      const rules = {
+        rules: {
+          '.read': 'auth.isAdmin == true',
+          foo: {
+            bar: {
+              '.read': 'auth.isUser == true'
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      const user = {isUser: true};
+      const admin = {isAdmin: true};
+
+      expect(db.as(null).read('foo').allowed).to.be.false();
+      expect(db.as(user).read('foo').allowed).to.be.false();
+      expect(db.as(admin).read('foo').allowed).to.be.true();
+
+      expect(db.as(null).read('foo/bar').allowed).to.be.false();
+      expect(db.as(user).read('foo/bar').allowed).to.be.true();
+      expect(db.as(admin).read('foo/bar').allowed).to.be.true();
+    });
+
+    it('should traverse all read rules while read is denied', function() {
       const rules = {
         rules: {
           '.read': 'false',
@@ -470,7 +476,9 @@ describe('database', function() {
           }
         }
       };
-      const result = db.with({rules}).read('foo/bar/baz');
+      const data = null;
+      const db = database.create(rules, data);
+      const result = db.read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql([
         '',
@@ -495,7 +503,9 @@ describe('database', function() {
           }
         }
       };
-      const result = db.with({rules}).read('foo/bar/baz');
+      const data = null;
+      const db = database.create(rules, data);
+      const result = db.read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
     });
@@ -515,7 +525,9 @@ describe('database', function() {
           }
         }
       };
-      const result = db.with({rules}).read('foo/bar/baz');
+      const data = null;
+      const db = database.create(rules, data);
+      const result = db.read('foo/bar/baz');
 
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
@@ -528,8 +540,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, {a: 1});
+      const data = {a: 1};
+      const db = database.create(rules, data);
 
       expect(db.read('/a').allowed).to.be.false();
     });
@@ -537,82 +549,132 @@ describe('database', function() {
   });
 
   describe('#write', function() {
-    const superAuth = {id: 1};
-    let db;
 
-    beforeEach(function() {
-      db = getDB();
-    });
+    it('returns the result of attempting to write', function() {
+      const rules = {
+        rules: {
+          foo: {
+            bar: {
+              '.write': 'false'
+            },
+            baz: {
+              '.write': 'true'
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
 
-    it('should match "now" with the server timestamp', function() {
-
-      const newData = {'.sv': 'timestamp'};
-
-      expect(db.write('timestamp/foo', newData).allowed).to.be.true();
-
-    });
-
-    it('returns the result of attempting to write the given path with the given DB state and new data', function() {
-
-      const newData = {wut: {'.value': true}};
-
-      expect(db.write('foo/firstChild', newData).allowed).to.be.false();
-      expect(db.as(superAuth).write('foo/firstChild', newData).allowed).to.be.true();
-
+      expect(db.write('foo', true).allowed).to.be.false();
+      expect(db.write('foo/bar', true).allowed).to.be.false();
+      expect(db.write('foo/baz', true).allowed).to.be.true();
     });
 
     it('should propagate variables in path', function() {
+      const rules = {
+        rules: {
+          $a: {
+            $b: {
+              '.write': 'false',
+              $c: {
+                '.write': '$a != $b && $b != $c'
+              }
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
 
-      expect(db.write('nested/one/two', {id: 'two'}).allowed).to.be.false();
-      expect(db.write('nested/one/one', {id: 'one'}).allowed).to.be.true();
-      expect(db.write('nested/one/one', {id: 'two'}).allowed).to.be.false();
-
+      expect(db.write('foo/foo/foo', true).allowed).to.be.false();
+      expect(db.write('foo/foo/bar', true).allowed).to.be.false();
+      expect(db.write('foo/bar/baz', true).allowed).to.be.true();
     });
 
     it('should prune null keys', function() {
-
-      const value = {a: 1, b: 2};
       const rules = {rules: {'.write': true}};
+      const data = {a: 1, b: 2};
+      const db = database.create(rules, data);
 
-      db = database.create(rules, value);
-
-      expect(db.write('/a', null).newRoot.val()).to.be.deep.equal({b: 2});
-      expect(db.write('/', {a: 1, b: {}}).newRoot.val()).to.be.deep.equal({a: 1});
-
+      expect(db.write('/a', null).newRoot.val()).to.deep.equal({b: 2});
+      expect(db.write('/', {a: 1, b: {}}).newRoot.val()).to.deep.equal({a: 1});
     });
 
     it('should prune null keys deeply', function() {
-
-      const value = {a: {b: 2}};
       const rules = {rules: {'.write': true}};
-
-      db = database.create(rules, value);
+      const data = {a: {b: 2}};
+      const db = database.create(rules, data);
 
       const result = db.write('/a/b', null);
 
-      expect(result.newRoot.val()).to.be.deep.equal(null);
+      expect(result.newRoot.val()).to.be.null();
       expect(result.newRoot.child('a').val()).to.be.null();
       expect(result.newRoot.child('a').exists()).to.be.false();
       expect(result.newRoot.val()).to.be.null();
       expect(result.newRoot.exists()).to.be.false();
+    });
 
+    it('should match "now" with the server timestamp', function() {
+      const rules = {
+        rules: {
+          '.write': false,
+          foo: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      expect(db.write('foo', 1).allowed).to.be.false();
+      expect(db.write('foo', TS).allowed).to.be.true();
+    });
+
+    it('should match "now" with the newData server timestamp', function() {
+      const rules = {
+        rules: {
+          '.write': false,
+          foo: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const now = 12345000;
+      const db = database.create(rules, data);
+
+      expect(db.write('foo', now, null, now).allowed).to.be.true();
+    });
+
+    it('should not match "now" with the data server timestamp', function() {
+      const rules = {
+        rules: {
+          '.write': false,
+          foo: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const now = 12345000;
+      const db = database.create(rules, data, now);
+
+      expect(db.write('foo', now).allowed).to.be.false();
     });
 
     it('should replace a node, not merge it', function() {
-      let result = db.write('mixedType/first', {
-        type: {'.value': 'b'},
-        b: {'.value': 1}
-      });
+      const rules = {rules: {'.write': true}};
+      const data = {
+        foo: {
+          bar: true,
+          baz: true
+        }
+      };
+      const db = database.create(rules, data);
 
-      expect(result.newData.val()).to.eql({type: 'b', b: 1});
-      expect(result.allowed).to.be.true();
-
-      result = db.write('mixedType/first', {
-        type: {'.value': 'a'},
-        b: {'.value': 1}
-      });
-
-      expect(result.allowed).to.be.false();
+      expect(db.write('foo', null).newData.val()).to.be.null();
+      expect(db.write('foo', {qux: true}).newData.val()).to.deep.equal({qux: true});
     });
 
     it('should traverse all write rules', function() {
@@ -633,12 +695,10 @@ describe('database', function() {
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, null);
-
-      const result = db.write('foo/bar/baz', true);
-
-      expect(result.logs.map(r => r.path)).to.eql([
+      expect(db.write('foo/bar/baz', true).logs.map(r => r.path)).to.deep.equal([
         '',
         'foo',
         'foo/bar',
@@ -658,12 +718,10 @@ describe('database', function() {
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, null);
-
-      const result = db.write('foo/bar/baz', true);
-
-      expect(result.logs.map(r => r.path)).to.eql(['', 'foo']);
+      expect(db.write('foo/bar/baz', true).logs.map(r => r.path)).to.eql(['', 'foo']);
     });
 
     it('should only traverse node with write rules', function() {
@@ -681,12 +739,10 @@ describe('database', function() {
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, null);
-
-      const result = db.write('foo/bar/baz', true);
-
-      expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
+      expect(db.write('foo/bar/baz', true).logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
 
     it('should traverse/walk all validate rules', function() {
@@ -714,9 +770,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, null);
-
+      const data = null;
+      const db = database.create(rules, data);
       const result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
@@ -753,9 +808,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, null);
-
+      const data = null;
+      const db = database.create(rules, data);
       const result = db.write('foo/bar/baz', {d: true, e: {f: true}});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql([
@@ -784,9 +838,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, null);
-
+      const data = null;
+      const db = database.create(rules, data);
       const result = db.write('foo/bar/baz', {d: true});
 
       expect(result.logs.filter(r => r.kind === 'validate').map(r => r.path)).to.eql(['foo/bar/baz/d']);
@@ -806,9 +859,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, null);
-
+      const data = null;
+      const db = database.create(rules, data);
       const result = db.write('foo/bar/baz', null);
 
       expect(result.logs.map(r => r.path)).to.eql(['foo']);
@@ -822,8 +874,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, {a: 1});
+      const data = null;
+      const db = database.create(rules, data);
 
       expect(db.write('/a', 2).allowed).to.be.false();
     });
@@ -837,8 +889,8 @@ describe('database', function() {
           }
         }
       };
-
-      db = database.create(rules, {a: 1});
+      const data = null;
+      const db = database.create(rules, data);
 
       expect(db.write('/a', 2).allowed).to.be.false();
     });
@@ -846,125 +898,159 @@ describe('database', function() {
   });
 
   describe('#update', function() {
-    const _now = Date.now;
-    let db, auth;
 
-    beforeEach(function() {
-      let now = 1000;
-
-      Date.now = () => now++;
-    });
-
-    afterEach(function() {
-      Date.now = _now;
-    });
-
-    beforeEach(function() {
+    it('should allow permitted write', function() {
       const rules = {
         rules: {
-          '.read': false,
-          timestamps: {
-            $foo: {
-              '.write': true,
-              '.validate': 'newData.val() == now'
-            }
-          },
-          foo: {
-            '.read': 'auth !== null',
-            '.write': 'auth.id === 1',
-            '.validate': 'newData.hasChildren(["bar", "baz", "fooz"])',
-            bar: {
-              '.validate': 'data.exists() == false'
-            }
-          },
-          nested: {
-            $first: {
-              $second: {
-                '.write': '$first == $second'
-              }
-            }
-          }
-        }
-      };
-
-      const initialData = {
-        foo: {
+          '.write': 'false',
           bar: {
-            '.value': true
+            '.write': true
           },
-          baz: {
-            '.value': true
-          },
-          fooz: {
-            '.value': true
-          }
-        },
-        nested: {
-          one: {
-            one: {
-              foo: {
-                '.value': 1
-              }
-            },
-            two: {
-              foo: {
-                '.value': 1
-              }
-            }
+          $other: {
+            '.write': false
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, initialData);
+      const bar = true;
+      const baz = true;
 
-      auth = {id: 1};
+      expect(db.update('/', {bar}).allowed).to.be.true();
+      expect(db.update('/', {bar, baz}).allowed).to.be.false();
+    });
+
+    it('should allow validated write', function() {
+      const rules = {
+        rules: {
+          '.write': 'true',
+          bar: {
+            '.validate': true
+          },
+          $other: {
+            '.validate': false
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      const bar = true;
+      const baz = true;
+
+      expect(db.update('/', {bar}).allowed).to.be.true();
+      expect(db.update('/', {bar, baz}).allowed).to.be.false();
     });
 
     it('should match "now" with the server timestamp', function() {
-      const newData = {
-        'timestamps/foo': {'.sv': 'timestamp'},
-        'timestamps/bar': {'.sv': 'timestamp'},
-        'timestamps/baz': 12345000
+      const rules = {
+        rules: {
+          '.write': 'false',
+          $key: {
+            '.write': 'newData.val() == now'
+          }
+        }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      expect(db.update('/', newData).allowed).to.be.false();
-      delete newData['timestamps/baz'];
+      const foo = TS;
+      const bar = TS;
+      const baz = 12345000;
 
-      expect(db.update('/', newData).allowed).to.be.true();
+      expect(db.update('/', {foo, bar, baz}).allowed).to.be.false();
+      expect(db.update('/', {foo, bar}).allowed).to.be.true();
     });
 
-    it('should allow validate write', function() {
-      const newData = {
-        'foo/baz': false,
-        'foo/fooz': false
+    it('should match "now" with the newData server timestamp', function() {
+      const rules = {
+        rules: {
+          '.write': 'false',
+          $key: {
+            '.write': 'newData.val() == now'
+          }
+        }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      expect(db.as(auth).update('/', newData).allowed).to.be.true();
-      expect(db.update('/', newData).allowed).to.be.false();
+      const now = 12345000;
+      const foo = now;
+      const bar = now;
 
-      newData['foo/bar'] = false;
-      expect(db.as(auth).update('/', newData).allowed).to.be.false();
+      expect(db.update('/', {foo, bar}, now).allowed).to.be.true();
+    });
+
+    it('should not match "now" with the data server timestamp', function() {
+      const rules = {
+        rules: {
+          '.write': 'false',
+          $key: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const now = 12345000;
+      const db = database.create(rules, data, now);
+
+      const foo = now;
+      const bar = now;
+
+      expect(db.update('/', {foo, bar}).allowed).to.be.false();
     });
 
     it('should propagate variables in path', function() {
-      expect(db.as(auth).update('nested/one/one', {foo: 2}).allowed).to.be.true();
-      expect(db.as(auth).update('nested/one/two', {foo: 2}).allowed).to.be.false();
+      const rules = {
+        rules: {
+          '.write': 'false',
+          $a: {
+            $b: {
+              $c: {
+                '.write': '$a != $b && $b != $c'
+              }
+            }
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      expect(db.update('/', {
+        'foo/foo/baz': true,
+        'foo/bar/bar': true
+      }).allowed).to.be.false();
+
+      expect(db.update('/', {
+        'foo/bar/baz': true,
+        'foo/bar/bar': true
+      }).allowed).to.be.false();
+
+      expect(db.update('/', {
+        'foo/bar/baz': true,
+        'foo/bar/qux': true
+      }).allowed).to.be.true();
     });
 
     it('should handle empty patch', function() {
-      const result = db.as(auth).update('nested/one/one', {});
+      const rules = {
+        rules: {
+          '.write': 'true'
+        }
+      };
+      const data = {foo: 1};
+      const db = database.create(rules, data);
+      const result = db.update('/', {});
 
       expect(result.allowed).to.be.true();
       expect(result.newData.val()).to.eql({foo: 1});
     });
 
-    it('should prune null keys deeply', function() {
-
+    it('should prune null node deeply', function() {
       const value = {a: {b: 2}};
       const rules = {rules: {'.write': true}};
-
-      db = database.create(rules, value);
-
+      const db = database.create(rules, value);
       const result = db.update('/', {'/a/b': {}});
 
       expect(result.newRoot.val()).to.be.deep.equal(null);
@@ -972,36 +1058,34 @@ describe('database', function() {
       expect(result.newRoot.child('a').exists()).to.be.false();
       expect(result.newRoot.val()).to.be.null();
       expect(result.newRoot.exists()).to.be.false();
-
     });
 
     it('should fail on type error in write rules evaluation', function() {
       const rules = {
         rules: {
           a: {
-            '.write': 'newData.val().contains("one") === true'
+            '.write': 'newData.val().contains("one")'
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, {a: 1});
-
-      expect(db.update('/', {a: 2}).allowed).to.be.false();
+      expect(db.update('/', {a: 1}).allowed).to.be.false();
     });
 
     it('should fail on error in validate rules evaluation', function() {
       const rules = {
         rules: {
-          '.write': true,
           a: {
-            '.validate': 'newData.val().contains("one") === true'
+            '.validate': 'newData.val().contains("one")'
           }
         }
       };
+      const data = null;
+      const db = database.create(rules, data);
 
-      db = database.create(rules, {a: 1});
-
-      expect(db.update('/', {a: 2}).allowed).to.be.false();
+      expect(db.update('/', {a: 1}).allowed).to.be.false();
     });
 
   });
