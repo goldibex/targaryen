@@ -108,4 +108,31 @@ describe('Chai plugin', function() {
     expect(targaryen.users.facebook).can.patch({bar: 2, baz: 2}).path('/foo');
   });
 
+  it('can set operation time stamp', function() {
+    targaryen.setFirebaseData({foo: 2000});
+    targaryen.setFirebaseRules({
+      rules: {
+        $key: {
+          '.read': 'data.val() > now',
+          '.write': 'newData.val() == now'
+        }
+      }
+    });
+
+    expect(null).can.readAt(1000).path('/foo');
+    expect(null).cannot.read.path('/foo');
+
+    expect(null).can.write({'.sv': 'timestamp'}, 1000).path('/foo');
+    expect(null).can.write({'.sv': 'timestamp'}).path('/foo');
+
+    expect(null).can.write(1000, 1000).path('/foo');
+    expect(null).cannot.write(2000, 1000).path('/foo');
+
+    expect(null).can.patch({foo: {'.sv': 'timestamp'}}, 1000).path('/');
+    expect(null).can.patch({foo: {'.sv': 'timestamp'}}).path('/');
+
+    expect(null).can.patch({foo: 1000, bar: 1000}, 1000).path('/');
+    expect(null).cannot.patch({foo: 1000, bar: 1000}, 2000).path('/');
+  });
+
 });

@@ -103,4 +103,31 @@ describe('the targaryen Jasmine plugin', function() {
     expect(targaryen.users.facebook).canPatch('/foo', {bar: 2, baz: 2});
   });
 
+  it('can set operation time stamp', function() {
+    targaryen.setFirebaseData({foo: 2000});
+    targaryen.setFirebaseRules({
+      rules: {
+        $key: {
+          '.read': 'data.val() > now',
+          '.write': 'newData.val() == now'
+        }
+      }
+    });
+
+    expect(null).canRead('/foo', 1000);
+    expect(null).cannotRead('/foo');
+
+    expect(null).canWrite('/foo', {'.sv': 'timestamp'}, 1000);
+    expect(null).canWrite('/foo', {'.sv': 'timestamp'});
+
+    expect(null).canWrite('/foo', 1000, 1000);
+    expect(null).cannotWrite('/foo', 1000, 2000);
+
+    expect(null).canPatch('/', {foo: {'.sv': 'timestamp'}}, 1000);
+    expect(null).canPatch('/', {foo: {'.sv': 'timestamp'}});
+
+    expect(null).canPatch('/', {foo: 1000}, 1000);
+    expect(null).cannotPatch('/', {foo: 1000}, 2000);
+  });
+
 });

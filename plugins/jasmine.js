@@ -54,7 +54,7 @@ exports.matchers = {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.write(path, newData, now);
+      const result = data.write(path, newData, undefined, now);
 
       return {
         pass: result.allowed === true,
@@ -70,7 +70,7 @@ exports.matchers = {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.write(path, newData, now);
+      const result = data.write(path, newData, undefined, now);
 
       return {
         pass: result.allowed === false,
