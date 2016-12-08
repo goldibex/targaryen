@@ -6,6 +6,7 @@
 
 const chai = require('chai');
 const targaryen = require('../../../plugins/chai');
+const util = require('../../../lib/util');
 
 describe('Chai plugin', function() {
 
@@ -13,175 +14,98 @@ describe('Chai plugin', function() {
     chai.use(targaryen);
   });
 
-  describe('if unconfigured', function() {
-
-    it('throws an error for any test', function() {
-
-      expect(function() {
-        expect(null).can.read.path('/');
-      }).to.throw();
-
-    });
-
+  beforeEach(function() {
+    util.resetFirebase();
+    util.setVerbose(true);
   });
 
-  describe('#setFirebaseData', function() {
+  it('should throw if rules are not set', function() {
+    targaryen.setFirebaseData(null);
 
-    it('sets the underlying Firebase database to the supplied data', function() {
-
-      targaryen.setFirebaseData({
-        users: {
-          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
-            name: 'Sherlock Holmes'
-          },
-          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
-            name: 'John Watson'
-          }
-        }
-      });
-
-    });
-
+    expect(() => expect(null).can.read.path('foo')).to.throw();
+    expect(() => expect(null).cannot.read.path('foo')).to.throw();
+    expect(() => expect(null).can.write(7).to.path('foo')).to.throw();
+    expect(() => expect(null).cannot.write(7).to.path('foo')).to.throw();
   });
 
-  describe('#setFirebaseRules', function() {
+  it('should throw if data is not set', function() {
+    targaryen.setFirebaseRules({rules: {'.read': true, '.write': true}});
 
-    it('sets the underlying Firebase database to the supplied data', function() {
+    expect(() => expect(null).can.read.path('foo')).to.throw();
+    expect(() => expect(null).can.write(7).to.path('foo')).to.throw();
 
-      targaryen.setFirebaseRules({
-        rules: {
-          users: {
-            $user: {
-              '.read': 'auth.uid === $user',
-              '.write': 'auth.isSuper === true'
-            }
-          },
-          posts: {
-            $post: {
-              '.read': true,
-              '.write': true,
-              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid',
-              created: {
-                '.validate': 'data.exists() == false'
-              },
-              author: {
-                '.validate': 'data.exists() == false'
-              }
-            }
-          }
-        }
-      });
+    targaryen.setFirebaseRules({rules: {'.read': false, '.write': false}});
 
-    });
-
+    expect(() => expect(null).cannot.read.path('foo')).to.throw();
+    expect(() => expect(null).cannot.write(7).to.path('foo')).to.throw();
   });
 
-  describe('when properly configured', function() {
-
-    beforeEach(function() {
-
-      targaryen.setFirebaseData({
-        users: {
-          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
-            name: 'Sherlock Holmes'
-          },
-          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
-            name: 'John Watson'
-          }
+  it('should test read access', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.read': false,
+      foo: {
+        bar: {
+          '.read': 'auth.uid !== null'
         }
-      });
+      }
+    }});
 
-      targaryen.setFirebaseRules({
-        rules: {
-          users: {
-            $user: {
-              '.read': 'auth.uid === $user',
-              '.write': 'auth.isSuper === true'
-            }
-          },
-          posts: {
-            $post: {
-              '.read': true,
-              '.write': true,
-              '.validate': 'newData.hasChildren(["created", "text", "author"]) && newData.child("author").val() === auth.uid',
-              created: {
-                '.validate': 'data.exists() == false'
-              },
-              author: {
-                '.validate': 'data.exists() == false'
-              }
-            }
-          }
+    expect(targaryen.users.unauthenticated).cannot.read.path('/');
+    expect(targaryen.users.unauthenticated).cannot.read.path('/foo');
+    expect(targaryen.users.unauthenticated).cannot.read.path('/foo/bar');
+
+    expect(targaryen.users.facebook).cannot.read.path('/');
+    expect(targaryen.users.facebook).cannot.read.path('/foo');
+    expect(targaryen.users.facebook).can.read.path('/foo/bar');
+  });
+
+  it('should test write access', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.write': false,
+      foo: {
+        bar: {
+          '.write': 'auth.uid !== null',
+          '.validate': 'newData.val() > 1'
         }
-      });
-    });
+      }
+    }});
 
-    it('permits read tests', function() {
-      expect(null).cannot.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).can.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-    });
+    expect(targaryen.users.unauthenticated).cannot.write(2).to.path('/');
+    expect(targaryen.users.unauthenticated).cannot.write(2).to.path('/foo');
+    expect(targaryen.users.unauthenticated).cannot.write(1).to.path('/foo/bar');
+    expect(targaryen.users.unauthenticated).cannot.write(2).to.path('/foo/bar');
 
-    it('permits write tests', function() {
+    expect(targaryen.users.facebook).cannot.write(2).to.path('/');
+    expect(targaryen.users.facebook).cannot.write(2).to.path('/foo');
+    expect(targaryen.users.facebook).cannot.write(1).to.path('/foo/bar');
+    expect(targaryen.users.facebook).can.write(2).to.path('/foo/bar');
+  });
 
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.write({smart: true})
-      .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3', isSuper: true}).can.write({stupid: true})
-      .to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.write({
-        author: 'password:3403291b-fdc9-4995-9a54-9656241c835d',
-        created: Date.now(),
-        text: 'Hello!'
-      })
-      .to.path('posts/newpost');
-
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.write({
-        author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'
-      })
-      .to.path('posts/newpost');
-
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).can.write({
-        author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3',
-        created: Date.now(),
-        text: 'Hello!'
-      })
-      .to.path('posts/newpost');
-
-    });
-
-    it('should permit patch tests', function() {
-      targaryen.setFirebaseData({
-        users: {
-          'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
-            name: 'Sherlock Holmes'
-          },
-          'password:3403291b-fdc9-4995-9a54-9656241c835d': {
-            name: 'John Watson'
-          }
-        },
-        posts: {
-          somePost: {
-            author: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3',
-            created: Date.now(),
-            text: 'Hello!'
-          }
+  it('should test multi write access', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.write': false,
+      foo: {
+        $key: {
+          '.write': 'auth.uid !== null',
+          '.validate': 'newData.val() > 1'
         }
-      });
+      }
+    }});
 
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).can.patch({
-        text: 'Hello World!'
-      })
-      .to.path('posts/somePost');
+    expect(targaryen.users.unauthenticated).cannot.patch({foo: {bar: 2, baz: 2}}).path('/');
+    expect(targaryen.users.unauthenticated).cannot.patch({'foo/bar': 1, 'foo/baz': 2}).path('/');
+    expect(targaryen.users.unauthenticated).cannot.patch({'foo/bar': 2, 'foo/baz': 2}).path('/');
+    expect(targaryen.users.unauthenticated).cannot.patch({bar: 1, baz: 2}).path('/foo');
+    expect(targaryen.users.unauthenticated).cannot.patch({bar: 2, baz: 2}).path('/foo');
 
-      expect({uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3'}).cannot.patch({
-        text: 'Hello World!',
-        created: Date.now()
-      })
-      .to.path('posts/somePost');
-
-    });
-
+    expect(targaryen.users.facebook).cannot.patch({foo: {bar: 2, baz: 2}}).path('/');
+    expect(targaryen.users.facebook).cannot.patch({'foo/bar': 1, 'foo/baz': 2}).path('/');
+    expect(targaryen.users.facebook).can.patch({'foo/bar': 2, 'foo/baz': 2}).path('/');
+    expect(targaryen.users.facebook).cannot.patch({bar: 1, baz: 2}).path('/foo');
+    expect(targaryen.users.facebook).can.patch({bar: 2, baz: 2}).path('/foo');
   });
 
 });
