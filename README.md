@@ -130,9 +130,12 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
     It holds:
 
-    - `allowed`: the success status;
-    - `info`: the rule evaluation info;
-    - `database`: the original database.
+    - `path`: operation path;
+    - `auth`: operation authentication data;
+    - `type`: operation authentication type (read|write|patch);
+    - `allowed`: success status;
+    - `info`: rule evaluation info;
+    - `database`: original database.
 
     For write and update operations, it also includes:
 
@@ -148,6 +151,10 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 - `targaryen.store(rules: object|Ruleset): Ruleset`
 
     Can be used to create the database rule set ahead of time and check its validity.
+
+- `targaryen.util`
+
+    Set of helper functions used by the `jasmine` and `chai` plugins reference implementations.
 
 
 ## Why is it named Targaryen?
