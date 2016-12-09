@@ -4,7 +4,7 @@
 
 'use strict';
 
-const store = require('../../../lib/database/store');
+const store = require('../../../../lib/database/store');
 
 describe('store', function() {
   const _now = Date.now;
