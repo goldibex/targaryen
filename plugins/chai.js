@@ -82,7 +82,7 @@ function chaiTargaryen(chai, utils) {
 
     case 'write':
       newData = utils.flag(this, 'operationData');
-      result = data.write(path, newData, now);
+      result = data.write(path, newData, undefined, now);
       break;
 
     case 'patch':
