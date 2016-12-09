@@ -7,6 +7,8 @@ const database = require('./lib/database');
 
 exports.util = helpers;
 exports.database = database.create;
+exports.store = database.store;
+exports.ruleset = database.ruleset;
 
 // Deprecate direct access to plugin helpers
 Object.defineProperties(exports, [

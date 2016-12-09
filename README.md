@@ -139,6 +139,16 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
     - `newDatabase`: the resulting database;
     - `newValue`: the value written to the database.
 
+- `targaryen.store(data: object|DataNode, options: {now: number|null, path: string|null, priority: string|number|null}): DataNode`
+
+    Can be used to create the database root ahead of time and check its validity.
+
+    The `path` option defines the relative path of the data from the root; e.g. `targaryen.store(1, {path: 'foo/bar/baz'})` is equivalent to `targaryen.store({foo: {bar: {baz: 1}}})`.
+
+- `targaryen.store(rules: object|Ruleset): Ruleset`
+
+    Can be used to create the database rule set ahead of time and check its validity.
+
 
 ## Why is it named Targaryen?
 
