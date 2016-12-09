@@ -125,7 +125,7 @@ describe('store', function() {
       expect(data.$set('foo', value, 'something').foo.$priority()).to.equal('something');
     });
 
-    it.skip('should throw when setting invalid priority', function() {
+    it('should throw when setting invalid priority', function() {
       expect(() => store.create({'.value': 1, '.priority': {foo: 'bar'}})).to.throw();
       expect(() => store.create({'.value': 1, '.priority': true})).to.throw();
 
