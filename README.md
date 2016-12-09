@@ -130,9 +130,12 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
     It holds:
 
-    - `allowed`: the success status;
-    - `info`: the rule evaluation info;
-    - `database`: the original database.
+    - `path`: operation path;
+    - `auth`: operation authentication data;
+    - `type`: operation authentication type (read|write|patch);
+    - `allowed`: success status;
+    - `info`: rule evaluation info;
+    - `database`: original database.
 
     For write and update operations, it also includes:
 
