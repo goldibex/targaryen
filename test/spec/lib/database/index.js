@@ -11,7 +11,7 @@
 
 'use strict';
 
-const database = require('../../../lib/database');
+const database = require('../../../../lib/database');
 
 const TS = Object.freeze({'.sv': 'timestamp'});
 

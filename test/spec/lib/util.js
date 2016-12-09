@@ -2,7 +2,7 @@
 'use strict';
 
 const util = require('../../../lib/util');
-const results = require('../../../lib/results');
+const database = require('../../../lib/database');
 
 describe('util', function() {
 
@@ -53,31 +53,31 @@ describe('util', function() {
     });
 
     it('should describe unauthenticated users', function() {
-      result = results.read(path, data);
+      result = database.results.read(path, data);
       expect(util.readableError(result)).to.contain('unauthenticated user');
     });
 
     it('should describe anonymous users', function() {
-      result = results.read(path, data.as(util.users.anonymous));
+      result = database.results.read(path, data.as(util.users.anonymous));
       expect(util.readableError(result)).to.contain('user authenticated anonymously');
     });
 
     it('should describe password users', function() {
-      result = results.read(path, data.as(util.users.password));
+      result = database.results.read(path, data.as(util.users.password));
       expect(util.readableError(result)).to.contain('user authenticated via Password Login');
     });
 
     it('should describe auth', function() {
       const auth = {uid: 123};
 
-      result = results.read(path, data.as(auth));
+      result = database.results.read(path, data.as(auth));
       expect(util.readableError(result)).to.contain(JSON.stringify(auth));
     });
 
     it('should describe auth with $description', function() {
       const $description = 'some description';
 
-      result = results.read(path, data.as({$description}));
+      result = database.results.read(path, data.as({$description}));
       expect(util.readableError(result)).to.contain($description);
     });
 
@@ -85,7 +85,7 @@ describe('util', function() {
       const auth = util.users[provider.toLowerCase()];
 
       it('should describe Facebook users', function() {
-        result = results.read(path, data.as(auth));
+        result = database.results.read(path, data.as(auth));
         expect(util.readableError(result)).to.contain(`user authenticated via ${provider}`);
       });
 
@@ -104,7 +104,7 @@ describe('util', function() {
       beforeEach(function() {
         util.setFirebaseRules({rules: {}});
         util.setFirebaseData(null);
-        result = results.read(path, util.getFirebaseData().as({$description}));
+        result = database.results.read(path, util.getFirebaseData().as({$description}));
       });
 
       it('should include the path', function() {
@@ -144,7 +144,7 @@ describe('util', function() {
 
         const data = util.getFirebaseData().as({$description});
 
-        result = results.write(path, data, data, value);
+        result = database.results.write(path, data, data, value);
       });
 
       it('should include the path', function() {
