@@ -149,6 +149,10 @@ Targaryen statically analyzes your security rules using [esprima](http://esprima
 
     Can be used to create the database rule set ahead of time and check its validity.
 
+- `targaryen.util`
+
+    Set of helper functions used by the `jasmine` and `chai` plugins reference implementations.
+
 
 ## Why is it named Targaryen?
 
