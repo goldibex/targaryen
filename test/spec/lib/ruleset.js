@@ -8,7 +8,7 @@
 
 'use strict';
 
-const ruleset = require('../../../lib/ruleset');
+const ruleset = require('../../../lib/database/ruleset');
 
 const invalidRulesets = {
   'are null': null,

@@ -2,7 +2,7 @@
 'use strict';
 
 const util = require('../../../lib/util');
-const results = require('../../../lib/results');
+const results = require('../../../lib/database/results');
 
 describe('util', function() {
 
