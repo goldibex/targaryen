@@ -133,7 +133,7 @@ describe('database', function() {
         expect(snap.parent().val()).to.deep.equal({foo});
       });
 
-      it.skip('fail if the snapshot was refering to the data root ', function() {
+      it('fail if the snapshot was refering to the data root ', function() {
         const data = null;
         const snap = database.create(rules, data).snapshot('/');
 
