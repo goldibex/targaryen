@@ -84,7 +84,7 @@ describe('database', function() {
 
     describe('#getPriority', function() {
 
-      it.skip('gets the priority at the specified path', function() {
+      it('gets the priority at the specified path', function() {
         const data = {
           '.priority': 1,
           foo: {
