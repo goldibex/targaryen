@@ -69,3 +69,8 @@ rules:
   space-before-function-paren:
     - error
     - never
+  valid-jsdoc:
+    - error
+    - requireParamDescription: true
+      requireReturnDescription: false
+      requireReturn: false
