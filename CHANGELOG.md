@@ -1,29 +1,38 @@
 ## 3.0.0 (upcoming)
 
-- [Fix type inferring](https://github.com/goldibex/targaryen/pull/64).
-- [Fix write permission test](https://github.com/goldibex/targaryen/issues/73).
-- [Add a verbose mode displaying detailed evaluation info](https://github.com/goldibex/targaryen/pull/83).
+- [Fix type validation](https://github.com/goldibex/targaryen/issues/62):
+    * Type inferring doesn't throw when it cannot infer a node type; set the type to "any" or "primitive".
+    * Type inferring of each side of a binary expression, or of method argument accepts "any" or "primitive" and delay type validation until evaluation.
+    * Validate type of string and snapshot method arguments during evaluation.
+    * Validate type of each sides of binary expression during evaluation: most arithmetic expressions require numbers, addition also accept operation on string, comparison require string, number or null, equality operations require a primitive or a plain Object.
+- [Add live testing for Firebase parity](https://github.com/goldibex/targaryen/pull/63).
+- [Stop evaluating child write rules](https://github.com/goldibex/targaryen/issues/73).
+- [Add more debugging info](https://github.com/goldibex/targaryen/pull/83).
+- [Fix snapshot root parent access](https://github.com/goldibex/targaryen/pull/97).
+- [Fix data node snapshot priority handling](https://github.com/goldibex/targaryen/pull/96).
 - [Refactor API](https://github.com/goldibex/targaryen/pull/80):
-
-    Plugins scripts should be imported directly, e.g. `require('targaryen/plugins/chai')`:
-
-    * Add `targaryen/plugins/chai`.
-    * Add `targaryen/plugins/jasmine`.
-    * Deprecate `targaryen.chai`.
-    * Deprecate `targaryen.jasmine`.
-    * Deprecate `targaryen.setFirebaseData`.
-    * Deprecate `targaryen.setFirebaseRules`.
-    * Deprecate `targaryen.setDebug`.
-    * Deprecate `targaryen.users`.
-
-    Simpler API to use targaryen directly:
-
-    * Add `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`.
-    * Add `targaryen.util` functions used by the CLI and the reference plugins for chai and jasmin
-    * Remove `targaryen.Ruleset`.
-    * Remove `targaryen.DataSnapshot`.
-    * Remove `targaryen.helpers`.
-
+    + Plugins scripts should be imported directly, e.g. `require('targaryen/plugins/chai')`:
+        * Add `targaryen/plugins/chai`.
+        * Add `targaryen/plugins/jasmine`.
+        * Deprecate `targaryen.chai`.
+        * Deprecate `targaryen.jasmine`.
+        * Deprecate `targaryen.setFirebaseData`.
+        * Deprecate `targaryen.setFirebaseRules`.
+        * Deprecate `targaryen.setDebug`.
+        * Deprecate `targaryen.users`.
+    + Simpler API to use targaryen directly:
+        * Add `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`.
+        * Add `targaryen.util` functions used by the CLI and the reference plugins for chai and jasmin
+        * Remove `targaryen.Ruleset`.
+        * Remove `targaryen.DataSnapshot`.
+        * Remove `targaryen.helpers`.
+- Refactor internal:
+    * [Refactor data access and Ruleset](https://github.com/goldibex/targaryen/pull/72).
+    * [Refactor public api](https://github.com/goldibex/targaryen/pull/80).
+    * [Format source based on eslint xo shared configuration](https://github.com/goldibex/targaryen/pull/81).
+    * [Refactor rule parser](https://github.com/goldibex/targaryen/pull/91).
+    * [Simpler tests](https://github.com/goldibex/targaryen/pull/94).
+    * [Move `lib/database`](https://github.com/goldibex/targaryen/pull/98).
 
 Thanks goes to @mhuebert, @RomansBermans and @simenbrekken for their contributions.
 
