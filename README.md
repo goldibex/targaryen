@@ -12,7 +12,7 @@ All you need to do is supply the security rules and some mock data, then write t
 
 ```js
 const assert = require('assert');
-const targaryen = require('./');
+const targaryen = require('targaryen');
 
 const rules = {
   rules: {
