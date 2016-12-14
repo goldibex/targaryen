@@ -25,7 +25,7 @@
     "url": "https://github.com/goldibex/targaryen"
   },
   "scripts": {
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
+    "coverage": "istanbul cover --print detail node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "fixtures": "./bin/targaryen-specs -v -i -s test/spec/lib/parser/fixtures.json",
     "format": "npm run lint -- --fix",
