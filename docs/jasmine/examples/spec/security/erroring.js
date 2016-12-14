@@ -1,10 +1,13 @@
-
 'use strict';
 
-var targaryen = require('../../../../../index'), // in your app this would be require('targaryen')
-  users = targaryen.users;
+// in your app this would be require('targaryen/plugins/jasmine')
+const targaryen = require('../../../../../plugins/jasmine');
 
 describe('An invalid set of security rules and data', function() {
+
+  beforeEach(function() {
+    jasmine.addMatchers(targaryen.matchers);
+  });
 
   it('causes Targaryen to throw', function() {
 

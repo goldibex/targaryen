@@ -1,22 +1,37 @@
 {
   "name": "targaryen",
-  "version": "2.3.3",
+  "version": "3.0.0-rc.1",
   "description": "Test Firebase security rules without connecting to Firebase.",
   "bin": {
-    "targaryen": "bin/targaryen"
+    "targaryen": "bin/targaryen",
+    "targaryen-specs": "bin/targaryen"
   },
   "main": "index.js",
   "directories": {
+    "bin": "bin",
+    "lib": "lib",
     "test": "test"
   },
+  "files": [
+    "bin",
+    "docs",
+    "lib",
+    "plugins",
+    "index.js",
+    "USAGE.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/goldibex/targaryen"
   },
   "scripts": {
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
-    "lint": "eslint lib/ test/ bin/targaryen",
-    "test": "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json"
+    "fixtures": "./bin/targaryen-specs -v -i -s test/spec/lib/parser/fixtures.json",
+    "format": "npm run lint -- --fix",
+    "lint": "eslint lib/ plugins/ test/ bin/targaryen",
+    "lint:html": "(npm run -s lint -- --max-warnings 0 -f html -o lint.html && rm lint.html) || echo 'open lint.html for linting errors'",
+    "test": "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
+    "test:inspect": "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
   "license": "ISC",
@@ -32,18 +47,26 @@
   "dependencies": {
     "cli-table": "^0.3.1",
     "colors": "^1.0.3",
+    "debug": "^2.3.3",
     "esprima": "^1.2.2",
-    "lodash.mergewith": "^4.6.0",
+    "firebase-token-generator": "^2.0.0",
+    "lodash.set": "^4.3.2",
     "minimist": "^1.1.0",
     "replaceall": "^0.1.3",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3",
     "strip-json-comments": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
-    "eslint": "^3.8.1",
+    "chai": "^3.5.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^3.9.1",
+    "eslint-config-xo": "^0.17.0",
     "eslint-plugin-node": "^2.1.3",
     "istanbul": "^0.4.5",
     "jasmine": "^2.1.1",
-    "mocha": "^2.1.0"
+    "mocha": "^2.1.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   }
 }

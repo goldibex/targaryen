@@ -1,35 +1,76 @@
 plugins:
   - node
-extends: 'eslint:recommended'
+extends: xo
 env:
   node: true
   commonjs: true
   es6: true
+parserOptions: 
+  ecmaFeatures: 
+    jsx: false
+    experimentalObjectRestSpread: false
+  ecmaVersion: 2016
+  sourceType: script
 rules:
-  indent:
+  
+  # possible errors
+  eqeqeq:
     - error
-    - 2
-  linebreak-style:
+    - smart
+  no-console:
+    - warn
+  no-confusing-arrow:
     - error
-    - unix
-  quotes:
+  no-eq-null:
+    - "off"
+  no-use-before-define:
     - error
-    - single
-  semi:
-    - error
-    - always
-  strict:
-    - error
-    - safe
+    - functions: false
+      classes: false
   node/no-unsupported-features:
     - error
     - version: 4
-  space-in-parens:
+  no-var:
+    - error
+  strict:
+    - error
+    - safe
+
+  # styling
+  arrow-body-style:
+    - error
+    - as-needed
+  brace-style:
+    - error
+    - 1tbs
+    - allowSingleLine: true
+  indent:
+    - error
+    - 2
+  lines-around-directive:
+    - error
+    - always
+  newline-after-var:
+    - error
+    - always
+  object-shorthand:
+    - error
+  one-var:
+    - error
+    - initialized: never
+      uninitialized: always
+  padded-blocks:
+    - "off"
+  prefer-arrow-callback:
+    - error
+    - allowNamedFunctions: true
+  prefer-const:
+    - error
+  space-before-function-paren:
     - error
     - never
-  computed-property-spacing: 
+  valid-jsdoc:
     - error
-    - never
-  array-bracket-spacing: 
-    - error
-    - never
+    - requireParamDescription: true
+      requireReturnDescription: false
+      requireReturn: false

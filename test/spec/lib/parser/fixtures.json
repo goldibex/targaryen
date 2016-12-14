@@ -1,0 +1,1067 @@
+{
+  "users": {
+    "bob": {
+      "foo": {
+        "bar": true
+      },
+      "provider": "custom",
+      "someBool": true,
+      "someInt": 1,
+      "someString": "one",
+      "uid": "custom:bob"
+    },
+    "unauth": null
+  },
+  "tests": [
+    {
+      "rule": "1 < 2",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "true",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "'foo'.contains('o')",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth !== null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.uid !== 'eviluser'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.someInt < 5",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.provider === 'custom'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.contains('75')",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.notfound.contains('75')",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.not.found.length > 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.isTernary === true ? root.child('x').exists() : true",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.isBoolean()",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "root.child(auth.someString.toUpperCase()).val() === null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.hasChildren()",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "root.hasChildren(['foo', 'bar', 'baz'])",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "root.hasChildren([auth.uid])",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').val().matches(/bar/)",
+      "user": "unauth",
+      "data": {
+        "foo": "bar"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.child('foo').val().matches(/BAR/i)",
+      "user": "unauth",
+      "data": {
+        "foo": "bar"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.child('foo').val().matches(/bar/ig)",
+      "user": "unauth",
+      "data": {
+        "foo": "bar"
+      },
+      "isValid": false
+    },
+    {
+      "rule": "root.child('users/' + auth.uid).exists()",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child(auth.x + auth.y).exists()",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "var foo = 8",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root = 5",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "auth.uid === '5'; auth.id === 5",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "7",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "'foo'",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "auth.someString === 'one' ? 7 : true",
+      "user": "bob",
+      "isValid": false
+    },
+    {
+      "rule": "auth.foo.contains(7)",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "skies === 'blue'",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.hasChildren('foo', 'bar')",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.hasChildren(['foo', 7])",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.child('str').val().matches('/foo/')",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "auth.foo.notFound() == false",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val().notFound == false",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.child('foo') != null",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val() > true",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val() < true",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val() >= true",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val() <= true",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "$color == 'blue'",
+      "user": "unauth",
+      "wildchildren": {
+        "$color": "blue"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "$color == 'green'",
+      "user": "unauth",
+      "wildchildren": {
+        "$color": "orange"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "$color == 'red'",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "$color == 'blue' && auth.foo.bar == true",
+      "user": "bob",
+      "wildchildren": {
+        "$color": "blue"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.dreams.length > 1",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.dreams.length > 1 ? false : true",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "!(auth.dreams.length > 1)",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.val() == 'bar'",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().contains('ba')",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/^ba/)",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/^wa/)",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.foo[$bar] == true",
+      "user": "bob",
+      "wildchildren": {
+        "$bar": "bar"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.foo['bar'] == true",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.foo.bar == true",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.foo.baz == null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.child('foo').child(auth.foo).val() != null",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').child(auth.foo).val() == null",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').child(auth.foo).exists()",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').child(auth.foo).exists() == false",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').hasChild(auth.foo)",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').hasChild(auth.foo) == false",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').hasChildren([auth.foo])",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "root.child('foo').hasChildren([auth.foo]) == false",
+      "user": "unauth",
+      "data": {
+        "foo": {
+          "bar": true
+        }
+      },
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo'.contains(auth.foo)",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo1'.contains(auth.someInt)",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo'.beginsWith(auth.foo)",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'1foo'.beginsWith(auth.someInt)",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo'.endsWith(auth.foo)",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo1'.endsWith(auth.someInt)",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo'.replace(auth.foo, 'bar') == 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo1'.replace(auth.someInt, 'bar') == 'foobar'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foobar'.replace('bar', auth.someInt) == 'foo1'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "-auth.foo == -1",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "-auth.someString == -1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "!(auth.foo == null)",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "!(auth.someString == null)",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(2**2) == 4",
+      "user": "bob",
+      "isValid": false
+    },
+    {
+      "rule": "(auth.someInt + 1) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 + auth.someInt) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someInt - 1) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 - auth.someInt) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someInt * 1) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 * auth.someInt) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someInt / 2) == 0.5",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 / auth.someInt) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someInt % 2) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 % auth.someInt) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "(auth.someString + 'two') == 'onetwo'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someString + 1) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "('two' + auth.someString) == 'twoone'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1 + auth.someString) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "(1 + 1) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(auth.someString - 1) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 - auth.someString) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someString * 1) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 * auth.someString) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someString / 2) == 0.5",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 / auth.someString) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someString % 2) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 % auth.someString) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 + auth.someBool) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someBool - 1) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 - auth.someBool) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someBool * 1) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 * auth.someBool) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someBool / 2) == 0.5",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 / auth.someBool) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.someBool % 2) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 % auth.someBool) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 + auth.none) == 2",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.none - 1) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 - auth.none) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.none * 1) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 * auth.none) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.none / 2) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 / auth.none) == 1",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(auth.none % 2) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1 % auth.none) == 0",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "(1/0 + '') == 'NaN'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "(1/0) > 2",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "(1/0) < 2",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "'foo' == auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.foo == 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "'foo' === auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.foo === 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "'foo' != auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.foo != 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "'foo' !== auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.foo !== 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "'one' == auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.someInt == 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "'one' === auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "auth.someInt === 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": false
+    },
+    {
+      "rule": "'one' != auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.someInt != 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "'one' !== auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.someInt !== 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "'foo' > auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.foo > 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo' >= auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.foo >= 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo' < auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.foo < 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'foo' <= auth.foo",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.foo <= 'foo'",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'one' > auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.someInt > 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'one' >= auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.someInt >= 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'one' < auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.someInt < 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "'one' <= auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "auth.someInt <= 'one'",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": true
+    },
+    {
+      "rule": "1 >= auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "2 > auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "1 <= auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "0 < auth.someInt",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.parent().exists()",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": true
+    }
+  ]
+}

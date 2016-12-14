@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+lint.html
 
 # Runtime data
 pids
@@ -29,3 +30,5 @@ node_modules
 
 # Editors
 *.sublime-*
+targaryen-service-account.json
+targaryen-secret.json

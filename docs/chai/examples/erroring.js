@@ -1,10 +1,12 @@
+'use strict';
 
-var chai = require('chai'),
-  targaryen = require('../../../index.js'), // in your app this would be require('targaryen')
-  expect = chai.expect,
-  users = targaryen.users;
+// in your app this would be require('targaryen/plugins/chai')
+const targaryen = require('../../../plugins/chai');
+const chai = require('chai');
+const expect = chai.expect;
+const users = targaryen.users;
 
-chai.use(targaryen.chai);
+chai.use(targaryen);
 
 describe('An invalid set of security rules', function() {
 

@@ -1,0 +1,10 @@
+extends: '../../.eslintrc.yml'
+env:
+  mocha: true
+globals:
+  expect: true
+  sinon: true
+rules:
+  max-nested-callbacks: "off"
+  no-new: "off"
+  prefer-arrow-callback: "off"

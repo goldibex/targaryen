@@ -2,3 +2,12 @@ language: node_js
 node_js:
   - "4"
   - "6"
+script:
+  - >
+    if [ "$TRAVIS_EVENT_TYPE" == "cron" ] && node --version | grep v6\. ; then
+      ./bin/build.sh test:live;
+    else
+      echo "skipping live tests";
+    fi
+  - npm run test
+  - npm run lint
