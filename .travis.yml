@@ -9,5 +9,5 @@ script:
     else
       echo "skipping live tests";
     fi
-  - npm run test
+  - npm run coveralls
   - npm run lint

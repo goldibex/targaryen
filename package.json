@@ -26,6 +26,7 @@
   },
   "scripts": {
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "fixtures": "./bin/targaryen-specs -v -i -s test/spec/lib/parser/fixtures.json",
     "format": "npm run lint -- --fix",
     "lint": "eslint lib/ plugins/ test/ bin/targaryen",
@@ -60,6 +61,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "dirty-chai": "^1.2.2",
+    "coveralls": "^2.11.15",
     "eslint": "^3.9.1",
     "eslint-config-xo": "^0.17.0",
     "eslint-plugin-node": "^2.1.3",
