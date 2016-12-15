@@ -33,6 +33,8 @@
     * [Refactor rule parser](https://github.com/goldibex/targaryen/pull/91).
     * [Simpler tests](https://github.com/goldibex/targaryen/pull/94).
     * [Move `lib/database`](https://github.com/goldibex/targaryen/pull/98).
+    * [Fix deleting a missing node](https://github.com/goldibex/targaryen/pull/103).
+    * [Add `DataNode.$merge` (`Database.root.$merge`)](https://github.com/goldibex/targaryen/pull/104).
 
 Thanks goes to @mhuebert, @RomansBermans and @simenbrekken for their contributions.
 
