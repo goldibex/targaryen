@@ -258,6 +258,12 @@ describe('store', function() {
       expect(newRoot.$value()).to.eql({a: 1, b: {e: 3}});
     });
 
+    it('should remove non existant node', function() {
+      const newRoot = data.$remove('/x/y/z');
+
+      expect(newRoot.$value()).to.deep.equal(data.$value());
+    });
+
   });
 
   describe('#$child', function() {
