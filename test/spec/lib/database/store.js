@@ -224,6 +224,55 @@ describe('store', function() {
 
   });
 
+  describe('#$merge', function() {
+    let data;
+
+    beforeEach(function() {
+      data = store.create({
+        a: 1,
+        b: {
+          c: {
+            d: 2
+          }
+        }
+      });
+    });
+
+    it('should return a new tree with merged data', function() {
+      const original = data.$value();
+      const newRoot = data.$merge('/', {a: 3, 'b/c/e': 4});
+
+      expect(data.$value()).to.deep.equal(original);
+      expect(newRoot.$value()).to.deep.equal({
+        a: 3,
+        b: {
+          c: {
+            d: 2,
+            e: 4
+          }
+        }
+      });
+    });
+
+    it('should return a new tree with removed branches', function() {
+      const newRoot = data.$merge('/', {a: null});
+
+      expect(data.a.$value()).to.equal(1);
+      expect(newRoot).not.to.have.property('a');
+    });
+
+    it('should return a new tree without empty branches', function() {
+      const newRoot = data.$merge('b/c', {d: null, e: null, f: 3});
+
+      expect(newRoot.b.c.$value()).to.deep.equal({f: 3});
+    });
+
+    it('should handle empty patch', function() {
+      expect(data.$merge('b/c', {})).to.equal(data);
+    });
+
+  });
+
   describe('#$remove', function() {
     let data;
 
