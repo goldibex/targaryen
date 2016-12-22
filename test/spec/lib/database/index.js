@@ -1088,6 +1088,48 @@ describe('database', function() {
       expect(db.update('/', {a: 1}).allowed).to.be.false();
     });
 
+    it('should show no rules were found', function() {
+      const rules = {
+        rules: {
+          foo: {
+            '.write': true
+          }
+        }
+      };
+      const data = {};
+      const db = database.create(rules, data).with({debug: true});
+      const patch = {
+        foo: true,
+        bar: true
+      };
+
+      const result = db.update('/', patch);
+
+      expect(result.info).to.contain('/bar: <no rules>');
+
+    });
+
+    it('should show .write rules did no allow the operation', function() {
+      const rules = {
+        rules: {
+          foo: {
+            '.write': true
+          }
+        }
+      };
+      const data = {};
+      const db = database.create(rules, data).with({debug: true});
+      const patch = {
+        foo: true,
+        bar: true
+      };
+
+      const result = db.update('/', patch);
+
+      expect(result.info).to.contain('No .write rule allowed the operation.');
+      expect(result.info).to.contain('patch was denied.');
+    });
+
   });
 
 });
