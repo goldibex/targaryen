@@ -1105,7 +1105,7 @@ describe('database', function() {
 
       const result = db.update('/', patch);
 
-      expect(result.info).to.contain('/bar: <no rules>');
+      expect(result.info).to.contain('/bar:  <no rules>');
 
     });
 
