@@ -1093,6 +1093,9 @@ describe('database', function() {
         rules: {
           foo: {
             '.write': true
+          },
+          bar: {
+            '.validate': true
           }
         }
       };
@@ -1105,7 +1108,9 @@ describe('database', function() {
 
       const result = db.update('/', patch);
 
-      expect(result.info).to.contain('/bar: <no rules>');
+      console.log(result.info);
+
+      expect(result.info).to.contain('/bar: write <no rules>');
 
     });
 
