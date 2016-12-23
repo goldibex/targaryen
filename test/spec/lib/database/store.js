@@ -313,6 +313,22 @@ describe('store', function() {
       expect(newRoot.$value()).to.deep.equal(data.$value());
     });
 
+    it('should copy parent nodes', function() {
+      data = store.create({
+        a: {
+          b: {
+            c: true,
+            d: true
+          },
+          e: true
+        }
+      });
+
+      const newRoot = data.$remove('a/b/c');
+
+      expect(newRoot.$value()).to.eql({a: {b: {d: true}, e: true}});
+    });
+
   });
 
   describe('#$child', function() {
