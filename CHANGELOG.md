@@ -35,8 +35,10 @@
     * [Move `lib/database`](https://github.com/goldibex/targaryen/pull/98).
     * [Fix deleting a missing node](https://github.com/goldibex/targaryen/pull/103).
     * [Add `DataNode.$merge` (`Database.root.$merge`)](https://github.com/goldibex/targaryen/pull/104).
+    * [Better debug info when an operation doesn't trigger any read/write rules](https://github.com/goldibex/targaryen/pull/107).
+    * [Fix regression bug in removing and prune nodes](https://github.com/goldibex/targaryen/pull/109).
 
-Thanks goes to @mhuebert, @RomansBermans and @simenbrekken for their contributions.
+Thanks goes to @alisson446, @georgesboris, @mhuebert, @RomansBermans and @simenbrekken for their contributions.
 
 ## 2.3.3 (2016-12-04)
 
