@@ -42,57 +42,6 @@ describe('util', function() {
 
   });
 
-  describe('user description', function() {
-    const path = '/';
-    let result, data;
-
-    beforeEach(function() {
-      util.setFirebaseRules({rules: {}});
-      util.setFirebaseData(null);
-      data = util.getFirebaseData();
-    });
-
-    it('should describe unauthenticated users', function() {
-      result = database.results.read(path, data);
-      expect(util.readableError(result)).to.contain('unauthenticated user');
-    });
-
-    it('should describe anonymous users', function() {
-      result = database.results.read(path, data.as(util.users.anonymous));
-      expect(util.readableError(result)).to.contain('user authenticated anonymously');
-    });
-
-    it('should describe password users', function() {
-      result = database.results.read(path, data.as(util.users.password));
-      expect(util.readableError(result)).to.contain('user authenticated via Password Login');
-    });
-
-    it('should describe auth', function() {
-      const auth = {uid: 123};
-
-      result = database.results.read(path, data.as(auth));
-      expect(util.readableError(result)).to.contain(JSON.stringify(auth));
-    });
-
-    it('should describe auth with $description', function() {
-      const $description = 'some description';
-
-      result = database.results.read(path, data.as({$description}));
-      expect(util.readableError(result)).to.contain($description);
-    });
-
-    ['Facebook', 'Twitter', 'Github', 'Google'].forEach(function(provider) {
-      const auth = util.users[provider.toLowerCase()];
-
-      it('should describe Facebook users', function() {
-        result = database.results.read(path, data.as(auth));
-        expect(util.readableError(result)).to.contain(`user authenticated via ${provider}`);
-      });
-
-    });
-
-  });
-
   ['readableError', 'unreadableError'].forEach(function(name) {
     const helper = util[name];
 
@@ -105,14 +54,6 @@ describe('util', function() {
         util.setFirebaseRules({rules: {}});
         util.setFirebaseData(null);
         result = database.results.read(path, util.getFirebaseData().as({$description}));
-      });
-
-      it('should include the path', function() {
-        expect(helper(result)).to.contain(path);
-      });
-
-      it('should include the user', function() {
-        expect(helper(result)).to.contain($description);
       });
 
       it('should include result info if debug is enabled', function() {
@@ -145,18 +86,6 @@ describe('util', function() {
         const data = util.getFirebaseData().as({$description});
 
         result = database.results.write(path, data, data, value);
-      });
-
-      it('should include the path', function() {
-        expect(helper(result)).to.contain(path);
-      });
-
-      it('should include the user', function() {
-        expect(helper(result)).to.contain($description);
-      });
-
-      it('should include the value', function() {
-        expect(helper(result)).to.contain(value);
       });
 
       it('should include result info if debug is enabled', function() {
