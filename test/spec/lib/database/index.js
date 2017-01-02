@@ -1108,8 +1108,6 @@ describe('database', function() {
 
       const result = db.update('/', patch);
 
-      console.log(result.info);
-
       expect(result.info).to.contain('/bar: write <no rules>');
 
     });
