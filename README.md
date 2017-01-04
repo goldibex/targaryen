@@ -100,6 +100,13 @@ See [USAGE.md](https://github.com/goldibex/targaryen/blob/master/USAGE.md) for m
 Targaryen statically analyzes your security rules using [esprima](http://esprima.org). It then conducts two passes over the abstract syntax tree. The first pass, during the parsing process, checks the types of variables and the syntax of the rules for correctness. The second pass, during the testing process, evaluates the expressions in the security rules given a set of state variables (the RuleDataSnapshots, auth data, the present time, and any wildchildren).
 
 
+## Install
+
+```shell
+npm install targaryen@3
+```
+
+
 ## API
 
 - `targaryen.database(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`

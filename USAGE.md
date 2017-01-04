@@ -22,7 +22,7 @@ To use either Jasmine or Chai, you'll need to get the Targaryen API. This is as
 simple as
 
 ```bash
-npm install --save-dev targaryen
+npm install --save-dev targaryen@3
 ```
 
 followed by
