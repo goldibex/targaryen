@@ -1,16 +1,26 @@
 {
   "rules": {
     "posts": {
+      /**
+       * Post.
+       *
+       * Read: anybody with the correct clearance level; each post has its own level requirement
+       * Write: by the author only.
+       */
       "$post": {
         ".read": "root.child('users').child(auth.uid).child('clearance-level').val() >= data.child('clearance-level').val()",
         ".write": "root.child('users').child(auth.uid).child('author').val() === true",
         ".validate": "newData.hasChildren() && newData.hasChild('date')",
         "date": {
-          ".validate": "data.parent().exists() === false && newData.val() <= now"
+          ".validate": "
+            data.parent().exists() === false
+            && newData.val() <= now
+          "
         }
       }
     },
     "flight-routes": {
+      // Flight routes are public and can be added/edited bu ticket agents
       "$from": {
         "$to": {
           ".read": "true",
