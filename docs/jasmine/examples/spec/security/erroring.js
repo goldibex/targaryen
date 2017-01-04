@@ -2,6 +2,9 @@
 
 // in your app this would be require('targaryen/plugins/jasmine')
 const targaryen = require('../../../../../plugins/jasmine');
+const path = require('path');
+
+const rules = targaryen.json.loadSync(path.join(__dirname, 'bad-rules.json'));
 
 describe('An invalid set of security rules and data', function() {
 
@@ -12,7 +15,7 @@ describe('An invalid set of security rules and data', function() {
   it('causes Targaryen to throw', function() {
 
     targaryen.setFirebaseData(require('./data.json'));
-    targaryen.setFirebaseRules(require('./bad-rules.json'));
+    targaryen.setFirebaseRules(rules);
 
   });
 

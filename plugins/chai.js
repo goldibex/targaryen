@@ -104,6 +104,7 @@ function chaiTargaryen(chai, utils) {
 
 }
 
+chaiTargaryen.json = require('firebase-json');
 chaiTargaryen.users = targaryen.util.users;
 chaiTargaryen.setDebug = targaryen.util.setDebug;
 chaiTargaryen.setVerbose = targaryen.util.setVerbose;
