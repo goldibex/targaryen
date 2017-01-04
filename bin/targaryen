@@ -2,8 +2,7 @@
 
 'use strict';
 
-const fs = require('fs');
-const stripJsonComments = require('strip-json-comments');
+const json = require('firebase-json');
 
 const path = require('path');
 const Table = require('cli-table');
@@ -21,8 +20,7 @@ if (argv._.length < 2) {
 
 const rulesJSONPath = path.resolve(argv._[0]);
 const testJSONPath = path.resolve(argv._[1]);
-const rulesJSONFile = fs.readFileSync(rulesJSONPath);
-const rules = JSON.parse(stripJsonComments(rulesJSONFile.toString()));
+const rules = json.loadSync(rulesJSONPath, 'utf8');
 const tests = require(testJSONPath);
 
 const jig = new TestJig(rules, tests);
