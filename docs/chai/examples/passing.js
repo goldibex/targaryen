@@ -5,6 +5,8 @@ const targaryen = require('../../../plugins/chai');
 const chai = require('chai');
 const expect = chai.expect;
 const users = targaryen.users;
+const path = require('path');
+const rules = targaryen.json.loadSync(path.join(__dirname, 'rules.json'));
 
 chai.use(targaryen);
 
@@ -12,7 +14,7 @@ describe('A valid set of security rules and data', function() {
 
   before(function() {
     targaryen.setFirebaseData(require('./data.json'));
-    targaryen.setFirebaseRules(require('./rules.json'));
+    targaryen.setFirebaseRules(rules);
   });
 
   it('can be tested against', function() {

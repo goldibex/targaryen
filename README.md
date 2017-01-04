@@ -46,14 +46,15 @@ Targaryen provides three convenient ways to run tests:
 - as a set of custom matchers for [Jasmine](https://jasmine.github.io):
 
     ```js
-    const targaryen = require('targaryen/plugins/jasmine');;
+    const targaryen = require('targaryen/plugins/jasmine');
+    const rules = targaryen.json.loadSync(RULES_PATH);
 
     describe('my security rules', function() {
 
       beforeEach(function() {
         jasmine.addMatchers(targaryen.matchers);
         targaryen.setFirebaseData(require(DATA_PATH));
-        targaryen.setFirebaseRules(require(RULES_PATH));
+        targaryen.setFirebaseRules(rules);
       });
 
       it('should allow authenticated user to read all data', function() {
@@ -70,6 +71,7 @@ Targaryen provides three convenient ways to run tests:
     const chai = require('chai');
     const targaryen = require('targaryen/plugins/chai');
     const expect = chai.expect;
+    const rules = targaryen.json.loadSync(RULES_PATH);
 
     chai.use(targaryen);
 
@@ -77,7 +79,7 @@ Targaryen provides three convenient ways to run tests:
 
       before(function() {
         targaryen.setFirebaseData(require(DATA_PATH)));
-        targaryen.setFirebaseRules(require(RULES_PATH));
+        targaryen.setFirebaseRules(rules);
       });
 
       it('should allow authenticated user to read all data', function() {

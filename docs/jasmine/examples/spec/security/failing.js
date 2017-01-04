@@ -2,10 +2,13 @@
 
 // in your app this would be require('targaryen/plugins/jasmine')
 const targaryen = require('../../../../../plugins/jasmine');
+const path = require('path');
+
+const rules = targaryen.json.loadSync(path.join(__dirname, 'rules.json'));
 const users = targaryen.users;
 
 targaryen.setFirebaseData(require('./data.json'));
-targaryen.setFirebaseRules(require('./rules.json'));
+targaryen.setFirebaseRules(rules);
 
 describe('A valid set of security rules and data', function() {
 
