@@ -70,6 +70,16 @@ describe('Rule', function() {
 
     });
 
+    it('properly handles computed member expressions', function() {
+
+      const pass = parser.parse('auth.bar[\'foo\' + \'bar\'] != null', []);
+      const scope = {auth: {bar: {foobar: true}}};
+
+      expect(() => pass.evaluate(scope)).to.not.throw();
+      expect(pass.evaluate(scope)).to.be.true();
+
+    });
+
     describe('with logical expression', function() {
 
       it('should evaluate each branch lazily', function() {
