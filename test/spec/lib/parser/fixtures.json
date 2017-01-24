@@ -14,6 +14,13 @@
   },
   "tests": [
     {
+      "rule": "auth.foo['b' + 'ar'] == true",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
       "rule": "1 < 2",
       "user": "unauth",
       "isValid": true,
