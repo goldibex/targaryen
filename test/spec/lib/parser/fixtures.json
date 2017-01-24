@@ -1087,6 +1087,18 @@
         "$foo": "exists"
       },
       "isValid": false
+    },
+    {
+      "rule": "auth.someString[\"contains\"](\"on\") == true",
+      "user": "bob",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "auth.someString[\"doesNotContains\"](\"on\") == false",
+      "user": "bob",
+      "isValid": false
     }
   ]
 }
