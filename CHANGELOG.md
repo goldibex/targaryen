@@ -1,4 +1,15 @@
-## 3.0.0 (upcoming)
+## 3.0.1 2017-01-24
+
+- Fix computed property type infering ([#114], [#116], [#117] & [#118])
+
+Thanks to @pthrasher for his contribution.
+
+[#114]: https://github.com/goldibex/targaryen/pull/114
+[#116]: https://github.com/goldibex/targaryen/pull/116
+[#117]: https://github.com/goldibex/targaryen/pull/117
+[#118]: https://github.com/goldibex/targaryen/pull/118
+
+## 3.0.0 (2017-01-12)
 
 - [Fix type validation](https://github.com/goldibex/targaryen/issues/62):
     * Type inferring doesn't throw when it cannot infer a node type; set the type to "any" or "primitive".
