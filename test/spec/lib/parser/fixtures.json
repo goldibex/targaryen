@@ -1062,6 +1062,26 @@
       "user": "unauth",
       "isValid": true,
       "failAtRuntime": true
+    },
+    {
+      "rule": "root[\"exists\"]() == false",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root[\"exi\" + \"sts\"]() == false",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root[$foo]() == false",
+      "user": "unauth",
+      "wildchildren": {
+        "$foo": "exists"
+      },
+      "isValid": false
     }
   ]
 }
