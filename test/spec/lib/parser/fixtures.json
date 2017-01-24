@@ -1071,6 +1071,11 @@
       "evaluateTo": true
     },
     {
+      "rule": "root[\"doesNotExist\"]() == true",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
       "rule": "root[\"exi\" + \"sts\"]() == false",
       "user": "unauth",
       "isValid": false
