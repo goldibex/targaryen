@@ -36,6 +36,12 @@ describe('Rule', function() {
 
     });
 
+    it('should provide global scope when infering a computed property type', function() {
+      expect(
+        () => parser.parse('root[$foo]() == null', ['$foo'])
+      ).to.throw(/Invalid property access/);
+    });
+
   });
 
   describe('#evaluate', function() {
