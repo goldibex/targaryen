@@ -1099,6 +1099,16 @@
       "rule": "auth.someString[\"doesNotContains\"](\"on\") == false",
       "user": "bob",
       "isValid": false
+    },
+    {
+      "rule": "root.child(\"foo\").val().length < 100",
+      "user": "unauth",
+      "data": {
+        "foo": ""
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
     }
   ]
 }
