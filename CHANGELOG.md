@@ -1,3 +1,13 @@
+## 3.0.2 2017-08-10
+
+- Fix falsy member property evaluation ([##125]); `foo.bar` would have evaluated to `foo` if `foo.bar` had been falsy (e.g. an empty string).
+- Fix patch example ([#123]).
+
+Thanks to @SamyPesse and @a-xin for their contributions.
+
+[#125]: https://github.com/goldibex/targaryen/issues/125
+[#123]: https://github.com/goldibex/targaryen/pull/123
+
 ## 3.0.1 2017-01-24
 
 - Fix computed property type infering ([#114], [#116], [#117] & [#118])
