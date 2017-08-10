@@ -1,6 +1,6 @@
 ## 3.0.2 2017-08-10
 
-- Fix falsy member property evaluation ([##125]); `foo.bar` would have evaluated to `foo` if `foo.bar` had been falsy (e.g. an empty string).
+- Fix falsy member property evaluation ([#125]); `foo.bar` would have evaluated to `foo` if `foo.bar` had been falsy (e.g. an empty string).
 - Fix patch example ([#123]).
 
 Thanks to @SamyPesse and @a-xin for their contributions.
