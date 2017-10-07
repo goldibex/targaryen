@@ -1,3 +1,11 @@
+## 3.0.3 2017-10-07
+
+- Fix handling of tests with invalid locations ([#131]).
+
+Thanks to @dannycochran for reporting the issue.
+
+[#131]: https://github.com/goldibex/targaryen/issues/131
+
 ## 3.0.2 2017-08-10
 
 - Fix falsy member property evaluation ([#125]); `foo.bar` would have evaluated to `foo` if `foo.bar` had been falsy (e.g. an empty string).
