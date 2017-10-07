@@ -23,7 +23,7 @@ const invalidRulesets = {
     },
     otherStuff: true
   },
-  'include invalid index': {
+  'includes an invalid index': {
     rules: {
       '.read': true,
       '.indexOn': true
@@ -267,6 +267,15 @@ describe('Ruleset', function() {
         expect(child.wildchildren).to.eql({$b: 'foo'});
       });
 
+      describe('should throw when the name includes an invalid character:', function() {
+        const rules = ruleset.create({rules: {'.read': true}});
+
+        ['.', '#', '$', '[', ']'].forEach(char => {
+          it(`e.g. using "${char}"`, () => expect(() => rules.root.$child(`ab/c${char}d`)).to.throw());
+        });
+
+      });
+
     });
 
     describe('#$traverse', function() {
@@ -398,6 +407,15 @@ describe('Ruleset', function() {
         expect(cb).to.have.been.calledWith('a', rules.root.a);
 
         expect(cb).to.have.callCount(2);
+      });
+
+      describe('should throw when the path includes an invalid character:', function() {
+        const rules = ruleset.create({rules: {'.read': true}});
+
+        ['.', '#', '$', '[', ']'].forEach(char => {
+          it(`e.g. using "${char}"`, () => expect(() => rules.root.$traverse(`a/b${char}c`, () => {})).to.throw());
+        });
+
       });
 
     });
