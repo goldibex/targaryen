@@ -69,6 +69,16 @@ describe('store', function() {
     });
   });
 
+  describe('should throw when creating a node with an invalid name:', function() {
+
+    ['.', '#', '$', '[', ']'].forEach(char => {
+      const data = {[`a${char}c`]: 1};
+
+      it(`e.g. using "${char}"`, () => expect(() => store.create(data)).to.throw());
+    });
+
+  });
+
   describe('server value replacement', function() {
 
     it('should handle time stamps', function() {
@@ -222,6 +232,14 @@ describe('store', function() {
       expect(newRoot).not.to.have.property('b');
     });
 
+    describe('should throw when the path includes an invalid character:', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        it(`e.g. using "${char}"`, () => expect(() => data.$set(`a${char}c`, 1)).to.throw());
+      });
+
+    });
+
   });
 
   describe('#$merge', function() {
@@ -269,6 +287,17 @@ describe('store', function() {
 
     it('should handle empty patch', function() {
       expect(data.$merge('b/c', {})).to.equal(data);
+    });
+
+    describe('should throw when the path includes an invalid character:', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        it(`e.g. using "${char}"`, () => {
+          expect(() => data.$merge('/', {a: 3, [`b/c/a${char}c`]: 4})).to.throw();
+          expect(() => data.$merge(`/a${char}c`, {a: 3})).to.throw();
+        });
+      });
+
     });
 
   });
@@ -329,6 +358,14 @@ describe('store', function() {
       expect(newRoot.$value()).to.eql({a: {b: {d: true}, e: true}});
     });
 
+    describe('should throw when the path includes an invalid character:', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        it(`e.g. using "${char}"`, () => expect(() => data.$remove(`/a${char}c`)).to.throw());
+      });
+
+    });
+
   });
 
   describe('#$child', function() {
@@ -344,6 +381,14 @@ describe('store', function() {
 
     it('should return a node if no node exists at a specific path', function() {
       expect(data.$child('foo/bar').$value()).to.equal(null);
+    });
+
+    describe('should throw when the path includes an invalid character:', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        it(`e.g. using "${char}"`, () => expect(() => data.$child(`a${char}c`)).to.throw());
+      });
+
     });
 
   });
