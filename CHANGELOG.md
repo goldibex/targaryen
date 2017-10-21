@@ -1,3 +1,11 @@
+## 3.0.4 2017-10-21
+
+- Fix handling of trailing slashes in update operation patch data keys ([#134]).
+
+Thanks to @SamyPesse for reporting the issue.
+
+[#134]: https://github.com/goldibex/targaryen/issues/134
+
 ## 3.0.3 2017-10-07
 
 - Fix handling of tests with invalid locations ([#131]).
