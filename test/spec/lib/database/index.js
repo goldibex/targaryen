@@ -1047,6 +1047,28 @@ describe('database', function() {
       expect(result.newData.val()).to.eql({foo: 1});
     });
 
+    it('should handle trailing slashes', function() {
+      const rules = {
+        rules: {
+          invites: {
+            $key: {
+              '.validate': 'newData.hasChildren(["createdAt"])',
+              createdAt: {
+                '.validate': 'newData.isNumber()'
+              }
+            },
+            '.write': true
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      expect(db.update('/', {'invites/someKey': {createdAt: 1508598138982}}).allowed).to.be.true();
+      expect(db.update('/', {'invites/someKey': {createdAt: 'some time ago'}}).allowed).to.be.false();
+      expect(db.update('/', {'invites/': {createdAt: 1508598138982}}).allowed).to.be.false();
+    });
+
     it('should prune null node deeply', function() {
       const value = {a: {b: 2}};
       const rules = {rules: {'.write': true}};
