@@ -1,3 +1,11 @@
+## 3.0.5 2017-10-23
+
+- Fix regression in v3.0.3 regarding invalid location in rules evaluation - should have been allowed ([#136]).
+
+Thanks to @chetbox for reporting the issue.
+
+[#136]: https://github.com/goldibex/targaryen/issues/136
+
 ## 3.0.4 2017-10-21
 
 - Fix handling of trailing slashes in update operation patch data keys ([#134]).
