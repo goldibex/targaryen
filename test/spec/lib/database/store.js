@@ -383,14 +383,6 @@ describe('store', function() {
       expect(data.$child('foo/bar').$value()).to.equal(null);
     });
 
-    describe('should throw when the path includes an invalid character:', function() {
-
-      ['.', '#', '$', '[', ']'].forEach(char => {
-        it(`e.g. using "${char}"`, () => expect(() => data.$child(`a${char}c`)).to.throw());
-      });
-
-    });
-
   });
 
 });

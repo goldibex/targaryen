@@ -546,6 +546,22 @@ describe('database', function() {
       expect(db.read('/a').allowed).to.be.false();
     });
 
+    describe('should fail when reading invalid path', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        const rules = {
+          rules: {
+            '.read': 'true'
+          }
+        };
+        const data = {};
+        const db = database.create(rules, data);
+
+        it(`e.g. using "${char}"`, () => expect(() => db.read(`ab/c${char}d`)).to.throw());
+      });
+
+    });
+
   });
 
   describe('#write', function() {
@@ -895,6 +911,22 @@ describe('database', function() {
       expect(db.write('/a', 2).allowed).to.be.false();
     });
 
+    describe('should fail when writing invalid path', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        const rules = {
+          rules: {
+            '.write': true
+          }
+        };
+        const data = null;
+        const db = database.create(rules, data);
+
+        it(`e.g. using "${char}"`, () => expect(() => db.write(`a/b${char}c`, true)).to.throw());
+      });
+
+    });
+
   });
 
   describe('#update', function() {
@@ -1153,6 +1185,28 @@ describe('database', function() {
 
       expect(result.info).to.contain('No .write rule allowed the operation.');
       expect(result.info).to.contain('patch was denied.');
+    });
+
+    describe('should fail when writing invalid path', function() {
+
+      ['.', '#', '$', '[', ']'].forEach(char => {
+        const rules = {
+          rules: {
+            '.write': true
+          }
+        };
+        const data = null;
+        const db = database.create(rules, data);
+        const patch = {
+          [`a/b${char}c`]: true
+        };
+
+        it(`e.g. using "${char}"`, () => {
+          expect(() => db.update('/', patch)).to.throw();
+          expect(() => db.update(`a/b${char}c`, {d: true})).to.throw();
+        });
+      });
+
     });
 
   });

@@ -10,6 +10,9 @@
       "someString": "one",
       "uid": "custom:bob"
     },
+    "uidWithEmail": {
+      "uid": "bob@example.com"
+    },
     "unauth": null
   },
   "tests": [
@@ -1106,6 +1109,48 @@
       "data": {
         "foo": ""
       },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.child(\"banned/\" + auth.uid).val() != true",
+      "user": "uidWithEmail",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.hasChild(\"banned/\" + auth.uid) == false",
+      "user": "uidWithEmail",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.hasChildren([\"banned/\" + auth.uid]) == false",
+      "user": "uidWithEmail",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.child(\"banned/bob@example.com\").val() != true",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.hasChild(\"banned/bob@example.com\") == false",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.hasChildren([\"banned/bob@example.com\"]) == false",
+      "user": "unauth",
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
