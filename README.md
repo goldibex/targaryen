@@ -78,7 +78,7 @@ Targaryen provides three convenient ways to run tests:
     describe('my security rules', function() {
 
       before(function() {
-        targaryen.setFirebaseData(require(DATA_PATH)));
+        targaryen.setFirebaseData(require(DATA_PATH));
         targaryen.setFirebaseRules(rules);
       });
 
