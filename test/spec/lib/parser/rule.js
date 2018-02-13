@@ -89,6 +89,7 @@ describe('Rule', function() {
 
       fixtures.tests.filter(d => d.isValid && !d.failAtRuntime).forEach(function(details) {
         const state = Object.assign({
+          query: database.query(details.query),
           root: database.snapshot('/', details.data || null),
           now: Date.now(),
           auth: fixtures.users[details.user] || null

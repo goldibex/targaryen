@@ -1154,6 +1154,16 @@
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByChild == \"foo/bar\"",
+      "user": "unauth",
+      "query": {
+        "orderByChild": "foo/bar"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
     }
   ]
 }
