@@ -42,6 +42,45 @@ describe('Rule', function() {
       ).to.throw(/Invalid property access/);
     });
 
+    describe('with query', function() {
+
+      it('should allow access to query attributes', function() {
+        const pass = [
+          'query.orderByChild == "owner"',
+          'query.orderByChild == null',
+          'query.orderByValue',
+          'query.orderByKey',
+          'query.orderByPriority',
+          'query.orderByValue == false',
+          'query.orderByKey == false',
+          'query.orderByPriority == false',
+          'query.startAt == "foo"',
+          'query.endAt == "foo"',
+          'query.equalTo == "foo"',
+          'query.startAt == 3',
+          'query.endAt == 3',
+          'query.equalTo == 3',
+          'query.startAt == true',
+          'query.endAt == true',
+          'query.equalTo == true',
+          'query.startAt == null',
+          'query.endAt == null',
+          'query.equalTo == null',
+          'query.limitToFirst == 10',
+          'query.limitToLast == 10',
+          'query.limitToFirst == null',
+          'query.limitToLast == null'
+        ];
+        const fail = [
+          'query.foo == "owner"'
+        ];
+
+        pass.forEach(rule => expect(() => parser.parse(rule, []), rule).not.to.throw());
+        fail.forEach(rule => expect(() => parser.parse(rule, []), rule).to.throw());
+      });
+
+    });
+
   });
 
   describe('#evaluate', function() {
