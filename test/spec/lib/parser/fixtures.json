@@ -1164,6 +1164,110 @@
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByChild == null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByChild == \"owner\"",
+      "user": "unauth",
+      "query": {
+        "orderByChild": "owner"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByKey == true && query.orderByValue == false && query.orderByPriority == false",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByKey != null && query.orderByValue != null && query.orderByPriority != null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.orderByKey == false && query.orderByValue == true && query.orderByPriority == false",
+      "user": "unauth",
+      "query": {
+        "orderByValue": true
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.startAt == null && query.endAt == null && query.equalTo == null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.startAt == \"foo\"",
+      "user": "unauth",
+      "query": {
+        "orderByValue": true,
+        "startAt": "foo"
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.endAt == 3",
+      "user": "unauth",
+      "query": {
+        "orderByValue": true,
+        "endAt": 3
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.equalTo == true",
+      "user": "unauth",
+      "query": {
+        "orderByValue": true,
+        "equalTo": true
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.limitToLast == null && query.limitToFirst == null",
+      "user": "unauth",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.limitToLast == 10",
+      "user": "unauth",
+      "query": {
+        "orderByValue": true,
+        "limitToLast": 10
+      },
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "query.foo == 1",
+      "user": "unauth",
+      "isValid": false
     }
   ]
 }
