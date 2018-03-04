@@ -123,15 +123,15 @@ npm install targaryen@3
 
     Extends the database object with auth data.
 
-- `Database.prototype.read(path: string, now: null|number): Result`
+- `Database.prototype.read(path: string, options: {now: number, query: object}): Result`
 
     Simulates a read operation.
 
-- `Database.prototype.write(path: string, value: any, priority: any, now: null|number): Result`
+- `Database.prototype.write(path: string, value: any, options: {now: number, priority: any}): Result`
 
     Simulates a write operation.
 
-- `Database.prototype.update(path: string, patch: object, now: null|number): Result`
+- `Database.prototype.update(path: string, patch: object, options: {now: number}): Result`
 
     Simulates an update operation (including multi-location update).
 
