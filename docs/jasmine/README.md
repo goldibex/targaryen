@@ -62,10 +62,10 @@ jasmine spec/security/<name of example>.js
   - `twitter`: a user authenticated by their Twitter account.
   - `google`: a user authenticated by their Google account.
   - `github`: a user authenticated by their Github account.
-- `expect(auth).canRead(path: string)`: asserts that the given path is readable by a user with the given authentication data.
-- `expect(auth).cannotRead(path: string)`: asserts that the given path is not readable by a user with the given authentication data.
-- `expect(auth).canWrite(path: string, data: any)`: asserts that the given path is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
-- `expect(auth).cannotWrite(path: string, data: any)`: asserts that the given path is not writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
-- `expect(auth).canPatch(path: string, patch: {[path: string]: any})`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
-- `expect(auth).cannotPatch(path: string, patch: {[path: string]: any})`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
+- `expect(auth).canRead(path: string [, options: {now?: number, query?: object} ])`: asserts that the given path is readable by a user with the given authentication data.
+- `expect(auth).cannotRead(path: string[, options: {now?: number, query?: object} ])`: asserts that the given path is not readable by a user with the given authentication data.
+- `expect(auth).canWrite(path: string [, data: any [, options: {now: number, priority: any} ]])`: asserts that the given path is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).cannotWrite(path: string [, data: any [, options: {now: number, priority: any} ]])`: asserts that the given path is not writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).canPatch(path: string, patch: {[path: string]: any} [, options: {now: number} ])`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
+- `expect(auth).cannotPatch(path: string, patch: {[path: string]: any} [, options: {now: number} ])`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
 

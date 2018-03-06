@@ -114,6 +114,33 @@ describe('the targaryen Jasmine plugin', function() {
       }
     });
 
+    expect(null).canRead('/foo', {now: 1000});
+    expect(null).cannotRead('/foo');
+
+    expect(null).canWrite('/foo', {'.sv': 'timestamp'}, {now: 1000});
+    expect(null).canWrite('/foo', {'.sv': 'timestamp'});
+
+    expect(null).canWrite('/foo', 1000, {now: 1000});
+    expect(null).cannotWrite('/foo', 1000, {now: 2000});
+
+    expect(null).canPatch('/', {foo: {'.sv': 'timestamp'}}, {now: 1000});
+    expect(null).canPatch('/', {foo: {'.sv': 'timestamp'}});
+
+    expect(null).canPatch('/', {foo: 1000}, {now: 1000});
+    expect(null).cannotPatch('/', {foo: 1000}, {now: 2000});
+  });
+
+  it('can set operation time stamp (legacy)', function() {
+    targaryen.setFirebaseData({foo: 2000});
+    targaryen.setFirebaseRules({
+      rules: {
+        $key: {
+          '.read': 'data.val() > now',
+          '.write': 'newData.val() == now'
+        }
+      }
+    });
+
     expect(null).canRead('/foo', 1000);
     expect(null).cannotRead('/foo');
 
@@ -128,6 +155,30 @@ describe('the targaryen Jasmine plugin', function() {
 
     expect(null).canPatch('/', {foo: 1000}, 1000);
     expect(null).cannotPatch('/', {foo: 1000}, 2000);
+  });
+
+  it('can set read query parameters', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.read': 'query.orderByChild == "owner" && query.equalTo == auth.uid'
+    }});
+
+    expect(null).cannotRead('/');
+    expect({uid: 'bob'}).cannotRead('/');
+    expect({uid: 'bob'}).canRead('/', {query: {
+      orderByChild: 'owner',
+      equalTo: 'bob'
+    }});
+  });
+
+  it('can set write priority', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.write': 'newData.getPriority() != null'
+    }});
+
+    expect(null).cannotWrite('/', 'foo');
+    expect(null).canWrite('/', 'foo', {priority: 1});
   });
 
 });
