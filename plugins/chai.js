@@ -23,37 +23,49 @@ function chaiTargaryen(chai, utils) {
   });
 
   chai.Assertion.addChainableMethod('readAt', function(now) {
+    const options = Object.assign({}, utils.flag(this, 'operationOptions'), {now});
 
     utils.flag(this, 'operation', 'read');
-    utils.flag(this, 'operationTimestamp', now);
+    utils.flag(this, 'operationOptions', options);
+
+  }, function() {
+    const options = Object.assign({}, utils.flag(this, 'operationOptions'), {now: null});
+
+    utils.flag(this, 'operation', 'read');
+    utils.flag(this, 'operationOptions', options);
+  });
+
+  chai.Assertion.addChainableMethod('readWith', function(options) {
+    utils.flag(this, 'operation', 'read');
+    utils.flag(this, 'operationOptions', options);
 
   }, function() {
     utils.flag(this, 'operation', 'read');
-    utils.flag(this, 'operationTimestamp', null);
+    utils.flag(this, 'operationOptions', {});
   });
 
-  chai.Assertion.addChainableMethod('write', function(data, now) {
+  chai.Assertion.addChainableMethod('write', function(data, options) {
 
     utils.flag(this, 'operation', 'write');
     utils.flag(this, 'operationData', data);
-    utils.flag(this, 'operationTimestamp', now);
+    utils.flag(this, 'operationOptions', typeof options === 'number' ? {now: options} : options);
 
   }, function() {
     utils.flag(this, 'operation', 'write');
     utils.flag(this, 'operationData', null);
-    utils.flag(this, 'operationTimestamp', null);
+    utils.flag(this, 'operationOptions', {});
   });
 
-  chai.Assertion.addChainableMethod('patch', function(data, now) {
+  chai.Assertion.addChainableMethod('patch', function(data, options) {
 
     utils.flag(this, 'operation', 'patch');
     utils.flag(this, 'operationData', data);
-    utils.flag(this, 'operationTimestamp', now);
+    utils.flag(this, 'operationOptions', options);
 
   }, function() {
     utils.flag(this, 'operation', 'patch');
     utils.flag(this, 'operationData', null);
-    utils.flag(this, 'operationTimestamp', null);
+    utils.flag(this, 'operationOptions', {});
   });
 
   chai.Assertion.addMethod('path', function(path) {
@@ -63,14 +75,14 @@ function chaiTargaryen(chai, utils) {
     const auth = this._obj;
     const data = targaryen.util.getFirebaseData().as(auth);
     const operationType = utils.flag(this, 'operation');
-    const now = utils.flag(this, 'operationTimestamp');
+    const options = utils.flag(this, 'operationOptions');
     const positivity = utils.flag(this, 'positivity');
     let result, newData;
 
     switch (operationType) {
 
     case 'read':
-      result = data.read(path, now);
+      result = data.read(path, options);
 
       if (positivity) {
         chai.assert(result.allowed === true, targaryen.util.unreadableError(result, 6).trim());
@@ -82,12 +94,12 @@ function chaiTargaryen(chai, utils) {
 
     case 'write':
       newData = utils.flag(this, 'operationData');
-      result = data.write(path, newData, undefined, now);
+      result = data.write(path, newData, options);
       break;
 
     case 'patch':
       newData = utils.flag(this, 'operationData');
-      result = data.update(path, newData, now);
+      result = data.update(path, newData, options);
       break;
 
     default:

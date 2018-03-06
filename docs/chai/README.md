@@ -66,7 +66,8 @@ mocha examples/<name of example>.js
 - `chai.Assertion.can`: asserts that this is an affirmative test, i.e., the specified operation ought to succeed.
 - `chai.Assertion.cannot`: asserts that this is a negative test, i.e., the specified operation ought to fail.
 - `chai.Assertion.read`: asserts that this test is for a read operation.
-- `chai.Assertion.write(data: any)`: asserts that this test is for a write operation. Optionally takes a Javascript object or primitive with the new data to be written (which will be in the `newData` snapshot in the rules). Otherwise it just tries with `null`.
-- `chai.Assertion.patch(data: {[path: string]: any})`: asserts that this test is for a patch (or multi-location update) operation. Optionally takes a Javascript object or primitive with the new data to be written (which will be in the `newData` snapshot in the rules). Otherwise it just tries with `null`.
+- `chai.Assertion.readWith(options: {query: object, now: number})`: asserts that this test is for a read operation.
+- `chai.Assertion.write(data: any [, options: {now: number, priority: any}])`: asserts that this test is for a write operation. Optionally takes a Javascript object or primitive with the new data to be written (which will be in the `newData` snapshot in the rules). Otherwise it just tries with `null`.
+- `chai.Assertion.patch(data: {[path: string]: any} [, options: {now: number}])`: asserts that this test is for a patch (or multi-location update) operation. Optionally takes a Javascript object or primitive with the new data to be written (which will be in the `newData` snapshot in the rules). Otherwise it just tries with `null`.
 - `chai.Assertion.path(firebasePath: string)`: asserts the path against which the operation should be conducted. This method actually tries the damn operation.
 
