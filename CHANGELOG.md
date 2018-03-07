@@ -1,3 +1,9 @@
+## 3.1.0-beta.0 2018-03-07
+
+- Add support for the `query` variable ([#142]).
+
+[#142]: https://github.com/goldibex/targaryen/issues/142
+
 ## 3.0.5 2017-10-23
 
 - Fix regression in v3.0.3 regarding invalid location in rules evaluation - should have been allowed ([#136]).
