@@ -19,11 +19,11 @@ exports.matchers = {
 
   canRead() {
 
-    return {compare(auth, path, now) {
+    return {compare(auth, path, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.read(path, now);
+      const result = data.read(path, options);
 
       return {
         pass: result.allowed === true,
@@ -35,11 +35,11 @@ exports.matchers = {
   },
   cannotRead() {
 
-    return {compare(auth, path, now) {
+    return {compare(auth, path, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.read(path, now);
+      const result = data.read(path, options);
 
       return {
         pass: result.allowed === false,
@@ -51,11 +51,13 @@ exports.matchers = {
   },
   canWrite() {
 
-    return {compare(auth, path, newData, now) {
+    return {compare(auth, path, newData, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.write(path, newData, undefined, now);
+      const result = typeof options === 'number' ?
+        data.write(path, newData, undefined, options) :
+        data.write(path, newData, options);
 
       return {
         pass: result.allowed === true,
@@ -67,11 +69,13 @@ exports.matchers = {
   },
   cannotWrite() {
 
-    return {compare(auth, path, newData, now) {
+    return {compare(auth, path, newData, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.write(path, newData, undefined, now);
+      const result = typeof options === 'number' ?
+        data.write(path, newData, undefined, options) :
+        data.write(path, newData, options);
 
       return {
         pass: result.allowed === false,
@@ -82,11 +86,11 @@ exports.matchers = {
   },
   canPatch() {
 
-    return {compare(auth, path, newData, now) {
+    return {compare(auth, path, newData, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.update(path, newData, now);
+      const result = data.update(path, newData, options);
 
       return {
         pass: result.allowed === true,
@@ -98,11 +102,11 @@ exports.matchers = {
   },
   cannotPatch() {
 
-    return {compare(auth, path, newData, now) {
+    return {compare(auth, path, newData, options) {
 
       const data = targaryen.util.getFirebaseData().as(auth);
 
-      const result = data.update(path, newData, now);
+      const result = data.update(path, newData, options);
 
       return {
         pass: result.allowed === false,

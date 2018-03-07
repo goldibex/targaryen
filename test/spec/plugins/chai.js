@@ -60,6 +60,20 @@ describe('Chai plugin', function() {
     expect(targaryen.users.facebook).can.read.path('/foo/bar');
   });
 
+  it('should test read access with provided query', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.read': 'query.orderByChild == "owner" && query.equalTo == auth.uid'
+    }});
+
+    expect(targaryen.users.unauthenticated).cannot.read.path('/');
+    expect(targaryen.users.facebook).cannot.read.path('/');
+    expect(targaryen.users.facebook).can.readWith({query: {
+      orderByChild: 'owner',
+      equalTo: targaryen.users.facebook.uid
+    }}).path('/');
+  });
+
   it('should test write access', function() {
     targaryen.setFirebaseData(null);
     targaryen.setFirebaseRules({rules: {
@@ -81,6 +95,16 @@ describe('Chai plugin', function() {
     expect(targaryen.users.facebook).cannot.write(2).to.path('/foo');
     expect(targaryen.users.facebook).cannot.write(1).to.path('/foo/bar');
     expect(targaryen.users.facebook).can.write(2).to.path('/foo/bar');
+  });
+
+  it('can set priority', function() {
+    targaryen.setFirebaseData(null);
+    targaryen.setFirebaseRules({rules: {
+      '.write': 'newData.getPriority() != null'
+    }});
+
+    expect(null).cannot.write('foo').to.path('/');
+    expect(null).can.write('foo', {priority: 10}).to.path('/');
   });
 
   it('should test multi write access', function() {
@@ -109,6 +133,33 @@ describe('Chai plugin', function() {
   });
 
   it('can set operation time stamp', function() {
+    targaryen.setFirebaseData({foo: 2000});
+    targaryen.setFirebaseRules({
+      rules: {
+        $key: {
+          '.read': 'data.val() > now',
+          '.write': 'newData.val() == now'
+        }
+      }
+    });
+
+    expect(null).can.readAt(1000).path('/foo');
+    expect(null).cannot.read.path('/foo');
+
+    expect(null).can.write({'.sv': 'timestamp'}, {now: 1000}).path('/foo');
+    expect(null).can.write({'.sv': 'timestamp'}).path('/foo');
+
+    expect(null).can.write(1000, {now: 1000}).path('/foo');
+    expect(null).cannot.write(2000, {now: 1000}).path('/foo');
+
+    expect(null).can.patch({foo: {'.sv': 'timestamp'}}, {now: 1000}).path('/');
+    expect(null).can.patch({foo: {'.sv': 'timestamp'}}).path('/');
+
+    expect(null).can.patch({foo: 1000, bar: 1000}, {now: 1000}).path('/');
+    expect(null).cannot.patch({foo: 1000, bar: 1000}, {now: 2000}).path('/');
+  });
+
+  it('can set operation time stamp (legacy)', function() {
     targaryen.setFirebaseData({foo: 2000});
     targaryen.setFirebaseRules({
       rules: {

@@ -532,6 +532,32 @@ describe('database', function() {
       expect(result.logs.map(r => r.path)).to.eql(['', 'foo/bar/baz']);
     });
 
+    it('should evaluate using provided timestamp', function() {
+      const rules = {
+        rules: {
+          '.read': 'now == 1234'
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      expect(db.read('foo').allowed).to.be.false();
+      expect(db.read('foo', {now: 1234}).allowed).to.be.true();
+    });
+
+    it('should evaluate using provided timestamp (legacy)', function() {
+      const rules = {
+        rules: {
+          '.read': 'now == 1234'
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      expect(db.read('foo').allowed).to.be.false();
+      expect(db.read('foo', 1234).allowed).to.be.true();
+    });
+
     it('should fail on type error in read rules evaluation', function() {
       const rules = {
         rules: {
@@ -660,10 +686,26 @@ describe('database', function() {
       const now = 12345000;
       const db = database.create(rules, data);
 
+      expect(db.write('foo', now, {now}).allowed).to.be.true();
+    });
+
+    it('should match "now" with the newData server timestamp (legacy)', function() {
+      const rules = {
+        rules: {
+          '.write': false,
+          foo: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const now = 12345000;
+      const db = database.create(rules, data);
+
       expect(db.write('foo', now, null, now).allowed).to.be.true();
     });
 
-    it('should not match "now" with the data server timestamp', function() {
+    it('should not match "now" with the previous data server timestamp', function() {
       const rules = {
         rules: {
           '.write': false,
@@ -1011,10 +1053,29 @@ describe('database', function() {
       const foo = now;
       const bar = now;
 
+      expect(db.update('/', {foo, bar}, {now}).allowed).to.be.true();
+    });
+
+    it('should match "now" with the newData server timestamp (legacy)', function() {
+      const rules = {
+        rules: {
+          '.write': 'false',
+          $key: {
+            '.write': 'newData.val() == now'
+          }
+        }
+      };
+      const data = null;
+      const db = database.create(rules, data);
+
+      const now = 12345000;
+      const foo = now;
+      const bar = now;
+
       expect(db.update('/', {foo, bar}, now).allowed).to.be.true();
     });
 
-    it('should not match "now" with the data server timestamp', function() {
+    it('should not match "now" with the previous data server timestamp', function() {
       const rules = {
         rules: {
           '.write': 'false',
