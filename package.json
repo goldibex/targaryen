@@ -32,6 +32,7 @@
     "lint": "eslint lib/ plugins/ test/ bin/targaryen",
     "lint:html": "(npm run -s lint -- --max-warnings 0 -f html -o lint.html && rm lint.html) || echo 'open lint.html for linting errors'",
     "test": "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
+    "test:unit": "mocha -r test/setup.js test/spec/ --recursive",
     "test:inspect": "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
