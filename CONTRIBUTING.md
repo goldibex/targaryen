@@ -2,7 +2,6 @@
 
 Pull Requests (PR) are welcomes.
 
-
 ## Installing
 
 Fork [Targaryen], then:
@@ -18,6 +17,7 @@ npm install
 
 If the error relates to rule parsing and evaluation, you can use
 `./bin/targaryen-specs`; e.g.:
+
 ```
 $ ./bin/targaryen-specs -a '{"tests": [{"rule": "1/0 > 2"}]}'
 {
@@ -55,6 +55,7 @@ The rule should evaluate to false.
 ```
 
 To add it to the list of test fixture in `test/spec/lib/parser/fixtures.json`:
+
 ```
 ./bin/targaryen-specs -s test/spec/lib/parser/fixtures.json -i -a '{"tests": [{"rule": "1/0 > 2"}]}'
 
@@ -64,7 +65,6 @@ npm run fixtures -- -a '{"tests": [{"rule": "1/0 > 2"}]}'
 
 For other type of bug, you should submit regular mocha tests if possible.
 
-
 ## Feature branch
 
 Avoid working fixes and new features in your master branch. It will prevent you
@@ -72,6 +72,7 @@ from submitting focused pull request or from working on more than one
 fix/feature at a time.
 
 Instead, create a branch for each fix or feature:
+
 ```bash
 git checkout master
 git pull upstream master
@@ -79,6 +80,7 @@ git checkout -b <branch-name>
 ```
 
 Work and commit the fixes/features, and then push your branch:
+
 ```bash
 git push origin <branch-name>
 ```
@@ -89,13 +91,13 @@ form:
     https://github.com/goldibex/targaryen/compare/master...<your-github-username>:<branch-name>
 
 Once your PR is accepted:
+
 ```bash
 git checkout master
 git push origin --delete <branch-name>
 git branch -D <branch-name>
 git pull upstream master
 ```
-
 
 ## Running tests
 
@@ -105,10 +107,10 @@ npm test
 ```
 
 Or for coverage info:
+
 ```
 npm run coverage
 ```
-
 
 ## Linting and formatting
 
@@ -130,6 +132,5 @@ npm run format
 npm run lint:html
 ```
 
-
-[Targaryen]: https://github.com/goldibex/targaryen
+[targaryen]: https://github.com/goldibex/targaryen
 [eslint]: http://eslint.org/

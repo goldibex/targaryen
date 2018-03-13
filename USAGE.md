@@ -1,5 +1,3 @@
-
-
 ## Standalone
 
 Install Targaryen locally and run it like so:
@@ -28,12 +26,12 @@ npm install --save-dev targaryen@3
 followed by
 
 ```js
-var targaryen = require('targaryen');
+var targaryen = require("targaryen");
 ```
 
 Before your tests start, you need to call two different methods:
 
-`targaryen.setFirebaseData(data)`: set the database state for the test. `data` is a plain old Javascript object containing whatever data you want to be accessible via the `root` and `data` objects in the security rules. You can either use the data format of Firebase's `exportVal` (i.e., with ".value" and ".priority" keys) or just a plain Javascript object. The plain object will be converted to the Firebase format. 
+`targaryen.setFirebaseData(data)`: set the database state for the test. `data` is a plain old Javascript object containing whatever data you want to be accessible via the `root` and `data` objects in the security rules. You can either use the data format of Firebase's `exportVal` (i.e., with ".value" and ".priority" keys) or just a plain Javascript object. The plain object will be converted to the Firebase format.
 
 `targaryen.setFirebaseRules(rules)`: set the database rules for the test. `rules` is a plain old Javascript object with the contents `rules.json`, so you can just say `targaryen.setFirebaseRules(require('./rules.json'))` and be on your way.
 
@@ -42,31 +40,28 @@ Before your tests start, you need to call two different methods:
 Docs are at [docs/chai](https://github.com/goldibex/targaryen/blob/master/docs/chai). A quick example:
 
 ```js
-
-var chai = require('chai'),
+var chai = require("chai"),
   expect = chai.expect,
-  targaryen = require('targaryen');
+  targaryen = require("targaryen");
 
 chai.use(targaryen.chai);
 
-describe('A set of rules and data', function() {
-
+describe("A set of rules and data", function() {
   before(function() {
-    
     // when you call setFirebaseData, you can either use the data format
     // of `exportVal` (i.e., with ".value" and ".priority" keys) or just a plain
     // Javascript object. The plain object will be converted to the Firebase format.
 
     targaryen.setFirebaseData({
       users: {
-        'password:500f6e96-92c6-4f60-ad5d-207253aee4d3': {
+        "password:500f6e96-92c6-4f60-ad5d-207253aee4d3": {
           name: {
-            '.value': 'Rickard Stark',
-            '.priority': 2
+            ".value": "Rickard Stark",
+            ".priority": 2
           }
         },
-        'password:3403291b-fdc9-4995-9a54-9656241c835d': {
-          name: 'Mad Aerys',
+        "password:3403291b-fdc9-4995-9a54-9656241c835d": {
+          name: "Mad Aerys",
           king: true
         }
       }
@@ -76,44 +71,45 @@ describe('A set of rules and data', function() {
     targaryen.setFirebaseRules({
       rules: {
         users: {
-          '.read': 'auth !== null',
-          '.write': "root.child('users').child(auth.uid).child('king').val() === true"
+          ".read": "auth !== null",
+          ".write":
+            "root.child('users').child(auth.uid).child('king').val() === true"
         }
       }
     });
-
   });
 
-  it('can be tested', function() {
+  it("can be tested", function() {
+    expect(targaryen.users.unauthenticated).cannot.read.path(
+      "users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3"
+    );
 
-    expect(targaryen.users.unauthenticated)
-    .cannot.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-
-    expect(targaryen.users.password)
-    .can.read.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
-
-    expect(targaryen.users.password)
-    .cannot.write(true).to.path('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent');
-
-    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' })
-    .can.write(true).to.path('users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire');
+    expect(targaryen.users.password).can.read.path(
+      "users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3"
+    );
 
     expect(targaryen.users.password)
-    .cannot.patch('/', {
-      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire': null,
-      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent': true
+      .cannot.write(true)
+      .to.path("users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent");
+
+    expect({ uid: "password:3403291b-fdc9-4995-9a54-9656241c835d" })
+      .can.write(true)
+      .to.path("users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire");
+
+    expect(targaryen.users.password).cannot.patch("/", {
+      "users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire": null,
+      "users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent": true
     });
 
-    expect({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d' })
-    .can.patch('/', {
-      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire': true,
-      'users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent': null
-    });
-
+    expect({ uid: "password:3403291b-fdc9-4995-9a54-9656241c835d" }).can.patch(
+      "/",
+      {
+        "users/password:3403291b-fdc9-4995-9a54-9656241c835d/on-fire": true,
+        "users/password:3403291b-fdc9-4995-9a54-9656241c835d/innocent": null
+      }
+    );
   });
-
 });
-
 ```
 
 ### Jasmine
@@ -121,7 +117,7 @@ describe('A set of rules and data', function() {
 Docs are at [docs/jasmine](https://github.com/goldibex/targaryen/blob/master/docs/jasmine). A quick example:
 
 ```js
-  
+
 var targaryen = require('targaryen');
 
 // see Chai example above for format
@@ -132,7 +128,7 @@ targaryen.setFirebaseRules(...);
 describe('A set of rules and data', function() {
 
   beforeEach(function() {
-    jasmine.addMatchers(targaryen.jasmine.matchers);    
+    jasmine.addMatchers(targaryen.jasmine.matchers);
   });
 
   it('can be tested', function() {
@@ -164,5 +160,4 @@ describe('A set of rules and data', function() {
   });
 
 });
-
 ```

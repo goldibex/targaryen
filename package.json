@@ -12,28 +12,27 @@
     "lib": "lib",
     "test": "test"
   },
-  "files": [
-    "bin",
-    "docs",
-    "lib",
-    "plugins",
-    "index.js",
-    "USAGE.md"
-  ],
+  "files": ["bin", "docs", "lib", "plugins", "index.js", "USAGE.md"],
   "repository": {
     "type": "git",
     "url": "https://github.com/goldibex/targaryen"
   },
   "scripts": {
-    "coverage": "istanbul cover --print detail node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-    "fixtures": "./bin/targaryen-specs -v -i -s test/spec/lib/parser/fixtures.json",
+    "coverage":
+      "istanbul cover --print detail node_modules/.bin/_mocha -- --require test/setup.js --recursive -b test/spec/",
+    "coveralls":
+      "npm run coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "fixtures":
+      "./bin/targaryen-specs -v -i -s test/spec/lib/parser/fixtures.json",
     "format": "npm run lint -- --fix",
     "lint": "eslint lib/ plugins/ test/ bin/targaryen",
-    "lint:html": "(npm run -s lint -- --max-warnings 0 -f html -o lint.html && rm lint.html) || echo 'open lint.html for linting errors'",
-    "test": "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
+    "lint:html":
+      "(npm run -s lint -- --max-warnings 0 -f html -o lint.html && rm lint.html) || echo 'open lint.html for linting errors'",
+    "test":
+      "mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
     "test:unit": "mocha -r test/setup.js test/spec/ --recursive",
-    "test:inspect": "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
+    "test:inspect":
+      "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
   "license": "ISC",

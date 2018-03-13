@@ -1183,21 +1183,24 @@
       "evaluateTo": true
     },
     {
-      "rule": "query.orderByKey == true && query.orderByValue == false && query.orderByPriority == false",
+      "rule":
+        "query.orderByKey == true && query.orderByValue == false && query.orderByPriority == false",
       "user": "unauth",
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
     },
     {
-      "rule": "query.orderByKey != null && query.orderByValue != null && query.orderByPriority != null",
+      "rule":
+        "query.orderByKey != null && query.orderByValue != null && query.orderByPriority != null",
       "user": "unauth",
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
     },
     {
-      "rule": "query.orderByKey == false && query.orderByValue == true && query.orderByPriority == false",
+      "rule":
+        "query.orderByKey == false && query.orderByValue == true && query.orderByPriority == false",
       "user": "unauth",
       "query": {
         "orderByValue": true
@@ -1207,7 +1210,8 @@
       "evaluateTo": true
     },
     {
-      "rule": "query.startAt == null && query.endAt == null && query.equalTo == null",
+      "rule":
+        "query.startAt == null && query.endAt == null && query.equalTo == null",
       "user": "unauth",
       "isValid": true,
       "failAtRuntime": false,
