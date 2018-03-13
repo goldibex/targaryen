@@ -1,4 +1,3 @@
-
 ## Note
 
 The CLI utility is meant for somewhat simpler tests. If you have more complex
@@ -8,13 +7,13 @@ requirements, please use targaryen as a plugin for either [Jasmine](https://gith
 
 1. Run `npm install -g targaryen`.
 2. Create a JSON security tests file. The file should contain a single base object
-with the following 3 keys:
+   with the following 3 keys:
 
-  `root`: an object containing the mock data the security tests should
-  operate on. This data can either be formatted identically to the kind of value that
-  comes out of `exportVal`, or just given as plain values if you don't care about priorities.
-  Additionally, the special object `{ ".sv": "timestamp" }` will be replaced with
-  an integer containing the number of milliseconds since the epoch.
+`root`: an object containing the mock data the security tests should
+operate on. This data can either be formatted identically to the kind of value that
+comes out of `exportVal`, or just given as plain values if you don't care about priorities.
+Additionally, the special object `{ ".sv": "timestamp" }` will be replaced with
+an integer containing the number of milliseconds since the epoch.
 
     An example:
     ```json
@@ -29,11 +28,11 @@ with the following 3 keys:
         }
       }
     ```
-  
+
     `users`: an object that describes the authentication state of any kind of user
     that might access your system. The keys should be the names by which you want to refer
     to the auth payload in the tests; the values should be the auth payloads themselves.
-    
+
     For example:
     ```json
       "users": {
@@ -46,7 +45,7 @@ with the following 3 keys:
     `tests`: an object that describes the tests, that is, operations that should or
     should not be possible given the current data in `root`, one of the users from `users`,
     and possibly some new data to be written.
-  
+
     The keys of this object should be the paths to be tested. The values are objects with at least
     one of four keys, `canRead`, `canWrite`, `cannotRead`, and `cannotWrite`. The values associated
     with these four keys should be arrays containing strings, in the case of the read
@@ -74,9 +73,10 @@ with the following 3 keys:
 
 3. Run the tests with the command
 
-  ```bash
-  $ targaryen path/to/rules.json path/to/tests.json
-  ```
+
+```bash
+$ targaryen path/to/rules.json path/to/tests.json
+```
 
 Targaryen will run the tests and report any failures on stderr.
 
@@ -89,4 +89,3 @@ as the output of the Firebase Forge's simulator.
 
 Targaryen exits with a non-zero status code if at least one test failed, or zero if
 all tests succeeded.
-

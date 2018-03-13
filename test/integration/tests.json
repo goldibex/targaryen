@@ -33,7 +33,7 @@
   },
   "tests": {
     "posts/existing-post": {
-      "canRead": [ "John Smith" ]
+      "canRead": ["John Smith"]
     },
     "posts/existing-post/date": {
       "cannotWrite": [
@@ -42,24 +42,26 @@
       ]
     },
     "posts/new-post": {
-      "canWrite": [{
-        "auth": "an author", "data": {
-          "date": { ".sv": "timestamp" }
-        }
-      }],
-      "cannotWrite": [{
-        "auth": "John Smith", "data": {
-          "date": { ".sv": "timestamp" }
-        }
-      }]
-    },
-    "posts/new-post/date": {
       "canWrite": [
-        { "auth": "an author", "data": { ".sv": "timestamp" } }
+        {
+          "auth": "an author",
+          "data": {
+            "date": { ".sv": "timestamp" }
+          }
+        }
       ],
       "cannotWrite": [
-        { "auth": "John Smith", "data": { ".sv": "timestamp" } }
+        {
+          "auth": "John Smith",
+          "data": {
+            "date": { ".sv": "timestamp" }
+          }
+        }
       ]
+    },
+    "posts/new-post/date": {
+      "canWrite": [{ "auth": "an author", "data": { ".sv": "timestamp" } }],
+      "cannotWrite": [{ "auth": "John Smith", "data": { ".sv": "timestamp" } }]
     },
     "posts/other-post": {
       "cannotRead": ["John Smith"]
