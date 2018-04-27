@@ -124,34 +124,6 @@
       "failAtRuntime": true
     },
     {
-      "rule": "root.child('foo').val().matches(/bar/)",
-      "user": "unauth",
-      "data": {
-        "foo": "bar"
-      },
-      "isValid": true,
-      "failAtRuntime": false,
-      "evaluateTo": true
-    },
-    {
-      "rule": "root.child('foo').val().matches(/BAR/i)",
-      "user": "unauth",
-      "data": {
-        "foo": "bar"
-      },
-      "isValid": true,
-      "failAtRuntime": false,
-      "evaluateTo": true
-    },
-    {
-      "rule": "root.child('foo').val().matches(/bar/ig)",
-      "user": "unauth",
-      "data": {
-        "foo": "bar"
-      },
-      "isValid": false
-    },
-    {
       "rule": "root.child('users/' + auth.uid).exists()",
       "user": "unauth",
       "isValid": true,
@@ -321,22 +293,6 @@
       "isValid": true,
       "failAtRuntime": false,
       "evaluateTo": true
-    },
-    {
-      "rule": "root.val().matches(/^ba/)",
-      "user": "unauth",
-      "data": "bar",
-      "isValid": true,
-      "failAtRuntime": false,
-      "evaluateTo": true
-    },
-    {
-      "rule": "root.val().matches(/^wa/)",
-      "user": "unauth",
-      "data": "bar",
-      "isValid": true,
-      "failAtRuntime": false,
-      "evaluateTo": false
     },
     {
       "rule": "auth.foo[$bar] == true",
@@ -1267,6 +1223,55 @@
     {
       "rule": "query.foo == 1",
       "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val().matches(/bar/)",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/BAR/i)",
+      "user": "unauth",
+      "data": "bar",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/bar/ig)",
+      "user": "unauth",
+      "isValid": false
+    },
+    {
+      "rule": "root.val().matches(/^foo/)",
+      "user": "unauth",
+      "data": "foo",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/^foo$/)",
+      "user": "unauth",
+      "data": "foo",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
+    },
+    {
+      "rule": "root.val().matches(/(^foo$|bar)/)",
+      "user": "unauth",
+      "data": "foo",
+      "isValid": false
+    },
+    {
+      "rule": "root.val().matches(/^(foo|)$/)",
+      "user": "unauth",
+      "data": "foo",
       "isValid": false
     }
   ]
