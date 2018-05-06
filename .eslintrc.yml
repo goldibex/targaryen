@@ -21,6 +21,7 @@ rules:
     - warn
   no-confusing-arrow:
     - error
+    - allowParens: true
   no-eq-null:
     - "off"
   no-use-before-define:
