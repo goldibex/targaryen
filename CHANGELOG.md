@@ -1,3 +1,9 @@
+## 3.1.0-beta.1 2018-05-06
+
+- Validate literal regular expression ([#146]).
+
+[#146]: https://github.com/goldibex/targaryen/pull/146
+
 ## 3.1.0-beta.0 2018-03-07
 
 - Add support for the `query` variable ([#142]).
