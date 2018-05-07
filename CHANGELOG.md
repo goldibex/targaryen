@@ -1,3 +1,7 @@
+## 3.1.0-beta.2 2018-05-07
+
+- Publish generated regexp parser; Thanks @a-xin for notice it.
+
 ## 3.1.0-beta.1 2018-05-06
 
 - Validate literal regular expression ([#146]).
