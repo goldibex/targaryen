@@ -1,3 +1,11 @@
+## 3.1.0-beta.3 2018-05-09
+
+- Allow dot in literal regexp ([#148]); Thanks @a-xin for notice it.
+- Support literal closing bracket ([#149]).
+
+[#148]: https://github.com/goldibex/targaryen/pull/148
+[#149]: https://github.com/goldibex/targaryen/pull/149
+
 ## 3.1.0-beta.2 2018-05-07
 
 - Publish generated regexp parser; Thanks @a-xin for notice it.
