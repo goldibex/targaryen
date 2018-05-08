@@ -94,9 +94,10 @@ groupRE ->
     positionalLiteral:? RE {% token.concatenation %}
 
 char  ->
-    %char     {% token.create %}
-  | %comma    {% token.char %}
-  | %literal  {% token.char %}
+    %char         {% token.create %}
+  | %comma        {% token.char %}
+  | %literal      {% token.char %}
+  | %closingBrace {% token.char %}
 
 number ->
     %number   {% token.create %}

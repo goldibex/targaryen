@@ -240,6 +240,13 @@ describe('regexp', function() {
         }]
       }
     }
+  }, {
+    title: 'literal closing brace',
+    expression: {
+      type: 'char',
+      value: '}',
+      offset: 0
+    }
   }].forEach(function(test) {
     it(`should parse ${test.title}`, function() {
       const results = regexp.parse(test.expression.value);
