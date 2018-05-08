@@ -1273,6 +1273,14 @@
       "user": "unauth",
       "data": "foo",
       "isValid": false
+    },
+    {
+      "rule": "root.val().matches(/\\{foo}/)",
+      "user": "unauth",
+      "data": "{foo}",
+      "isValid": true,
+      "failAtRuntime": false,
+      "evaluateTo": true
     }
   ]
 }
