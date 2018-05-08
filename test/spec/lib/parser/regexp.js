@@ -262,6 +262,10 @@ describe('regexp', function() {
     source: '\\wbc',
     expected: '\\wbc'
   }, {
+    title: 'dot',
+    source: '.bc',
+    expected: '.bc'
+  }, {
     title: 'positive set',
     source: '[-a-z]bc',
     expected: '[-a-z]bc'
