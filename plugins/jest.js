@@ -6,82 +6,88 @@
 
 'use strict';
 
+const json = require('firebase-json');
 const targaryen = require('../');
 
-function toBeAllowed({ info, allowed }) {
-  const pass = allowed === true;
-  const message = pass
-    ? () => `Expected operation to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${info}`
-    : () => `Expected operation to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${info}`;
+// Need to disable eslint rule for jest's utils: this.utils.EXPECTED_COLOR('a')
+/* eslint-disable new-cap */
 
-    return {
+function toBeAllowed(result) {
+  const pass = result.allowed === true;
+  const message = pass ?
+    () => `Expected operation to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${result.info}` :
+    () => `Expected operation to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${result.info}`;
+
+  return {
     message,
-    pass,
+    pass
   };
 }
 
 function toAllowRead(database, path, options) {
-  const { info, allowed } = database
-    .with({ debug: true })
+  const result = database
+    .with({debug: true})
     .read(path, options);
 
-  const pass = allowed === true;
-  const message = pass
-    ? () => `Expected ${this.utils.EXPECTED_COLOR('read')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${info}`
-    : () => `Expected ${this.utils.EXPECTED_COLOR('read')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${info}`;
+  const pass = result.allowed === true;
+  const message = pass ?
+    () => `Expected ${this.utils.EXPECTED_COLOR('read')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${result.info}` :
+    () => `Expected ${this.utils.EXPECTED_COLOR('read')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${result.info}`;
 
   return {
     message,
-    pass,
+    pass
   };
 }
 
 function toAllowWrite(database, path, value, options) {
-  const { info, allowed } = database
-    .with({ debug: true })
+  const result = database
+    .with({debug: true})
     .write(path, value, options);
 
-  const pass = allowed === true;
-  const message = pass
-    ? () => `Expected ${this.utils.EXPECTED_COLOR('write')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${info}`
-    : () => `Expected ${this.utils.EXPECTED_COLOR('write')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${info}`;
+  const pass = result.allowed === true;
+  const message = pass ?
+    () => `Expected ${this.utils.EXPECTED_COLOR('write')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${result.info}` :
+    () => `Expected ${this.utils.EXPECTED_COLOR('write')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${result.info}`;
 
   return {
     message,
-    pass,
+    pass
   };
 }
 
 function toAllowUpdate(database, path, patch, options) {
-  const { info, allowed } = database
-    .with({ debug: true })
+  const result = database
+    .with({debug: true})
     .update(path, patch, options);
 
-  const pass = allowed === true;
-  const message = pass
-    ? () => `Expected ${this.utils.EXPECTED_COLOR('update')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${info}`
-    : () => `Expected ${this.utils.EXPECTED_COLOR('update')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${info}`;
+  const pass = result.allowed === true;
+  const message = pass ?
+    () => `Expected ${this.utils.EXPECTED_COLOR('update')} to be ${this.utils.EXPECTED_COLOR('denied')} but it was ${this.utils.RECEIVED_COLOR('allowed')}\n\n${result.info}` :
+    () => `Expected ${this.utils.EXPECTED_COLOR('update')} to be ${this.utils.EXPECTED_COLOR('allowed')} but it was ${this.utils.RECEIVED_COLOR('denied')}\n\n${result.info}`;
 
   return {
     message,
-    pass,
+    pass
   };
 }
 
 /**
- * Simple wrapper for `targaryen.database()` for conveniently creating a
+ * Expose `targaryen.database()` for conveniently creating a
  * database for a jest test.
+ *
+ * @return {Database}
  */
-function getDatabase(...args) {
-  return targaryen.database(...args);
-}
+const getDatabase = targaryen.database;
 
 /**
  * Simple wrapper for `targaryen.database()` that also enables debug mode for
  * detailed error messages.
+ *
+ * @return {Database}
  */
-function getDebugDatabase(...args) {
-  return targaryen.database(...args).with({ debug: true });
+function getDebugDatabase() {
+  return targaryen.database.apply(this, arguments).with({debug: true});
 }
 
 const jestTargaryen = {
@@ -93,8 +99,8 @@ const jestTargaryen = {
   // NOTE: Exported for convenience only
   getDatabase,
   getDebugDatabase,
-  json: require('firebase-json'),
-  users: targaryen.util.users,
+  json,
+  users: targaryen.util.users
 };
 
 module.exports = jestTargaryen;
