@@ -35,6 +35,7 @@
     "prepare": "npm run build",
     "test": "npm run build && mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
     "test:unit": "mocha -r test/setup.js test/spec/ --recursive",
+    "test:plugin:jest": "jest test/jest",
     "test:inspect": "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
