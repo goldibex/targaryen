@@ -1,0 +1,71 @@
+
+## Using Targaryen with Jest
+
+1. Run `npm install -g jest` and `npm install --save-dev targaryen`.
+
+2. Create a new directory for your security tests (**NOTE**: Jest defaults to look for tests inside of `__tests__` folders, or in files that end in `.spec.js` or `.test.js`).
+
+3. Add a new *fixture JSON* for the state of your Firebase. Call this `spec/security/<firebase path>.json`. This file will describe the state of the Firebase data store for your tests, that is, what you can get via the `root` and `data` variables in the security rules.
+
+4. Create a new file for your first set of tests, like `spec/security/<firebase path>.spec.js`.
+
+5. Add the following content to the top of the new file:
+
+```js
+// user-rules.spec.js
+const targaryen = require('targaryen/plugins/jest');
+
+expect.extend({
+  toAllowRead: targaryen.toAllowRead,
+  toAllowUpdate: targaryen.toAllowUpdate,
+  toAllowWrite: targaryen.toAllowWrite,
+});
+
+const RULES_PATH = 'database.rules.json';
+const rules = targaryen.json.loadSync(RULES_PATH);
+const initialData = require(path.join(__dirname, path.basename(__filename, '.spec.js') + '.json'));
+
+test('basic', () => {
+  const database = targaryen.getDatabase(rules, initialData);
+
+  expect(database.as(targaryen.users.unauthenticated)).not.toAllowRead('/user');
+  expect(database.as(targaryen.users.unauthenticated)).toAllowRead('/public');
+  expect(database.as(targaryen.users.facebook)).toAllowRead('/user');
+  expect(database.as({ uid: '1234'})).toAllowWrite('/user/1234', {
+    name: 'Anna',
+  });
+});
+```
+
+where `RULES_PATH` is the path to your security rules JSON file. If your security rules are broken, Targaryen will throw an exception at this point with detailed information about what specifically is broken.
+
+6. Write your security tests.
+
+The subject of every assertion will be the authentication state (i.e., `auth`) of the user trying the operation, so for instance, `null` would be an unauthenticated user, or a Firebase Password Login user would look like `{ uid: 'password:500f6e96-92c6-4f60-ad5d-207253aee4d3', id: 1, provider: 'password' }`. There are symbolic versions of these in `targaryen.users`.
+
+See the API section below for details, or take a look at the example files here.
+
+7. Run the tests with `jest`.
+
+## API
+
+- import with `require('targaryen/plugins/jest')`.
+- `jestTargaryen.toAllowRead`, `jestTargaryen.toAllowWrite`, `jestTargaryen.toAllowUpdate`, `jestTargaryen.toBeAllowed`: The jest matchers. Load them using `expect.extend({toAllowRead: targaryen.toAllowRead, toAllowWrite: targaryen.toAllowWrite, toAllowUpdate: targaryen.toAllowUpdate, toBeAllowed: targaryen.toBeAllowed});` before running any tests.
+- `jestTargaryen.getDatabase(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`: Wrapper for `targaryen.database()`.
+- `jestTargaryen.getDebugDatabase(rules: object|Ruleset, data: object|DataNode, now: null|number): Database`: Wrapper for `targaryen.database()` that also enables debug mode. Use this if you write your tests using the generic matcher `toBeAllowed()`.
+- `jestTargaryen.json`: Export of `firebase-json` to allow parsing of firebase rule files.
+- `jestTargaryen.users`: A set of authentication objects you can use as the subject of the assertions. Has the following keys:
+  - `unauthenticated`: an unauthenticated user, i.e., `auth === null`.
+  - `anonymous`: a user authenticated using Firebase anonymous sessions.
+  - `password`: a user authenticated using Firebase Password Login.
+  - `facebook`: a user authenticated by their Facebook account.
+  - `twitter`: a user authenticated by their Twitter account.
+  - `google`: a user authenticated by their Google account.
+  - `github`: a user authenticated by their Github account.
+- `expect(auth).canRead(path: string [, options: {now?: number, query?: object} ])`: asserts that the given path is readable by a user with the given authentication data.
+- `expect(auth).cannotRead(path: string[, options: {now?: number, query?: object} ])`: asserts that the given path is not readable by a user with the given authentication data.
+- `expect(auth).canWrite(path: string [, data: any [, options: {now: number, priority: any} ]])`: asserts that the given path is writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).cannotWrite(path: string [, data: any [, options: {now: number, priority: any} ]])`: asserts that the given path is not writable by a user with the given authentication data. Optionally takes a Javascript object containing `newData`, otherwise this will be set to `null`.
+- `expect(auth).canPatch(path: string, patch: {[path: string]: any} [, options: {now: number} ])`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
+- `expect(auth).cannotPatch(path: string, patch: {[path: string]: any} [, options: {now: number} ])`: asserts that the given patch (or multi-location update) operation is writable by a user with the given authentication data.
+

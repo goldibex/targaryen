@@ -35,6 +35,7 @@
     "prepare": "npm run build",
     "test": "npm run build && mocha -r test/setup.js test/spec/ --recursive  && jasmine && node ./bin/targaryen --verbose test/integration/rules.json test/integration/tests.json",
     "test:unit": "mocha -r test/setup.js test/spec/ --recursive",
+    "test:plugin:jest": "jest test/jest",
     "test:inspect": "node --inspect --debug-brk node_modules/.bin/_mocha -r test/setup.js test/spec/ --recursive"
   },
   "author": "Harry Schmidt <me@goldibex.com>",
@@ -72,9 +73,11 @@
     "coveralls": "^2.11.15",
     "eslint": "^3.9.1",
     "eslint-config-xo": "^0.17.0",
+    "eslint-plugin-jest": "^21.15.1",
     "eslint-plugin-node": "^2.1.3",
     "istanbul": "^0.4.5",
     "jasmine": "^2.1.1",
+    "jest": "^22.4.3",
     "mocha": "^2.1.0",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"

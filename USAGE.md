@@ -166,3 +166,60 @@ describe('A set of rules and data', function() {
 });
 
 ```
+
+### Jest
+
+Docs are at [docs/jest](https://github.com/goldibex/targaryen/blob/master/docs/jest). A quick example:
+
+```js
+
+const targaryen = require('targaryen/plugins/jest');
+
+// see Chai example above for format
+const rules = targaryen.json.loadSync(RULES_PATH);
+const data = require(DATA_PATH);
+
+expect.extend({
+  toAllowRead: targaryen.toAllowRead,
+  toAllowUpdate: targaryen.toAllowUpdate,
+  toAllowWrite: targaryen.toAllowWrite
+});
+
+describe('A set of rules and data', function() {
+  const database = targaryen.getDatabase(rules, data);
+
+  it('should allow authenticated user to read all data', function() {
+    expect(database.as({uid: 'foo'})).toAllowRead('/');
+    expect(database.as(null)).not.toAllowRead('/');
+  })
+
+  it('can be tested', function() {
+
+    expect(database.as(targaryen.users.unauthenticated))
+    .not.toAllowRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
+
+    expect(database.as(targaryen.users.password))
+    .toAllowRead('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3');
+
+    expect(database.as(targaryen.users.password))
+    .not.toAllowWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent', true);
+
+    expect(database.as({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'}))
+    .toAllowWrite('users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire', true);
+
+    expect(database.as({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'}))
+    .toAllowUpdate('/', {
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire': true,
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent': null
+    });
+
+    expect(database.as({ uid: 'password:3403291b-fdc9-4995-9a54-9656241c835d'}))
+    .not.toAllowUpdate('/', {
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/onFire': null,
+      'users/password:500f6e96-92c6-4f60-ad5d-207253aee4d3/innocent': true
+    });
+
+  });
+
+});
+```

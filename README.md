@@ -65,7 +65,7 @@ Targaryen provides three convenient ways to run tests:
     });
     ```
 
-- or as a plugin for [Chai](http://chaijs.com).
+- as a plugin for [Chai](http://chaijs.com).
 
     ```js
     const chai = require('chai');
@@ -85,6 +85,29 @@ Targaryen provides three convenient ways to run tests:
       it('should allow authenticated user to read all data', function() {
         expect({uid: 'foo'}).can.read.path('/');
         expect(null).cannot.read.path('/');
+      })
+
+    });
+    ```
+
+- or as a set of custom matchers for [Jest](https://facebook.github.io/jest/):
+
+    ```js
+    const targaryen = require('targaryen/plugins/jest');
+    const rules = targaryen.json.loadSync(RULES_PATH);
+
+    expect.extend({
+      toAllowRead: targaryen.toAllowRead,
+      toAllowUpdate: targaryen.toAllowUpdate,
+      toAllowWrite: targaryen.toAllowWrite
+    });
+
+    describe('my security rules', function() {
+      const database = targaryen.getDatabase(rules, require(DATA_PATH));
+
+      it('should allow authenticated user to read all data', function() {
+        expect(database.as({uid: 'foo'})).toAllowRead('/');
+        expect(database.as(null)).not.toAllowRead('/');
       })
 
     });

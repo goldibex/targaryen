@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matchers toAllowRead 1`] = `
+"Expected [32mread[39m to be [32mallowed[39m but it was [31mdenied[39m
+
+Attempt to read /user as null.
+
+/user: read <no rules>
+
+No .read rule allowed the operation.
+read was denied."
+`;
+
+exports[`matchers toAllowRead 2`] = `
+"Expected [32mread[39m to be [32mdenied[39m but it was [31mallowed[39m
+
+Attempt to read /public as null.
+
+/public: read \\"true\\"  => true
+  true  [=> true]
+
+read was allowed."
+`;
+
+exports[`matchers toAllowUpdate 1`] = `
+"Expected [32mupdate[39m to be [32mdenied[39m but it was [31mallowed[39m
+
+Attempt to patch /user/1234 as {\\"uid\\":\\"1234\\"}.
+Patch: \\"{
+  \\"name\\": \\"Anna\\"
+}\\".
+
+/user/1234: write \\"auth.uid === $uid\\"  => true
+  auth.uid === $uid  [=> true]
+  using [
+    $uid = \\"1234\\"
+    auth = {\\"uid\\":\\"1234\\"}
+    auth.uid = \\"1234\\"
+  ]
+
+patch was allowed."
+`;
+
+exports[`matchers toAllowWrite 1`] = `
+"Expected [32mwrite[39m to be [32mdenied[39m but it was [31mallowed[39m
+
+Attempt to write /user/1234 as {\\"uid\\":\\"1234\\"}.
+New Value: \\"{
+  \\"name\\": \\"Anna\\"
+}\\".
+
+/user/1234: write \\"auth.uid === $uid\\"  => true
+  auth.uid === $uid  [=> true]
+  using [
+    $uid = \\"1234\\"
+    auth = {\\"uid\\":\\"1234\\"}
+    auth.uid = \\"1234\\"
+  ]
+
+write was allowed."
+`;

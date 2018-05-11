@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generic matchers toBeAllowed 1`] = `
+"Expected operation to be [32mallowed[39m but it was [31mdenied[39m
+
+Attempt to read /user as null.
+
+/user: read <no rules>
+
+No .read rule allowed the operation.
+read was denied."
+`;
+
+exports[`generic matchers toBeAllowed 2`] = `
+"Expected operation to be [32mdenied[39m but it was [31mallowed[39m
+
+Attempt to write /user/1234 as {\\"uid\\":\\"1234\\"}.
+New Value: \\"{
+  \\"name\\": \\"Anna\\"
+}\\".
+
+/user/1234: write \\"auth.uid === $uid\\"  => true
+  auth.uid === $uid  [=> true]
+  using [
+    $uid = \\"1234\\"
+    auth = {\\"uid\\":\\"1234\\"}
+    auth.uid = \\"1234\\"
+  ]
+
+write was allowed."
+`;
