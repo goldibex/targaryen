@@ -12,8 +12,8 @@ script:
   - npm run coveralls
   - npm run lint
   - >
-    if [[ $(node --version | cut -c 2-) < 6 ]]; then
-      echo "skipping jest plugin test";
-    else
+    if node --version | grep v6\. ; then
       npm run test:plugin:jest;
+    else
+      echo "skipping jest plugin test";
     fi
