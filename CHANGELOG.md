@@ -1,3 +1,16 @@
+## 3.1.0 2018-05-13
+
+- Add [jest matcher] ([#150])
+- Validate literal regular expression ([#146]).
+- Add support for the `query` variable ([#142]).
+
+Thanks to @a-xin to implementing the new plugin and for his help troubleshooting
+RexExp validation.
+
+[#150]: https://github.com/goldibex/targaryen/pull/150
+[jest matcher]: https://github.com/goldibex/targaryen/tree/master/docs/jest
+
+
 ## 3.1.0-beta.3 2018-05-09
 
 - Allow dot in literal regexp ([#148]); Thanks @a-xin for notice it.
