@@ -8,9 +8,15 @@ describe('util', function() {
 
   describe('setFirebaseData', function() {
 
-    it('should throw on invalid data', function() {
+    it('should not throw on invalid data', function() {
       expect(
         () => util.setFirebaseData(new Date())
+      ).to.not.throw();
+    });
+
+    it('should throw on invalid data', function() {
+      expect(
+        () => util.setFirebaseData(/regex/)
       ).to.throw();
     });
 
