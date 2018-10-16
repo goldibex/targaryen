@@ -62,7 +62,41 @@ describe('store', function() {
     });
   });
 
-  [new Date(), /foo/].forEach(function(v) {
+  it('should let .toJSON() be used as value', function() {
+    class Something {
+      constructor() {
+        Object.defineProperty(this, 'key', {value: 'definedValue', enumberable: false});
+        Object.defineProperty(this, 'key2', {value: 'definedValue'});
+      }
+      toJSON() {
+        return {key: 'val'};
+      }
+    }
+
+    expect(store.create(new Something()).$value()).to.eql({key: 'val'});
+    expect(store.create({v: new Something()}).$value()).to.eql({v: {key: 'val'}});
+  });
+
+  it('should not let classes without .toJSON() be used as value', function() {
+    class Something {
+      constructor() {
+        Object.defineProperty(this, 'key', {value: 'definedValue', enumberable: false});
+        Object.defineProperty(this, 'key2', {value: 'definedValue'});
+      }
+    }
+
+    expect(() => store.create(new Something())).to.throw();
+    expect(() => store.create({v: new Something()})).to.throw();
+  });
+
+  [new Date()].forEach(function(v) {
+    it(`should let ${v.constructor.name} be used as value`, function() {
+      expect(store.create(v).$value()).to.eql(v.toJSON());
+      expect(store.create({v}).$value()).to.eql({v: v.toJSON()});
+    });
+  });
+
+  [/foo/].forEach(function(v) {
     it(`should not let ${v.constructor.name} be used as value`, function() {
       expect(() => store.create(v)).to.throw();
       expect(() => store.create({v})).to.throw();

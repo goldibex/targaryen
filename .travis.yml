@@ -2,9 +2,10 @@ language: node_js
 node_js:
   - "4"
   - "6"
+  - "8"
 script:
   - >
-    if [ "$TRAVIS_EVENT_TYPE" == "cron" ] && node --version | grep v6\. ; then
+    if [ "$TRAVIS_EVENT_TYPE" == "cron" ] && node --version | grep --invert-match v4\. ; then
       ./bin/build.sh test:live;
     else
       echo "skipping live tests";
