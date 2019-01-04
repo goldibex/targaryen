@@ -36,10 +36,12 @@ describe('stringMethods', function() {
 
     it('returns true if the given string ends with the given substring', function() {
       expect(stringMethods.endsWith('bar', 'ar')).to.be.true();
+      expect(stringMethods.endsWith('arbar', 'ar')).to.be.true();
     });
 
     it('returns false if the given string does not end with the given substring', function() {
       expect(stringMethods.endsWith('bar', 'az')).to.be.false();
+      expect(stringMethods.endsWith('', 'az')).to.be.false();
     });
 
   });
